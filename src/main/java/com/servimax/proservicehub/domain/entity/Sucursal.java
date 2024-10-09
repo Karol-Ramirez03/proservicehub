@@ -33,8 +33,8 @@ public class Sucursal {
     @ManyToOne
     private Empresa empresa;
 
-    // @OneToMany(mappedBy = "sucursal")
-    // private List<EmpresaServicio> empresa_servicio;
+    @OneToMany(mappedBy = "sucursal")
+    private List<EmpresaServicio> empresa_servicio;
 
     public Long getId() {
         return id;

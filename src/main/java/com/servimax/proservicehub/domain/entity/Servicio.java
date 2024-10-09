@@ -24,8 +24,8 @@ public class Servicio {
     private Boolean requiere_insumo;
     private String  tiempo_ejecucion;
 
-    // @OneToMany(mappedBy = "servicio")
-    // private List<EmpresaServicio> empresa_servicio;
+    @OneToMany(mappedBy = "servicio")
+    private List<EmpresaServicio> empresa_servicio;
 
 
 

@@ -19,12 +19,12 @@ public class EmpresaServicio {
     private Double valorServicio;
 
     @ManyToOne
-    // @MapsId("idEmpresa")
-    @JoinColumn(name = "id_empresa", insertable = false, updatable = false)
-    private Empresa empresa;
+    @MapsId("idSucursal")
+    @JoinColumn(name = "id_sucursal", insertable = false, updatable = false)
+    private Sucursal sucursal;
 
     @ManyToOne
-    // @MapsId("idServicio")
+    @MapsId("idServicio")
     @JoinColumn(name = "id_servicio", insertable = false, updatable = false)
     private Servicio servicio;
 
@@ -35,14 +35,6 @@ public class EmpresaServicio {
 
     public void setValorServicio(Double valorServicio) {
         this.valorServicio = valorServicio;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
     }
 
     public Servicio getServicio() {
@@ -59,6 +51,14 @@ public class EmpresaServicio {
 
     public void setId(EmpresaServicioPk id) {
         this.id = id;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
  
 
