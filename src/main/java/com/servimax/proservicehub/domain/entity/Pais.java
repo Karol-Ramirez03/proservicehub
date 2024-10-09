@@ -1,23 +1,28 @@
 package com.servimax.proservicehub.domain.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "empresa")
-public class Empresa {
+@Table(name = "pais")
+public class Pais {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id; 
 
     @Column
     private String nombre;
-    
-    @ManyToOne
-    private TipoEmpresa tipo_empresa;
+
+    @OneToMany(mappedBy = "pais")
+    private List<Region> region;
 
     public long getId() {
         return id;
@@ -35,13 +40,14 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public TipoEmpresa getTipo_empresa() {
-        return tipo_empresa;
+    public List<Region> getRegion() {
+        return region;
     }
 
-    public void setTipo_empresa(TipoEmpresa tipo_empresa) {
-        this.tipo_empresa = tipo_empresa;
+    public void setRegion(List<Region> region) {
+        this.region = region;
     }
 
     
+
 }

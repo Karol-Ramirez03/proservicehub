@@ -7,22 +7,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tipo_empresa")
-public class TipoEmpresa {
+@Table(name = "region")
+public class Region {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String descripcion;
+    private String nombre;
+    
+    @ManyToOne
+    private Pais pais;
 
-    @OneToMany(mappedBy = "tipo_empresa")
-    private List<Empresa> empresa;
+    @OneToMany(mappedBy = "region")
+    private List<Ciudad> ciudad;
 
     public Long getId() {
         return id;
@@ -32,24 +36,21 @@ public class TipoEmpresa {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public List<Empresa> getEmpresa() {
-        return empresa;
+    public Pais getPais() {
+        return pais;
     }
 
-    public void setEmpresa(List<Empresa> empresa) {
-        this.empresa = empresa;
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
     
-
-
-
 }
