@@ -27,10 +27,11 @@ public class Servicio {
     @OneToMany(mappedBy = "servicio")
     private List<EmpresaServicio> empresa_servicio;
 
+    @OneToMany(mappedBy="servicio")
+    private List<ServicioInsumo> servicioInsumo;
 
-
-
-
+    @OneToMany(mappedBy="servicio")
+    private List<DetalleOrdenServicio> detalle_orden_servicio;
 
     public Long getId() {
         return id;
@@ -55,6 +56,24 @@ public class Servicio {
     }
     public void setTiempo_ejecucion(String tiempo_ejecucion) {
         this.tiempo_ejecucion = tiempo_ejecucion;
+    }
+    public List<EmpresaServicio> getEmpresa_servicio() {
+        return empresa_servicio;
+    }
+    public void setEmpresa_servicio(List<EmpresaServicio> empresa_servicio) {
+        this.empresa_servicio = empresa_servicio;
+    }
+    public List<ServicioInsumo> getServicioInsumo() {
+        return servicioInsumo;
+    }
+    public void setServicioInsumo(List<ServicioInsumo> servicioInsumo) {
+        this.servicioInsumo = servicioInsumo;
+    }
+    public List<DetalleOrdenServicio> getDetalle_orden_servicio() {
+        return detalle_orden_servicio;
+    }
+    public void setDetalle_orden_servicio(List<DetalleOrdenServicio> detalle_orden_servicio) {
+        this.detalle_orden_servicio = detalle_orden_servicio;
     } 
 
     
