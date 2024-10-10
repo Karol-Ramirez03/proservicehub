@@ -31,6 +31,9 @@ public class Insumo {
     @OneToMany(mappedBy="insumo")
     private List<ServicioInsumo> servicioInsumo;
 
+    @OneToMany(mappedBy = "insumo")
+    private List<PersonaInsumo> personaInsumos;
+
     public Insumo() {
     }
 

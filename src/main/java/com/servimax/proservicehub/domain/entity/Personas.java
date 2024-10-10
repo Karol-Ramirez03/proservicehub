@@ -28,6 +28,9 @@ public class Personas {
     @OneToMany(mappedBy = "personas")
     private List<EmailPersona> emailPersona;
 
+    @OneToMany(mappedBy = "personas")
+    private List<PersonaInsumo> personaInsumo;
+
     @ManyToOne
     private Sucursal sucursal;
 
