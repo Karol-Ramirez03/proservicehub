@@ -7,8 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "orden_servicio")
@@ -21,11 +24,19 @@ public class OrdenServicio {
     @Column
     private Date fecha_orden;
 
-    //falta personas
+    @ManyToOne
+    @JoinColumn(name="id_cliente")
+    private Personas personas;
+
+    @ManyToOne
+    @JoinColumn(name="id_empleado")
+    private Personas persona;
 
     @ManyToOne
     private EstadoOrdenServicio estado_orden_servicio;
 
+    @OneToMany(mappedBy = "ordenServicio")
+    private List<OrdenTrabajo> ordenTrabajo;
 
     public OrdenServicio() {
     }
@@ -56,6 +67,30 @@ public class OrdenServicio {
 
     public void setEstado_orden_servicio(EstadoOrdenServicio estado_orden_servicio) {
         this.estado_orden_servicio = estado_orden_servicio;
+    }
+
+    public Personas getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
+    }
+
+    public Personas getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Personas persona) {
+        this.persona = persona;
+    }
+
+    public List<OrdenTrabajo> getOrdenTrabajo() {
+        return ordenTrabajo;
+    }
+
+    public void setOrdenTrabajo(List<OrdenTrabajo> ordenTrabajo) {
+        this.ordenTrabajo = ordenTrabajo;
     }
 
 

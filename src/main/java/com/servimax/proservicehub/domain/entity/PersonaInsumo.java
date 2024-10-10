@@ -15,6 +15,7 @@ public class PersonaInsumo {
     PersonaInsumoPk id;
 
     @ManyToOne
+    @JoinColumn(name="servicio_id")
     private Servicio servicio;
 
     @ManyToOne

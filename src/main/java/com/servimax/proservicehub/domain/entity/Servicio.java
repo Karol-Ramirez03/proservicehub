@@ -33,6 +33,12 @@ public class Servicio {
     @OneToMany(mappedBy="servicio")
     private List<DetalleOrdenServicio> detalle_orden_servicio;
 
+    @OneToMany(mappedBy="servicio")
+    private List<DetalleOrdenTrabajo> detalle_orden_trabajo;
+
+    @OneToMany(mappedBy = "servicio")
+    private List<AprobacionServicio> aprovacionServicio;
+
     public Long getId() {
         return id;
     }
@@ -74,6 +80,18 @@ public class Servicio {
     }
     public void setDetalle_orden_servicio(List<DetalleOrdenServicio> detalle_orden_servicio) {
         this.detalle_orden_servicio = detalle_orden_servicio;
+    }
+    public List<DetalleOrdenTrabajo> getDetalle_orden_trabajo() {
+        return detalle_orden_trabajo;
+    }
+    public void setDetalle_orden_trabajo(List<DetalleOrdenTrabajo> detalle_orden_trabajo) {
+        this.detalle_orden_trabajo = detalle_orden_trabajo;
+    }
+    public List<AprobacionServicio> getAprovacionServicio() {
+        return aprovacionServicio;
+    }
+    public void setAprovacionServicio(List<AprobacionServicio> aprovacionServicio) {
+        this.aprovacionServicio = aprovacionServicio;
     } 
 
     

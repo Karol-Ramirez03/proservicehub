@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "estado_aprov")
+@Table(name = "estado_aprovacion")
 public class EstadoAprovacion {
 
     @Id
@@ -21,7 +21,7 @@ public class EstadoAprovacion {
     @Column
     private String nombre;
 
-    @OneToMany(mappedBy = "estado_aprov")
+    @OneToMany(mappedBy = "estado_aprovacion")
     private List<AprobacionServicio> aprobacionServicio;
 
     public EstadoAprovacion() {

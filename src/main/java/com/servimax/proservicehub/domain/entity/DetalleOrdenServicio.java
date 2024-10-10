@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,9 +21,11 @@ public class DetalleOrdenServicio {
     private Double valor_servicio;
 
     @ManyToOne
+    @JoinColumn(name="id_orden_servicio")
     private OrdenServicio ordenServicio;
 
     @ManyToOne
+    @JoinColumn(name="id_servicio")
     private Servicio servicio;
 
     public DetalleOrdenServicio() {
