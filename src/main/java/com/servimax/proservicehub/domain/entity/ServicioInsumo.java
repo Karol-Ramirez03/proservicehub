@@ -21,12 +21,12 @@ public class ServicioInsumo {
 
     @ManyToOne
     @MapsId("idInsumo")
-    @JoinColumn(name="id_insumo")
+    @JoinColumn(name="id_insumo", insertable = false, updatable = false)
     private Insumo insumo;
   
     @ManyToOne
     @MapsId("idServicio")
-    @JoinColumn(name="id_servicio")
+    @JoinColumn(name="id_servicio", insertable = false, updatable = false)
     private Servicio servicio;
 
     public ServicioInsumo() {
