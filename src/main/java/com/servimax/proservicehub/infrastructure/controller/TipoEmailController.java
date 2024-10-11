@@ -1,8 +1,6 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.TipoEmailServiceI;
 import com.servimax.proservicehub.domain.entity.TipoEmail;
+import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
 
@@ -47,7 +46,7 @@ public class TipoEmailController {
     @PostMapping()
     public ResponseEntity<?> create(@Valid @RequestBody TipoEmail tipoEmail, BindingResult result){
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
             
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(tipoEmailServiceI.save(tipoEmail));
@@ -57,7 +56,7 @@ public class TipoEmailController {
     public ResponseEntity<?> update(@Valid @RequestBody TipoEmail tipoEmail, @PathVariable Long id, BindingResult result) {
         Optional<TipoEmail> OTipoEmail= tipoEmailServiceI.update(id, tipoEmail);
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
         }
         if (OTipoEmail.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(OTipoEmail.orElseThrow());
@@ -74,12 +73,4 @@ public class TipoEmailController {
         return ResponseEntity.notFound().build();
     }
     
-
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(err -> {
-            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-    }
 }

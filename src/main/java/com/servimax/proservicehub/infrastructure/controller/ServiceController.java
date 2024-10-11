@@ -1,8 +1,6 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.ServicioServiceI;
 import com.servimax.proservicehub.domain.entity.Servicio;
+import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
 
@@ -47,7 +46,7 @@ public class ServiceController {
     @PostMapping()
     public ResponseEntity<?> create(@Valid @RequestBody Servicio servicio, BindingResult result) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
         }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(servicioServiceI.save(servicio));
@@ -57,7 +56,7 @@ public class ServiceController {
     public ResponseEntity<?> update(@Valid @RequestBody Servicio servicio, @PathVariable Long id, BindingResult result) {
         Optional<Servicio> servicioOptional = servicioServiceI.update(id, servicio);
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
         }
         if (servicioOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(servicioOptional.orElseThrow());
@@ -72,14 +71,6 @@ public class ServiceController {
             return ResponseEntity.ok(servicioOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
-    }
-    
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(err -> {
-            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
     }
     
     

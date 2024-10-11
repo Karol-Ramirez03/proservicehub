@@ -1,8 +1,6 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.TipoPersonaServiceI;
 import com.servimax.proservicehub.domain.entity.TipoPersona;
+import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
 
@@ -48,7 +47,7 @@ public class TipoPersonaController {
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody TipoPersona TipoPersona, BindingResult result) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
         }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(tipoPersonaService.save(TipoPersona));
@@ -58,7 +57,7 @@ public class TipoPersonaController {
     public ResponseEntity<?> update(@Valid @RequestBody TipoPersona TipoPersona, @PathVariable Long id, BindingResult result) {
         Optional<TipoPersona> TipoPersonaOptional = tipoPersonaService.update(id, TipoPersona);
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return ValidatedFields.validation(result);
         }
         if (TipoPersonaOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(TipoPersonaOptional.orElseThrow());
@@ -75,11 +74,4 @@ public class TipoPersonaController {
         return ResponseEntity.notFound().build();
     }
     
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(err -> {
-            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-    }
 }
