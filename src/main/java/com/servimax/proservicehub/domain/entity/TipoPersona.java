@@ -24,7 +24,7 @@ public class TipoPersona {
     private Long id; 
 
     @NotNull(message = "No puedes ser vacio este campo")
-    @Size(min = 1, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     @Column
     private String nombre;
 
