@@ -19,6 +19,7 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    
     @Column 
     private String nombre;
     private Boolean requiere_insumo;
