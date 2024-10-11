@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "tipo_persona")
@@ -16,19 +19,21 @@ public class TipoPersona {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; 
+    private Long id; 
 
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Size(min = 1, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     @Column
     private String nombre;
 
     @OneToMany(mappedBy = "tipoPersona")
     private List<Personas> personas;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,8 +52,6 @@ public class TipoPersona {
     public void setPersonas(List<Personas> personas) {
         this.personas = personas;
     }
-
-    
 
 
 }
