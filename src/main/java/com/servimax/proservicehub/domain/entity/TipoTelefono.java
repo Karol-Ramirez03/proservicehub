@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tipo_telefono")
@@ -20,6 +21,7 @@ public class TipoTelefono {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
 
+    @NotBlank
     @Column
     private String nombre;
 
