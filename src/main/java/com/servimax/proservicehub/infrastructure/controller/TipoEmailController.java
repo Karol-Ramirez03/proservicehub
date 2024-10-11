@@ -18,62 +18,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.servimax.proservicehub.application.service.ServicioServiceI;
-import com.servimax.proservicehub.domain.entity.Servicio;
+import com.servimax.proservicehub.application.service.TipoEmailServiceI;
+import com.servimax.proservicehub.domain.entity.TipoEmail;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/servicio")
-public class ServiceController {
+@RequestMapping("api/tipoEmail")
+public class TipoEmailController {
 
-    @Autowired
-    private ServicioServiceI servicioServiceI;
+     @Autowired
+    private TipoEmailServiceI tipoEmailServiceI;
 
     @GetMapping
-    public List<Servicio> list(){
-        return  servicioServiceI.findAll();
+    public List<TipoEmail> list(){
+        return  tipoEmailServiceI.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> view(@PathVariable Long id) {
-        Optional<Servicio> servicioOptional = servicioServiceI.findById(id);
-        if (servicioOptional.isPresent()) {
-            return ResponseEntity.ok(servicioOptional.orElseThrow());
+    public ResponseEntity<?> view(@PathVariable Long id){
+        Optional<TipoEmail> OTipoEmail = tipoEmailServiceI.findById(id);
+        if (OTipoEmail.isPresent()){
+            return ResponseEntity.ok(OTipoEmail.orElseThrow());
         }
-        return ResponseEntity.notFound().build();
+        return  ResponseEntity.notFound().build();
     }
 
     @PostMapping()
-    public ResponseEntity<?> create(@Valid @RequestBody Servicio servicio, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody TipoEmail tipoEmail, BindingResult result){
         if (result.hasFieldErrors()) {
             return validation(result);
+            
         }
-        
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicioServiceI.save(servicio));
+        return ResponseEntity.status(HttpStatus.CREATED).body(tipoEmailServiceI.save(tipoEmail));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Servicio servicio, @PathVariable Long id, BindingResult result) {
-        Optional<Servicio> servicioOptional = servicioServiceI.update(id, servicio);
+    public ResponseEntity<?> update(@Valid @RequestBody TipoEmail tipoEmail, @PathVariable Long id, BindingResult result) {
+        Optional<TipoEmail> OTipoEmail= tipoEmailServiceI.update(id, tipoEmail);
         if (result.hasFieldErrors()) {
             return validation(result);
         }
-        if (servicioOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(servicioOptional.orElseThrow());
+        if (OTipoEmail.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(OTipoEmail.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<Servicio> servicioOptional = servicioServiceI.delete(id);
-        if (servicioOptional.isPresent()) {
-            return ResponseEntity.ok(servicioOptional.orElseThrow());
+        Optional<TipoEmail> OTipoEmail = tipoEmailServiceI.delete(id);
+        if (OTipoEmail.isPresent()) {
+            return ResponseEntity.ok(OTipoEmail.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }
     
+
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> {
@@ -81,9 +82,4 @@ public class ServiceController {
         });
         return ResponseEntity.badRequest().body(errors);
     }
-    
-    
 }
-    
-
-

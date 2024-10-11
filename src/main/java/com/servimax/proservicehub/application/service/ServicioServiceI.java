@@ -9,6 +9,6 @@ public interface ServicioServiceI {
     List<Servicio> findAll();
     Optional<Servicio> findById(Long id);
     Servicio save(Servicio servicio);
-    Optional<Servicio> update(Integer id, Servicio servicio);
-    Optional<Servicio> delete(Integer id);
+    Optional<Servicio> update(Long id, Servicio servicio);
+    Optional<Servicio> delete(Long id);
 }
