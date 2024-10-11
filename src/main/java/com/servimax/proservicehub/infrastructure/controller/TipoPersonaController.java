@@ -24,7 +24,7 @@ import com.servimax.proservicehub.domain.entity.TipoPersona;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/tipoPersona")
+@RequestMapping("api/tipopersona")
 public class TipoPersonaController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class TipoPersonaController {
     }
 
         
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody TipoPersona TipoPersona, BindingResult result) {
         if (result.hasFieldErrors()) {
             return validation(result);
