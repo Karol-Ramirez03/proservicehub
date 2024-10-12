@@ -5,6 +5,8 @@ package com.servimax.proservicehub.domain.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "sucursal")
@@ -23,19 +27,31 @@ public class Sucursal {
     private Long id;
 
     @Column
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     private String nombre;
+
+    @Column
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     private String nit;
+
+    @Column
     private Timestamp fecha_creacion;
 
     @ManyToOne
+    @NotNull(message = "No puedes ser vacio este campo")
     private Direccion direccion;
 
     @ManyToOne
+    @NotNull(message = "No puedes ser vacio este campo")
     private Empresa empresa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sucursal")
     private List<EmpresaServicio> empresa_servicio;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sucursal")
     private List<Personas> personas;
 
