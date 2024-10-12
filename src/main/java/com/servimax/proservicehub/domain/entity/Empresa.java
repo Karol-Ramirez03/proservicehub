@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "empresa")
@@ -19,9 +21,12 @@ public class Empresa {
     private Long id;
 
     @Column
+    @NotNull(message = "no puede ser null")
+    @Size(min = 1,max = 100, message = "no puede estar vacio")
     private String nombre;
     
     @ManyToOne
+    @NotNull(message = "no puede ser null")
     private TipoEmpresa tipo_empresa;
 
     @JsonIgnore

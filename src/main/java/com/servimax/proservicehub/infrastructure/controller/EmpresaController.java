@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.EmpresaServiceI;
 import com.servimax.proservicehub.domain.entity.Empresa;
+import com.servimax.proservicehub.validations.ValidatedFields;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/empresa")
@@ -40,7 +44,10 @@ public class EmpresaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Empresa Empresa){
+    public ResponseEntity<?> create(@Valid @RequestBody Empresa Empresa, BindingResult result){
+        if (result.hasFieldErrors()) {
+            return ValidatedFields.validation(result);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaServiceI.save(Empresa));
     }
 
@@ -63,9 +70,9 @@ public class EmpresaController {
 
     @DeleteMapping("/{id}") 
     public ResponseEntity<?> delete(@PathVariable Long id){
-        Optional<Empresa> empresaId = empresaServiceI.findById(id); 
+        Optional<Empresa> empresaId =  empresaServiceI.delete(id);
         if (empresaId.isPresent()) {
-            empresaServiceI.delete(id);
+            return ResponseEntity.ok(empresaId.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }

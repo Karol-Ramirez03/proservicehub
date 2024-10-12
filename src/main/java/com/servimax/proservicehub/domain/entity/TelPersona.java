@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "telefono_persona")
@@ -17,9 +19,12 @@ public class TelPersona {
     private long id; 
 
     @Column
+    @NotNull(message = "no puede ser null")
+    @Size(min = 1,max = 100, message = "no puede estar vacio")
     private Long numero;
 
     @ManyToOne
+    @NotNull(message = "no puede ser null")
     private TipoTelefono tipoTelefono;
 
     @ManyToOne
