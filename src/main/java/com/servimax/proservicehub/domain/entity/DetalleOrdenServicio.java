@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "detalle_orden_servicio")
@@ -17,13 +18,16 @@ public class DetalleOrdenServicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column
     private Double valor_servicio;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_orden_servicio")
-    private OrdenServicio ordenServicio;
+    private OrdenServicio id_orden_servicio;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_servicio")
     private Servicio servicio;
@@ -31,9 +35,9 @@ public class DetalleOrdenServicio {
     public DetalleOrdenServicio() {
     }
 
-    public DetalleOrdenServicio(Double valor_servicio, OrdenServicio ordenServicio, Servicio servicio) {
+    public DetalleOrdenServicio(Double valor_servicio, OrdenServicio id_orden_servicio, Servicio servicio) {
         this.valor_servicio = valor_servicio;
-        this.ordenServicio = ordenServicio;
+        this.id_orden_servicio = id_orden_servicio;
         this.servicio = servicio;
     }
 
@@ -54,11 +58,11 @@ public class DetalleOrdenServicio {
     }
 
     public OrdenServicio getOrden_servicio() {
-        return ordenServicio;
+        return id_orden_servicio;
     }
 
     public void setOrden_servicio(OrdenServicio orden_servicio) {
-        this.ordenServicio = orden_servicio;
+        this.id_orden_servicio = orden_servicio;
     }
 
     public Servicio getServicio() {
@@ -68,6 +72,16 @@ public class DetalleOrdenServicio {
     public void setServicio(Servicio servicio) {
         this.servicio = servicio;
     }
+
+    public OrdenServicio getOrdenServicio() {
+        return id_orden_servicio;
+    }
+
+    public void setOrdenServicio(OrdenServicio ordenServicio) {
+        this.id_orden_servicio = ordenServicio;
+    }
+
+
 
     
 
