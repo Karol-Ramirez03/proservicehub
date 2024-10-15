@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 @Embeddable
 public class ServicioInsumoPk implements Serializable{
 
+    @NotNull(message = "No puede estar vacio")
     private Long idInsumo;
+
+    @NotNull(message = "No puede estar vacio")
     private Long idServicio;
 
     public ServicioInsumoPk() {

@@ -5,6 +5,8 @@ package com.servimax.proservicehub.domain.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,12 +35,17 @@ public class Sucursal {
     @ManyToOne
     private Empresa empresa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sucursal")
     private List<EmpresaServicio> empresa_servicio;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sucursal")
     private List<Personas> personas;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "sucursal")
+    private List<TelSucursal> sucursales;
 
     public Long getId() {
         return id;

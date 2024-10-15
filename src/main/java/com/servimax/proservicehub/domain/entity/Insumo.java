@@ -38,6 +38,10 @@ public class Insumo {
     @OneToMany(mappedBy = "insumo")
     private List<PersonaInsumo> personaInsumos;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "insumo")
+    private List<DetalleCompra> detalleCompras;
+
     public Insumo() {
     }
 
@@ -111,6 +115,20 @@ public class Insumo {
         this.servicioInsumo = servicioInsumo;
     }
 
-    
+    public List<PersonaInsumo> getPersonaInsumos() {
+        return personaInsumos;
+    }
+
+    public void setPersonaInsumos(List<PersonaInsumo> personaInsumos) {
+        this.personaInsumos = personaInsumos;
+    }
+
+    public List<DetalleCompra> getDetalleCompras() {
+        return detalleCompras;
+    }
+
+    public void setDetalleCompras(List<DetalleCompra> detalleCompras) {
+        this.detalleCompras = detalleCompras;
+    }
 
 }

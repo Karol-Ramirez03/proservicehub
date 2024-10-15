@@ -1,35 +1,43 @@
 package com.servimax.proservicehub.domain.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "ciudad")
-public class Ciudad {
+@Table(name = "estado_compra")
+public class EstadoCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "No puede estar vacio")
     @Column
     private String nombre;
 
-    @ManyToOne
-    private Region region;
-
+    @NotNull(message = "No puede estar vacio")
     @JsonIgnore
-    @OneToMany(mappedBy = "ciudad")
-    private List<Direccion> direccion;
+    @OneToMany(mappedBy = "estado_compra")
+    private List<Compra> compra;
+
+    public EstadoCompra() {
+    }
+
+    public EstadoCompra(Long id, String nombre, List<Compra> compra) {
+        this.id = id;
+        this.nombre = nombre;
+        this.compra = compra;
+    }
 
     public Long getId() {
         return id;
@@ -47,14 +55,14 @@ public class Ciudad {
         this.nombre = nombre;
     }
 
-    public Region getRegion() {
-        return region;
+    public List<Compra> getCompra() {
+        return compra;
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
+    public void setCompra(List<Compra> compra) {
+        this.compra = compra;
     }
 
     
-    
+
 }

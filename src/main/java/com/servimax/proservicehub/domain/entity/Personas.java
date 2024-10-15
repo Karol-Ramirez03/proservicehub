@@ -3,6 +3,8 @@ package com.servimax.proservicehub.domain.entity;
 import java.security.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,26 +24,37 @@ public class Personas {
     private String apellido;
     private Timestamp fechaRegistro;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<TelPersona> telPersona;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<EmailPersona> emailPersona;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<PersonaInsumo> personaInsumo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<OrdenServicio> ordenServicioCliente;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "persona")
     private List<OrdenServicio> ordenServicioEmpleado;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<OrdenTrabajo> ordenTrabajoEmpleado;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<AprobacionServicio> aprovacionServicio;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "personas")
+    private List<Compra> compra;
 
     @ManyToOne
     private Sucursal sucursal;
@@ -127,14 +140,11 @@ public class Personas {
     public void setTipoPersona(TipoPersona tipoPersona) {
         this.tipoPersona = tipoPersona;
     }
-
-
-
-
-
-    
-
-
-
+    public List<Compra> getCompra() {
+        return compra;
+    }
+    public void setCompra(List<Compra> compra) {
+        this.compra = compra;
+    }
 
 }
