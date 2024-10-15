@@ -6,6 +6,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "persona_insumo")
@@ -14,15 +15,18 @@ public class PersonaInsumo {
     @EmbeddedId
     PersonaInsumoPk id;
 
+    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     @JoinColumn(name="servicio_id")
     private Servicio servicio;
 
+    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     @MapsId("idPersona")
     @JoinColumn(name = "id_persona", insertable = false, updatable = false)
     private Personas personas;
 
+    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     @MapsId("idInsumo")
     @JoinColumn(name = "id_Insumo", insertable = false, updatable = false)

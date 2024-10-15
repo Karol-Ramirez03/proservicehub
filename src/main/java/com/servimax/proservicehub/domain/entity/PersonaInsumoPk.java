@@ -2,11 +2,15 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 
 @Embeddable
 public class PersonaInsumoPk implements Serializable{
 
+    @NotNull(message = "No puede estar vacio")
     private Long idPersona;
+
+    @NotNull(message = "No puede estar vacio")
     private Long idInsumo;
 
     public PersonaInsumoPk() {

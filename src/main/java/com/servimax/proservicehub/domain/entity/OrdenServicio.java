@@ -11,7 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "orden_servicio")
@@ -21,13 +25,16 @@ public class OrdenServicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numero_orden;
 
+    @NotNull(message = "No puedes ser vacio fecha")
     @Column
     private Date fecha_orden;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_cliente")
     private Personas personas;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_empleado")
     private Personas persona;
@@ -35,6 +42,7 @@ public class OrdenServicio {
     @ManyToOne
     private EstadoOrdenServicio estado_orden_servicio;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ordenServicio")
     private List<OrdenTrabajo> ordenTrabajo;
 
