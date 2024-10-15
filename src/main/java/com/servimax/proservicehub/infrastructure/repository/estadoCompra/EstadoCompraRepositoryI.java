@@ -9,4 +9,5 @@ import com.servimax.proservicehub.domain.entity.EstadoCompra;
 @Repository
 public interface EstadoCompraRepositoryI extends CrudRepository<EstadoCompra,Long>{
     Optional<EstadoCompra> findByNombre(String nombre);
+
 }
