@@ -16,61 +16,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.servimax.proservicehub.application.service.TipoEmpresaServiceI;
-import com.servimax.proservicehub.domain.entity.TipoEmpresa;
+import com.servimax.proservicehub.application.service.CiudadServiceI;
+import com.servimax.proservicehub.domain.entity.Ciudad;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/tipoEmpresa")
-public class TipoEmpresaController {
+@RequestMapping("api/ciudad")
+public class CiudadController {
 
-    
     @Autowired
-    private TipoEmpresaServiceI tipoEmpresaServiceI;
+    private CiudadServiceI CiudadServiceI;
 
     @GetMapping
-    public List<TipoEmpresa> list(){
-        return tipoEmpresaServiceI.findAll();
+    public List<Ciudad> list(){
+        return CiudadServiceI.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> view(@PathVariable Long id){
-        Optional<TipoEmpresa> TipoEmpresaOpt = tipoEmpresaServiceI.findById(id);
-        if (TipoEmpresaOpt.isPresent()) {
-            return ResponseEntity.ok(TipoEmpresaOpt.orElseThrow());
+        Optional<Ciudad> CiudadOpt = CiudadServiceI.findById(id);
+        if (CiudadOpt.isPresent()) {
+            return ResponseEntity.ok(CiudadOpt.orElseThrow());
         }   
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody TipoEmpresa TipoEmpresa, BindingResult result){
+    public ResponseEntity<?> create(@Valid @RequestBody Ciudad Ciudad, BindingResult result){
         if (result.hasFieldErrors()) {
             return ValidatedFields.validation(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(tipoEmpresaServiceI.save(TipoEmpresa));
+        return ResponseEntity.status(HttpStatus.CREATED).body(CiudadServiceI.save(Ciudad));
     }
 
     @PutMapping("/{id}")
-    public Optional<TipoEmpresa> Update(@PathVariable Long id, @RequestBody TipoEmpresa TipoEmpresa){
-        Optional<TipoEmpresa> TipoEmpresaId = tipoEmpresaServiceI.findById(id); 
-        if (TipoEmpresaId.isPresent()) {
-            TipoEmpresa TipoEmpresaCopy = TipoEmpresaId.orElseThrow();
-            if (TipoEmpresa.getDescripcion() != null) {
-                TipoEmpresaCopy.setDescripcion(TipoEmpresa.getDescripcion());
+    public Optional<Ciudad> Update(@PathVariable Long id, @RequestBody Ciudad Ciudad){
+        Optional<Ciudad> CiudadId = CiudadServiceI.findById(id); 
+        if (CiudadId.isPresent()) {
+            Ciudad CiudadCopy = CiudadId.orElseThrow();
+            if (Ciudad.getRegion() != null) {
+                CiudadCopy.setRegion(Ciudad.getRegion());
             }
-            tipoEmpresaServiceI.update(id, TipoEmpresaCopy);
-            return Optional.of(TipoEmpresaCopy);
+            if (Ciudad.getNombre() != null) {
+                CiudadCopy.setNombre(Ciudad.getNombre());
+            }
+            CiudadServiceI.update(id, CiudadCopy);
+            return Optional.of(CiudadCopy);
         }
         return Optional.empty();
     }
 
     @DeleteMapping("/{id}") 
     public ResponseEntity<?> delete(@PathVariable Long id){
-        Optional<TipoEmpresa> TipoEmpresaId = tipoEmpresaServiceI.delete(id); 
-        if (TipoEmpresaId.isPresent()) {
-            return ResponseEntity.ok(TipoEmpresaId.orElseThrow());
+        Optional<Ciudad> CiudadId =  CiudadServiceI.delete(id);
+        if (CiudadId.isPresent()) {
+            return ResponseEntity.ok(CiudadId.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }

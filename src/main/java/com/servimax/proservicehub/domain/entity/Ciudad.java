@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "ciudad")
@@ -21,10 +23,13 @@ public class Ciudad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     @Column
     private String nombre;
 
     @ManyToOne
+    @NotNull(message = "No puedes ser vacio este campo")
     private Region region;
 
     @JsonIgnore

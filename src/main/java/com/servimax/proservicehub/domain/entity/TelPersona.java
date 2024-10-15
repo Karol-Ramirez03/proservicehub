@@ -8,22 +8,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "telefono_persona")
 public class TelPersona {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; 
+    private Long id; 
 
     @Column
+    @NotNull(message = "no puede ser null")
+    @Min(6)
     private Long numero;
 
     @ManyToOne
+    @NotNull(message = "no puede ser null")
     private TipoTelefono tipoTelefono;
 
     @ManyToOne
+    @NotNull(message = "no puede ser null")
     private Personas personas;
+
+    public TelPersona() {
+    }
 
     public long getId() {
         return id;
