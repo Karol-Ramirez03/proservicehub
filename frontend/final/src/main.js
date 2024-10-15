@@ -30,12 +30,12 @@ class InicioForm extends LitElement {
                 <button class="active">Iniciar sesión</button>
                 <button>Registrarse</button>
             </div>
-            <form>
+            <form class="login-form">
                 <div class="input-group">
-                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="email" name="email" placeholder="Correo electrónico" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" placeholder="Contraseña" required>
+                    <input type="password" name="password" placeholder="Contraseña" required>
                 </div>
                 <div class="options">
                     <label>
@@ -43,7 +43,7 @@ class InicioForm extends LitElement {
                     </label>
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
-                <button type="submit" class="login-btn">Iniciar sesión</button>
+                <button type="submit" class="guardar login-btn">Iniciar sesión</button>
             </form>
         </div>
     </div>
@@ -60,18 +60,22 @@ class InicioForm extends LitElement {
   }
   _handleSubmit(e) {
     e.preventDefault();
-    const formData =this.shadowRoot.querySelector(".login-form")
+    const form =this.shadowRoot.querySelector(".login-form")
+    const formData= new FormData(form)
+    const username=formData.get('email')
+    const password=formData.get('password')
     const loginData = {
-      username: formData.get('username'),
-      password: formData.get('password')
+      usuario: username,
+      contraseña: password
     };
-
-    fetch('https://tuapi.com/login', {
-      method: 'POST',
+    
+    console.log(loginData)
+    const url = `http://localhost:8080/api/login?username=${username}&password=${password}`
+    fetch(url, {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(loginData)
     })
     .then(response => {
       if (!response.ok) {

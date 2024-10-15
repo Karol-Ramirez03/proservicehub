@@ -27,6 +27,10 @@ public class Rol {
     public Rol() {
     }
 
+    public Rol(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Rol(Long id, String nombre, List<Login> login) {
         this.id = id;
         this.nombre = nombre;

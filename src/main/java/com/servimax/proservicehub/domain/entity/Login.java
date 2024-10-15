@@ -37,6 +37,18 @@ public class Login {
     public Login() {
     }
 
+    
+    public Login(Long id, @NotBlank String usuario) {
+        this.id = id;
+        this.usuario = usuario;
+    }
+
+
+    public Login(@NotBlank String usuario, @NotBlank String contraseña) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }
+
     public Login(Long id, String usuario, String contraseña, Rol rol, Personas personas) {
         this.id = id;
         this.usuario = usuario;

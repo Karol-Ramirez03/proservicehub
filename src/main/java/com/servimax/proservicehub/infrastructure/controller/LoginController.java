@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
@@ -32,6 +33,21 @@ public class LoginController {
     @GetMapping
     public List<Login> list(){
         return loginServiceI.findAll();
+    }
+
+    @GetMapping("/api/login")
+    public ResponseEntity<?> login(
+            @RequestParam(name = "usuario") String usuario,
+            @RequestParam(name = "contraseña") String contraseña) {
+        
+        // Lógica de autenticación
+        Login login = loginServiceI.authenticate(usuario, contraseña);
+        
+        if (login == null) {
+            return ResponseEntity.status(401).body("Credenciales inválidas"); // Retorna 401 si la autenticación falla
+        }
+        
+        return ResponseEntity.ok(new Login(login.getId(), login.getUsuario())); // Retorna un objeto específico
     }
 
     @GetMapping("/{id}")

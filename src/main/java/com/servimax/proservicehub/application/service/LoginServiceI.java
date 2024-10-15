@@ -11,4 +11,5 @@ public interface LoginServiceI {
     Login save(Login login);
     Optional<Login> update(Long id, Login login);
     Optional<Login> delete(Long id);
+    Login authenticate(String usuario, String contraseña);
 }

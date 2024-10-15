@@ -7,5 +7,5 @@ import com.servimax.proservicehub.domain.entity.Login;
 
 @Repository
 public interface LoginRepositoryI extends CrudRepository<Login,Long>{
-
+    Login findByUsuario(String usuario);
 }
