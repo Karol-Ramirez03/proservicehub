@@ -3,6 +3,8 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "servicio")
@@ -19,18 +22,35 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column 
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Column(length = 50,nullable = false)
     private String nombre;
+
+    @NotNull(message = "No puedes ser vacio este campo")
     private Boolean requiere_insumo;
+
+    @NotNull(message = "No puedes ser vacio este campo")
     private String  tiempo_ejecucion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "servicio")
     private List<EmpresaServicio> empresa_servicio;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="servicio")
+    private List<ServicioInsumo> servicioInsumo;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="servicio")
+    private List<DetalleOrdenServicio> detalle_orden_servicio;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="servicio")
+    private List<DetalleOrdenTrabajo> detalle_orden_trabajo;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "servicio")
+    private List<AprobacionServicio> aprovacionServicio;
 
     public Long getId() {
         return id;
@@ -55,6 +75,36 @@ public class Servicio {
     }
     public void setTiempo_ejecucion(String tiempo_ejecucion) {
         this.tiempo_ejecucion = tiempo_ejecucion;
+    }
+    public List<EmpresaServicio> getEmpresa_servicio() {
+        return empresa_servicio;
+    }
+    public void setEmpresa_servicio(List<EmpresaServicio> empresa_servicio) {
+        this.empresa_servicio = empresa_servicio;
+    }
+    public List<ServicioInsumo> getServicioInsumo() {
+        return servicioInsumo;
+    }
+    public void setServicioInsumo(List<ServicioInsumo> servicioInsumo) {
+        this.servicioInsumo = servicioInsumo;
+    }
+    public List<DetalleOrdenServicio> getDetalle_orden_servicio() {
+        return detalle_orden_servicio;
+    }
+    public void setDetalle_orden_servicio(List<DetalleOrdenServicio> detalle_orden_servicio) {
+        this.detalle_orden_servicio = detalle_orden_servicio;
+    }
+    public List<DetalleOrdenTrabajo> getDetalle_orden_trabajo() {
+        return detalle_orden_trabajo;
+    }
+    public void setDetalle_orden_trabajo(List<DetalleOrdenTrabajo> detalle_orden_trabajo) {
+        this.detalle_orden_trabajo = detalle_orden_trabajo;
+    }
+    public List<AprobacionServicio> getAprovacionServicio() {
+        return aprovacionServicio;
+    }
+    public void setAprovacionServicio(List<AprobacionServicio> aprovacionServicio) {
+        this.aprovacionServicio = aprovacionServicio;
     } 
 
     

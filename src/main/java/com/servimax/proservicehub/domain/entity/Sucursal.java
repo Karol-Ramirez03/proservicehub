@@ -36,6 +36,10 @@ public class Sucursal {
     @OneToMany(mappedBy = "sucursal")
     private List<EmpresaServicio> empresa_servicio;
 
+    @OneToMany(mappedBy = "sucursal")
+    private List<Personas> personas;
+
+
     public Long getId() {
         return id;
     }

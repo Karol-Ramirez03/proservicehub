@@ -2,6 +2,8 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ import jakarta.persistence.Table;
 public class Empresa {
 
     @Id
-    private long id;
+    private Long id;
 
     @Column
     private String nombre;
@@ -22,14 +24,15 @@ public class Empresa {
     @ManyToOne
     private TipoEmpresa tipo_empresa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "empresa")
     private List<Sucursal> sucursal;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

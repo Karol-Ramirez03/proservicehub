@@ -11,32 +11,32 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "estado_aprovacion")
-public class EstadoAprovacion {
+@Table(name = "estado_orden_servicio")
+public class EstadoOrdenServicio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column
     private String nombre;
 
-    @OneToMany(mappedBy = "estado_aprovacion")
-    private List<AprobacionServicio> aprobacionServicio;
+    @OneToMany(mappedBy = "estado_orden_servicio")
+    private List<OrdenServicio> ordenServicio;
 
-    public EstadoAprovacion() {
+    public EstadoOrdenServicio() {
     }
 
-    public EstadoAprovacion(Long id, String nombre, List<AprobacionServicio> aprobacionServicio) {
+    public EstadoOrdenServicio(long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -48,13 +48,13 @@ public class EstadoAprovacion {
         this.nombre = nombre;
     }
 
-    // public List<AprobacionServicio> getAprobacionServicio() {
-    //     return aprobacionServicio;
-    // }
+    public List<OrdenServicio> getOrdenServicio() {
+        return ordenServicio;
+    }
 
-    // public void setAprobacionServicio(List<AprobacionServicio> aprobacionServicio) {
-    //     this.aprobacionServicio = aprobacionServicio;
-    // }
+    public void setOrdenServicio(List<OrdenServicio> ordenServicio) {
+        this.ordenServicio = ordenServicio;
+    }
+
     
 }
-
