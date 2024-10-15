@@ -8,9 +8,9 @@ import com.servimax.proservicehub.domain.entity.Personas;
 public interface PersonasServiceI {
 
     List<Personas> findAll();
-    Optional<Personas> findById(Long id);
-    Personas save(Personas Personas);
-    Optional<Personas> update(Long id, Personas Personas);
-    Optional<Personas> delete(Long id);
+    Optional<Personas> findById(Long nroDoc);
+    Personas save(Personas persona);
+    Optional<Personas> update(Long nroDoc, Personas persona);
+    Optional<Personas> delete(Long nroDoc);
 }
 
