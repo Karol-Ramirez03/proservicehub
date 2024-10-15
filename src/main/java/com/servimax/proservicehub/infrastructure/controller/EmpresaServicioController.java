@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.EmpresaServicioServiceI;
 import com.servimax.proservicehub.domain.entity.EmpresaServicio;
-import com.servimax.proservicehub.domain.entity.EmpresaServicioPk;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -56,7 +55,6 @@ public class EmpresaServicioController {
 
     @PutMapping("/{IdSucursal}/{IdServicio}")
     public Optional<EmpresaServicio> update(@PathVariable Long IdSucursal, @PathVariable Long IdServicio, @RequestBody EmpresaServicio EmpresaServicio){
-        EmpresaServicioPk id = new EmpresaServicioPk(IdSucursal, IdServicio);
         Optional<EmpresaServicio> compranew = EmpresaServicioServiceI.findById(IdSucursal,IdServicio);
         if (compranew.isPresent()) {
             EmpresaServicio EmpresaServicioCopy = compranew.get();
