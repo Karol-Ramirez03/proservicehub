@@ -19,7 +19,7 @@ import com.servimax.proservicehub.application.service.EmpresaServiceI;
 import com.servimax.proservicehub.domain.entity.Empresa;
 
 @RestController
-@RequestMapping("/api/personas")
+@RequestMapping("api/personas")
 public class PersonaController {
 
     @Autowired

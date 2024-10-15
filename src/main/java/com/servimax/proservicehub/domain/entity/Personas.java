@@ -1,6 +1,6 @@
 package com.servimax.proservicehub.domain.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
