@@ -1,7 +1,5 @@
 package com.servimax.proservicehub.domain.entity;
 
-
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -105,6 +103,30 @@ public class Sucursal {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public List<EmpresaServicio> getEmpresa_servicio() {
+        return empresa_servicio;
+    }
+
+    public void setEmpresa_servicio(List<EmpresaServicio> empresa_servicio) {
+        this.empresa_servicio = empresa_servicio;
+    }
+
+    public List<Personas> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Personas> personas) {
+        this.personas = personas;
+    }
+
+    public List<TelSucursal> getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(List<TelSucursal> sucursales) {
+        this.sucursales = sucursales;
     }
 
 
