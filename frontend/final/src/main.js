@@ -1,72 +1,48 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('inicio-form')
-class InicioForm extends LitElement {
-  static styles = css`
-    :host {
-      background-color: hsl(180, 100%, 50%);
-      display: block;
-      font-family: Arial, sans-serif;
-    }
-    .login-container {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 40px;
-      width: 300px;
-      text-align: center;
-    }
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .forgot-password {
-      margin-top: 15px;
-      font-size: 14px;
-      color: #007bff;
-      text-decoration: none;
-    }
-  `;
 
-  render() {
+class InicioForm extends LitElement {
+
+  
+  static properties = {
+    condition: {},
+    btnguardar: {},
+  };
+
+  constructor(){
+    super()
+
+  }
+
+  render(){
+    // this.attachShadow({mode: 'open'})
+    // this.shadowRoot.innerHTML
     return html`
+    <link rel="stylesheet" href="src/index.css" />
       <div class="login-container">
         <h2>Login</h2>
-        <form @submit=${this._handleSubmit}>
+        <form class="login-form">
           <input type="text" name="username" placeholder="Username" required>
           <input type="password" name="password" placeholder="Password" required>
-          <button type="submit">Login</button>
+          <button class="guardar">Login</button>
         </form>
         <a href="#" class="forgot-password">Forgot Password?</a>
       </div>
-    `;
+    `
   }
 
+  updated(){
+    const btnguardar= this.shadowRoot.querySelector(".guardar")
+    btnguardar.addEventListener("click",(e)=>{
+      e.preventDefault();
+      console.log("holaaaa")
+      this._handleSubmit(e)
+    })
+  }
   _handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData =this.shadowRoot.querySelector(".login-form")
     const loginData = {
       username: formData.get('username'),
       password: formData.get('password')
@@ -95,5 +71,5 @@ class InicioForm extends LitElement {
   }
 }
 
-// No necesitas esto, ya que LitElement se encargará de crear el componente cuando se use en HTML.
-document.querySelector('#app').innerHTML = '<inicio-form></inicio-form>';
+
+customElements.define("inicio-form",InicioForm)

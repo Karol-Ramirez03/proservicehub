@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class OrdenTrabajo {
     @Column
     private Time hora_asignacion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orden_trabajo")
     private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
 
@@ -42,6 +45,7 @@ public class OrdenTrabajo {
     @JoinColumn(name="numero_orden_servicio")
     private OrdenServicio ordenServicio;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orden_trabajo")
     private List<AprobacionServicio> aprobacionServicios;
 

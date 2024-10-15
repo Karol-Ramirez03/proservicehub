@@ -2,6 +2,8 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "estado_orden")
@@ -18,9 +21,11 @@ public class EstadoOrden {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @NotBlank(message = "No puedes ser vacio nombre")
     @Column
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "estado_orden")
     private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
 
@@ -44,6 +49,18 @@ public class EstadoOrden {
 
     public List<DetalleOrdenTrabajo> getDetalleOrdenTrabajo() {
         return detalleOrdenTrabajo;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDetalleOrdenTrabajo(List<DetalleOrdenTrabajo> detalleOrdenTrabajo) {
+        this.detalleOrdenTrabajo = detalleOrdenTrabajo;
     }
     
 }

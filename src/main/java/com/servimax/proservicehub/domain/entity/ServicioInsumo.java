@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="servicio_insumo")
@@ -16,14 +17,17 @@ public class ServicioInsumo {
     @EmbeddedId
     private ServicioInsumoPk id;
 
+    @NotNull(message = "No puede estar vacio")
     @Column
     private Double cantidad;
 
+    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     @MapsId("idInsumo")
     @JoinColumn(name="id_insumo", insertable = false, updatable = false)
     private Insumo insumo;
   
+    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     @MapsId("idServicio")
     @JoinColumn(name="id_servicio", insertable = false, updatable = false)
