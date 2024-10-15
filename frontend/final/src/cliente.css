@@ -1,0 +1,148 @@
+
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  nav{
+    display: flex;
+    color: white;
+    align-items: center;
+    background-color: #2563EB;
+    justify-content: space-between;
+    padding: 1%;
+  
+  }
+  .principal{
+    background-color: #F3F4F6;
+  }
+  .container-user{
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 9%;
+  }
+  
+  .container-cuerpo{
+    display: flex;
+    color: #7180A0;
+    width: 80%;
+    height: auto;
+  }
+  
+  .container-principal{
+    padding: 2%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: start;
+    min-height: 90vh;
+    width: 100%;
+    gap: 3px;
+  }
+  
+  .container-button{
+    width: 80%;
+  }
+  button{
+    background-color: white;
+    border-radius: 5px;
+    padding: 1%;
+    color: #2563EB;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  button:active{
+    background-color:  #2563EB;
+    color: white;
+  }
+  
+  
+  
+  
+  .table-container {
+    width: 80%;
+    margin: 2% auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .nombres-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .nombres-table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .nombres-table th, .nombres-table td {
+    padding: 1%;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .nombres-table th {
+    font-weight: bold;
+    color: #6c757d;
+  }
+  
+  .nombres-table td {
+    color: #343a40;
+  }
+  
+  .nombres-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .comprar-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  @media (max-width:900px) {
+    .table-container {
+      width: 98%;
+    }
+    .nombres-table th, .nombres-table td {
+      font-size: 2vw;
+    }
+    .container-button{
+      width: 99%;
+    }
+  
+  }
+  @media (max-width:600px) {
+    .table-container {
+      width: 98%;
+    }
+    .nombres-table th, .nombres-table td {
+      font-size: 4vw;
+    }
+    button{
+      background-color: white;
+      border-radius: 5px;
+      padding: 1%;
+      color: #2563EB;
+      font-size: 2.8vw;
+    }
+    h1 {
+      font-size: 5.8vw;
+    }
+    .container-user img{
+      width: 40%;
+      height: auto;
+    }
+    .container-user{
+      width: 19%;
+    }
+    .container-user h3{
+      font-size: 4vw;
+    }
+  }

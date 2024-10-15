@@ -20,15 +20,33 @@ class InicioForm extends LitElement {
     // this.shadowRoot.innerHTML
     return html`
     <link rel="stylesheet" href="src/index.css" />
-      <div class="login-container">
-        <h2>Login</h2>
-        <form class="login-form">
-          <input type="text" name="username" placeholder="Username" required>
-          <input type="password" name="password" placeholder="Password" required>
-          <button class="guardar">Login</button>
-        </form>
-        <a href="#" class="forgot-password">Forgot Password?</a>
-      </div>
+   <div class="login-container">
+        <div class="login-box">
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <h2>Bienvenido</h2>
+            <div class="tabs">
+                <button class="active">Iniciar sesión</button>
+                <button>Registrarse</button>
+            </div>
+            <form>
+                <div class="input-group">
+                    <input type="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Contraseña" required>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox"> Recordarme
+                    </label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="login-btn">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
     `
   }
 
