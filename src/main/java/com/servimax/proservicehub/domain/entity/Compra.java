@@ -28,11 +28,9 @@ public class Compra {
     private Timestamp fecha_compra;
     private Double total;
 
-    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     private EstadoCompra estado_compra;
 
-    @NotNull(message = "No puede estar vacio")
     @JsonIgnore
     @OneToMany(mappedBy = "compra")
     private List<DetalleCompra> detalleCompra;

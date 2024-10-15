@@ -25,12 +25,15 @@ public class EstadoCompra {
     @Column
     private String nombre;
 
-    @NotNull(message = "No puede estar vacio")
     @JsonIgnore
     @OneToMany(mappedBy = "estado_compra")
     private List<Compra> compra;
 
     public EstadoCompra() {
+    }
+
+    public EstadoCompra(@NotNull(message = "No puede estar vacio") String nombre) {
+        this.nombre = nombre;
     }
 
     public EstadoCompra(Long id, String nombre, List<Compra> compra) {

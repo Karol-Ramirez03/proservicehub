@@ -22,11 +22,9 @@ public class DetalleCompra {
     private int cantidad;
     private Double precio_unitario;
 
-    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     private Insumo insumo;
 
-    @NotNull(message = "No puede estar vacio")
     @ManyToOne
     private Compra compra;
 
