@@ -1,7 +1,7 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,46 +16,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.servimax.proservicehub.application.service.ServicioInsumoServiceI;
-import com.servimax.proservicehub.domain.entity.ServicioInsumo;
+import com.servimax.proservicehub.application.service.PersonaInsumoServiceI;
+import com.servimax.proservicehub.domain.entity.PersonaInsumo;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/servicioinsumo")
-public class ServicioInsumoController {
+@RequestMapping("api/personainsumo")
+public class PersonaInsumoController {
 
     @Autowired
-    private ServicioInsumoServiceI servicioInsumoServiceI;
+    private PersonaInsumoServiceI personaInsumoServiceI;
 
     @GetMapping
-    public List<ServicioInsumo> list(){
-        return servicioInsumoServiceI.findAll();
+    public List<PersonaInsumo> list(){
+        return personaInsumoServiceI.findAll();
     }
 
     @GetMapping("/{idInsumo}/{idservicio}")
-    public ResponseEntity<?> view(@PathVariable Long idInsumo,@PathVariable  Long idservicio) {
-        Optional<ServicioInsumo> ServicioInsumoOptional = servicioInsumoServiceI.findById(idInsumo,idservicio);
-        if (ServicioInsumoOptional.isPresent()) {
-            return ResponseEntity.ok(ServicioInsumoOptional.orElseThrow());
+    public ResponseEntity<?> view(@PathVariable Long idPersona,@PathVariable  Long idInsumo) {
+        Optional<PersonaInsumo> PersonaInsumoOptional = personaInsumoServiceI.findById(idPersona,idInsumo);
+        if (PersonaInsumoOptional.isPresent()) {
+            return ResponseEntity.ok(PersonaInsumoOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }
 
         
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody ServicioInsumo ServicioInsumo, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody PersonaInsumo personaInsumo, BindingResult result) {
         if (result.hasFieldErrors()) {
             return ValidatedFields.validation(result);
         }
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicioInsumoServiceI.save(ServicioInsumo));
+        return ResponseEntity.status(HttpStatus.CREATED).body(personaInsumoServiceI.save(personaInsumo));
     }
 
     @PutMapping("/{idInsumo}/{idservicio}")
-    public ResponseEntity<?> update(@Valid @RequestBody ServicioInsumo ServicioInsumo, @PathVariable Long idInsumo,@PathVariable  Long idservicio, BindingResult result) {
-        Optional<ServicioInsumo> ServicioInsumoOptional = servicioInsumoServiceI.update(idInsumo,idservicio, ServicioInsumo);
+    public ResponseEntity<?> update(@Valid @RequestBody PersonaInsumo personaInsumo, @PathVariable Long idPersona,@PathVariable  Long idInsumo, BindingResult result) {
+        Optional<PersonaInsumo> ServicioInsumoOptional = personaInsumoServiceI.update(idPersona,idInsumo, personaInsumo);
         if (result.hasFieldErrors()) {
             return ValidatedFields.validation(result);
         }
@@ -66,10 +66,10 @@ public class ServicioInsumoController {
     }
 
     @DeleteMapping("/{idInsumo}/{idservicio}")
-    public ResponseEntity<?> delete(@PathVariable Long idInsumo,@PathVariable  Long idservicio) {
-        Optional<ServicioInsumo> ServicioInsumoOptional = servicioInsumoServiceI.delete(idInsumo,idservicio);
-        if (ServicioInsumoOptional.isPresent()) {
-            return ResponseEntity.ok(ServicioInsumoOptional.orElseThrow());
+    public ResponseEntity<?> delete(@PathVariable Long idPersona,@PathVariable  Long idInsumo) {
+        Optional<PersonaInsumo> personaInsumoOptional = personaInsumoServiceI.delete(idPersona,idInsumo);
+        if (personaInsumoOptional.isPresent()) {
+            return ResponseEntity.ok(personaInsumoOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }

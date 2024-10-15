@@ -3,12 +3,12 @@ package com.servimax.proservicehub.application.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.servimax.proservicehub.domain.entity.ServicioInsumo;
+import com.servimax.proservicehub.domain.entity.PersonaInsumo;
 
 public interface PersonaInsumoServiceI {
-    List<ServicioInsumo> findAll();
-    // Optional<Servicio> findById(Long id);
-    ServicioInsumo save(ServicioInsumo servicioInsumo);
-    // Optional<Servicio> update(Long id, Servicio servicio);
-    // Optional<Servicio> delete(Long id);
+    List<PersonaInsumo> findAll();
+    Optional<PersonaInsumo> findById(Long idPersona, Long idInsumo);
+    PersonaInsumo save(PersonaInsumo personaInsumo);
+    Optional<PersonaInsumo> update(Long idPersona, Long idInsumo, PersonaInsumo personaInsumo);
+    Optional<PersonaInsumo> delete(Long idPersona, Long idInsumo);
 }
