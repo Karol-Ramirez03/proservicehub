@@ -8,4 +8,5 @@ import com.servimax.proservicehub.domain.entity.TelPersona;
 @Repository
 public interface TelPersonaRepositoryI extends CrudRepository<TelPersona,Long> {
 
+    
 }

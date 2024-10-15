@@ -25,7 +25,7 @@ public class OrdenTrabajo {
     private Long id;
 
     @Column
-    private String numero_orden_trabajo;
+    private int numero_orden_trabajo;
 
     @Column
     private Date fecha_asignacion;
@@ -52,7 +52,7 @@ public class OrdenTrabajo {
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(Long id, String numero_orden_trabajo, Date fecha_asignacion, Time hora_asignacion,
+    public OrdenTrabajo(Long id, int numero_orden_trabajo, Date fecha_asignacion, Time hora_asignacion,
             List<DetalleOrdenTrabajo> detalleOrdenTrabajo, Personas personas, OrdenServicio ordenServicio) {
         this.id = id;
         this.numero_orden_trabajo = numero_orden_trabajo;
@@ -71,11 +71,11 @@ public class OrdenTrabajo {
         this.id = id;
     }
 
-    public String getNumero_orden_trabajo() {
+    public int getNumero_orden_trabajo() {
         return numero_orden_trabajo;
     }
 
-    public void setNumero_orden_trabajo(String numero_orden_trabajo) {
+    public void setNumero_orden_trabajo(int numero_orden_trabajo) {
         this.numero_orden_trabajo = numero_orden_trabajo;
     }
 
