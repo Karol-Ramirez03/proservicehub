@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -21,7 +20,6 @@ public class TelPersona {
 
     @Column
     @NotNull(message = "no puede ser null")
-    @Min(6)
     private Long numero;
 
     @ManyToOne
