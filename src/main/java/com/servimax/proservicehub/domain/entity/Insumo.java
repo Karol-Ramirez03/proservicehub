@@ -2,6 +2,8 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,9 +30,11 @@ public class Insumo {
     private int stock_minimo;
     private int stock_maximo;
 
+    @JsonIgnore
     @OneToMany(mappedBy="insumo")
     private List<ServicioInsumo> servicioInsumo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "insumo")
     private List<PersonaInsumo> personaInsumos;
 
