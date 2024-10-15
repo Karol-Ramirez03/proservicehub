@@ -33,8 +33,14 @@ public class RolImplementation implements RolServiceI{
 
     @Override
     public Optional<Rol> update(Long id, Rol rol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Optional<Rol> ORol = rolRepositoryI.findById(id);
+        if (ORol.isPresent()) {
+            Rol rol2 = ORol.orElseThrow();
+            rol2.setNombre(rol.getNombre());
+            return Optional.of(rolRepositoryI.save(rol2));
+            
+        }
+        return Optional.empty();
     }
 
     @Override
