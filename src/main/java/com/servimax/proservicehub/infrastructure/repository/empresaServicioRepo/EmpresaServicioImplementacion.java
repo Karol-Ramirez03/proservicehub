@@ -26,8 +26,9 @@ public class EmpresaServicioImplementacion implements EmpresaServicioServiceI{
 
     // @Transactional(readOnly = true)
     @Override
-    public Optional<EmpresaServicio> findById(EmpresaServicioPk id) {
-        return EmpresaServicioRepositoryI.findById(id);
+    public Optional<EmpresaServicio> findById(Long  idSucursal, Long idServicio) {
+        EmpresaServicioPk key =new EmpresaServicioPk(idSucursal,idServicio);
+        return EmpresaServicioRepositoryI.findById(key);
     }
 
     @Override
@@ -36,8 +37,9 @@ public class EmpresaServicioImplementacion implements EmpresaServicioServiceI{
     }
 
     @Override
-    public Optional<EmpresaServicio> update(EmpresaServicioPk id, EmpresaServicio EmpresaServicio) {
-        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioRepositoryI.findById(id);
+    public Optional<EmpresaServicio> update(Long  idSucursal, Long idServicio, EmpresaServicio EmpresaServicio) {
+        EmpresaServicioPk key =new EmpresaServicioPk(idSucursal,idServicio);
+        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioRepositoryI.findById(key);
         if (EmpresaServicioOptional.isPresent()) {
             EmpresaServicio EmpresaServicioCopy = EmpresaServicioOptional.orElseThrow();
             EmpresaServicioCopy.setValorServicio(EmpresaServicio.getValorServicio());
@@ -49,8 +51,9 @@ public class EmpresaServicioImplementacion implements EmpresaServicioServiceI{
     }
 
     @Override
-    public Optional<EmpresaServicio> delete(EmpresaServicioPk id) {
-        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioRepositoryI.findById(id);
+    public Optional<EmpresaServicio> delete(Long  idSucursal, Long idServicio) {
+        EmpresaServicioPk key =new EmpresaServicioPk(idSucursal,idServicio);
+        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioRepositoryI.findById(key);
         EmpresaServicioOptional.ifPresent(cP -> {
             EmpresaServicioRepositoryI.delete(cP);
         });

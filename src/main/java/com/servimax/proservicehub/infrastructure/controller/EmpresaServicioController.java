@@ -38,8 +38,7 @@ public class EmpresaServicioController {
 
     @GetMapping("/{IdSucursal}/{IdServicio}")
     public ResponseEntity<?> view(@PathVariable Long IdSucursal, @PathVariable Long IdServicio) {
-        EmpresaServicioPk id = new EmpresaServicioPk(IdSucursal, IdServicio);
-        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioServiceI.findById(id);
+        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioServiceI.findById(IdSucursal,IdServicio);
         if (EmpresaServicioOptional.isPresent()) {
             return ResponseEntity.ok(EmpresaServicioOptional.orElseThrow());
         }
@@ -58,7 +57,7 @@ public class EmpresaServicioController {
     @PutMapping("/{IdSucursal}/{IdServicio}")
     public Optional<EmpresaServicio> update(@PathVariable Long IdSucursal, @PathVariable Long IdServicio, @RequestBody EmpresaServicio EmpresaServicio){
         EmpresaServicioPk id = new EmpresaServicioPk(IdSucursal, IdServicio);
-        Optional<EmpresaServicio> compranew = EmpresaServicioServiceI.findById(id);
+        Optional<EmpresaServicio> compranew = EmpresaServicioServiceI.findById(IdSucursal,IdServicio);
         if (compranew.isPresent()) {
             EmpresaServicio EmpresaServicioCopy = compranew.get();
             if (EmpresaServicio.getServicio() != null) {
@@ -71,7 +70,7 @@ public class EmpresaServicioController {
                 EmpresaServicioCopy.setValorServicio(EmpresaServicio.getValorServicio());
             }
 
-            EmpresaServicioServiceI.update(id, EmpresaServicioCopy);
+            EmpresaServicioServiceI.update(IdSucursal,IdServicio, EmpresaServicioCopy);
             return Optional.of(EmpresaServicioCopy);
             
         }
@@ -81,8 +80,7 @@ public class EmpresaServicioController {
 
     @DeleteMapping("/{IdSucursal}/{IdServicio}")
     public ResponseEntity<?> delete(@PathVariable Long IdSucursal, @PathVariable Long IdServicio) {
-        EmpresaServicioPk id = new EmpresaServicioPk(IdSucursal, IdServicio);
-        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioServiceI.delete(id);
+        Optional<EmpresaServicio> EmpresaServicioOptional = EmpresaServicioServiceI.delete(IdSucursal,IdServicio);
         if (EmpresaServicioOptional.isPresent()) {
             return ResponseEntity.ok(EmpresaServicioOptional.orElseThrow());
         }

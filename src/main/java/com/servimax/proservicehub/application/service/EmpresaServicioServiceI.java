@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.servimax.proservicehub.domain.entity.EmpresaServicio;
-import com.servimax.proservicehub.domain.entity.EmpresaServicioPk;
 
 public interface EmpresaServicioServiceI {
     List<EmpresaServicio> findAll();
-    Optional<EmpresaServicio> findById(EmpresaServicioPk id);
+    Optional<EmpresaServicio> findById(Long  idSucursal, Long idServicio);
     EmpresaServicio save(EmpresaServicio EmpresaServicio);
-    Optional<EmpresaServicio> update(EmpresaServicioPk id, EmpresaServicio EmpresaServicio);
-    Optional<EmpresaServicio> delete(EmpresaServicioPk id);
+    Optional<EmpresaServicio> update(Long  idSucursal, Long idServicio, EmpresaServicio EmpresaServicio);
+    Optional<EmpresaServicio> delete(Long  idSucursal, Long idServicio);
 }

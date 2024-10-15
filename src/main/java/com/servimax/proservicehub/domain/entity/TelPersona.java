@@ -32,8 +32,6 @@ public class TelPersona {
     @NotNull(message = "no puede ser null")
     private Personas personas;
 
-    
-
     public TelPersona() {
     }
 

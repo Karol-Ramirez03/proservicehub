@@ -33,7 +33,7 @@ public class TelPersonaImplementacion implements  TelPersonaServiceI{
 
     @Override
     public Optional<TelPersona> update(Long id, TelPersona TelPersona) {
-       Optional<TelPersona> OTelPersona = telPersonaRepositoryI.findById(id);
+        Optional<TelPersona> OTelPersona = telPersonaRepositoryI.findById(id);
         if (OTelPersona.isPresent()) {
             TelPersona  TelPersonaAdic = OTelPersona.orElseThrow();
             TelPersonaAdic.setNumero(TelPersona.getNumero());
