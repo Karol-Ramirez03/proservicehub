@@ -14,7 +14,7 @@ class  PagInicioRecursosHumanos extends LitElement {
 
     render(){
     return html `
-    <link rel="stylesheet" href="src/cliente.css"/>
+    <link rel="stylesheet" href="src/recursosHumanos.css"/>
     <div class="container">
       <nav>
         <h1>Portal de Recursos Humanos</h1>

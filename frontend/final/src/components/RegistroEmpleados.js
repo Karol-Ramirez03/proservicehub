@@ -1,6 +1,7 @@
 
 const renderizarTablas = () => {
     return /* html */`
+    <link rel="stylesheet" href="../recursosHumanos.css"/>
     <div class="contenedor-formularioper">
     
         <h1>Formulario de Registro</h1>
