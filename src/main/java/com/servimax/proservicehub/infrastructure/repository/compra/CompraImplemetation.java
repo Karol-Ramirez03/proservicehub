@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.CompraServiceI;
 import com.servimax.proservicehub.domain.entity.Compra;
+import com.servimax.proservicehub.domain.entity.Personas;
 
 @Service
 public class CompraImplemetation implements CompraServiceI{
@@ -54,6 +55,17 @@ public class CompraImplemetation implements CompraServiceI{
         return OCompra;
     }
 
+    @Override
+    public List<Compra> findByPersonasId(Personas personasId) {
+       return compraRepositoryI.findByPersonaId(personasId);
+    }
 
+    public String obtenerNombreEstado(Long estadoId) {
+        Compra compra = compraRepositoryI.findById(estadoId)
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        // Obtener el nombre del estado
+        return compra.getEstado_compra().getNombre();
+    }
 
 }

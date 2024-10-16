@@ -27,6 +27,13 @@ public class TipoEmail {
     @OneToMany(mappedBy = "tipoEmail")
     private List<EmailPersona> emailPersona;
 
+    public TipoEmail() {
+    }
+
+    public TipoEmail(String nombre) {
+        this.nombre = nombre;
+    }
+
     public long getId() {
         return id;
     }

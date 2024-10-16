@@ -27,6 +27,18 @@ public class Pais {
     @OneToMany(mappedBy = "pais")
     private List<Region> region;
 
+    public Pais(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Pais() {
+    }
+
+    public Pais(long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public long getId() {
         return id;
     }

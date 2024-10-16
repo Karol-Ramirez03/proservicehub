@@ -36,6 +36,14 @@ public class Ciudad {
     @OneToMany(mappedBy = "ciudad")
     private List<Direccion> direccion;
 
+    public Ciudad() {
+    }
+
+    public Ciudad(String nombre, Region region) {
+        this.nombre = nombre;
+        this.region = region;
+    }
+
     public Long getId() {
         return id;
     }
