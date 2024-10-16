@@ -32,6 +32,13 @@ public class TipoPersona {
     @OneToMany(mappedBy = "tipoPersona")
     private List<Personas> personas;
 
+    public TipoPersona() {
+    }
+
+    public TipoPersona(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
