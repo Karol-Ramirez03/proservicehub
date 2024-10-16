@@ -2,10 +2,12 @@ package com.servimax.proservicehub.infrastructure.repository.personasRepo;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.PersonasServiceI;
 import com.servimax.proservicehub.domain.entity.Personas;
 
+@Service
 public class PersonasImplementacion implements PersonasServiceI{
 
     @Autowired

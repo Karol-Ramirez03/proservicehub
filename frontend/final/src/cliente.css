@@ -106,6 +106,52 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
+
+/* css formulario empleados */
+.contenedor-formularioper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 10px;
+  padding: 3%;
+  color: #6c757d;
+}
+
+#registroForm {
+  /* border: 3px solid blue; */
+  width: 40%;
+  margin: 3%;
+  padding: 3%;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2vw;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1vw;
+}
+.btn-registro{
+  background-color: #2563EB;
+  color: white;
+  width: 100%;
+  padding: 3%;
+}
+
   @media (max-width:900px) {
     .table-container {
       width: 98%;
@@ -116,6 +162,16 @@
     .container-button{
       width: 99%;
     }
+
+    /* formulario registro */
+
+    
+#registroForm {
+  /* border: 3px solid blue; */
+  width: 60%;
+
+
+}
   
   }
   @media (max-width:600px) {
@@ -145,4 +201,11 @@
     .container-user h3{
       font-size: 4vw;
     }
+
+/* formulario Registro */
+    .form-group label {
+
+      font-size: 3vw;
+  }
+  
   }
