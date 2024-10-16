@@ -29,12 +29,10 @@ public class OrdenServicio {
     @Column
     private Date fecha_orden;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_cliente")
     private Personas personas;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_empleado")
     private Personas persona;

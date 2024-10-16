@@ -44,6 +44,14 @@ public class OrdenServicioController {
         }   
         return ResponseEntity.notFound().build();
     }
+    @GetMapping("/estado/{estadoId}")
+    public ResponseEntity<List<OrdenServicio>> findByEstadoId(@PathVariable Long estadoId) {
+        List<OrdenServicio> ordenServicios = ordenServicioServiceI.findByEstadoId(estadoId);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
+    }
 
     @PostMapping()
     public ResponseEntity<?> create(@Valid @RequestBody OrdenServicio ordenServicio, BindingResult result) {
@@ -74,5 +82,5 @@ public class OrdenServicioController {
         }
         return ResponseEntity.notFound().build();
     }
-
+    
 }

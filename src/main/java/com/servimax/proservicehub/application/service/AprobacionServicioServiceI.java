@@ -1,5 +1,15 @@
 package com.servimax.proservicehub.application.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+
 public interface AprobacionServicioServiceI {
+    List<AprobacionServicio> findAll();
+    Optional<AprobacionServicio> findById(Long id);
+    AprobacionServicio save(AprobacionServicio aprobacionServicio);
+    Optional<AprobacionServicio> update(Long id, AprobacionServicio aprobacionServicio);
+    Optional<AprobacionServicio> delete(Long id);
 
 }

@@ -56,6 +56,10 @@ public class Personas {
     @OneToMany(mappedBy = "personas")
     private List<Compra> compra;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "personas")
+    private List<Login> login;
+
     @ManyToOne
     private Sucursal sucursal;
 
@@ -146,5 +150,12 @@ public class Personas {
     public void setCompra(List<Compra> compra) {
         this.compra = compra;
     }
+    public List<Login> getLogin() {
+        return login;
+    }
+    public void setLogin(List<Login> login) {
+        this.login = login;
+    }
 
+    
 }

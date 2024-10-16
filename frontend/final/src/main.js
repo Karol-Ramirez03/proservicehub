@@ -20,15 +20,33 @@ class InicioForm extends LitElement {
     // this.shadowRoot.innerHTML
     return html`
     <link rel="stylesheet" href="src/index.css" />
-      <div class="login-container">
-        <h2>Login</h2>
-        <form class="login-form">
-          <input type="text" name="username" placeholder="Username" required>
-          <input type="password" name="password" placeholder="Password" required>
-          <button class="guardar">Login</button>
-        </form>
-        <a href="#" class="forgot-password">Forgot Password?</a>
-      </div>
+   <div class="login-container">
+        <div class="login-box">
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <h2>Bienvenido</h2>
+            <div class="tabs">
+                <button class="active">Iniciar sesión</button>
+                <button>Registrarse</button>
+            </div>
+            <form class="login-form">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox"> Recordarme
+                    </label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="guardar login-btn">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
     `
   }
 
@@ -42,18 +60,22 @@ class InicioForm extends LitElement {
   }
   _handleSubmit(e) {
     e.preventDefault();
-    const formData =this.shadowRoot.querySelector(".login-form")
+    const form =this.shadowRoot.querySelector(".login-form")
+    const formData= new FormData(form)
+    const username=formData.get('email')
+    const password=formData.get('password')
     const loginData = {
-      username: formData.get('username'),
-      password: formData.get('password')
+      usuario: username,
+      contraseña: password
     };
-
-    fetch('https://tuapi.com/login', {
-      method: 'POST',
+    
+    console.log(loginData)
+    const url = `http://localhost:8080/api/login?username=${username}&password=${password}`
+    fetch(url, {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(loginData)
     })
     .then(response => {
       if (!response.ok) {
