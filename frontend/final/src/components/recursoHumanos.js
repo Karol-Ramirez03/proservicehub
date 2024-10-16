@@ -1,5 +1,7 @@
 import {LitElement, html } from 'lit'
-import { dataInsumos } from './OrdenesRH.js';
+import {dataOrdenes } from './OrdenesRH.js';
+import { dataRegistro } from './RegistroEmpleados.js';
+import { dataserviciosNo } from './serviciosNoasignados.js';
 // registrar empleados
 // servicios no asignados - generar ordenes de trabajo
 // seguimiento de ordenes de trabajo
@@ -23,8 +25,8 @@ class  PagInicioRecursosHumanos extends LitElement {
       </nav>  
       <section class="container-principal">
         <div class="container-button">
-          <button class="boton-insumo">Registro Personal</button>
-          <button>Servicios</button>
+          <button class="registro">Registro Personal</button>
+          <button class="servicio-no-asignado">Servicios</button>
           <button class="boton-orden">Ordenes</button>
         </div>
 
@@ -36,14 +38,27 @@ class  PagInicioRecursosHumanos extends LitElement {
     </div>
     `;
     }
-    updated() {
+    firstUpdated() {
         const botonOrdenes = this.shadowRoot.querySelector(".boton-orden")
+        const botonRegistro = this.shadowRoot.querySelector(".registro")
+        const serviciosAsignacion = this.shadowRoot.querySelector(".servicio-no-asignado")
         const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
+       
 
         botonOrdenes.addEventListener('click', (e) => {
-            e.preventDefault
-            dataInsumos(contenedorPrincipal);
+            e.preventDefault()
+            dataOrdenes(contenedorPrincipal);
           });
+        botonRegistro.addEventListener("click", (e) => {
+            e.preventDefault()
+            dataRegistro(contenedorPrincipal);
+          });
+        serviciosAsignacion.addEventListener("click", (e) => {
+            e.preventDefault()
+            dataserviciosNo(contenedorPrincipal);
+          });
+
+        
     }
 
 }

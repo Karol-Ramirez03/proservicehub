@@ -55,4 +55,10 @@ public class OrdenServicioImplementation implements OrdenServicioServiceI{
         return OOrdenServicio;
     }
 
+    @Override
+    public List<OrdenServicio> findByEstadoId(Long estadoId) {
+        return ordenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
+    }
+
+
 }

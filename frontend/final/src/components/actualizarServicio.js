@@ -57,39 +57,17 @@ const renderizarDatos = (datos,shadowRoot) => {
     `;
     cuerpoData.appendChild(fila)
   });
-  
 }
 
 export const dataOrdenes = async (contenedorPrincipal)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
-    contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
-
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
-    
-    try {
-        const response = await fetch("http://localhost:8080/api/detalleorden/estado/1", {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,shadowRoot);
-            const botonFecha = shadowRoot.querySelectorAll(".boton-fecha")
-            botonFecha.addEventListener("click", (e)   => {
-                e.preventDefault()
-                console.log("hola")
-            })
-            
-        }
-        
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    
-    
+
+    const botonFecha = shadowRoot.querySelector(".boton-fecha")
+
+    botonFecha.addEventListener("click", (e)   => {
+        contenedorPrincipal.insertAdjacentHTML("beforeend", )
+    })
   
 }
