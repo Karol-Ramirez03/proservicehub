@@ -118,7 +118,15 @@
       width: 99%;
     }
 
+    /* formulario registro */
 
+    
+#registroForm {
+  /* border: 3px solid blue; */
+  width: 60%;
+
+
+}
   
   }
   @media (max-width:600px) {
@@ -149,5 +157,10 @@
       font-size: 4vw;
     }
 
+/* formulario Registro */
+    .form-group label {
+
+      font-size: 3vw;
+  }
   
   }
