@@ -7,5 +7,4 @@ import com.servimax.proservicehub.domain.entity.Compra;
 
 @Repository
 public interface CompraRepositoryI extends CrudRepository<Compra,Long>{
-
 }
