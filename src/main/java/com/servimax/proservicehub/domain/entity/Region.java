@@ -31,6 +31,23 @@ public class Region {
     @OneToMany(mappedBy = "region")
     private List<Ciudad> ciudad;
 
+    public Region() {
+    }
+
+    public Region(String nombre, Pais pais) {
+        this.nombre = nombre;
+        this.pais = pais;
+    }
+
+    public Region(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Region(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
