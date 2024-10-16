@@ -24,21 +24,18 @@ body {
 
 .login-box {
   background-color: #000;
-  padding: 40px;
+  padding: 4vw;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
-  width: 300px;
+  width: 80vw;
+  max-width: 400px; /* Para limitar el tamaño máximo */
+  margin: 0 auto; /* Centrar en la página */
 }
 
 .icon {
-  font-size: 50px;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-h2 {
-  color: white;
+  /* font-size: 50px; */
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -99,6 +96,7 @@ h2 {
   color: #87cefa;
 }
 
+
 .login-btn {
   width: 100%;
   padding: 10px;
@@ -115,68 +113,51 @@ h2 {
   background-color: #6495ed;
 }
 
+/*  RESPONSIVE CEL*/
 
-
-
-
-
-
-/* body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #ffac4e;
+.welcome h2{
+  font-size: 1rem;
 }
 
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.input-group{
+  font-size: 0.9rem;
+  padding: 6px;
+}
+.tabs button{
+  font-size: 0.7rem;
+}
+label{
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  margin-left:1rem ;
+}
+a{
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
 }
 
-:host {
-  display: block;
-  font-family: Arial, sans-serif;
+/* login */
+@media (min-width: 768px) {
+  h2 {
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem; /* Aumenta el tamaño de fuente */
+  }
+
+
+  
 }
-.login-container {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  width: 300px;
-  text-align: center;
+
+@media (min-width: 1024px) {
+  h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem; /* Aumenta más el tamaño de fuente */
+  }
 }
-h2 {
-  color: #333;
-  margin-bottom: 20px;
+
+.login-btn:hover {
+  background-color: #00aaff; /* Color de fondo al pasar el cursor */
 }
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-button:hover {
-  background-color: #0056b3;
-}
-.forgot-password {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #007bff;
-  text-decoration: none;
-} */
+
+
+
