@@ -1,5 +1,8 @@
 package com.servimax.proservicehub.infrastructure.repository.estadoCompra;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,9 +17,17 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Verifica ya existe antes de insertarlo
-        if (!estadoCompraRepositoryI.findByNombre("Ejecutado").isPresent()) {
-            estadoCompraRepositoryI.save(new EstadoCompra("Ejecutado"));
+        List<String> tipos = Arrays.asList(
+        "Ejecutado",
+        "Pendiente asignacion",
+        "Cancelado",
+        "Rechazado"
+    );
+
+    for (String nombreTipo : tipos) {
+        if (!estadoCompraRepositoryI.findByNombre(nombreTipo).isPresent()) {
+            estadoCompraRepositoryI.save(new EstadoCompra(nombreTipo));
         }
     }
+}
 }

@@ -36,20 +36,20 @@ public class AprobacionServicio {
     private String solucion;
     
     @ManyToOne
-    private EstadoAprovacion estado_aprovacion;
+    private EstadoAprobacion estado_aprobacion;
 
     public AprobacionServicio() {
     }
 
     public AprobacionServicio(Long id, OrdenTrabajo orden_trabajo, Personas personas, Servicio servicio,
-            String hallazgo, String solucion, EstadoAprovacion estado_aprovacion) {
+            String hallazgo, String solucion, EstadoAprobacion estado_aprovacion) {
         this.id = id;
         this.orden_trabajo = orden_trabajo;
         this.personas = personas;
         this.servicio = servicio;
         this.hallazgo = hallazgo;
         this.solucion = solucion;
-        this.estado_aprovacion = estado_aprovacion;
+        this.estado_aprobacion = estado_aprovacion;
     }
 
     public Long getId() {
@@ -100,12 +100,12 @@ public class AprobacionServicio {
         this.solucion = solucion;
     }
 
-    public EstadoAprovacion getEstado_aprovacion() {
-        return estado_aprovacion;
+    public EstadoAprobacion getEstado_aprovacion() {
+        return estado_aprobacion;
     }
 
-    public void setEstado_aprovacion(EstadoAprovacion estado_aprovacion) {
-        this.estado_aprovacion = estado_aprovacion;
+    public void setEstado_aprovacion(EstadoAprobacion estado_aprovacion) {
+        this.estado_aprobacion = estado_aprovacion;
     }
 
     

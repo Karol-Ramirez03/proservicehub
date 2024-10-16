@@ -31,6 +31,14 @@ public class TipoEmpresa {
     @OneToMany(mappedBy = "tipo_empresa")
     private List<Empresa> empresa;
 
+    public TipoEmpresa() {
+    }
+
+    public TipoEmpresa(
+            @NotNull(message = "no puede ser null") @Size(min = 1, max = 100, message = "no puede estar vacio") String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Long getId() {
         return id;
     }
