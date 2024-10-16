@@ -7,6 +7,8 @@ const contenedor = document.querySelector(".table-container")
 const botonServicios = document.querySelector(".boton-servicio")
 const botonCompra = document.querySelector(".boton-compra")
 
+const clienteId=10255
+
 botonInsumo.addEventListener("click", (e) => {
     dataInsumos(contenedor)
 });
@@ -16,6 +18,6 @@ botonServicios.addEventListener("click", (e) => {
 });
 
 botonCompra.addEventListener("click", (e) => {
-    dataCompras(contenedor)
+    dataCompras(contenedor,clienteId)
 });
 
