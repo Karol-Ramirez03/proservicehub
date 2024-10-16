@@ -1,7 +1,8 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.CompraServiceI;
+import com.servimax.proservicehub.application.service.PersonasServiceI;
 import com.servimax.proservicehub.domain.entity.Compra;
+import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -28,6 +31,9 @@ public class CompraController {
 
     @Autowired
     private CompraServiceI compraServiceI;
+
+    @Autowired
+    private PersonasServiceI personasServiceI;
 
     @GetMapping
     public List<Compra> list(){
@@ -72,6 +78,30 @@ public class CompraController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/persona/{personaId}")
+    public ResponseEntity<List<Compra>> findByPersonaId(@PathVariable Long personaId) {
+        // Primero, busca la persona por ID
+        Optional<Personas> persona = personasServiceI.findById(personaId);
+        if (persona == null) {
+            return ResponseEntity.notFound().build(); // Retorna 404 si la persona no se encuentra
+        }
+        Personas newPersona=persona.get();
+        // Busca las compras asociadas a la persona
+        List<Compra> compras = compraServiceI.findByPersonasId(newPersona);
+        if (compras.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay compras
+        }
+        
+        return ResponseEntity.ok(compras); // Retorna 200 con las compras
+    }
+
+    @GetMapping("/{compraId}/estado/nombre")
+    public ResponseEntity<String> obtenerNombreEstado(@PathVariable Long compraId) {
+        String nombreEstado = compraServiceI.obtenerNombreEstado(compraId);
+        return ResponseEntity.ok(nombreEstado);
+    }
+
 
     
 }

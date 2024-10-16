@@ -33,6 +33,19 @@ public class TipoTelefono {
         return id;
     }
 
+    public TipoTelefono() {
+    }
+
+    public TipoTelefono(@NotBlank String nombre) {
+        this.nombre = nombre;
+    }
+
+    public TipoTelefono(long id, @NotBlank String nombre, List<TelPersona> telPersona) {
+        this.id = id;
+        this.nombre = nombre;
+        this.telPersona = telPersona;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
