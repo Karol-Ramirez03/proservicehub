@@ -8,10 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.servimax.proservicehub.domain.entity.Servicio;
-import com.servimax.proservicehub.domain.entity.ServicioInsumo;
-import com.servimax.proservicehub.domain.entity.ServicioInsumoPk;
-import com.servimax.proservicehub.infrastructure.repository.insumoRepo.InsumoRepository;
-import com.servimax.proservicehub.infrastructure.repository.servicioInsumo.ServicioInsumoRepositoryI;
+// import com.servimax.proservicehub.domain.entity.ServicioInsumo;
+// import com.servimax.proservicehub.domain.entity.ServicioInsumoPk;
+// import com.servimax.proservicehub.infrastructure.repository.insumoRepo.InsumoRepository;
+// import com.servimax.proservicehub.infrastructure.repository.servicioInsumo.ServicioInsumoRepositoryI;
 
 @Component
 public class ServicioDataInitializer implements CommandLineRunner{
@@ -19,11 +19,11 @@ public class ServicioDataInitializer implements CommandLineRunner{
     @Autowired
     private ServicioRepositoryI servicioRepositoryI;
 
-    @Autowired
-    private ServicioInsumoRepositoryI servicioInsumoRepositoryI;
+    // @Autowired
+    // private ServicioInsumoRepositoryI servicioInsumoRepositoryI;
 
-    @Autowired
-    private InsumoRepository insumoRepository;
+    // @Autowired
+    // private InsumoRepository insumoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,19 +42,19 @@ public class ServicioDataInitializer implements CommandLineRunner{
             }
         }
 
-        List<ServicioInsumo> serInsumos=Arrays.asList(
-            new ServicioInsumo(new ServicioInsumoPk(18L,1L),2),
-            new ServicioInsumo(new ServicioInsumoPk(14L,1L),7),
-            new ServicioInsumo(new ServicioInsumoPk(4L,3L),2),
-            new ServicioInsumo(new ServicioInsumoPk(6L,3L),5),
-            new ServicioInsumo(new ServicioInsumoPk(16L,4L),1)
-        );
+        // List<ServicioInsumo> serInsumos=Arrays.asList(
+        //     new ServicioInsumo(new ServicioInsumoPk(18L,1L),2),
+        //     new ServicioInsumo(new ServicioInsumoPk(14L,1L),7),
+        //     new ServicioInsumo(new ServicioInsumoPk(4L,3L),2),
+        //     new ServicioInsumo(new ServicioInsumoPk(6L,3L),5),
+        //     new ServicioInsumo(new ServicioInsumoPk(16L,4L),1)
+        // );
 
-        if (servicioRepositoryI.count() != 0 && insumoRepository.count() !=0) {
-        for (ServicioInsumo serInsumo: serInsumos){
-            servicioInsumoRepositoryI.save(serInsumo);
-        }
-    }
+        // if (servicioRepositoryI.count() != 0 && insumoRepository.count() !=0) {
+        // for (ServicioInsumo serInsumo: serInsumos){
+        //     servicioInsumoRepositoryI.save(serInsumo);
+        // }
+    // }
 
 
     }
