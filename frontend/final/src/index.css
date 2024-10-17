@@ -15,6 +15,42 @@ body {
   background: linear-gradient(135deg, #1d2671, #c33764);
 }
 
+
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+}
+
+label input[type="checkbox"] {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background-color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+label input[type="checkbox"]:hover {
+  background-color: #444; /* Color más claro al hacer hover */
+  border-color: #1e90ff; /* Color de borde azul al hacer hover */
+}
+
+label input[type="checkbox"]:checked {
+  background-color: #1e90ff; /* Color azul cuando está seleccionado */
+  border-color: #1e90ff;
+}
+
+label input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 3px rgba(30, 144, 255, 0.8); /* Sombra azul suave al enfocar */
+}
+
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -29,8 +65,19 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 80vw;
-  max-width: 400px; /* Para limitar el tamaño máximo */
-  margin: 0 auto; /* Centrar en la página */
+  max-width: 400px; 
+  margin: 0 auto; 
+}
+
+.reg-box {
+  background-color: #000;
+  padding: 0.1vw;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 80vw;
+  max-width: 400px; 
+  margin: 0 auto; 
 }
 
 .tabs {
@@ -51,6 +98,99 @@ body {
 
 .tabs button.active {
   border-bottom: 2px solid #1e90ff;
+}
+
+.tabs button.reg {
+  border-bottom: 2px solid #1e90ff;
+}
+
+.tabs button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: border-bottom 0.3s ease;
+}
+
+.tabs button.active {
+  border-bottom: 2.5px solid #1e90ff; /* Azul fuerte para botón activo */
+}
+
+.tabs button.reg {
+  border-bottom: 2.5px solid #1e90ff; /* Azul fuerte para botón activo */
+}
+
+.tabs button:hover {
+  border-bottom: 2.5px solid rgba(245, 245, 245, 0.5); /* Azul más visible al hacer hover */
+}
+
+.login-btn:hover {
+  background-color: #00aaff; /* Color de fondo al pasar el cursor */
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group select{
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.input-group select:hover {
+  background-color: #444; /* Color más claro al hacer hover */
+}
+
+.input-group select:focus {
+  background-color: #444; /* Color más claro al enfocar */
+  outline: none;
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.5); /* Sombra azul suave al enfocar */
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+}
+
+.input-group input::placeholder {
+  color: #ccc;
+}
+.input-group input {
+  width: 100%;
+  padding: 9px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:hover {
+  background-color: #444; /* Color más claro al hacer hover */
+}
+
+.input-group input:focus {
+  background-color: #444; /* Color más claro al enfocar */
+  outline: none;
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.5); /* Sombra azul suave al enfocar */
 }
 
 .input-group {
@@ -109,6 +249,21 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e90ff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: #6495ed;
+}
 .login-btn:hover {
   background-color: #6495ed;
 }
@@ -141,12 +296,10 @@ a{
 /* login */
 @media (min-width: 768px) {
   h2 {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     font-size: 1.5rem; /* Aumenta el tamaño de fuente */
   }
 
-
-  
 }
 
 @media (min-width: 1024px) {
@@ -156,9 +309,12 @@ a{
   }
 }
 
-.login-btn:hover {
-  background-color: #00aaff; /* Color de fondo al pasar el cursor */
+/* register */
+@media (max-width: 480px) {
+  .reg-box {
+    width: 90vw; /* Se hace más ancho en pantallas muy pequeñas */
+    padding: 5vw; /* Incrementa el padding para mejor espacio */
+  }
+  
+
 }
-
-
-

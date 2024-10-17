@@ -108,15 +108,38 @@ class InicioForm extends LitElement {
     console.log("funcionooo")
     const divform= this.shadowRoot.querySelector(".login-form")
     divform.innerHTML=`
-                <input type="text" name="username" placeholder="Nombre de usuario" required>
+            
+              <div class ="input-group">
+                <input type="text" name="username" placeholder="Nombre" required>
+              </div>
+              <div class ="input-group">
+                <input type="text" name="username" placeholder="Apellido" required>
               </div>
               <div class="input-group">
                 <input type="email" name="email" placeholder="Correo electrónico" required>
               </div>
               <div class="input-group">
                 <input type="password" name="password" placeholder="Contraseña" required>
+              </div>  
+              <div class="input-group">
+                <input type="text" id="documentNumber" name="documentNumber" placeholder="Número de documento" required>
               </div>
+              <div class="input-group op">
+                <select id="idSucursal" name="idSucursal">
+                  <option value="" disabled selected>Seleccionar sucursal</option>
+                  <option value="1">Sucursal 1</option>
+                  <option value="2">Sucursal 2</option>
+                  <option value="3">Sucursal 3</option>
+                </select>
+                <select id="idtipo" name="tipopersona">
+                  <option value="" disabled selected>Seleccionar tipo</option>
+                  <option value="1">Persona Natural</option>
+                  <option value="2">Persona Juridica</option>
+                </select>  
+              </div>
+
               <button type="submit" class="guardar register-btn">Registrarse</button>
+            </div> 
               `
 
     // e.preventDefault();
