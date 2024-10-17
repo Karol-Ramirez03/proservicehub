@@ -57,11 +57,6 @@ public class OrdenServicioImplementation implements OrdenServicioServiceI{
         return OOrdenServicio;
     }
 
-    // @Override
-    // public List<OrdenServicio> findByEstadoId(EstadoOrdenServicio estadoId) {
-    //     return ordenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
-    // }
-
     @Override
     public List<OrdenServicio> findByPersonasId(Personas personasId) {
         return ordenServicioRepositoryI.findByPersonaId(personasId);
