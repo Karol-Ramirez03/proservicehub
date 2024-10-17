@@ -19,6 +19,7 @@ public class EstadoOrdenDataInitializer implements CommandLineRunner{
         List<String> tipos = Arrays.asList(
         "Ejecutado",
         "Pendiente asignacion",
+        "En proceso",
         "Cancelado",
         "Rechazado"
     );
