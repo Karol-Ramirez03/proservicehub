@@ -54,7 +54,7 @@ export const dataserviciosNo = async (contenedorPrincipal)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     
     try {
-        const response = await fetch("http://localhost:8080/api/detalleordenservicio/estado/1", {
+        const response = await fetch("http://localhost:8080/api/detalleordenservicio/estado/2", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

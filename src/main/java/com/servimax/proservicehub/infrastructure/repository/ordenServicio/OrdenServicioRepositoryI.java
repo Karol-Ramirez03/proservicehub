@@ -15,8 +15,8 @@ import com.servimax.proservicehub.domain.entity.Personas;
 public interface OrdenServicioRepositoryI extends CrudRepository<OrdenServicio,Long>{
 
 
-    @Query("SELECT o FROM OrdenServicio o WHERE o.estado_orden_servicio = ?1")
-    List<OrdenServicio> findByEstadoOrdenServicioId(@Param("estadoId") Long estadoId);
+    // @Query("SELECT o FROM OrdenServicio o WHERE o.estado_orden_servicio = ?1")
+    // List<OrdenServicio> findByEstadoOrdenServicioId(@Param("estadoId") Long estadoId);
 
     @Query("SELECT o FROM OrdenServicio o WHERE o.personas = ?1 ORDER BY o.numero_orden")
     List<OrdenServicio> findByPersonaId(@Param("personaId") Personas personaId);

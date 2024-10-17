@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "direccion")
@@ -22,9 +24,17 @@ public class Direccion {
     private long id; 
 
     @Column
+    @NotNull(message = "No puedes ser vacio este campo")
+    @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     private String calle;
+    
+    @Column
     private String carrera;
+
+    @Column
     private String descripcion;
+
+    @Column
     private String barrio;
 
     @ManyToOne
@@ -64,6 +74,19 @@ public class Direccion {
     public void setBarrio(String barrio) {
         this.barrio = barrio;
     }
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+    public List<Sucursal> getSucursal() {
+        return sucursal;
+    }
+    public void setSucursal(List<Sucursal> sucursal) {
+        this.sucursal = sucursal;
+    }
+    
 
 
 
