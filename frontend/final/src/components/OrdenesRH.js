@@ -40,7 +40,7 @@ const renderizarDatos = (datos,shadowRoot) => {
     fila.innerHTML= `
       <td>${dato.id}</td>
       <td>${dato.fecha}</td>
-      <td>${dato.estado_orden}</td>
+      <td>${dato.estado_orden?.nombre??"0"}</td>
       <td>${dato.servicio?.id??""}</td>
       <td>${dato.servicio?.nombre??""}</td>
 

@@ -3,7 +3,7 @@ const renderizarTablas = () => {
     return /* html */`
     <div class="contenedor-formularioper">
     
-        <h1>Asignar Fecha</h1>
+        <h1>Registrar Empleado</h1>
             <form id="registroForm">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -82,6 +82,12 @@ export const dataRegistro = async (contenedorPrincipal)  => {
             "tipoPersona": {id:tipoPersonaId},
             "nro_Doc": nroDoc
         }
+        const DatosLogin = {
+            "usuario": usuario,
+            "contraseña": password,
+            "rol": {"id": idRol},
+            "personas":{"nro_Doc":nroDoc}
+          }
         console.log(datosEnviar)
         try {
             const response = await fetch("http://localhost:8080/api/personas", {
@@ -100,6 +106,25 @@ export const dataRegistro = async (contenedorPrincipal)  => {
             
         } catch (error) {
             console.error('Error:', error);
+        }
+        try {
+            const response = await fetch("http://localhost:8080/api/login", {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(DatosLogin)
+            })
+            if (response.ok) {
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                
+                
+            }
+            
+        } catch (error) {
+            console.error('Error:',error)
+            
         }
     })
   
