@@ -104,7 +104,7 @@ export const dataCompras = async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/compra/persona/1005539417", {
+        const response = await fetch("http://localhost:8080/api/compra/persona/10255", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

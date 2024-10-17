@@ -24,22 +24,17 @@ const renderizarTablas = () => {
 const renderizarDatos = (datos,orden) => {
     const cuerpoData = document.querySelector(".tbody-info");
 
-    cuerpoData.innerHTML = "";
-    console.log(datos)
-    console.log(orden)
-    for(let cont = 0; cont <datos.length; cont++){
         const fila = document.createElement("tr"); // Asegúrate de usar "tr" entre comillas
         fila.innerHTML = `
-        <td>${datos[cont].id}</td>
-        <td>${datos[cont].nombre}</td>
-        <td>${datos[cont].requiere_insumo}</td>
-        <td>${datos[cont].tiempo_ejecucion}</td>
-        <td>${orden[cont].estado_orden_servicio.nombre}</td>
-        <td><button id="${datos[cont].id}">Detalles</button></td> 
+        <td>${datos.id}</td>
+        <td>${datos.nombre}</td>
+        <td>${datos.requiere_insumo}</td>
+        <td>${datos.tiempo_ejecucion}</td>
+        <td>${orden.estado_orden_servicio.nombre}</td>
+        <td><button id="${datos.id}">Detalles</button></td> 
         `;
-        cont+=1
         cuerpoData.appendChild(fila);
-    }
+    
         
 }
 
@@ -47,7 +42,7 @@ const renderizarDatos = (datos,orden) => {
 export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
-    const id=1005539417
+    const id=10255
     var list=[]
     var ordenList=[]
     try {
@@ -61,8 +56,6 @@ export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
             const ordenes = await response.json();
             var cont=0
             ordenes.forEach(async orden=>{
-                console.log(orden)
-                ordenList.push(orden)
                 try {
                     const response2 = await fetch(`http://localhost:8080/api/detalleordenservicio/${orden.numero_orden}`, {
                         method:"GET",
@@ -81,14 +74,15 @@ export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
                             })
                             if(response2.ok){
                                 const servicio = await response2.json();
-                                console.log(servicio)
-                                list.push(servicio)
-                                
+                                renderizarDatos(servicio,orden);
                                 
                             }
                             
                         } catch (error) {
                             console.error('Error:', error);
+                        }finally{
+                            
+
                         }
                         
                         
@@ -107,11 +101,9 @@ export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
     } catch (error) {
         console.error('Error:', error);
     }
-    while (list.length==ordenList.length){
-        console.log(list)
-        renderizarDatos(list,ordenList);
-
-    }
+   
+    
+    
     
     
 }

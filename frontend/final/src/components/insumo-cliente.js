@@ -104,7 +104,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
                     "id": 2
                 },
                 "personas": {
-                    "nro_Doc": 1005539417
+                    "nro_Doc": 10255
                 }
             }
             try {
