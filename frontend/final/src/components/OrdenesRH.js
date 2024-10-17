@@ -38,21 +38,21 @@ const renderizarDatos = (datos,shadowRoot) => {
   datos.forEach(dato => {
     const fila = document.createElement("tr");
     fila.innerHTML= `
-      <td>${dato.id}</td>
-      <td>${dato.fecha}</td>
-      <td>${dato.estado_orden}</td>
-      <td>${dato.servicio.id}</td>
-      <td>${dato.servicio.nombre}</td>
+        <td>${dato.id}</td>
+        <td>${dato.fecha}</td>
+        <td>${dato.estado_orden}</td>
+        <td>${dato.servicio.id}</td>
+        <td>${dato.servicio.nombre}</td>
 
-      <td>${dato.orden_trabajo.id}</td>
-      <td>${dato.orden_trabajo.fecha_asignacion}</td>
-      <td>${dato.orden_trabajo.hora_asignacion}</td>
-      <td>${dato.orden_trabajo.personas.nro_Doc}</td>
-      <td>${dato.orden_trabajo.personas.nombre}</td>
-      <td>${dato.orden_trabajo.ordenServicio.numero_orden}</td>
-      <td>${dato.orden_trabajo.numero_orden_trabajo}</td>
-      
-      <td><button class="boton-fecha">Asignar Fecha</button></td>
+        <td>${dato.orden_trabajo.id}</td>
+        <td>${dato.orden_trabajo.fecha_asignacion}</td>
+        <td>${dato.orden_trabajo.hora_asignacion}</td>
+        <td>${dato.orden_trabajo.personas.nro_Doc}</td>
+        <td>${dato.orden_trabajo.personas.nombre}</td>
+        <td>${dato.orden_trabajo.ordenServicio.numero_orden}</td>
+        <td>${dato.orden_trabajo.numero_orden_trabajo}</td>
+        
+        <td><button class="boton-fecha">Asignar Fecha</button></td>
 
     `;
     cuerpoData.appendChild(fila)

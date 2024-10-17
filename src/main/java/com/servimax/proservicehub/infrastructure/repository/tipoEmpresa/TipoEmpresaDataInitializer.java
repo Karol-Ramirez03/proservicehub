@@ -25,7 +25,7 @@ public class TipoEmpresaDataInitializer implements CommandLineRunner{
     );
 
     for (String nombreTipo : tipos) {
-        if (!tipoEmpresaRepositoryI.findByNombre(nombreTipo).isPresent()) {
+        if (!tipoEmpresaRepositoryI.findByDescripcion(nombreTipo).isPresent()) {
             tipoEmpresaRepositoryI.save(new TipoEmpresa(nombreTipo));
         }
     }

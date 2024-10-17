@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.List;
 
 import com.servimax.proservicehub.domain.entity.OrdenServicio;
+import com.servimax.proservicehub.domain.entity.Personas;
 
 public interface OrdenServicioServiceI {
     List<OrdenServicio> findAll();
@@ -12,4 +13,6 @@ public interface OrdenServicioServiceI {
     Optional<OrdenServicio> update(Long id, OrdenServicio ordenServicio);
     Optional<OrdenServicio> delete(Long id);
     List<OrdenServicio> findByEstadoId(Long estadoId);
+    List<OrdenServicio> findByPersonasId(Personas personasId);
+    void addOrdenServicio(Long idCliente,Long idservicio);
 }

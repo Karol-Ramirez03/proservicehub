@@ -23,7 +23,7 @@ public class EstadoAprobacionDataInitializer implements CommandLineRunner{
         "Rechazado"
     );
 
-     for (String nombreTipo : tipos) {
+    for (String nombreTipo : tipos) {
         if (!estadoAprobacionRepositoryI.findByNombre(nombreTipo).isPresent()) {
             estadoAprobacionRepositoryI.save(new EstadoAprobacion(nombreTipo));
         }

@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.OrdenServicioServiceI;
+import com.servimax.proservicehub.application.service.PersonasServiceI;
+import com.servimax.proservicehub.domain.dto.OrdenServicioDTO;
+import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.OrdenServicio;
+import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -29,6 +33,10 @@ public class OrdenServicioController {
 
     @Autowired
     private OrdenServicioServiceI ordenServicioServiceI;
+
+    @Autowired
+    private PersonasServiceI personasServiceI;
+
 
     @GetMapping
     public List<OrdenServicio> list(){
@@ -81,6 +89,29 @@ public class OrdenServicioController {
             return ResponseEntity.ok(OOrdenServicio.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/persona/{personaId}")
+    public ResponseEntity<List<OrdenServicio>> findByPersonaId(@PathVariable Long personaId) {
+        // Primero, busca la persona por ID
+        Optional<Personas> persona = personasServiceI.findById(personaId);
+        if (persona == null) {
+            return ResponseEntity.notFound().build(); // Retorna 404 si la persona no se encuentra
+        }
+        Personas newPersona=persona.get();
+        // Busca las compras asociadas a la persona
+        List<OrdenServicio> orden = ordenServicioServiceI.findByPersonasId(newPersona);
+        if (orden.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay compras
+        }
+        
+        return ResponseEntity.ok(orden); // Retorna 200 con las compras
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<Void> addOrdenServicio(@RequestBody OrdenServicioDTO ordenServicioDTO) {
+        ordenServicioServiceI.addOrdenServicio(ordenServicioDTO.getIdCliente(), ordenServicioDTO.getIdServicio());
+        return ResponseEntity.ok().build();
     }
     
 }

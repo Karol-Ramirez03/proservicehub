@@ -8,10 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,9 +26,11 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "No puede estar vacio")
-    @Column
+    
+    @Column(nullable = false,updatable = false)
     private Timestamp fecha_compra;
+    
+    @NotNull(message = "No puede estar vacio")
     private Double total;
 
     @ManyToOne
@@ -40,10 +44,13 @@ public class Compra {
     @JoinColumn(name = "cliente")
     private Personas personas;
 
-    public Compra() {
+    @PrePersist
+    protected void onCreate() {
+        this.fecha_compra = new Timestamp(new Date().getTime());
     }
 
-    
+    public Compra() {
+    }
 
     public Compra(Long id, @NotNull(message = "No puede estar vacio") Timestamp fecha_compra, Double total,
             @NotNull(message = "No puede estar vacio") EstadoCompra estado_compra,
@@ -55,8 +62,6 @@ public class Compra {
         this.detalleCompra = detalleCompra;
         this.personas = personas;
     }
-
-
 
     public Compra(Long id, Timestamp fecha_compra, EstadoCompra estado_compra, List<DetalleCompra> detalleCompra,Double total) {
         this.id = id;
