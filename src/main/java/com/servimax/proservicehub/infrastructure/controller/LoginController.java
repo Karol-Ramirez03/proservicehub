@@ -80,22 +80,22 @@ public class LoginController {
     }
 
 
-    @PostMapping("/register")
-    public ResponseEntity<Login> register(@RequestBody LoginRequest loginRequest) {
-        Login login = new Login();
-        login.setUsuario(loginRequest.getUsuario());
-        login.setContraseña(loginRequest.getContraseña());
-        Login savedLogin = loginServiceI.save(login);
-        return ResponseEntity.ok(savedLogin);
-    }
+    // @PostMapping("/register")
+    // public ResponseEntity<Login> register(@RequestBody LoginRequest loginRequest) {
+    //     Login login = new Login();
+    //     login.setUsuario(loginRequest.getUsuario());
+    //     login.setContraseña(loginRequest.getContraseña());
+    //     Login savedLogin = loginServiceI.save(login);
+    //     return ResponseEntity.ok(savedLogin);
+    // }
 
-    @GetMapping("/login")
-    public ResponseEntity<Login> login(@RequestParam String username, @RequestParam String password) {
-        Login authenticatedUser = loginServiceI.authenticate(username, password);
-        if (authenticatedUser != null) {
-            return ResponseEntity.ok(authenticatedUser);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+    // @GetMapping("/login")
+    // public ResponseEntity<Login> login(@RequestParam String username, @RequestParam String password) {
+    //     Login authenticatedUser = loginServiceI.authenticate(username, password);
+    //     if (authenticatedUser != null) {
+    //         return ResponseEntity.ok(authenticatedUser);
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    //     }
+    // }
 }
