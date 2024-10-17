@@ -22,13 +22,11 @@ class InicioForm extends LitElement {
     <link rel="stylesheet" href="src/index.css" />
    <div class="login-container">
         <div class="login-box">
-            <div class="icon">
-                <i class="fas fa-user"></i>
-            </div>
-            <h2>Bienvenido</h2>
+             <img src="public/User (2).png" alt="img" class="img">
+            <h2 class= "welcome" >Bienvenido</h2>
             <div class="tabs">
                 <button class="active">Iniciar sesión</button>
-                <button>Registrarse</button>
+                <button class= "reg">Registrarse</button>
             </div>
             <form class="login-form">
                 <div class="input-group">
@@ -52,11 +50,24 @@ class InicioForm extends LitElement {
 
   updated(){
     const btnguardar= this.shadowRoot.querySelector(".guardar")
+    const btnLogin=this.shadowRoot.querySelector(".active")
+    
+    btnLogin.addEventListener("click",(e)=>{
+      location.reload();
+    })
     btnguardar.addEventListener("click",(e)=>{
       e.preventDefault();
       console.log("holaaaa")
       this._handleSubmit(e)
     })
+
+    const btnregister= this.shadowRoot.querySelector(".reg")
+    btnregister.addEventListener("click",(e)=>{
+      console.log("hola")
+      e.preventDefault;
+      this._handleRegister(e)
+    })
+    
   }
   _handleSubmit(e) {
     e.preventDefault();
@@ -85,13 +96,64 @@ class InicioForm extends LitElement {
     })
     .then(data => {
       console.log('Inicio de sesión exitoso:', data);
-      // Aquí puedes manejar la respuesta, como guardar el token o redirigir al usuario
     })
     .catch(error => {
       console.error('Error en el inicio de sesión:', error);
     });
   }
+
+  _handleRegister(e) {
+    e.preventDefault()
+    console.log("reg")
+    const divform= this.shadowRoot.querySelector(".login-form")
+    divform.innerHTML=`
+            
+              <div class ="input-group">
+                <input type="text" name="username" placeholder="Nombre" required>
+              </div>
+              <div class ="input-group">
+                <input type="text" name="username" placeholder="Apellido" required>
+              </div>
+              <div class="input-group">
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+              </div>
+              <div class="input-group">
+                <input type="password" name="password" placeholder="Contraseña" required>
+              </div>  
+              <div class="input-group">
+                <input type="text" id="documentNumber" name="documentNumber" placeholder="Número de documento" required>
+              </div>
+              <div class="input-group op">
+                <select id="idSucursal" name="idSucursal">
+                  <option value="" disabled selected>Seleccionar sucursal</option>
+                  <option value="1">Sucursal 1</option>
+                  <option value="2">Sucursal 2</option>
+                  <option value="3">Sucursal 3</option>
+                </select>
+                <select id="idtipo" name="tipopersona">
+                  <option value="" disabled selected>Seleccionar tipo</option>
+                  <option value="1">Persona Natural</option>
+                  <option value="2">Persona Juridica</option>
+                </select>  
+              </div>
+
+              <button type="submit" class="guardar register-btn">Registrarse</button>
+            </div> 
+              `;
+            }          
+            _handleSubmit(e) {  
+          e.preventDefault();
+          const form = this.shadowRoot.querySelector(".register-form");
+          const formData = new FormData(form);
+          const username = formData.get('username');
+          const email = formData.get('email');
+          const password = formData.get('password');
+          const registerData = {
+            usuario: username,
+            correo: email,
+            contraseña: password,
+          }
 }
 
-
+}
 customElements.define("inicio-form",InicioForm)
