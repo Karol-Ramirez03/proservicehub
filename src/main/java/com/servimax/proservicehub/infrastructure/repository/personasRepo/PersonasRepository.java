@@ -7,5 +7,5 @@ import com.servimax.proservicehub.domain.entity.Personas;
 
 @Repository
 public interface PersonasRepository extends CrudRepository<Personas,Long>{
-
+    
 }

@@ -43,7 +43,7 @@ const renderizarDatos = (datos,shadowRoot) => {
 const addOrdenEvenListener=(shadowRoot,datos)=>{
     const btnSolicitar=document.querySelectorAll(".solicitar");
 
-    const idCliente=10255
+    const idCliente=1005539417
     btnSolicitar.forEach(boton=>{
         boton.addEventListener("click",async (e)=>{
             e.preventDefault()

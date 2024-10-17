@@ -19,15 +19,14 @@ public class ServicioInsumo {
 
     @NotNull(message = "No puede estar vacio")
     @Column
-    private Double cantidad;
+    private int cantidad;
 
-    @NotNull(message = "No puede estar vacio")
+    
     @ManyToOne
     @MapsId("idInsumo")
     @JoinColumn(name="id_insumo", insertable = false, updatable = false)
     private Insumo insumo;
-  
-    @NotNull(message = "No puede estar vacio")
+    
     @ManyToOne
     @MapsId("idServicio")
     @JoinColumn(name="id_servicio", insertable = false, updatable = false)
@@ -36,7 +35,20 @@ public class ServicioInsumo {
     public ServicioInsumo() {
     }
 
-    public ServicioInsumo(ServicioInsumoPk id, Double cantidad, Insumo insumo, Servicio servicio) {
+    public ServicioInsumo(ServicioInsumoPk id, @NotNull(message = "No puede estar vacio") int cantidad) {
+        this.id = id;
+        this.cantidad = cantidad;
+    }
+
+    public ServicioInsumo(@NotNull(message = "No puede estar vacio") int cantidad,
+            @NotNull(message = "No puede estar vacio") Insumo insumo,
+            @NotNull(message = "No puede estar vacio") Servicio servicio) {
+        this.cantidad = cantidad;
+        this.insumo = insumo;
+        this.servicio = servicio;
+    }
+
+    public ServicioInsumo(ServicioInsumoPk id, int cantidad, Insumo insumo, Servicio servicio) {
         this.id = id;
         this.cantidad = cantidad;
         this.insumo = insumo;
@@ -51,11 +63,11 @@ public class ServicioInsumo {
         this.id = id;
     }
 
-    public Double getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Double cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 

@@ -54,15 +54,4 @@ public class LoginImplementation implements LoginServiceI{
         return OLogin;
     }
 
-    @Override
-    public Login authenticate(String usuario, String contraseña) {
-        Login login = loginRepositoryI.findByUsuario(usuario); // Busca el usuario por nombre
-        
-        if (login != null && login.getContraseña().equals(contraseña)) {
-            return login; // Retorna el usuario si las credenciales son válidas
-        }
-        
-        return null; // Retorna null si la autenticación falla
-    }
-
 }

@@ -9,8 +9,8 @@ const renderizarTablas = () => {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Fecha de compra</th>
-                <th>Estado</th>
+                <th>Estado Solicitud</th>
+                <th>Encargado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
+const renderizarDatos = (datos,shadowRoot) => {
     const cuerpoData = document.querySelector(".tbody-info")
 
     console.log("funciona")
@@ -99,12 +99,12 @@ const addInfoEventListener=(shadowRoot)=>{
 }
 
 
-export const dataCompras = async (contenedorPrincipal,clienteId)  => {
+export const dataAprobacion= async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/compra/persona/1005539417", {
+        const response = await fetch("http://localhost:8080/api/aprobacionservicio/persona/1005539417", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
@@ -112,7 +112,7 @@ export const dataCompras = async (contenedorPrincipal,clienteId)  => {
         })
         if(response.ok){
             const compras = await response.json();
-            renderizarDatos(compras,shadowRoot,contenedorPrincipal);
+            renderizarDatos(compras,shadowRoot);
             
         }
         

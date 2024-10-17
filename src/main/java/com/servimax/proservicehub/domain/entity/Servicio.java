@@ -52,6 +52,34 @@ public class Servicio {
     @OneToMany(mappedBy = "servicio")
     private List<AprobacionServicio> aprovacionServicio;
 
+    public Servicio() {
+    }
+    
+    public Servicio(@NotNull(message = "No puedes ser vacio nombre") String nombre,
+            @NotNull(message = "No puedes ser vacio requiere insumo") Boolean requiere_insumo,
+            @NotNull(message = "No puedes ser vacio tiempo ejecucion") String tiempo_ejecucion) {
+        this.nombre = nombre;
+        this.requiere_insumo = requiere_insumo;
+        this.tiempo_ejecucion = tiempo_ejecucion;
+    }
+
+    public Servicio(Long id, @NotNull(message = "No puedes ser vacio nombre") String nombre,
+            @NotNull(message = "No puedes ser vacio requiere insumo") Boolean requiere_insumo,
+            @NotNull(message = "No puedes ser vacio tiempo ejecucion") String tiempo_ejecucion,
+            List<EmpresaServicio> empresa_servicio, List<ServicioInsumo> servicioInsumo,
+            List<DetalleOrdenServicio> detalle_orden_servicio, List<DetalleOrdenTrabajo> detalle_orden_trabajo,
+            List<AprobacionServicio> aprovacionServicio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.requiere_insumo = requiere_insumo;
+        this.tiempo_ejecucion = tiempo_ejecucion;
+        this.empresa_servicio = empresa_servicio;
+        this.servicioInsumo = servicioInsumo;
+        this.detalle_orden_servicio = detalle_orden_servicio;
+        this.detalle_orden_trabajo = detalle_orden_trabajo;
+        this.aprovacionServicio = aprovacionServicio;
+    }
+
     public Long getId() {
         return id;
     }
