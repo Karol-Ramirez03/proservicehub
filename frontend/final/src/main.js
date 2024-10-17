@@ -96,7 +96,6 @@ class InicioForm extends LitElement {
     })
     .then(data => {
       console.log('Inicio de sesión exitoso:', data);
-      // Aquí puedes manejar la respuesta, como guardar el token o redirigir al usuario
     })
     .catch(error => {
       console.error('Error en el inicio de sesión:', error);
@@ -105,7 +104,7 @@ class InicioForm extends LitElement {
 
   _handleRegister(e) {
     e.preventDefault()
-    console.log("funcionooo")
+    console.log("reg")
     const divform= this.shadowRoot.querySelector(".login-form")
     divform.innerHTML=`
             
@@ -140,20 +139,21 @@ class InicioForm extends LitElement {
 
               <button type="submit" class="guardar register-btn">Registrarse</button>
             </div> 
-              `
-
-    // e.preventDefault();
-    // const form = this.shadowRoot.querySelector(".register-form");
-    // const formData = new FormData(form);
-    // const username = formData.get('username');
-    // const email = formData.get('email');
-    // const password = formData.get('password');
-    // const registerData = {
-    //   usuario: username,
-    //   correo: email,
-    //   contraseña: password,
-    };
+              `;
+            }          
+            _handleSubmit(e) {  
+          e.preventDefault();
+          const form = this.shadowRoot.querySelector(".register-form");
+          const formData = new FormData(form);
+          const username = formData.get('username');
+          const email = formData.get('email');
+          const password = formData.get('password');
+          const registerData = {
+            usuario: username,
+            correo: email,
+            contraseña: password,
+          }
 }
 
-
+}
 customElements.define("inicio-form",InicioForm)

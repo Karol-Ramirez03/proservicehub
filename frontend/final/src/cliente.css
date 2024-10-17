@@ -7,13 +7,13 @@
   font-family: 'Arial', sans-serif;
 }
 
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #1d2671, #c33764);
-}
+  /* body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1d2671, #c33764);
+  } */
 
   nav{
     display: flex;

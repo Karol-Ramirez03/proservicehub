@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
 import com.servimax.proservicehub.domain.entity.Login;
+import com.servimax.proservicehub.domain.entity.LoginRequest;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -77,4 +79,23 @@ public class LoginController {
         return ResponseEntity.notFound().build();
     }
 
+
+    @PostMapping("/register")
+    public ResponseEntity<Login> register(@RequestBody LoginRequest loginRequest) {
+        Login login = new Login();
+        login.setUsuario(loginRequest.getUsuario());
+        login.setContraseña(loginRequest.getContraseña());
+        Login savedLogin = loginServiceI.save(login);
+        return ResponseEntity.ok(savedLogin);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Login> login(@RequestParam String username, @RequestParam String password) {
+        Login authenticatedUser = loginServiceI.authenticate(username, password);
+        if (authenticatedUser != null) {
+            return ResponseEntity.ok(authenticatedUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }

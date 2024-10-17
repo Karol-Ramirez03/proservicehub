@@ -14,7 +14,7 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #1d2671, #c33764);
 }
-  nav{
+  /* nav{
     display: flex;
     color: white;
     align-items: center;
@@ -22,7 +22,7 @@ body {
     justify-content: space-between;
     padding: 1%;
   
-  }
+  } */
   .principal{
     background-color: #F3F4F6;
   }
