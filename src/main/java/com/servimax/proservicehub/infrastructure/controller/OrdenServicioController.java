@@ -44,14 +44,7 @@ public class OrdenServicioController {
         }   
         return ResponseEntity.notFound().build();
     }
-    @GetMapping("/estado/{estadoId}")
-    public ResponseEntity<List<OrdenServicio>> findByEstadoId(@PathVariable Long estadoId) {
-        List<OrdenServicio> ordenServicios = ordenServicioServiceI.findByEstadoId(estadoId);
-        if (ordenServicios.isEmpty()) {
-            return ResponseEntity.noContent().build(); 
-        }
-        return ResponseEntity.ok(ordenServicios);
-    }
+
 
     @PostMapping()
     public ResponseEntity<?> create(@Valid @RequestBody OrdenServicio ordenServicio, BindingResult result) {
@@ -63,15 +56,34 @@ public class OrdenServicioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody OrdenServicio ordenServicio, @PathVariable Long id, BindingResult result) {
-        Optional<OrdenServicio> OOrdenServicio = ordenServicioServiceI.update(id, ordenServicio);
-        if (result.hasFieldErrors()) {
-            return ValidatedFields.validation(result);
+    public ResponseEntity<?> update(@RequestBody OrdenServicio ordenServicio, @PathVariable Long id, BindingResult result) {
+        Optional<OrdenServicio> ordenServicioOptional = ordenServicioServiceI.findById(id);
+
+        if (ordenServicioOptional.isPresent()) {
+            OrdenServicio ordenServicioCopy = ordenServicioOptional.orElseThrow();
+    
+            if (ordenServicio.getFecha_orden() != null) {
+                ordenServicioCopy.setFecha_orden(ordenServicio.getFecha_orden());
+            }
+            if (ordenServicio.getPersona() != null) {
+                ordenServicioCopy.setPersona(ordenServicio.getPersona());
+            }
+            if (ordenServicio.getPersonas() != null) {
+                ordenServicioCopy.setPersonas(ordenServicio.getPersonas());
+            }
+            if (ordenServicio.getEstado_orden_servicio() != null) {
+                ordenServicioCopy.setEstado_orden_servicio(ordenServicio.getEstado_orden_servicio());
+            }
+            if (ordenServicio.getOrdenTrabajo() != null) {
+                ordenServicioCopy.setOrdenTrabajo(ordenServicio.getOrdenTrabajo());
+            }
+            
+            ordenServicioServiceI.update(id, ordenServicioCopy);
+            
+            return ResponseEntity.status(HttpStatus.OK).body(ordenServicioCopy);
         }
-        if (OOrdenServicio.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(OOrdenServicio.orElseThrow());
-        }
-        return ResponseEntity.notFound().build();
+    
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("OrdenServicio no encontrada");
     }
 
     @DeleteMapping("/{id}")

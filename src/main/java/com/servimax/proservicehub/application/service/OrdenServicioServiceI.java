@@ -11,5 +11,5 @@ public interface OrdenServicioServiceI {
     OrdenServicio save(OrdenServicio ordenServicio);
     Optional<OrdenServicio> update(Long id, OrdenServicio ordenServicio);
     Optional<OrdenServicio> delete(Long id);
-    List<OrdenServicio> findByEstadoId(Long estadoId);
+    // List<OrdenServicio> findByEstadoId(Long estadoId);
 }

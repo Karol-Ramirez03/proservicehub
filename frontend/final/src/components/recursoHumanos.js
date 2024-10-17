@@ -38,7 +38,7 @@ class  PagInicioRecursosHumanos extends LitElement {
     </div>
     `;
     }
-    firstUpdated() {
+    updated() {
         const botonOrdenes = this.shadowRoot.querySelector(".boton-orden")
         const botonRegistro = this.shadowRoot.querySelector(".registro")
         const serviciosAsignacion = this.shadowRoot.querySelector(".servicio-no-asignado")

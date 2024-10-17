@@ -1,5 +1,4 @@
-// http://localhost:8080/api/ordenservicio/estado/{estadoId}
-
+import { dataNewEmpleado } from "./actualizarServicio";
 
 const renderizarTablas = () => {
     return /* html */`
@@ -40,7 +39,7 @@ const renderizarDatos = (datos,shadowRoot) => {
       <td>${dato.orden_servicio?.personas?.nro_Doc ?? ''}</td>
       <td>${dato.orden_servicio?.persona?.nro_Doc ?? '0'}</td>
       <td>${dato.orden_servicio?.persona?.nombre ?? '0'}</td>
-      <td><button class="boton-orden">Asignar empleado</button></td>
+      <td><button class="boton-empleado" id="${dato.orden_servicio.numero_orden}">Asignar empleado</button></td>
 
     `;
     cuerpoData.appendChild(fila)
@@ -55,7 +54,7 @@ export const dataserviciosNo = async (contenedorPrincipal)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     
     try {
-        const response = await fetch("http://localhost:8080/api/detalleordenservicio", {
+        const response = await fetch("http://localhost:8080/api/detalleordenservicio/estado/1", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
@@ -65,6 +64,19 @@ export const dataserviciosNo = async (contenedorPrincipal)  => {
             const Ordenes = await response.json();
             console.log(Ordenes)
             renderizarDatos(Ordenes,shadowRoot);
+
+            const botonEmpleado = shadowRoot.querySelectorAll(".boton-empleado")
+            botonEmpleado.forEach(boton => {
+                boton.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const idDetalle = e.target.id;
+                    console.log(idDetalle)
+                    console.log("Se ha hecho clic en el botón de asignar fecha");
+                    dataNewEmpleado(contenedorPrincipal,idDetalle)
+
+                });
+            });
+
 
         }
         

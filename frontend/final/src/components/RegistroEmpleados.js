@@ -1,10 +1,9 @@
 
 const renderizarTablas = () => {
     return /* html */`
-    <link rel="stylesheet" href="../recursosHumanos.css"/>
     <div class="contenedor-formularioper">
     
-        <h1>Formulario de Registro</h1>
+        <h1>Asignar Fecha</h1>
             <form id="registroForm">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -34,7 +33,7 @@ const renderizarTablas = () => {
                 </div>
                 <div class="form-group">
                     <label for="usuario">Usuario:</label>
-                    <input type="text" id="usuario" name="usuario" required>
+                    <input type="email" id="usuario" name="usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>

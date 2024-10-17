@@ -1,73 +1,139 @@
-
-
-const renderizarTablas = () => {
+const renderizarFecha = () => {
     return /* html */`
-    <table class="nombres-table">
-        <thead>
-            <tr>
-                <th>Id Detalle Orden Trabajo</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Id Servicio</th>
-                <th>Nombre Servicio</th>
-                
-                <th>Id Orden de Trabajo</th>    
-                <th>Fecha Asignacion</th>      
-                <th>Hora Asignacion</th>      
-                <th>Id empleado</th>
-                <th>Nombre empleado</th>
-                <th>Numero Orden Servicio</th>
-                <th>Numero Orden Trabajo</th>
-                
-                <th>Asignar Fecha</th>
-                
-            </tr>
-        </thead>
-        <tbody class="tbody-info">
-        </tbody>
-    </table>
+    <div class="contenedor-formularioper">
+    <h1>Formulario de Registro</h1>
+        <form class="registroForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="date" id="nombre" name="nombre"required>
+            </div>   
+            <div class="form-group">
+                <button type="submit" class="btn-registro btn-asignar">asignar</button>                
+            </div>   
+        </form>
+       
+
+    </div>
+    
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
-  const cuerpoData = shadowRoot.querySelector(".tbody-info")
+export const dataNewFecha = async (contenedorPrincipal, idDetalleOrden)  => {
 
-  console.log(cuerpoData)
-  cuerpoData.innerHTML = ""
-
-  datos.forEach(dato => {
-    const fila = document.createElement("tr");
-    fila.innerHTML= `
-      <td>${dato.id}</td>
-      <td>${dato.fecha}</td>
-      <td>${dato.estado_orden}</td>
-      <td>${dato.servicio.id}</td>
-      <td>${dato.servicio.nombre}</td>
-
-      <td>${dato.orden_trabajo.id}</td>
-      <td>${dato.orden_trabajo.fecha_asignacion}</td>
-      <td>${dato.orden_trabajo.hora_asignacion}</td>
-      <td>${dato.orden_trabajo.personas.nro_Doc}</td>
-      <td>${dato.orden_trabajo.personas.nombre}</td>
-      <td>${dato.orden_trabajo.ordenServicio.numero_orden}</td>
-      <td>${dato.orden_trabajo.numero_orden_trabajo}</td>
-      
-      <td><button class="boton-fecha">Asignar Fecha</button></td>
-
-    `;
-    cuerpoData.appendChild(fila)
-  });
-}
-
-export const dataOrdenes = async (contenedorPrincipal)  => {
-    console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
+    contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarFecha())
+
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
 
-    const botonFecha = shadowRoot.querySelector(".boton-fecha")
+    const formulario = shadowRoot.querySelector(".registroForm");
+    const boton = shadowRoot.querySelector(".btn-asignar");
+    const detalleid = idDetalleOrden;
 
-    botonFecha.addEventListener("click", (e)   => {
-        contenedorPrincipal.insertAdjacentHTML("beforeend", )
-    })
-  
+    boton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        
+        const fecha = formulario.querySelector("#nombre").value;
+        if (fecha == null || fecha == "") {
+            console.log("Fecha no asignada:", fecha);
+            
+        } else {
+            console.log("Fecha asignada:", fecha);
+            const datosEnviar =	{
+                "fecha": fecha,
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:8080/api/detalleorden/${detalleid}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(datosEnviar)
+                })
+                if(response.ok){
+                    const Ordenes = await response.json();
+                    console.log(Ordenes)
+                    formulario.reset()
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
+            
+        }
+
+    });
+    
+}
+
+const renderizarEmpleado = () => {
+    return /* html */`
+    <div class="contenedor-formularioper">
+    <h1>Formulario de Registro</h1>
+        <form class="registroForm">
+            <div class="form-group">
+                <label for="idEmpleado">Id Empleado:</label>
+                <input type="number" id="idEmpleado" name="idEmpleado" required>
+            </div>  
+            <div class="form-group">
+                <button type="submit" class="btn-registro">Registrar</button>                
+            </div>    
+        </form>
+
+    </div>
+    
+    `;
+}
+
+export const dataNewEmpleado = async (contenedorPrincipal, idOrdenServicio)  => {
+    console.log(contenedorPrincipal)
+    contenedorPrincipal.innerHTML = ""
+    contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarEmpleado())
+
+    const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+
+    const formulario = shadowRoot.querySelector(".registroForm");
+    const boton = shadowRoot.querySelector(".btn-registro");
+    const detalleid = idOrdenServicio;
+
+    boton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        
+        const Dato = formulario.querySelector("#idEmpleado").value;
+        if (Dato == null || Dato == "") {
+            console.log("Dato no asignada:", Dato);
+            
+        } else {
+            console.log("Dato asignada:", Dato);
+            const datosEnviar =	{
+                "persona": {
+                    "nro_Doc": Dato
+                }
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:8080/api/ordenservicio/${detalleid}`,  {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(datosEnviar)
+                })
+                if(response.ok){
+                    const Ordenes = await response.json();
+                    console.log(Ordenes)
+                    formulario.reset()
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
+            
+        }
+
+    });
+    
+    
 }

@@ -53,5 +53,10 @@ public class DetalleOrdenServicioImplementation implements DetalleOrdenServicioS
         });
         return OOrdenServicio;
     }
+    
+    @Override
+    public List<DetalleOrdenServicio> findByEstadoId(long estadoId) {
+        return detalleOrdenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
+    }
 
 }
