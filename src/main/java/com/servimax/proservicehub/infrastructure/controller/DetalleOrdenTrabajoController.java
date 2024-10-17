@@ -52,16 +52,37 @@ public class DetalleOrdenTrabajoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody DetalleOrdenTrabajo detalleOrdenTrabajo, @PathVariable Long id, BindingResult result) {
-        Optional<DetalleOrdenTrabajo> detalleOptional = detalleOrdenTrabajoServiceI.update(id, detalleOrdenTrabajo);
-        if (result.hasFieldErrors()) {
-            return ValidatedFields.validation(result);
+    public ResponseEntity<?> update(@Valid @RequestBody DetalleOrdenTrabajo detalleOrdenTrabajo, BindingResult result, @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getFieldErrors());
         }
+    
+        Optional<DetalleOrdenTrabajo> detalleOptional = detalleOrdenTrabajoServiceI.findById(id);
+    
         if (detalleOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(detalleOptional.orElseThrow());
+            DetalleOrdenTrabajo detalleCopy = detalleOptional.orElseThrow();
+    
+            if (detalleOrdenTrabajo.getFecha() != null) {
+                detalleCopy.setFecha(detalleOrdenTrabajo.getFecha());
+            }
+            if (detalleOrdenTrabajo.getEstado_orden() != null) {
+                detalleCopy.setEstado_orden(detalleOrdenTrabajo.getEstado_orden());
+            }
+            if (detalleOrdenTrabajo.getServicio() != null) {
+                detalleCopy.setServicio(detalleOrdenTrabajo.getServicio());
+            }
+            if (detalleOrdenTrabajo.getOrden_trabajo() != null) {
+                detalleCopy.setOrden_trabajo(detalleOrdenTrabajo.getOrden_trabajo());
+            }
+    
+            detalleOrdenTrabajoServiceI.update(id, detalleCopy);
+            
+            return ResponseEntity.status(HttpStatus.OK).body(detalleCopy);
         }
-        return ResponseEntity.notFound().build();
+    
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DetalleOrdenTrabajo no encontrado");
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {

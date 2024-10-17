@@ -1,10 +1,9 @@
 package com.servimax.proservicehub.application.service;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 import com.servimax.proservicehub.domain.entity.OrdenServicio;
-import com.servimax.proservicehub.domain.entity.Personas;
 
 public interface OrdenServicioServiceI {
     List<OrdenServicio> findAll();
