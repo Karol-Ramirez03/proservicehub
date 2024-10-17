@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.servimax.proservicehub.application.service.OrdenServicioServiceI;
 import com.servimax.proservicehub.domain.entity.OrdenServicio;
+import com.servimax.proservicehub.domain.entity.Personas;
 
 @Service
+@Transactional
 public class OrdenServicioImplementation implements OrdenServicioServiceI{
 
     @Autowired
@@ -55,9 +57,19 @@ public class OrdenServicioImplementation implements OrdenServicioServiceI{
         return OOrdenServicio;
     }
 
+    // @Override
+    // public List<OrdenServicio> findByEstadoId(EstadoOrdenServicio estadoId) {
+    //     return ordenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
+    // }
+
     @Override
-    public List<OrdenServicio> findByEstadoId(Long estadoId) {
-        return ordenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
+    public List<OrdenServicio> findByPersonasId(Personas personasId) {
+        return ordenServicioRepositoryI.findByPersonaId(personasId);
+    }
+
+    @Override
+    public void addOrdenServicio(Long idCliente,Long idservicio) {
+        ordenServicioRepositoryI.addOrdenServicio(idCliente,idservicio);
     }
 
 

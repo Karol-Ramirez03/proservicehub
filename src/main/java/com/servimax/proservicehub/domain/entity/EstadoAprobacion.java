@@ -13,8 +13,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "estado_aprovacion")
-public class EstadoAprovacion {
+@Table(name = "estado_aprobacion")
+public class EstadoAprobacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,17 @@ public class EstadoAprovacion {
     private String nombre;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "estado_aprovacion")
+    @OneToMany(mappedBy = "estado_aprobacion")
     private List<AprobacionServicio> aprobacionServicio;
 
-    public EstadoAprovacion() {
+    public EstadoAprobacion() {
     }
 
-    public EstadoAprovacion(Long id, String nombre, List<AprobacionServicio> aprobacionServicio) {
+    public EstadoAprobacion(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public EstadoAprobacion(Long id, String nombre, List<AprobacionServicio> aprobacionServicio) {
         this.id = id;
         this.nombre = nombre;
     }
@@ -51,13 +55,13 @@ public class EstadoAprovacion {
         this.nombre = nombre;
     }
 
-    // public List<AprobacionServicio> getAprobacionServicio() {
-    //     return aprobacionServicio;
-    // }
+    public List<AprobacionServicio> getAprobacionServicio() {
+        return aprobacionServicio;
+    }
 
-    // public void setAprobacionServicio(List<AprobacionServicio> aprobacionServicio) {
-    //     this.aprobacionServicio = aprobacionServicio;
-    // }
+    public void setAprobacionServicio(List<AprobacionServicio> aprobacionServicio) {
+        this.aprobacionServicio = aprobacionServicio;
+    }
     
 }
 

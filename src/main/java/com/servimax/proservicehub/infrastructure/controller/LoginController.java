@@ -34,21 +34,6 @@ public class LoginController {
         return loginServiceI.findAll();
     }
 
-    // @GetMapping("/api/login")
-    // public ResponseEntity<?> login(
-    //         @RequestParam(name = "usuario") String usuario,
-    //         @RequestParam(name = "contraseña") String contraseña) {
-        
-    //     // Lógica de autenticación
-    //     Login login = loginServiceI.authenticate(usuario, contraseña);
-        
-    //     if (login == null) {
-    //         return ResponseEntity.status(401).body("Credenciales inválidas"); // Retorna 401 si la autenticación falla
-    //     }
-        
-    //     return ResponseEntity.ok(new Login(login.getId(), login.getUsuario())); // Retorna un objeto específico
-    // }
-
     @GetMapping("/{id}")
     public ResponseEntity<?> view(@PathVariable Long id){
         Optional<Login> OLogin = loginServiceI.findById(id);

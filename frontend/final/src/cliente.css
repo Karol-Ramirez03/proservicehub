@@ -107,6 +107,16 @@
     transition: background-color 0.3s ease;
   }
 
+  .cancelar{
+    color: red;
+  }
+  #cantidad{
+    border-radius: 5px;
+    border: solid 1px #343a40;
+  }
+  .detalles{
+    padding-top: 2px;
+  }
   @media (max-width:900px) {
     .table-container {
       width: 98%;

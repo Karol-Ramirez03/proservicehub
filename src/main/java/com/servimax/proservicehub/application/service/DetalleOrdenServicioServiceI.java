@@ -11,4 +11,5 @@ public interface DetalleOrdenServicioServiceI {
     DetalleOrdenServicio save(DetalleOrdenServicio detalleOrdenServicio);
     Optional<DetalleOrdenServicio> update(Long id, DetalleOrdenServicio detalleOrdenServicio);
     Optional<DetalleOrdenServicio> delete(Long id);
+    List<DetalleOrdenServicio> findByEstadoId(long estadoId);
 }
