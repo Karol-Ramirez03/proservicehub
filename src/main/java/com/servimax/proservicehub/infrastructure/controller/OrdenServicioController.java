@@ -64,7 +64,7 @@ public class OrdenServicioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody OrdenServicio ordenServicio, @PathVariable Long id, BindingResult result) {
+    public ResponseEntity<?> update(@RequestBody OrdenServicio ordenServicio, @PathVariable Long id) {
         Optional<OrdenServicio> ordenServicioOptional = ordenServicioServiceI.findById(id);
 
         if (ordenServicioOptional.isPresent()) {
@@ -84,6 +84,9 @@ public class OrdenServicioController {
             }
             if (ordenServicio.getOrdenTrabajo() != null) {
                 ordenServicioCopy.setOrdenTrabajo(ordenServicio.getOrdenTrabajo());
+            }
+            if (ordenServicio.getNumero_orden() != null) {
+                ordenServicioCopy.setNumero_orden(ordenServicio.getNumero_orden());
             }
             
             ordenServicioServiceI.update(id, ordenServicioCopy);
