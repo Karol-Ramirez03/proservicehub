@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "final": "file:",
-    "lit": "^3.2.1"
+    "lit": "^3.2.1",
+    "node": "^22.10.0"
   },
   "devDependencies": {
     "vite": "^5.4.9"

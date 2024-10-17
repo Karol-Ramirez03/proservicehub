@@ -13,7 +13,7 @@ import com.servimax.proservicehub.domain.entity.TipoEmpresa;
 @Service
 public class TipoEmpresaImplementacion implements TipoEmpresaServiceI{
 
-   @Autowired
+    @Autowired
     private TipoEmpresaRepositoryI tipoEmpresaRepositoryI;
 
     @Override
@@ -34,7 +34,7 @@ public class TipoEmpresaImplementacion implements TipoEmpresaServiceI{
 
     @Override
     public Optional<TipoEmpresa> update(Long id, TipoEmpresa TipoEmpresa) {
-       Optional<TipoEmpresa> tipoEmpresa = tipoEmpresaRepositoryI.findById(id);
+        Optional<TipoEmpresa> tipoEmpresa = tipoEmpresaRepositoryI.findById(id);
         if (tipoEmpresa.isPresent()) {
             TipoEmpresa  TipoEmpresaAdic = tipoEmpresa.orElseThrow();
             TipoEmpresaAdic.setDescripcion(TipoEmpresa.getDescripcion());

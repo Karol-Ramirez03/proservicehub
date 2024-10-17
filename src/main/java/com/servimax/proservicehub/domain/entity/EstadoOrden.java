@@ -39,6 +39,10 @@ public class EstadoOrden {
     public EstadoOrden() {
     }
 
+    public EstadoOrden(@NotBlank(message = "No puedes ser vacio nombre") String nombre) {
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }

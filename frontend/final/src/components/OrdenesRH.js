@@ -1,5 +1,5 @@
-
-
+//ver todas las ordenes de trabajo y su seguimiento
+import { dataNewFecha } from "./actualizarServicio";
 const renderizarTablas = () => {
     return /* html */`
     <table class="nombres-table">
@@ -40,9 +40,9 @@ const renderizarDatos = (datos,shadowRoot) => {
     fila.innerHTML= `
       <td>${dato.id}</td>
       <td>${dato.fecha}</td>
-      <td>${dato.estado_orden}</td>
-      <td>${dato.servicio.id}</td>
-      <td>${dato.servicio.nombre}</td>
+      <td>${dato.estado_orden?.nombre??"0"}</td>
+      <td>${dato.servicio?.id??""}</td>
+      <td>${dato.servicio?.nombre??""}</td>
 
       <td>${dato.orden_trabajo.id}</td>
       <td>${dato.orden_trabajo.fecha_asignacion}</td>
@@ -52,7 +52,7 @@ const renderizarDatos = (datos,shadowRoot) => {
       <td>${dato.orden_trabajo.ordenServicio.numero_orden}</td>
       <td>${dato.orden_trabajo.numero_orden_trabajo}</td>
       
-      <td><button class="boton-fecha">Asignar Fecha</button></td>
+      <td><button class="boton-fecha" id="${dato.id}">Asignar Fecha</button></td>
 
     `;
     cuerpoData.appendChild(fila)
@@ -68,7 +68,7 @@ export const dataOrdenes = async (contenedorPrincipal)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     
     try {
-        const response = await fetch("http://localhost:8080/api/detalleorden/estado/1", {
+        const response = await fetch("http://localhost:8080/api/detalleorden", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
@@ -78,11 +78,18 @@ export const dataOrdenes = async (contenedorPrincipal)  => {
             const Ordenes = await response.json();
             console.log(Ordenes)
             renderizarDatos(Ordenes,shadowRoot);
-            const botonFecha = shadowRoot.querySelectorAll(".boton-fecha")
-            botonFecha.addEventListener("click", (e)   => {
-                e.preventDefault()
-                console.log("hola")
-            })
+            const botonesFecha = shadowRoot.querySelectorAll(".boton-fecha")
+            botonesFecha.forEach(boton => {
+                boton.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const idDetalle = e.target.id;
+                    console.log(idDetalle)
+                    console.log("Se ha hecho clic en el botón de asignar fecha");
+                    dataNewFecha(contenedorPrincipal,idDetalle)
+
+                });
+            });
+
             
         }
         

@@ -30,6 +30,10 @@ public class EstadoOrdenServicio {
     public EstadoOrdenServicio() {
     }
 
+    public EstadoOrdenServicio(String nombre) {
+        this.nombre = nombre;
+    }
+
     public EstadoOrdenServicio(long id, String nombre) {
         this.id = id;
         this.nombre = nombre;

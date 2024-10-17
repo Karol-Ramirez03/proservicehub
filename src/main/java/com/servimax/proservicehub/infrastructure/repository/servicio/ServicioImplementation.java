@@ -34,7 +34,7 @@ public class ServicioImplementation implements ServicioServiceI{
 
     @Override
     public Optional<Servicio> update(Long id, Servicio servicio) {
-       Optional<Servicio> OServicio = servicioRepositoryI.findById(id);
+        Optional<Servicio> OServicio = servicioRepositoryI.findById(id);
         if (OServicio.isPresent()) {
             Servicio  servicioAdic = OServicio.orElseThrow();
             servicioAdic.setNombre(servicio.getNombre());
