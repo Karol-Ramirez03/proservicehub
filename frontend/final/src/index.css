@@ -21,7 +21,7 @@ label {
   align-items: center;
   cursor: pointer;
   font-size: 14px;
-  color: white;
+  color: #6c757d;
 }
 
 label input[type="checkbox"] {
@@ -57,10 +57,14 @@ label input[type="checkbox"]:focus {
   align-items: center;
   height: 100vh;
 }
-
+.img {
+  max-width: 100%;   /* Se ajusta al tamaño del contenedor */
+  height: auto;      /* Mantiene la proporción de la imagen */
+  width: 50px;      /* Define un ancho específico, puedes ajustarlo a tu necesidad */
+}
 
 .login-box {
-  background-color: #000;
+  background-color: white;
   padding: 1vw 4vw 1vw 4vw;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
@@ -79,7 +83,7 @@ label input[type="checkbox"]:focus {
 .tabs button {
   background: none;
   border: none;
-  color: white;
+  color: #6C757D;
   font-size: 16px;
   padding: 10px;
   cursor: pointer;
@@ -155,7 +159,7 @@ label input[type="checkbox"]:focus {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
+  background-color: antiquewhite;
   color: white;
   font-size: 14px;
 }
@@ -168,7 +172,7 @@ label input[type="checkbox"]:focus {
   padding: 5px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
+  background-color: antiquewhite;
   color: white;
   font-size: 14px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -235,7 +239,7 @@ label input[type="checkbox"]:focus {
   margin-bottom: 2rem;
   border: none;
   border-radius: 5px;
-  color: white;
+  color: #F3F4F6;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -245,7 +249,7 @@ label input[type="checkbox"]:focus {
   width: 100%;
   padding: 10px;
   background-color: #1e90ff;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border: none;
   border-radius: 5px;
   color: white;

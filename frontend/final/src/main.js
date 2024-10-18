@@ -22,7 +22,7 @@ class InicioForm extends LitElement {
     <link rel="stylesheet" href="src/index.css" />
    <div class="login-container">
         <div class="login-box">
-             <img src="public/User (2).png" alt="img" class="img">
+             <img src="public/user.png" alt="img" class="img">
             <h2 class= "welcome" >Bienvenido</h2>
             <div class="tabs">
                 <button class="active">Iniciar sesión</button>
@@ -139,20 +139,20 @@ class InicioForm extends LitElement {
 
               <button type="submit" class="guardar register-btn">Registrarse</button>
             </div> 
-              `;
-            }          
-            _handleSubmit(e) {  
-          e.preventDefault();
-          const form = this.shadowRoot.querySelector(".register-form");
-          const formData = new FormData(form);
-          const username = formData.get('username');
-          const email = formData.get('email');
-          const password = formData.get('password');
-          const registerData = {
-            usuario: username,
-            correo: email,
-            contraseña: password,
-          }
+               `;
+          //   }          
+          //   _handleSubmit(e) {  
+          // e.preventDefault();
+          // const form = this.shadowRoot.querySelector(".register-form");
+          // const formData = new FormData(form);
+          // const username = formData.get('username');
+          // const email = formData.get('email');
+          // const password = formData.get('password');
+          // const registerData = {
+          //   usuario: username,
+          //   correo: email,
+          //   contraseña: password,
+          // }
 }
 
 }
