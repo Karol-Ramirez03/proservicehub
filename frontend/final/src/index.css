@@ -58,9 +58,9 @@ label input[type="checkbox"]:focus {
   height: 100vh;
 }
 .img {
-  max-width: 100%;   /* Se ajusta al tamaño del contenedor */
-  height: auto;      /* Mantiene la proporción de la imagen */
-  width: 50px;      /* Define un ancho específico, puedes ajustarlo a tu necesidad */
+  max-width: 100%;   
+  height: auto;      
+  width: 50px;     
 }
 
 .login-box {
@@ -132,19 +132,20 @@ label input[type="checkbox"]:focus {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
-  color: white;
+  background-color: #d3c9c9;
+  color: black;
   font-size: 14px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 
 .input-group select:hover {
-  background-color: #444; /* Color más claro al hacer hover */
+  background-color: #45457a80; /* Color más claro al hacer hover */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-group select:focus {
-  background-color: #444; /* Color más claro al enfocar */
+  background-color: #45457a80; /* Color más claro al enfocar */
   outline: none;
   box-shadow: 0 0 8px rgba(30, 144, 255, 0.5); /* Sombra azul suave al enfocar */
 }
@@ -179,11 +180,11 @@ label input[type="checkbox"]:focus {
 }
 
 .input-group input:hover {
-  background-color: #444; /* Color más claro al hacer hover */
+  background-color:  #45457a6b; /* Color más claro al hacer hover */
 }
 
 .input-group input:focus {
-  background-color: #444; /* Color más claro al enfocar */
+  background-color: #45457a80; /* Color más claro al enfocar */
   outline: none;
   box-shadow: 0 0 8px rgba(30, 144, 255, 0.5); /* Sombra azul suave al enfocar */
 }
@@ -197,13 +198,13 @@ label input[type="checkbox"]:focus {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
-  color: white;
+  background-color: #887b7b5d;
+  color: black;
   font-size: 14px;
 }
-
+/* letra dentro de los input*/
 .input-group input::placeholder {
-  color: #ccc;
+  color: rgba(105, 100, 100, 0.767);
 }
 
 .options {
