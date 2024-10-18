@@ -51,6 +51,16 @@ public class Insumo {
         this.nombre = nombre;
     }
 
+    public Insumo(String codigo_interno, String nombre, Double precio_unitario, int stock, int stock_minimo,
+            int stock_maximo) {
+        this.codigo_interno = codigo_interno;
+        this.nombre = nombre;
+        this.precio_unitario = precio_unitario;
+        this.stock = stock;
+        this.stock_minimo = stock_minimo;
+        this.stock_maximo = stock_maximo;
+    }
+
     public long getId() {
         return id;
     }

@@ -19,7 +19,7 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<String> tipos = Arrays.asList(
         "Ejecutado",
-        "Pendiente asignacion",
+        "Pendiente",
         "Cancelado",
         "Rechazado"
     );

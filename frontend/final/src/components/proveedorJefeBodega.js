@@ -129,7 +129,7 @@ const addInfoEventListener = (shadowRoot) => {
 };
 
 
-export const dataCompras = async (contenedorPrincipal,clienteId)  => {
+export const dataProveedor = async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;

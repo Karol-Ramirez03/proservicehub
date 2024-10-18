@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.Personas;
 
 @Service
 public class AprobacionServicioImplementation implements AprobacionServicioServiceI{
@@ -52,6 +53,11 @@ public class AprobacionServicioImplementation implements AprobacionServicioServi
             aprobacionServicioRepositoryI.delete(aprobSer);
         });
         return OAprobacionservicio;
+    }
+
+    @Override
+    public List<AprobacionServicio> findByPersonasId(Personas personasId) {
+        return aprobacionServicioRepositoryI.findByPersonaId(personasId);
     }
 
     @Override

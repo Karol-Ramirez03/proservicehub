@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.DetalleCompraServiceI;
+import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.DetalleCompra;
 
 @Service
@@ -52,6 +53,11 @@ public class DetalleCompraImplementation implements DetalleCompraServiceI{
             detalleCompraRepositoryI.delete(deCo);
         });
         return ODetalleCompra;
+    }
+
+    @Override
+    public List<DetalleCompra> findByCompra(Compra compra) {
+        return detalleCompraRepositoryI.findByCompra(compra);
     }
 
 }

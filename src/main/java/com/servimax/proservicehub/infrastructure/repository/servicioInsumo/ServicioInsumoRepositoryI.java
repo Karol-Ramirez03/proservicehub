@@ -8,5 +8,5 @@ import com.servimax.proservicehub.domain.entity.ServicioInsumoPk;
 
 @Repository
 public interface ServicioInsumoRepositoryI extends CrudRepository<ServicioInsumo, ServicioInsumoPk>{
-
+    
 }

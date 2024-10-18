@@ -11,7 +11,7 @@ import com.servimax.proservicehub.domain.entity.EstadoOrden;
 
 @Component
 public class EstadoOrdenDataInitializer implements CommandLineRunner{
-     @Autowired
+    @Autowired
     private EstadoOrdenRepositoryI estadoOrdenRepositoryI;
 
     @Override
@@ -24,7 +24,7 @@ public class EstadoOrdenDataInitializer implements CommandLineRunner{
         "Rechazado"
     );
 
-     for (String nombreTipo : tipos) {
+    for (String nombreTipo : tipos) {
         if (!estadoOrdenRepositoryI.findByNombre(nombreTipo).isPresent()) {
             estadoOrdenRepositoryI.save(new EstadoOrden(nombreTipo));
         }
