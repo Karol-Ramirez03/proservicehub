@@ -83,24 +83,62 @@ const addInfoEventListener = (shadowRoot, datos) => {
                     <td><button class="aprobar" id="${idCompra}">Aprobar</button></td>
                     `;
                 }
+                filas.innerHTML+=`<tr class="div-${idCompra}"></tr>`
 
 
                 // Asignar eventos a los nuevos botones
-                agregarEventosBotones(filas, dataUsar);
+                agregarEventosBotones(filas, dataUsar,idCompra);
             }
         });
     });
 };
 
-const agregarEventosBotones = (filas, dataUsar) => {
+const agregarEventosBotones = (filas, dataUsar,idCompra) => {
     const btnDenegar = filas.querySelector('.cancelar');
     const btnAprobar = filas.querySelector('.aprobar');
     const btnCerrar = filas.querySelector('.cerrar');
-
+    const divFila= filas.querySelector(`div-${idCompra}`)
     if (btnDenegar) {
-        btnDenegar.addEventListener('click', () => {
+        btnDenegar.addEventListener('click', async () => {
+            divFila.innerHTML=`
+            <td></td>
+            <td class="cantidad-input" colspan="2">
+                <form class="form-${idCompra}">
+                    <div class="form-group">
+                        <label for="cantidad">cantidad a ordenar:</label>
+                        <input type="number" id="cantidad" name="cantidad"required>
+                    </div>
+                </form>
+            </td>
+            <td><button class="enviar" id="${idCompra}">Enviar</button></td>
+            `
             console.log(`Denegar id: ${dataUsar.id}`);
-            // Lógica para denegar
+            const solicitud={
+                "estado_aprobacion":{
+                    "id":2
+                }
+            }
+            try {
+                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(solicitud)
+                })
+                if(response2.ok){
+                    const servicio = await response2.json();
+                    renderizarDatos(servicio,orden,detalles);
+
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }finally{
+                
+
+            }
         });
     }
 

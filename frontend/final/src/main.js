@@ -223,7 +223,7 @@ class InicioForm extends LitElement {
     const number = formData.get('documentNumber');
     const sucursal = formData.get('idSucursal');
     const tpersona = formData.get('tipopersona');
-
+    let num=Number(number)
     const registerData = {
       "nombre": username,
       "apellido": lastname,
@@ -234,7 +234,7 @@ class InicioForm extends LitElement {
       "tipoPersona": {
         "id":tpersona
       },
-      "nro_Doc": number
+      "nro_Doc": num
     }
     console.log(registerData)
     try {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,22 +57,38 @@ public class AprobacionServicioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(aprobacionServicioServiceI.save(AprobacionServicio));
     }
 
-    // @PutMapping("/{id}")
-    // public Optional<AprobacionServicio> Update(@PathVariable Long id, @RequestBody AprobacionServicio AprobacionServicio){
-    //     Optional<AprobacionServicio> CiudadId = aprobacionServicioServiceI.findById(id); 
-    //     if (CiudadId.isPresent()) {
-    //         AprobacionServicio CiudadCopy = CiudadId.orElseThrow();
-    //         if (AprobacionServicio.getRegion() != null) {
-    //             CiudadCopy.setRegion(AprobacionServicio.getRegion());
-    //         }
-    //         if (AprobacionServicio.getNombre() != null) {
-    //             CiudadCopy.setNombre(AprobacionServicio.getNombre());
-    //         }
-    //         aprobacionServicioServiceI.update(id, CiudadCopy);
-    //         return Optional.of(CiudadCopy);
-    //     }
-    //     return Optional.empty();
-    // }
+    @PutMapping("/{id}")
+    public ResponseEntity<AprobacionServicio> update(@PathVariable Long id, @RequestBody AprobacionServicio aprobacionServicio) {
+        Optional<AprobacionServicio> aprobacionExistenteOpt = aprobacionServicioServiceI.findById(id);
+        
+        if (!aprobacionExistenteOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AprobacionServicio aprobacionExistente = aprobacionExistenteOpt.get();
+
+        // Solo actualiza los campos que no son nulos en el objeto recibido
+        if (aprobacionServicio.getHallazgo() != null) {
+            aprobacionExistente.setHallazgo(aprobacionServicio.getHallazgo());
+        }
+        if (aprobacionServicio.getSolucion() != null) {
+            aprobacionExistente.setSolucion(aprobacionServicio.getSolucion());
+        }
+        if (aprobacionServicio.getMotivoRechazo() != null) {
+            aprobacionExistente.setMotivoRechazo(aprobacionServicio.getMotivoRechazo());
+        }
+        if (aprobacionServicio.getOrden_trabajo()!= null) {
+            aprobacionExistente.setOrden_trabajo(aprobacionServicio.getOrden_trabajo());
+        }
+        if (aprobacionServicio.getEstado_aprobacion() != null) {
+            aprobacionExistente.setEstado_aprobacion(aprobacionServicio.getEstado_aprobacion());
+        }
+
+        // Guarda el objeto actualizado
+        aprobacionServicioServiceI.update(id, aprobacionExistente);
+        return ResponseEntity.ok(aprobacionExistente);
+}
+
 
     @GetMapping("/persona/{personaId}")
     public ResponseEntity<List<AprobacionServicio>> findByPersonaId(@PathVariable Long personaId) {
