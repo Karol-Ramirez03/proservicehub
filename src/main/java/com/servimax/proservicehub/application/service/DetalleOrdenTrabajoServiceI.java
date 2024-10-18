@@ -12,4 +12,6 @@ public interface DetalleOrdenTrabajoServiceI {
     DetalleOrdenTrabajo save(DetalleOrdenTrabajo detalleOrdenTrabajo);
     Optional<DetalleOrdenTrabajo> update(Long id, DetalleOrdenTrabajo detalleOrdenTrabajo);
     Optional<DetalleOrdenTrabajo> delete(Long id);
+    List<DetalleOrdenTrabajo> findByIdEmpleado(long estadoId);
+
 }

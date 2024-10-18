@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
+import com.servimax.proservicehub.application.service.PersonasServiceI;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.Compra;
+import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -27,6 +30,9 @@ public class AprobacionServicioController {
 
     @Autowired
     private AprobacionServicioServiceI aprobacionServicioServiceI;
+
+    @Autowired
+    private PersonasServiceI personasServiceI;
 
     @GetMapping
     public List<AprobacionServicio> list(){
@@ -67,6 +73,22 @@ public class AprobacionServicioController {
     //     return Optional.empty();
     // }
 
+    @GetMapping("/persona/{personaId}")
+    public ResponseEntity<List<AprobacionServicio>> findByPersonaId(@PathVariable Long personaId) {
+        // Primero, busca la persona por ID
+        Optional<Personas> persona = personasServiceI.findById(personaId);
+        if (persona == null) {
+            return ResponseEntity.notFound().build(); // Retorna 404 si la persona no se encuentra
+        }
+        Personas newPersona=persona.get();
+        // Busca las compras asociadas a la persona
+        List<AprobacionServicio> aproServ = aprobacionServicioServiceI.findByPersonasId(newPersona);
+        if (aproServ.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay compras
+        }
+        return ResponseEntity.ok(aproServ); // Retorna 200 con las compras
+    }
+
     @DeleteMapping("/{id}") 
     public ResponseEntity<?> delete(@PathVariable Long id){
         Optional<AprobacionServicio> CiudadId =  aprobacionServicioServiceI.delete(id);
@@ -74,6 +96,15 @@ public class AprobacionServicioController {
             return ResponseEntity.ok(CiudadId.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/aprobacion/{estadoId}")
+    public ResponseEntity<List<AprobacionServicio>> findByEstadoId(@PathVariable long estadoId) {
+        List<AprobacionServicio> ordenServicios = aprobacionServicioServiceI.findByEstadoId(estadoId);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
     }
 
 }

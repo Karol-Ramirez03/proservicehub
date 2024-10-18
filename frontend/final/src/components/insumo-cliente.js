@@ -41,7 +41,6 @@ datos.forEach(dato => {
     fila2.className=`comprar-${dato.id}`
     cuerpoData.appendChild(fila2)
 });
-  
     // Después de que se hayan agregado todas las filas, agrega el EventListener
     agregarTrCompra(shadowRoot,datos);
 }
@@ -104,7 +103,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
                     "id": 2
                 },
                 "personas": {
-                    "nro_Doc": 10255
+                    "nro_Doc": 1005539417
                 }
             }
             try {

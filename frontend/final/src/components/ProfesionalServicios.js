@@ -1,4 +1,7 @@
 import {LitElement, html } from 'lit'
+import { dataAprobado } from './OrdenesAprobadas-Profesionales.js';
+import { dataserviciosAsignado } from './OrdenAsignada-Profesionales.js';
+import { dataOrdenesTrabajo } from './OrdenTrabajo-Profesionales.js';
 
 class  PagInicioProfesionalServicios extends LitElement {
     constructor(){
@@ -18,9 +21,10 @@ class  PagInicioProfesionalServicios extends LitElement {
       </nav>  
       <section class="container-principal">
         <div class="container-button">
-          <button class="registro">Ordenes Asignadas- Solicitar Aprobacion</button>
-          <button class="servicio-no-asignado">Servicios Asignados</button>
-          <button class="boton-orden">Solicitudes Aprobadas</button>
+          <button class="ordenes">Detalle Orden</button>
+          <button class="servicios">Ordenes</button>
+          <button class="trabajos">Trabajo</button>
+          <button class="aprobado">Solicitudes Aprobadas</button>
         </div>
 
         <div class="table-container">
@@ -31,7 +35,39 @@ class  PagInicioProfesionalServicios extends LitElement {
     </div>
     `;
     }
+    //
     updated() {
+      const botonOrdenes = this.shadowRoot.querySelector(".ordenes")
+      const botonServicios = this.shadowRoot.querySelector(".servicios")
+      const botonTrabajos = this.shadowRoot.querySelector(".trabajos")
+      const botonAprobado = this.shadowRoot.querySelector(".aprobado")
+      const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
+     
+
+      botonOrdenes.addEventListener('click', (e) => {
+          e.preventDefault()
+
+        });
+
+      botonServicios.addEventListener("click", (e) => {
+          e.preventDefault()
+          let idEmpleado = 12;
+          dataserviciosAsignado(contenedorPrincipal,idEmpleado)
+
+        });
+
+      botonTrabajos.addEventListener("click", (e) => {
+        e.preventDefault()
+        let idEmpleado = 12;
+        dataOrdenesTrabajo(contenedorPrincipal,idEmpleado)
+
+      });
+      botonAprobado.addEventListener("click", (e) => {
+          e.preventDefault()
+          dataAprobado(contenedorPrincipal)
+
+        });
+
 
 
         

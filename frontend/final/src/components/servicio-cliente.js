@@ -61,7 +61,7 @@ const addOrdenEvenListener=(shadowRoot,datos)=>{
                     body:JSON.stringify(datosEnviar)
                 });
                 if (response.ok) {
-                    
+
                 }
             } catch (error) {
                 console.error('Error:', error);

@@ -72,10 +72,19 @@ public class DetalleOrdenServicioController {
         }
         return ResponseEntity.notFound().build();
     }
-    
+
     @GetMapping("/estado/{estadoId}")
     public ResponseEntity<List<DetalleOrdenServicio>> findByEstadoId(@PathVariable long estadoId) {
         List<DetalleOrdenServicio> ordenServicios = detalleOrdenServicioServiceI.findByEstadoId(estadoId);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
+    }
+
+    @GetMapping("/empleado/{estadoId}")
+    public ResponseEntity<List<DetalleOrdenServicio>> findByEmpleado(@PathVariable long estadoId) {
+        List<DetalleOrdenServicio> ordenServicios = detalleOrdenServicioServiceI.findByIdEmpleado(estadoId);
         if (ordenServicios.isEmpty()) {
             return ResponseEntity.noContent().build(); 
         }
