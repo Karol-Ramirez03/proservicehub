@@ -98,4 +98,13 @@ public class AprobacionServicioController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/aprobacion/{estadoId}")
+    public ResponseEntity<List<AprobacionServicio>> findByEstadoId(@PathVariable long estadoId) {
+        List<AprobacionServicio> ordenServicios = aprobacionServicioServiceI.findByEstadoId(estadoId);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
+    }
+
 }

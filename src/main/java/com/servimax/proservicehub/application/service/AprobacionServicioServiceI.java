@@ -13,4 +13,6 @@ public interface AprobacionServicioServiceI {
     Optional<AprobacionServicio> update(Long id, AprobacionServicio aprobacionServicio);
     Optional<AprobacionServicio> delete(Long id);
     List<AprobacionServicio> findByPersonasId(Personas personasId);
+    List<AprobacionServicio> findByEstadoId(long estadoId);
+
 }

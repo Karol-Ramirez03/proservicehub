@@ -53,3 +53,34 @@ BEGIN
     
 END $$
 DELIMITER ;
+
+DELIMITER$$
+CREATE PRCOCEDURE insert_aprobacion_servicio(
+    IN id_trabajo INT,
+    IN hallazgo VARCHAR,
+    IN solucion VARCHAR
+)
+BEGIN
+    DECLARE id_cliente_aprob INT;
+    DECLARE id_servicio_aprob INT;
+    DECLARE id_orden_servicio_aprob INT; 
+
+    SELECT id_servicio INTO id_servicio_aprob
+    FROM detalle_orden_trabajo
+    WHERE id_orden_trabajo = id_trabajo
+    LIMIT 1;
+
+    SELECT numero_orden_servicio INTO id_orden_servicio_aprob
+    FROM orden_trabajo
+    WHERE id = id_orden_trabajo;
+
+    SELECT id_cliente INTO id_cliente_aprob
+    FROM orden_servicio
+    WHERE numero_orden = id_orden_servicio_aprob;
+
+    INSERT INTO aprovacion_servicio(estado_aprobacion_id, id_cliente, id_orden_trabajo,id_servicio,hallazgo,solucion)
+    VALUES (1,id_cliente_aprob,id_trabajo)
+
+
+END$$
+DELIMITER;

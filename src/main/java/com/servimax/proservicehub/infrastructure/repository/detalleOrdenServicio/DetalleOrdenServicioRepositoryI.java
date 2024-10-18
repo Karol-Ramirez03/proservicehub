@@ -14,4 +14,7 @@ public interface DetalleOrdenServicioRepositoryI extends CrudRepository<DetalleO
 
     @Query("SELECT d FROM DetalleOrdenServicio d INNER JOIN d.id_orden_servicio os WHERE os.estado_orden_servicio.id = ?1")
     List<DetalleOrdenServicio> findByEstadoOrdenServicioId(@Param("estadoId") long estadoId);
+
+    @Query("SELECT d FROM DetalleOrdenServicio d INNER JOIN d.id_orden_servicio os WHERE os.persona.id = ?1")
+    List<DetalleOrdenServicio> findByIdEmpleado(@Param("estadoId") long estadoId);
 }
