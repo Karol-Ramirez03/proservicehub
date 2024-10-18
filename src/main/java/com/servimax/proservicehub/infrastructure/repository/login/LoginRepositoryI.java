@@ -9,5 +9,5 @@ import com.servimax.proservicehub.domain.entity.Login;
 
 @Repository
 public interface LoginRepositoryI extends CrudRepository<Login,Long>{
-    Optional<Login> findByUsuario(String nombre);
+    Optional<Login> findByUsuario(String usuario);
 }

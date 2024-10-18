@@ -72,7 +72,8 @@ public class DetalleOrdenServicioController {
         }
         return ResponseEntity.notFound().build();
     }
-        @GetMapping("/estado/{estadoId}")
+    
+    @GetMapping("/estado/{estadoId}")
     public ResponseEntity<List<DetalleOrdenServicio>> findByEstadoId(@PathVariable long estadoId) {
         List<DetalleOrdenServicio> ordenServicios = detalleOrdenServicioServiceI.findByEstadoId(estadoId);
         if (ordenServicios.isEmpty()) {

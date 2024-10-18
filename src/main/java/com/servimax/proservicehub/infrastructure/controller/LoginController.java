@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
 import com.servimax.proservicehub.domain.entity.Login;
-import com.servimax.proservicehub.domain.entity.LoginRequest;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -97,4 +96,13 @@ public class LoginController {
     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     //     }
     // }
+
+    @GetMapping("/usuario/{usuario}")
+    public ResponseEntity<Optional<Login>> findByUsuario(@PathVariable String usuario) {
+        Optional<Login> login = loginServiceI.findByUsuario(usuario);
+        if (login.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(login);
+    }
 }
