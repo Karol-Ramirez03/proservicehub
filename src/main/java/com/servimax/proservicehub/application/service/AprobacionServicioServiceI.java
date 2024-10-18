@@ -11,5 +11,6 @@ public interface AprobacionServicioServiceI {
     AprobacionServicio save(AprobacionServicio aprobacionServicio);
     Optional<AprobacionServicio> update(Long id, AprobacionServicio aprobacionServicio);
     Optional<AprobacionServicio> delete(Long id);
+    List<AprobacionServicio> findByEstadoId(long estadoId);
 
 }

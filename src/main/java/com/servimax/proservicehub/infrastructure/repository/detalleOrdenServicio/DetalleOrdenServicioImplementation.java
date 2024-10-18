@@ -59,4 +59,10 @@ public class DetalleOrdenServicioImplementation implements DetalleOrdenServicioS
         return detalleOrdenServicioRepositoryI.findByEstadoOrdenServicioId(estadoId);
     }
 
+    @Override
+    public List<DetalleOrdenServicio> findByIdEmpleado(long estadoId) {
+        return detalleOrdenServicioRepositoryI.findByIdEmpleado(estadoId);
+
+    }
+
 }

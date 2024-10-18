@@ -48,4 +48,11 @@ public class DetalleOrdenTrabajoImplementacion  implements DetalleOrdenTrabajoSe
             return detalle;
         });
     }
+
+    @Override
+    public List<DetalleOrdenTrabajo> findByIdEmpleado(long estadoId) {
+        return detalleOrdenTrabajoRepository.findDetallesByEmpleadoId(estadoId);
+
+    }
+
 }

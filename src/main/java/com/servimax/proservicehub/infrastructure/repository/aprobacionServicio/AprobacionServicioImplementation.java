@@ -54,4 +54,8 @@ public class AprobacionServicioImplementation implements AprobacionServicioServi
         return OAprobacionservicio;
     }
 
+    @Override
+    public List<AprobacionServicio> findByEstadoId(long estadoId) {
+        return aprobacionServicioRepositoryI.findByEstadoAprobacionId(estadoId);
+    }
 }
