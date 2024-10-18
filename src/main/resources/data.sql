@@ -37,3 +37,19 @@ BEGIN
             END IF;
 END$$
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS addOrdenServicio;
+DELIMITER $$
+CREATE PROCEDURE addOrdenServicio(IN idCliente INT,IN idServicio INT)
+BEGIN
+	DECLARE nueva_orden_id INT;
+    
+    INSERT INTO orden_servicio(estado_orden_servicio_id,fecha_orden,id_empleado,id_cliente) VALUES(2,NOW(),null,idCliente);
+    
+    SET nueva_orden_id = LAST_INSERT_ID();
+    
+    INSERT INTO detalle_orden_servicio(valor_servicio,id_orden_servicio,id_servicio) VALUES(0,nueva_orden_id,idServicio);
+    
+END $$
+DELIMITER ;

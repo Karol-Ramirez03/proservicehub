@@ -56,11 +56,14 @@
     width: 80%;
   }
   button{
-    background-color: white;
+    background-color: rgb(255, 254, 254);
     border-radius: 5px;
     padding: 1%;
     color: #2563EB;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;
+    border: none;
+    box-shadow: 2px 2px 0 0 rgb(40, 65, 35);
   }
   button:active{
     background-color:  #2563EB;
@@ -72,7 +75,7 @@
   
   .table-container {
     width: 80%;
-    margin: 2% auto;
+    margin: 1% auto;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -85,7 +88,7 @@
   }
   
   .nombres-table thead {
-    background-color: #f8f9fa;
+    background-color: hsl(210, 17%, 98%);
   }
   
   .nombres-table th, .nombres-table td {
@@ -119,6 +122,11 @@
 
   .cancelar{
     color: red;
+    
+  }
+  #cerrar{
+    position: relative;
+    left: 50px;
   }
   #cantidad{
     border-radius: 5px;
@@ -126,6 +134,24 @@
   }
   .detalles{
     padding-top: 2px;
+  }
+  .agregar-insumo{
+    color: black;
+    background-color: #30c452;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: 6px 0 6px 10px;
+    box-shadow: 2px 2px 0 0 rgb(40, 65, 35);
+  }
+  .agregar-proveedor{
+    color: rgb(255, 255, 255);
+    background-color: #3033c4;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: 6px 0 6px 10px;
+    box-shadow: 2px 2px 0 0 rgb(18, 24, 16);
   }
   @media (max-width:900px) {
     .table-container {

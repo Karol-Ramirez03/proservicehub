@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.DetalleCompraServiceI;
+import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.DetalleCompra;
+import com.servimax.proservicehub.infrastructure.repository.compra.CompraRepositoryI;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ public class DetalleCompraController {
 
     @Autowired
     private DetalleCompraServiceI detalleCompraServiceI;
+
+    @Autowired
+    private CompraRepositoryI compraRepositoryI;
 
     @GetMapping
     public List<DetalleCompra> list(){
@@ -70,6 +75,23 @@ public class DetalleCompraController {
             return ResponseEntity.ok(ODetalleCompra.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/compra/{compraId}")
+    public ResponseEntity<List<DetalleCompra>> findByPersonaId(@PathVariable Long compraId) {
+        // Primero, busca la comprapor ID
+        Optional<Compra> compra = compraRepositoryI.findById(compraId);
+        if (compra == null) {
+            return ResponseEntity.notFound().build(); // Retorna 404 si la persona no se encuentra
+        }
+        Compra newCompra= compra.get();
+        // Busca las compras asociadas a la persona
+        List<DetalleCompra> detaOrden = detalleCompraServiceI.findByCompra(newCompra);
+        if (detaOrden.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay compras
+        }
+        
+        return ResponseEntity.ok(detaOrden); // Retorna 200 con las compras
     }
 
 }

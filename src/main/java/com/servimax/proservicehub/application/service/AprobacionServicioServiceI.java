@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.Personas;
 
 public interface AprobacionServicioServiceI {
     List<AprobacionServicio> findAll();
@@ -11,5 +12,5 @@ public interface AprobacionServicioServiceI {
     AprobacionServicio save(AprobacionServicio aprobacionServicio);
     Optional<AprobacionServicio> update(Long id, AprobacionServicio aprobacionServicio);
     Optional<AprobacionServicio> delete(Long id);
-
+    List<AprobacionServicio> findByPersonasId(Personas personasId);
 }

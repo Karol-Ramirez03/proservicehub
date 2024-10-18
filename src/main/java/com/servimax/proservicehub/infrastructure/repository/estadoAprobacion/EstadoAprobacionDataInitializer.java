@@ -20,7 +20,7 @@ public class EstadoAprobacionDataInitializer implements CommandLineRunner{
         "Ejecutado",
         "No aprobado",
         "Aprobado",
-        "pendiente",
+        "Pendiente",
         "Cancelado",
         "Rechazado"
     );

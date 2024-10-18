@@ -9,7 +9,7 @@ const renderizarTablas = () => {
             <tr>
                 <th>id</th>
                 <th>nombre</th>
-                <th>Requiere Insumo</th>
+                <th>Valor Servicio</th>
                 <th>Tiempo Ejecución</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -21,23 +21,35 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,orden) => {
+const renderizarDatos = (datos,orden,detalles) => {
     const cuerpoData = document.querySelector(".tbody-info");
 
         const fila = document.createElement("tr"); // Asegúrate de usar "tr" entre comillas
         fila.innerHTML = `
         <td>${datos.id}</td>
         <td>${datos.nombre}</td>
-        <td>${datos.requiere_insumo}</td>
+        <td>${detalles.valor_servicio}</td>
         <td>${datos.tiempo_ejecucion}</td>
         <td>${orden.estado_orden_servicio.nombre}</td>
-        <td><button id="${datos.id}">Detalles</button></td> 
+        
         `;
+        if(orden.estado_orden_servicio.id==2){
+            fila.innerHTML+=`<td><button class="cancelar" id="${datos.id}">Cancelar</button></td> `
+        }
         cuerpoData.appendChild(fila);
     
-        
+        _addEvent(fila);
 }
 
+const _addEvent=(fila)=>{
+    const btnCancelar=fila.querySelector(".cancelar")
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', (e) => {
+            console.log(e.target.id);
+            // Lógica para cancelar Cambiar estado a cancelado
+        });
+    }
+}
 
 export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.innerHTML = ""
@@ -74,7 +86,8 @@ export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
                             })
                             if(response2.ok){
                                 const servicio = await response2.json();
-                                renderizarDatos(servicio,orden);
+                                renderizarDatos(servicio,orden,detalles);
+
                                 
                             }
                             
@@ -101,7 +114,6 @@ export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
     } catch (error) {
         console.error('Error:', error);
     }
-   
     
     
     
