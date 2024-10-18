@@ -72,13 +72,16 @@ const addInfoEventListener = (shadowRoot, datos) => {
                     <td colspan="1">${dataUsar.hallazgo}</td>
                     <td><strong>Solucion:</strong></td>
                     <td>${dataUsar.solucion}</td>
-                    <td><button class="cancelar" id="${idCompra}">Denegar</button></td>
-                    <td><button class="aprobar" id="${idCompra}">Aprobar</button></td>
+                    <td><button class="cerrar" id="${idCompra}">Cerrar</button></td>
+                    
                 `;
 
                 // Agregar botón "Cerrar" si el estado no es 4
-                if (dataUsar.estado_aprovacion.id !== 4) {
-                    filas.innerHTML += `<td><button class="cerrar" id="${idCompra}">Cerrar</button></td>`;
+                if (dataUsar.estado_aprovacion.id == 4) {
+                    filas.innerHTML += `
+                    <td><button class="cancelar" id="${idCompra}">Denegar</button></td>
+                    <td><button class="aprobar" id="${idCompra}">Aprobar</button></td>
+                    `;
                 }
 
 
