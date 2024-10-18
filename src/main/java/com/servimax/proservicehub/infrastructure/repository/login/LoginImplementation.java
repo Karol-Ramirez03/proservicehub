@@ -54,4 +54,9 @@ public class LoginImplementation implements LoginServiceI{
         return OLogin;
     }
 
+    @Override
+    public List<Login> findByRolId(Long id) {
+        return  loginRepositoryI.findByRolId(id);
+    }
+
 }
