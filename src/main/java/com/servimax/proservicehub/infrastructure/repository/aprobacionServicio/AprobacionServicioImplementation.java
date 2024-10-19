@@ -5,10 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
 import com.servimax.proservicehub.domain.entity.Personas;
+
+
 
 @Service
 public class AprobacionServicioImplementation implements AprobacionServicioServiceI{
@@ -63,5 +66,16 @@ public class AprobacionServicioImplementation implements AprobacionServicioServi
     @Override
     public List<AprobacionServicio> findByEstadoId(long estadoId) {
         return aprobacionServicioRepositoryI.findByEstadoAprobacionId(estadoId);
+    }
+
+    @Override
+    @Transactional
+    public void insertAprobacionServicio(Long idTrabajo, String hallazgoap, String solucionap) {
+        try {
+            aprobacionServicioRepositoryI.insertAprobacionServicio(idTrabajo, hallazgoap, solucionap);
+        } catch (Exception e) {
+            // Manejar excepciones de forma adecuada
+            throw new RuntimeException("Error al insertar la aprobación de servicio", e);
+        }
     }
 }

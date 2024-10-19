@@ -14,5 +14,7 @@ public interface AprobacionServicioServiceI {
     Optional<AprobacionServicio> delete(Long id);
     List<AprobacionServicio> findByPersonasId(Personas personasId);
     List<AprobacionServicio> findByEstadoId(long estadoId);
+    void insertAprobacionServicio(Long idTrabajo,String hallazgoap,String solucionap);
 
 }
+//mccm

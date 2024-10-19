@@ -149,7 +149,42 @@ width: 100%;
 padding: 3%;
 }
 
+#form-orden{
+  display: flex;
+  flex-wrap: wrap;  
+  width: 100%;
+}
+.formfila{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+}
+.formfila button{
+  padding: 5%;
+  width: auto;
+}
+.formfila .group{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.formfila input {
+  display: flex;
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1vw;
+  align-items: center;
+}
+.btn-cancelar{
+  background-color: #2563EB;
+  color: white;
+  width: 100%;
+  padding: 5%;
 
+}
 @media (max-width:900px) {
   .table-container {
     width: 98%;
