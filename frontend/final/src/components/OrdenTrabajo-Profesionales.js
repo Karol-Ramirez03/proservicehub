@@ -71,10 +71,6 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
     fila.innerHTML =`
         <td colspan="13">
             <form colspan="13" class="formfila">
-                <div class="group">
-                    <label for="idDet">Id Orden Trabajo:</label>
-                    <input type="number" id="idDet" name="idDet"required>
-                </div>
         
                 <div class="group">
                     <label for="Hallazgo">Hallazgo:</label>
@@ -96,7 +92,7 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
             </td>
     `;
 
-    const formFila = shadowRoot.querySelector(`.cont${filaid} .formfila`);
+    const formFila = shadowRoot.querySelector(`.formfila`);
 
     const btnRegistrar = formFila.querySelector(".btn-registro");
     const btnCancelar = formFila.querySelector(".btn-cancelar");
@@ -104,7 +100,6 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
     btnRegistrar.addEventListener("click", async (e) => {
         e.preventDefault();
 
-        const idDet = formFila.querySelector("#idDet").value;
         //iddet o es necesario ya que lo obtenemos de otros medios (filaid)
         const hallazgo = formFila.querySelector("#Hallazgo").value;
         const solucion = formFila.querySelector("#Solucion").value;
@@ -115,8 +110,9 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
             "solucion":solucion
 
         }
-        if (idDet && hallazgo && solucion) {
+        if (hallazgo && solucion) {
             console.log("Datos registrados:", { idtra, hallazgo, solucion });
+            console.log(formFila);
             alert("Registro completado!");
             try {
                 const response = await fetch(`http://localhost:8080/api/aprobacionservicio/agregar`, {
@@ -127,14 +123,16 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
                     body: JSON.stringify(enviarData)
                 })
                 if(response.ok){
-                    const Ordenes = await response.json();
-                    console.log(Ordenes)
-
+                    
+                    formFila.reset()
+                    fila.innerHTML = "";
+                    console.log("prueba")
                     
                 }
-                
             } catch (error) {
                 console.error('Error:', error);
+
+
             }
 
         } else {

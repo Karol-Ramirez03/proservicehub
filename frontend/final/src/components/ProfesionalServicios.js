@@ -21,7 +21,6 @@ class  PagInicioProfesionalServicios extends LitElement {
       </nav>  
       <section class="container-principal">
         <div class="container-button">
-          <button class="ordenes">Detalle Orden</button>
           <button class="servicios">Ordenes</button>
           <button class="trabajos">Trabajo</button>
           <button class="aprobado">Solicitudes Aprobadas</button>
@@ -37,17 +36,11 @@ class  PagInicioProfesionalServicios extends LitElement {
     }
     //
     updated() {
-      const botonOrdenes = this.shadowRoot.querySelector(".ordenes")
       const botonServicios = this.shadowRoot.querySelector(".servicios")
       const botonTrabajos = this.shadowRoot.querySelector(".trabajos")
       const botonAprobado = this.shadowRoot.querySelector(".aprobado")
       const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
      
-
-      botonOrdenes.addEventListener('click', (e) => {
-          e.preventDefault()
-
-        });
 
       botonServicios.addEventListener("click", (e) => {
           e.preventDefault()

@@ -190,7 +190,8 @@ padding: 3%;
     width: 98%;
   }
   .nombres-table th, .nombres-table td {
-    font-size: 1.5vw;
+    font-size: 1.2vw;
+    word-wrap: break-word;
   }
   .container-button{
     width: 99%;
@@ -212,7 +213,7 @@ width: 60%;
     width: 99%;
   }
   .nombres-table th, .nombres-table td {
-    font-size: 1.8vw;
+    font-size: 1.4vw;
   }
   button{
     background-color: white;
