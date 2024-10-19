@@ -20,6 +20,8 @@ public class Rol {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+
+
     @Column
     private String nombre;
 
