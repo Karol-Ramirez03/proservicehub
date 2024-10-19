@@ -73,4 +73,13 @@ public class PersonaInsumoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/insumos/{idPersona}")
+    public ResponseEntity<List<PersonaInsumo>> getInsumosByPersonaId(@PathVariable Long idPersona) {
+        List<PersonaInsumo> insumos = personaInsumoServiceI.getInsumosByPersonaId(idPersona);
+        if (insumos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(insumos);
+    }
 }
