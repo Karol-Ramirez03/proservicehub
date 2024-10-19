@@ -12,4 +12,5 @@ public interface LoginServiceI {
     Optional<Login> update(Long id, Login login);
     Optional<Login> delete(Long id);
     Optional<Login> findByUsuario(String usuario);
+    List<Login> findByRolId(Long rolId);
 }

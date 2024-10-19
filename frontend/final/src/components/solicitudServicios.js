@@ -78,12 +78,14 @@ const addInfoEventListener = (shadowRoot, datos) => {
 
                 // Agregar botón "Cerrar" si el estado no es 4
                 if (dataUsar.estado_aprovacion.id == 4) {
-                    filas.innerHTML += `
+                    filas.innerHTML += /*html*/`
                     <td><button class="cancelar" id="${idCompra}">Denegar</button></td>
                     <td><button class="aprobar" id="${idCompra}">Aprobar</button></td>
                     `;
                 }
-                filas.innerHTML+=`<tr class="div-${idCompra}"></tr>`
+                const newFila=document.createElement(`tr`)
+                newFila.className=(`div-${idCompra}`)
+                filas.insertAdjacentHTML("afterend",newFila.outerHTML)
 
 
                 // Asignar eventos a los nuevos botones
@@ -97,21 +99,22 @@ const agregarEventosBotones = (filas, dataUsar,idCompra) => {
     const btnDenegar = filas.querySelector('.cancelar');
     const btnAprobar = filas.querySelector('.aprobar');
     const btnCerrar = filas.querySelector('.cerrar');
-    const divFila= filas.querySelector(`div-${idCompra}`)
+    
     if (btnDenegar) {
         btnDenegar.addEventListener('click', async () => {
-            divFila.innerHTML=`
-            <td></td>
-            <td class="cantidad-input" colspan="2">
-                <form class="form-${idCompra}">
-                    <div class="form-group">
-                        <label for="cantidad">cantidad a ordenar:</label>
-                        <input type="number" id="cantidad" name="cantidad"required>
-                    </div>
-                </form>
-            </td>
-            <td><button class="enviar" id="${idCompra}">Enviar</button></td>
-            `
+            
+            // filas.insertAdjacentHTML("afterend", `
+            //                         <td></td>
+            //                         <td class="input" colspan="2">
+            //                             <form class="form-${idCompra}">
+            //                                 <div class="form-group">
+            //                                 <label for="descripcion" style="display: block;">Descripción:</label>
+            //                                 <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
+            //                                 </div>
+            //                             </form>
+            //                         </td>
+            //                         <td><button class="id" id="${idCompra}">Enviar</button></td>
+            //                     `);
             console.log(`Denegar id: ${dataUsar.id}`);
             const solicitud={
                 "estado_aprobacion":{
@@ -127,25 +130,41 @@ const agregarEventosBotones = (filas, dataUsar,idCompra) => {
                     body:JSON.stringify(solicitud)
                 })
                 if(response2.ok){
-                    const servicio = await response2.json();
-                    renderizarDatos(servicio,orden,detalles);
-
+                    eliminarFila(filas)
                     
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
-            }finally{
-                
-
             }
         });
     }
 
     if (btnAprobar) {
-        btnAprobar.addEventListener('click', () => {
+        btnAprobar.addEventListener('click', async () => {
             console.log(`Aprobar id: ${dataUsar.id}`);
-            // Lógica para aprobar PROCEDURE ACTUALIZAR ESTADO
+            console.log(`Denegar id: ${dataUsar.id}`);
+            const solicitud={
+                "estado_aprobacion":{
+                    "id":3
+                }
+            }
+            try {
+                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(solicitud)
+                })
+                if(response2.ok){
+                    eliminarFila(filas)
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     }
 

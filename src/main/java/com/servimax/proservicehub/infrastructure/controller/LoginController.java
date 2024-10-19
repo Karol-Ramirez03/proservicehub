@@ -21,6 +21,8 @@ import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/login")
@@ -105,4 +107,15 @@ public class LoginController {
         }
         return ResponseEntity.ok(login);
     }
+
+    @GetMapping("rol/{rolId}")
+    public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
+        List<Login> logins = loginServiceI.findByRolId(rolId);
+        if (logins.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(logins);
+    }
+
+    
 }
