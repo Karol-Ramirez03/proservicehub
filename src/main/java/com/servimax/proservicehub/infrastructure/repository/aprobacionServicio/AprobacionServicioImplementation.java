@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.EstadoAprobacion;
 import com.servimax.proservicehub.domain.entity.Personas;
 
 
@@ -66,6 +67,11 @@ public class AprobacionServicioImplementation implements AprobacionServicioServi
     @Override
     public List<AprobacionServicio> findByEstadoId(long estadoId) {
         return aprobacionServicioRepositoryI.findByEstadoAprobacionId(estadoId);
+    }
+
+    @Override
+    public List<AprobacionServicio> findByEstadoPersona(EstadoAprobacion estado_aprobacion,Long estadoId) {
+        return aprobacionServicioRepositoryI.findByEstadoAprobacionAndEmpleado(estado_aprobacion, estadoId);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.servimax.proservicehub.infrastructure.repository.detalleOrdenServicio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,4 +66,14 @@ public class DetalleOrdenServicioImplementation implements DetalleOrdenServicioS
 
     }
 
+    @Override
+    public List<Object[]> servicioMasPedido(Date fechaInicio) {
+        return detalleOrdenServicioRepositoryI.findServicioMasPedidoUltimoMes(fechaInicio);
+
+    }
+    @Override
+    public List<Object[]> servicioMenosPedido(Date fechaInicio) {
+        return detalleOrdenServicioRepositoryI.findServicioMenosPedidoUltimoMes(fechaInicio);
+    }
+    
 }

@@ -57,8 +57,8 @@ class  PagInicioProfesionalServicios extends LitElement {
       });
       botonAprobado.addEventListener("click", (e) => {
           e.preventDefault()
-          dataAprobado(contenedorPrincipal)
-
+          let idEmpleado = 12;
+          dataAprobado(contenedorPrincipal,idEmpleado)
         });
 
 

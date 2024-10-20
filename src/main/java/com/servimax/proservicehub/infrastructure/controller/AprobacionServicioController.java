@@ -19,6 +19,7 @@ import com.servimax.proservicehub.application.service.AprobacionServicioServiceI
 import com.servimax.proservicehub.application.service.PersonasServiceI;
 import com.servimax.proservicehub.domain.dto.AprobacionDTO;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.EstadoAprobacion;
 import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -101,6 +102,15 @@ public class AprobacionServicioController {
     @GetMapping("/aprobacion/{estadoId}")
     public ResponseEntity<List<AprobacionServicio>> findByEstadoId(@PathVariable long estadoId) {
         List<AprobacionServicio> ordenServicios = aprobacionServicioServiceI.findByEstadoId(estadoId);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
+    }
+
+    @GetMapping("/aprobacionPer/{estado_aprobacion}/{idempleado}")
+    public ResponseEntity<List<AprobacionServicio>> findByEstadoPersona(@PathVariable EstadoAprobacion estado_aprobacion,@PathVariable Long idempleado) {
+        List<AprobacionServicio> ordenServicios = aprobacionServicioServiceI.findByEstadoPersona(estado_aprobacion, idempleado);
         if (ordenServicios.isEmpty()) {
             return ResponseEntity.noContent().build(); 
         }
