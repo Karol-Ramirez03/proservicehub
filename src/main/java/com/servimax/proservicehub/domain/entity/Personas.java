@@ -24,6 +24,12 @@ public class Personas {
     private String apellido;
     private Timestamp fechaRegistro;
 
+    @ManyToOne
+    private Sucursal sucursal;
+
+    @ManyToOne
+    private TipoPersona tipoPersona;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<TelPersona> telPersona;
@@ -60,11 +66,7 @@ public class Personas {
     @OneToMany(mappedBy = "personas")
     private List<Login> login;
 
-    @ManyToOne
-    private Sucursal sucursal;
-
-    @ManyToOne
-    private TipoPersona tipoPersona;
+ 
 
     public Long getNro_Doc() {
         return Nro_Doc;

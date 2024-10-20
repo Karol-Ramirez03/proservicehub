@@ -36,13 +36,14 @@ public class Compra {
     @ManyToOne
     private EstadoCompra estado_compra;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente")
+    private Personas personas;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "compra")
     private List<DetalleCompra> detalleCompra;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente")
-    private Personas personas;
 
     @PrePersist
     protected void onCreate() {
