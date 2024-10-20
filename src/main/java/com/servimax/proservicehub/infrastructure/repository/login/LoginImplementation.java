@@ -54,4 +54,13 @@ public class LoginImplementation implements LoginServiceI{
         return OLogin;
     }
 
+    @Override
+    public Optional<Login> findByUsuario(String usuario) {
+        return loginRepositoryI.findByUsuario(usuario);
+    }
+
+    @Override
+    public List<Login> findByRolId(Long rolId) {
+        return loginRepositoryI.findByRolId(rolId);
+    }
 }

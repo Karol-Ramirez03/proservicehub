@@ -20,9 +20,7 @@ public class EstadoAprobacionDataInitializer implements CommandLineRunner{
         "Ejecutado",
         "No aprobado",
         "Aprobado",
-        "Pendiente",
-        "Cancelado",
-        "Rechazado"
+        "Pendiente"
     );
 
     for (String nombreTipo : tipos) {

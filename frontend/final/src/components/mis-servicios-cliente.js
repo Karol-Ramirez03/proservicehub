@@ -34,7 +34,7 @@ const renderizarDatos = (datos,orden,detalles) => {
         
         `;
         if(orden.estado_orden_servicio.id==2){
-            fila.innerHTML+=`<td><button class="cancelar" id="${datos.id}">Cancelar</button></td> `
+            fila.innerHTML+=`<td><button class=" cancelar" id="${datos.id}">Cancelar</button></td> `
         }
         cuerpoData.appendChild(fila);
     
@@ -44,9 +44,34 @@ const renderizarDatos = (datos,orden,detalles) => {
 const _addEvent=(fila)=>{
     const btnCancelar=fila.querySelector(".cancelar")
     if (btnCancelar) {
-        btnCancelar.addEventListener('click', (e) => {
+        btnCancelar.addEventListener('click', async (e) => {
             console.log(e.target.id);
-            // Lógica para cancelar Cambiar estado a cancelado
+            const orden={
+                "estado_orden_servicio":{
+                    "id":3
+                }
+            }
+            try {
+                const response2 = await fetch(`http://localhost:8080/api/ordenservicio/${e.target.id}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(orden)
+                })
+                if(response2.ok){
+                    const servicio = await response2.json();
+                    renderizarDatos(servicio,orden,detalles);
+
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }finally{
+                
+
+            }
         });
     }
 }
