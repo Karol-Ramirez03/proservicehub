@@ -450,23 +450,204 @@ import { initDynamicTable } from "./prueba";
 //   ]
 // });
 
+// initDynamicPanel({
+//   buttonText: '+ Registrar Pais ',
+//   panelTitle: 'Agregar Nuevo Pais ',
+//   submitButtonText: 'Registrar Pais',
+//   apiUrl: 'http://localhost:8080/api/pais',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Persona Insumo ',
+//   panelTitle: 'Agregar Nueva Persona Insumo ',
+//   submitButtonText: 'Registrar Persona Insumo',
+//   apiUrl: 'http://localhost:8080/api/persona_insumo',
+//   fields: [          
+//     { label: 'ID de Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//       options: [
+//         { value: '1', label: 'Servicio 1' }, 
+//         { value: '2', label: 'Servicio 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un servicio'
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', required: true, validationMessage: 'Debe seleccionar una persona' },
+//     { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', required: true, validationMessage: 'Debe seleccionar un insumo' }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Region ',
+//   panelTitle: 'Agregar Nueva Region ',
+//   submitButtonText: 'Registrar Region',
+//   apiUrl: 'http://localhost:8080/api/region',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío' 
+//     },
+//     { label: 'País', id: 'pais', type: 'select', apiKey: 'pais', 
+//       options: [
+//         { value: '1', label: 'País 1' }, 
+//         { value: '2', label: 'País 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un país'
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Servicio ',
+//   panelTitle: 'Agregar Nuevo Servicio ',
+//   submitButtonText: 'Registrar Servicio',
+//   apiUrl: 'http://localhost:8080/api/servicio',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío',
+//       maxLength: 50 
+//     },
+//     { label: 'Requiere Insumo', id: 'requiere_insumo', type: 'checkbox', apiKey: 'requiere_insumo', 
+//       required: true, validationMessage: 'Debe indicar si requiere insumo' 
+//     },
+//     { label: 'Tiempo de Ejecución', id: 'tiempo_ejecucion', type: 'text', apiKey: 'tiempo_ejecucion', 
+//       required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío'
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Servicio Insumo',
+//   panelTitle: 'Agregar Nuevo Servicio Insumo',
+//   submitButtonText: 'Registrar Servicio Insumo',
+//   apiUrl: 'http://localhost:8080/api/servicio_insumo',
+//   fields: [          
+//     { label: 'Cantidad', id: 'cantidad', type: 'number', apiKey: 'cantidad', 
+//       required: true, validationMessage: 'La cantidad no puede estar vacía' 
+//     },
+//     { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', 
+//       required: true, validationMessage: 'Debe seleccionar un insumo',
+//       options: [] 
+//     },
+//     { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//       required: true, validationMessage: 'Debe seleccionar un servicio',
+//       options: [] 
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Sucursal',
+//   panelTitle: 'Agregar Nueva Sucursal',
+//   submitButtonText: 'Registrar Sucursal',
+//   apiUrl: 'http://localhost:8080/api/sucursal',
+//   fields: [          
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+//       minLength: 1, maxLength: 100 
+//     },
+//     { label: 'NIT', id: 'nit', type: 'text', apiKey: 'nit', 
+//       required: true, validationMessage: 'El NIT no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+//       minLength: 1, maxLength: 100 
+//     },
+//     { label: 'Fecha de Creación', id: 'fecha_creacion', type: 'datetime-local', apiKey: 'fecha_creacion', 
+//       required: false 
+//     },
+//     { label: 'Dirección', id: 'direccion', type: 'select', apiKey: 'direccion', 
+//       required: true, validationMessage: 'Debe seleccionar una dirección',
+//       options: [] 
+//     },
+//     { label: 'Empresa', id: 'empresa', type: 'select', apiKey: 'empresa', 
+//       required: true, validationMessage: 'Debe seleccionar una empresa',
+//       options: [] 
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Telefono Persona',
+//   panelTitle: 'Agregar Nueva Telefono Persona',
+//   submitButtonText: 'Registrar Telefono Persona',
+//   apiUrl: 'http://localhost:8080/api/telefono_persona',
+//   fields: [          
+//     { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
+//       required: true, validationMessage: 'El número de teléfono no puede ser nulo' 
+//     },
+//     { label: 'Tipo de Teléfono', id: 'tipoTelefono', type: 'select', apiKey: 'tipoTelefono', 
+//       required: true, validationMessage: 'Debe seleccionar un tipo de teléfono', 
+//       options: [] 
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', 
+//       required: true, validationMessage: 'Debe seleccionar una persona', 
+//       options: [] 
+//     } 
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Telefono Sucursal',
+//   panelTitle: 'Agregar Nueva Telefono Sucursal',
+//   submitButtonText: 'Registrar Telefono Sucursal',
+//   apiUrl: 'http://localhost:8080/api/telefono_sucursal',
+//   fields: [          
+//     { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
+//       required: true, validationMessage: 'El número no puede estar vacío' 
+//     },
+//     { label: 'Sucursal', id: 'sucursal', type: 'select', apiKey: 'sucursal', 
+//       required: true, validationMessage: 'Debe seleccionar una sucursal', 
+//       options: []
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Tipo Email',
+//   panelTitle: 'Agregar Nueva Tipo Email',
+//   submitButtonText: 'Registrar Tipo Email',
+//   apiUrl: 'http://localhost:8080/api/tipo_email',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Tipo Empresa',
+//   panelTitle: 'Agregar Nueva Tipo Empresa',
+//   submitButtonText: 'Registrar Tipo Empresa',
+//   apiUrl: 'http://localhost:8080/api/tipo_empresa',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Tipo Persona',
+//   panelTitle: 'Agregar Nuevo Tipo Persona',
+//   submitButtonText: 'Registrar Tipo Persona',
+//   apiUrl: 'http://localhost:8080/api/tipo_persona',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+//     { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+//     }
+//   ]
+// });
+
 initDynamicPanel({
-  buttonText: '+ Registrar Pais ',
-  panelTitle: 'Agregar Nuevo Pais ',
-  submitButtonText: 'Registrar Pais',
-  apiUrl: 'http://localhost:8080/api/pais',
+  buttonText: '+ Registrar Tipo Persona',
+  panelTitle: 'Agregar Nuevo Tipo Persona',
+  submitButtonText: 'Registrar Tipo Persona',
+  apiUrl: 'http://localhost:8080/api/tipo_telefono',
   fields: [          
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
-    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+    { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+    }
   ]
 });
-
-
-
-
-
-
-
 
 
 
@@ -902,11 +1083,165 @@ initDynamicPanel({
 //   ]
 // });
 
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/pais',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/persona_insumo',
+//   fields: [
+//     { label: 'ID de Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//       options: [
+//         { value: '1', label: 'Servicio 1' }, 
+//         { value: '2', label: 'Servicio 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un servicio'
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', required: true, validationMessage: 'Debe seleccionar una persona' },
+//     { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', required: true, validationMessage: 'Debe seleccionar un insumo' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/region',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío' 
+//     },
+//     { label: 'País', id: 'pais', type: 'select', apiKey: 'pais', 
+//       options: [
+//         { value: '1', label: 'País 1' }, 
+//         { value: '2', label: 'País 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un país'
+//     }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/servicio',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío',
+//       maxLength: 50 
+//     },
+//     { label: 'Requiere Insumo', id: 'requiere_insumo', type: 'checkbox', apiKey: 'requiere_insumo', 
+//       required: true, validationMessage: 'Debe indicar si requiere insumo' 
+//     },
+//     { label: 'Tiempo de Ejecución', id: 'tiempo_ejecucion', type: 'text', apiKey: 'tiempo_ejecucion', 
+//       required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío'
+//     }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/servicio_insumo',
+//   fields: [
+//     { label: 'Cantidad', id: 'cantidad', type: 'number', apiKey: 'cantidad', 
+//       required: true, validationMessage: 'La cantidad no puede estar vacía' 
+//     },
+//     { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', 
+//       required: true, validationMessage: 'Debe seleccionar un insumo',
+//       options: [] // Aquí deberías cargar los insumos disponibles
+//     },
+//     { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//       required: true, validationMessage: 'Debe seleccionar un servicio',
+//       options: [] // Aquí deberías cargar los servicios disponibles
+//     }    
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/sucursal',
+//   fields: [
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+//       required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+//       minLength: 1, maxLength: 100 
+//     },
+//     { label: 'NIT', id: 'nit', type: 'text', apiKey: 'nit', 
+//       required: true, validationMessage: 'El NIT no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+//       minLength: 1, maxLength: 100 
+//     },
+//     { label: 'Fecha de Creación', id: 'fecha_creacion', type: 'datetime-local', apiKey: 'fecha_creacion', 
+//       required: false 
+//     },
+//     { label: 'Dirección', id: 'direccion', type: 'select', apiKey: 'direccion', 
+//       required: true, validationMessage: 'Debe seleccionar una dirección',
+//       options: [] 
+//     },
+//     { label: 'Empresa', id: 'empresa', type: 'select', apiKey: 'empresa', 
+//       required: true, validationMessage: 'Debe seleccionar una empresa',
+//       options: [] 
+//     } 
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/telefono_persona',
+//   fields: [
+//     { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
+//       required: true, validationMessage: 'El número de teléfono no puede ser nulo' 
+//     },
+//     { label: 'Tipo de Teléfono', id: 'tipoTelefono', type: 'select', apiKey: 'tipoTelefono', 
+//       required: true, validationMessage: 'Debe seleccionar un tipo de teléfono', 
+//       options: [] 
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', 
+//       required: true, validationMessage: 'Debe seleccionar una persona', 
+//       options: [] 
+//     }    
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/telefono_sucursal',
+//   fields: [
+//     { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
+//       required: true, validationMessage: 'El número no puede estar vacío' 
+//     },
+//     { label: 'Sucursal', id: 'sucursal', type: 'select', apiKey: 'sucursal', 
+//       required: true, validationMessage: 'Debe seleccionar una sucursal', 
+//       options: [] 
+//     }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/tipo_email',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/tipo_empresa',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/tipo_persona',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+//     { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+//     }
+//   ]
+// });
 
 initDynamicTable({
-  apiUrl: 'http://localhost:8080/api/pais',
+  apiUrl: 'http://localhost:8080/api/tipo_telefono',
   fields: [
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
-    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+    { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+    }
   ]
 });
