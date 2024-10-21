@@ -157,3 +157,21 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS actualizarStockProveedor;
+DELIMITER $$
+CREATE PROCEDURE actualizarStockProveedor(IN insumoId INT, IN cantidad INT)
+BEGIN
+    DECLARE stock_nuevo INT;
+
+    SELECT stock INTO stock_nuevo
+    FROM insumo 
+    WHERE id=insumoId;
+
+    SET stock_nuevo = stock_nuevo + cantidad;
+
+    UPDATE insumo SET stock = stock_nuevo WHERE id=insumoId;
+
+END $$
+
+DELIMITER ;

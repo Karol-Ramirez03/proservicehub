@@ -13,4 +13,5 @@ public interface InsumoServiceI {
     Optional<Insumo> delete(Long id);
     int verificarStock(int insumoId, int cantidadSolicitada);
     void actualizarStock(int insumoId,int cantidad);
+    void actualizarStockProveedor(int insumoId,int cantidad);
 }

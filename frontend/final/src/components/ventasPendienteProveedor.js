@@ -9,10 +9,10 @@ const renderizarTablas = () => {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Fecha de compra</th>
+                <th>Fecha de Venta</th>
                 <th>Estado</th>
-                <th>Detalles</th>
-                <th>Efectuar</th>
+                <th>Acciones</th>
+                <th>Venta</th>
             </tr>
         </thead>
         <tbody class="tbody-info">
@@ -28,45 +28,23 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
     cuerpoData.innerHTML = ""
 
     datos.forEach(async dato => {
-    var fila2=""
-
-    try {
-        const response2 = await fetch(`http://localhost:8080/api/compra/${dato.id}/estado/nombre`, {
-            method: "GET"
-        });
-    
-        if (response2.ok) {
-            const estado = await response2.text();
+        var fila2=""
+        if(dato.estado_compra.id==2){
             const fechaCompra = new Date(dato.fecha_compra).toLocaleDateString('en-CA');
             const fila = document.createElement("tr");
             fila.innerHTML = `
             <td>${dato.id}</td>
             <td >${fechaCompra}</td>
-            <td>${estado}</td>
+            <td>${dato.estado_compra.nombre}</td>
             <td><button class="detalles" id="detalles"  data-id="${dato.id}">Ver detalles</button></td>
-            
+            <td><button class="vender" id="vender"  data-id="${dato.id}">Vender</button></td>
             `;
-            console.log(dato)
-            if(dato.estado_compra.id==2){
-                fila.innerHTML+=`<td><button class="vender" id="vender"  data-id="${dato.id}">Vender</button></td>`
-            }else{
-                fila.innerHTML+=`<td></td>`
-            }
             cuerpoData.appendChild(fila);
             fila2 = document.createElement("table");
             fila2.style.width = "200%"; 
             fila2.classList.add(`detalle-${dato.id}`,"nombres-table")
             cuerpoData.appendChild(fila2)
-
-        } else {
-            console.error(`Error en la solicitud: ${response2.status} - ${response2.statusText}`);
         }
-    
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    
-    
     });
     
     
@@ -163,34 +141,55 @@ const addInfoEventListener = (shadowRoot) => {
                     console.error('Error:', error);
                 }
 
-                let suficiente = true;
-                const fetchPromises = insumos.map(async insumo => {
+                insumos.map(async insumo => {
                     console.log(insumo);
                     try {
-                        const response = await fetch("http://localhost:8080/api/insumo/validar-stock", {
+                        const response = await fetch("http://localhost:8080/api/insumo/actualizar-stock-proveedor", {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify(insumo)
                         });
-
+        
                         if (response.ok) {
-                            const compras = await response.json();
-                            console.log(compras);
-                            if (compras == -1 || compras == 0) {
-                                suficiente = false; // Cambiar el valor de suficiente
+                            console.log("Bien")
+                            // Verificamos si hay contenido en la respuesta
+                            if (response.status === 204) { // 204 No Content
+                                console.log('Stock actualizado correctamente, sin contenido en la respuesta.');
+                            } else {
+                                const compras = await response.json(); // Aquí se puede agregar el manejo de respuesta si existe
+                                console.log('Respuesta recibida:', compras);
                             }
+                        } else {
+                            console.error('Error en la respuesta:', response.status);
                         }
                     } catch (error) {
                         console.error('Error:', error);
                     }
                 });
+        
+                try {
+                    const response = await fetch(`http://localhost:8080/api/compra/actualizarestadocompra/${idCompra}`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify()
+                    });
+        
+                    if (response.ok) {
+                        
+                        console.log("Estado actualizado")
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
 
-                // Esperar a que todas las promesas se resuelvan
-                Promise.all(fetchPromises).then(() => {
-                    actualizarStock(suficiente,insumos,idCompra);
-                });
+                // // Esperar a que todas las promesas se resuelvan
+                // Promise.all(fetchPromises).then(() => {
+                //     actualizarStock(suficiente,insumos,idCompra);
+                // });
                 
             }
 
@@ -198,67 +197,13 @@ const addInfoEventListener = (shadowRoot) => {
     });
 };
 
-const actualizarStock=async (suficiente,insumos,idCompra)=>{
-    if(suficiente){
-        console.log("Si se puede")
-        console.log(insumos)
-        insumos.map(async insumo => {
-            console.log(insumo);
-            try {
-                const response = await fetch("http://localhost:8080/api/insumo/actualizar-stock", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(insumo)
-                });
 
-                if (response.ok) {
-                    console.log("Bien")
-                    // Verificamos si hay contenido en la respuesta
-                    if (response.status === 204) { // 204 No Content
-                        console.log('Stock actualizado correctamente, sin contenido en la respuesta.');
-                    } else {
-                        const compras = await response.json(); // Aquí se puede agregar el manejo de respuesta si existe
-                        console.log('Respuesta recibida:', compras);
-                    }
-                } else {
-                    console.error('Error en la respuesta:', response.status);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        });
-
-        try {
-            const response = await fetch(`http://localhost:8080/api/compra/actualizarestadocompra/${idCompra}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify()
-            });
-
-            if (response.ok) {
-                
-                console.log("Estado actualizado")
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-
-    }else{
-        alert("Insumo no encontrado o insuficiente")
-    }
-}
-
-
-export const dataComprasAux = async (contenedorPrincipal,clienteId)  => {
+export const dataVentasPendiente = async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/compra/tipocompra/2", {
+        const response = await fetch("http://localhost:8080/api/compra/persona/1005539417", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

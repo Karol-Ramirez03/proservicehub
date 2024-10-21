@@ -1,6 +1,5 @@
 import { dataProveedorInsumo } from "./proveedoresInsumo.js";
 import { initProveedorPanel } from "./registrarProveedor.js";
-import { dataInsumoRiesgo } from "./insumosRiesgo.js";
 
 
 const botonProInsumo = document.querySelector(".boton-proveedor-insumo")
