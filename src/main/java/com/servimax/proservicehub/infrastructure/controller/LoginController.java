@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
-import com.servimax.proservicehub.application.service.RolServiceI;
 import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -30,9 +29,6 @@ public class LoginController {
 
     @Autowired
     private LoginServiceI loginServiceI;
-
-    @Autowired
-    private RolServiceI rolServiceI;
 
     @GetMapping
     public List<Login> list(){

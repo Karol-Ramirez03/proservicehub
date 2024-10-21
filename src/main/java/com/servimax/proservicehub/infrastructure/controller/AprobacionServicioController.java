@@ -141,7 +141,6 @@ public class AprobacionServicioController {
                 aprobacionDTO.getHallazgo(), aprobacionDTO.getSolucion());
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            e.printStackTrace(); // Imprimir el stack trace para depurar
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
