@@ -333,22 +333,133 @@ import { initDynamicTable } from "./prueba";
 //   ]
 // });
 
+// initDynamicPanel({
+//   buttonText: '+ Registrar Estado Orden  ',
+//   panelTitle: 'Agregar Nuevo Estado Orden ',
+//   submitButtonText: 'Registrar Estado Orden ',
+//   apiUrl: 'http://localhost:8080/api/estado_orden',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Estado Orden Servicio ',
+//   panelTitle: 'Agregar Nuevo Estado Orden Servicio ',
+//   submitButtonText: 'Registrar Estado Orden Servicio',
+//   apiUrl: 'http://localhost:8080/api/estado_orden_servicio',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Login ',
+//   panelTitle: 'Agregar Nuevo Login ',
+//   submitButtonText: 'Registrar Login',
+//   apiUrl: 'http://localhost:8080/api/login',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Usuario', id: 'usuario', type: 'text', apiKey: 'usuario', required: true, unique: true, validationMessage: 'El usuario no puede estar vacío y debe ser único' },
+//     { label: 'Contraseña', id: 'contraseña', type: 'password', apiKey: 'contraseña', required: true, unique: true, validationMessage: 'La contraseña no puede estar vacía y debe ser única' },
+//     { label: 'Rol', id: 'rol', type: 'select', apiKey: 'rol', 
+//   options: [
+//     { value: '2', label: 'Cliente' }, 
+//     { value: '9', label: 'Profesional' },
+//     { value: '11', label: 'Proveedor' } 
+//   ],
+//   required: true, validationMessage: 'Debe seleccionar un rol'
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', 
+//   options: [
+//     { value: '1', label: 'Persona 1' }, 
+//     { value: '2', label: 'Persona 2' }  
+//   ],
+//   required: true, validationMessage: 'Debe seleccionar una persona'
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Orden Servicio ',
+//   panelTitle: 'Agregar Nuevo Orden Servicio ',
+//   submitButtonText: 'Registrar Orden Servicio',
+//   apiUrl: 'http://localhost:8080/api/orden_servicio',
+//   fields: [          
+//     { label: 'Número de Orden', id: 'numero_orden', type: 'number', apiKey: 'numero_orden', required: true, validationMessage: 'El número de orden no puede estar vacío' },
+//     { label: 'Fecha de Orden', id: 'fecha_orden', type: 'date', apiKey: 'fecha_orden', required: true, validationMessage: 'La fecha de orden no puede estar vacía' },
+//     { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//       options: [
+//         { value: '1', label: 'Cliente 1' }, 
+//         { value: '2', label: 'Cliente 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un cliente'
+//     },
+//     { label: 'Empleado', id: 'persona', type: 'select', apiKey: 'persona', 
+//       options: [
+//         { value: '1', label: 'Empleado 1' }, 
+//         { value: '2', label: 'Empleado 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un empleado'
+//     },
+//     { label: 'Estado de la Orden', id: 'estado_orden_servicio', type: 'select', apiKey: 'estado_orden_servicio', 
+//       options: [
+//         { value: 'ejecutado', label: 'Ejecutado' },
+//         { value: 'pendiente', label: 'Pendiente' },
+//         { value: 'cancelado', label: 'Cancelado' },
+//         { value: 'rechazado', label: 'Rechazado' }
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un estado de la orden'
+//     }
+//   ]
+// });
+
+// initDynamicPanel({
+//   buttonText: '+ Registrar Orden Servicio ',
+//   panelTitle: 'Agregar Nuevo Orden Servicio ',
+//   submitButtonText: 'Registrar Orden Servicio',
+//   apiUrl: 'http://localhost:8080/api/orden_trabajo',
+//   fields: [          
+//     { label: 'Número de Orden', id: 'numero_orden', type: 'number', apiKey: 'numero_orden', required: true, validationMessage: 'El número de orden no puede estar vacío' },
+//     { label: 'Fecha de Orden', id: 'fecha_orden', type: 'date', apiKey: 'fecha_orden', required: true, validationMessage: 'La fecha de orden no puede estar vacía' },
+//     { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//       options: [
+//         { value: '1', label: 'Cliente 1' }, 
+//         { value: '2', label: 'Cliente 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un cliente'
+//     },
+//     { label: 'Empleado', id: 'persona', type: 'select', apiKey: 'persona', 
+//       options: [
+//         { value: '1', label: 'Empleado 1' }, 
+//         { value: '2', label: 'Empleado 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un empleado'
+//     },
+//     { label: 'Estado de la Orden', id: 'estado_orden_servicio', type: 'select', apiKey: 'estado_orden_servicio', 
+//       options: [
+//         { value: 'ejecutado', label: 'Ejecutado' },
+//         { value: 'pendiente', label: 'Pendiente' }, 
+//         { value: 'cancelado', label: 'Cancelado' },
+//         { value: 'rechazado', label: 'Rechazado' }
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un estado de la orden'
+//     }
+//   ]
+// });
+
 initDynamicPanel({
-  buttonText: '+ Registrar Estado Orden  ',
-  panelTitle: 'Agregar Nuevo Estado Orden ',
-  submitButtonText: 'Registrar Estado Orden ',
-  apiUrl: 'http://localhost:8080/api/estado_orden',
+  buttonText: '+ Registrar Pais ',
+  panelTitle: 'Agregar Nuevo Pais ',
+  submitButtonText: 'Registrar Pais',
+  apiUrl: 'http://localhost:8080/api/pais',
   fields: [          
     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
   ]
 });
-
-
-
-
-
-
 
 
 
@@ -689,8 +800,111 @@ initDynamicPanel({
 //   ]
 // });
 
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/estado_orden',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/estado_orden_servicio',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/login',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Usuario', id: 'usuario', type: 'text', apiKey: 'usuario', required: true, unique: true, validationMessage: 'El usuario no puede estar vacío y debe ser único' },
+//     { label: 'Contraseña', id: 'contraseña', type: 'password', apiKey: 'contraseña', required: true, unique: true, validationMessage: 'La contraseña no puede estar vacía y debe ser única' },
+//     { label: 'Rol', id: 'rol', type: 'select', apiKey: 'rol', 
+//   options: [
+//     { value: '2', label: 'Cliente' }, 
+//     { value: '9', label: 'Profesional' },
+//     { value: '11', label: 'Proveedor' } 
+//   ],
+//   required: true, validationMessage: 'Debe seleccionar un rol'
+//     },
+//     { label: 'Persona', id: 'personas', type: 'select', apiKey: 'personas', 
+//   options: [
+//     { value: '1', label: 'Persona 1' }, 
+//     { value: '2', label: 'Persona 2' }  
+//   ],
+//   required: true, validationMessage: 'Debe seleccionar una persona'
+//     }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/orden_servicio',
+//   fields: [
+//     { label: 'Número de Orden', id: 'numero_orden', type: 'number', apiKey: 'numero_orden', required: true, validationMessage: 'El número de orden no puede estar vacío' },
+//     { label: 'Fecha de Orden', id: 'fecha_orden', type: 'date', apiKey: 'fecha_orden', required: true, validationMessage: 'La fecha de orden no puede estar vacía' },
+//     { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//       options: [
+//         { value: '1', label: 'Cliente 1' }, 
+//         { value: '2', label: 'Cliente 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un cliente'
+//     },
+//     { label: 'Empleado', id: 'persona', type: 'select', apiKey: 'persona', 
+//       options: [
+//         { value: '1', label: 'Empleado 1' }, 
+//         { value: '2', label: 'Empleado 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un empleado'
+//     },
+//     { label: 'Estado de la Orden', id: 'estado_orden_servicio', type: 'select', apiKey: 'estado_orden_servicio', 
+//       options: [
+//         { value: 'ejecutado', label: 'Ejecutado' },
+//         { value: 'pendiente', label: 'Pendiente' },
+//         { value: 'cancelado', label: 'Cancelado' },
+//         { value: 'rechazado', label: 'Rechazado' }
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un estado de la orden'
+//     }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/orden_trabajo',
+//   fields: [
+//     { label: 'Número de Orden', id: 'numero_orden', type: 'number', apiKey: 'numero_orden', required: true, validationMessage: 'El número de orden no puede estar vacío' },
+//     { label: 'Fecha de Orden', id: 'fecha_orden', type: 'date', apiKey: 'fecha_orden', required: true, validationMessage: 'La fecha de orden no puede estar vacía' },
+//     { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//       options: [
+//         { value: '1', label: 'Cliente 1' }, 
+//         { value: '2', label: 'Cliente 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un cliente'
+//     },
+//     { label: 'Empleado', id: 'persona', type: 'select', apiKey: 'persona', 
+//       options: [
+//         { value: '1', label: 'Empleado 1' }, 
+//         { value: '2', label: 'Empleado 2' }  
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un empleado'
+//     },
+//     { label: 'Estado de la Orden', id: 'estado_orden_servicio', type: 'select', apiKey: 'estado_orden_servicio', 
+//       options: [
+//         { value: 'ejecutado', label: 'Ejecutado' },
+//         { value: 'pendiente', label: 'Pendiente' },
+//         { value: 'cancelado', label: 'Cancelado' },
+//         { value: 'rechazado', label: 'Rechazado' }
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un estado de la orden'
+//     }
+//   ]
+// });
+
+
 initDynamicTable({
-  apiUrl: 'http://localhost:8080/api/estado_orden',
+  apiUrl: 'http://localhost:8080/api/pais',
   fields: [
     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
