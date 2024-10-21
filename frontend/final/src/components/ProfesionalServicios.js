@@ -44,20 +44,20 @@ class  PagInicioProfesionalServicios extends LitElement {
 
       botonServicios.addEventListener("click", (e) => {
           e.preventDefault()
-          let idEmpleado = 12;
+          let idEmpleado = 10666;
           dataserviciosAsignado(contenedorPrincipal,idEmpleado)
 
         });
 
       botonTrabajos.addEventListener("click", (e) => {
         e.preventDefault()
-        let idEmpleado = 12;
+        let idEmpleado = 10666;
         dataOrdenesTrabajo(contenedorPrincipal,idEmpleado)
 
       });
       botonAprobado.addEventListener("click", (e) => {
           e.preventDefault()
-          let idEmpleado = 12;
+          let idEmpleado = 10666;
           dataAprobado(contenedorPrincipal,idEmpleado)
         });
 

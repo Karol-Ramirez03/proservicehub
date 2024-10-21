@@ -57,7 +57,7 @@ export const dataAprobado = async (contenedorPrincipal,idEmpleado)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
 
     try {
-        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/aprobacionPer/1/${idEmpleado}`, {
+        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/aprobacionPer/3/${idEmpleado}`, {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

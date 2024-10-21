@@ -1,5 +1,3 @@
-INSERT INTO pais(nombre) VALUES ('Argentina');
-
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS actualizar_estado_servicio$$
@@ -15,11 +13,16 @@ BEGIN
     IF NEW.id_empleado IS NOT NULL THEN
             SET NEW.estado_orden_servicio_id = 3;
             SET id_empleado_asignado = NEW.id_empleado;
+
             
             SELECT numero_orden_trabajo + 1 INTO numeroSiguiente
-            FROM orden_Trabajo
+            FROM orden_trabajo
             ORDER BY numero_orden_trabajo DESC
             LIMIT 1;
+
+            IF numeroSiguiente IS NULL THEN
+                SET numeroSiguiente = 1;
+            END IF;
 
             SELECT id_servicio INTO id_servicio_Asignado
             FROM detalle_orden_servicio
@@ -33,7 +36,7 @@ BEGIN
 
 
             INSERT INTO detalle_orden_trabajo (fecha, id_orden_trabajo, id_estado, id_servicio)
-            VALUES(NULL, nueva_order_id, 1,id_servicio_Asignado);
+            VALUES(NULL, nueva_order_id, 3,id_servicio_Asignado);
             END IF;
 END$$
 DELIMITER ;
@@ -64,7 +67,7 @@ BEGIN
     WHERE numero_orden = id_orden_servicio_aprob;
 
     INSERT INTO aprovacion_servicio(estado_aprobacion_id, id_cliente, id_orden_trabajo,id_servicio,hallazgo,solucion)
-    VALUES (1,id_cliente_aprob,id_trabajo,id_servicio_aprob,hallazgoap,solucionap);
+    VALUES (4,id_cliente_aprob,id_trabajo,id_servicio_aprob,hallazgoap,solucionap);
 
 
 END$$
