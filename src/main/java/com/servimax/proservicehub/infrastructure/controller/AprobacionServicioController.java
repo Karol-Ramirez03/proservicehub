@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
 import com.servimax.proservicehub.application.service.PersonasServiceI;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
-import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 

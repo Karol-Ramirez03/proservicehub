@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.CompraServiceI;
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.TipoCompra;
 
 @Service
 public class CompraImplemetation implements CompraServiceI{
@@ -57,7 +59,7 @@ public class CompraImplemetation implements CompraServiceI{
 
     @Override
     public List<Compra> findByPersonasId(Personas personasId) {
-       return compraRepositoryI.findByPersonaId(personasId);
+        return compraRepositoryI.findByPersonaId(personasId);
     }
 
     public String obtenerNombreEstado(Long estadoId) {
@@ -67,5 +69,26 @@ public class CompraImplemetation implements CompraServiceI{
         // Obtener el nombre del estado
         return compra.getEstado_compra().getNombre();
     }
+
+    @Override
+    public void addComprayDetalle(Long idCliente,Long idservicio,int cantidad) {
+        compraRepositoryI.addComprayDetalle(idCliente,idservicio,cantidad);
+    }
+
+    @Override
+    public List<Compra> findByTipoCompraId(TipoCompra tipoCompraId) {
+        return compraRepositoryI.findByTipoCompraId(tipoCompraId);
+    }
+
+    // @Override
+    // public String ejecutar_compra(Long compraId){
+    //     try{
+    //         compraRepositoryI.ejecutar_compra(compraId);
+    //         return "Compra ejecutada con éxito.";
+
+    //     }catch (DataAccessException e){
+    //         return "Error al realizar la compra: " + e.getMessage();
+    //     }
+    // }
 
 }

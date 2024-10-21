@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.InsumoServiceI;
+import com.servimax.proservicehub.domain.dto.ValidarStockRequest;
 import com.servimax.proservicehub.domain.entity.Insumo;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -87,5 +88,10 @@ public class InsumoController {
             return ResponseEntity.ok(InsumoId.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/validar-stock")
+    public int validarStock(@RequestBody ValidarStockRequest request) {
+        return InsumoServiceI.verificarStock(request.getInsumoId(), request.getCantidadSolicitada());
     }
 }

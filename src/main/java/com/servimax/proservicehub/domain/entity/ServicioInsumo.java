@@ -1,11 +1,5 @@
 package com.servimax.proservicehub.domain.entity;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.servimax.proservicehub.infrastructure.repository.insumoRepo.InsumoRepository;
-import com.servimax.proservicehub.infrastructure.repository.servicio.ServicioRepositoryI;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

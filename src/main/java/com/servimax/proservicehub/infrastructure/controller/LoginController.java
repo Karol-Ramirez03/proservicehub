@@ -21,7 +21,6 @@ import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

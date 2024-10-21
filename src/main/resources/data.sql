@@ -38,22 +38,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-
-DROP PROCEDURE IF EXISTS addOrdenServicio;
-DELIMITER $$
-CREATE PROCEDURE addOrdenServicio(IN idCliente INT,IN idServicio INT)
-BEGIN
-	DECLARE nueva_orden_id INT;
-    
-    INSERT INTO orden_servicio(estado_orden_servicio_id,fecha_orden,id_empleado,id_cliente) VALUES(2,NOW(),null,idCliente);
-    
-    SET nueva_orden_id = LAST_INSERT_ID();
-    
-    INSERT INTO detalle_orden_servicio(valor_servicio,id_orden_servicio,id_servicio) VALUES(0,nueva_orden_id,idServicio);
-    
-END $$
-DELIMITER ;
-
 DELIMITER$$
 CREATE PRCOCEDURE insert_aprobacion_servicio(
     IN id_trabajo INT,
@@ -84,3 +68,117 @@ BEGIN
 
 END$$
 DELIMITER;
+
+
+DROP PROCEDURE IF EXISTS addOrdenServicio;
+DELIMITER $$
+CREATE PROCEDURE addOrdenServicio(IN idCliente INT,IN idServicio INT)
+BEGIN
+	DECLARE nueva_orden_id INT;
+    
+    INSERT INTO orden_servicio(estado_orden_servicio_id,fecha_orden,id_empleado,id_cliente) VALUES(2,NOW(),null,idCliente);
+    
+    SET nueva_orden_id = LAST_INSERT_ID();
+    
+    INSERT INTO detalle_orden_servicio(valor_servicio,id_orden_servicio,id_servicio) VALUES(0,nueva_orden_id,idServicio);
+    
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS addComprayDetalle;
+DELIMITER $$
+CREATE PROCEDURE addComprayDetalle(IN idCliente INT,IN idProducto INT,IN cantidad INT,IN tipo_compra INT)
+BEGIN
+	DECLARE id_compra INT;
+    DECLARE precio_total DOUBLE;
+    DECLARE precio_u DOUBLE;
+
+    SELECT precio_unitario INTO precio_u
+    FROM insumo
+    WHERE id=idProducto;
+
+    SET precio_total= precio_u*cantidad;
+
+    INSERT INTO compra(fecha_compra,total,estado_compra_id,cliente,tipo_compra_id ) VALUES(NOW(),precio_total,2,idCliente,tipo_compra);
+    
+    SET id_compra = LAST_INSERT_ID();
+    
+    INSERT INTO detalle_compra(cantidad,precio_unitario,compra_id,insumo_id) VALUES(cantidad,precio_u,id_compra,idProducto);
+    
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS validar_stock;
+DELIMITER $$
+CREATE PROCEDURE validar_stock(IN insumoId INT, IN cantidad INT, OUT estado INT)
+BEGIN
+    DECLARE stock_disponible INT;
+
+    SELECT stock INTO stock_disponible
+    FROM insumo
+    WHERE id = insumoId;
+
+    IF stock_disponible IS NULL THEN
+        SET estado = -1; 
+    ELSEIF stock_disponible < cantidad THEN
+        SET estado = 0;
+    ELSE
+        SET estado = 1;
+    END IF;
+END $$
+
+DELIMITER ;
+
+-- DROP PROCEDURE IF EXISTS ejecutar_compra;
+-- DELIMITER $$
+
+-- CREATE PROCEDURE ejecutar_compra(IN compraId INT)
+-- BEGIN
+--     DECLARE stock_insuficiente BOOLEAN DEFAULT FALSE;
+--     DECLARE insumoId INT;
+--     DECLARE cantidadA INT;
+
+--     DECLARE cur CURSOR FOR
+--     SELECT insumo_id INTO insumoId, cantidad INTO cantidadA FROM detalle_compra WHERE compra_id = compraId;
+
+--     DECLARE CONTINUE HANDLER FOR NOT FOUND SET stock_insuficiente = TRUE;
+
+--     START TRANSACTION;
+
+--     OPEN cur;
+
+--     read_loop: LOOP
+--         FETCH cur INTO insumoId, cantidadA;
+
+--         IF stock_insuficiente THEN
+--             LEAVE read_loop;
+--         END IF;
+
+--         IF (SELECT stock FROM insumo WHERE id = insumoId) < cantidadA THEN 
+--             SET stock_insuficiente = TRUE;
+--             LEAVE read_loop; 
+--         END IF;
+
+--         UPDATE insumo SET stock = stock - cantidadA WHERE id = insumoId;
+--     END LOOP;
+
+--     CLOSE cur;
+
+--     IF stock_insuficiente THEN
+
+--         ROLLBACK;
+--         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Stock insuficiente para completar la compra.';
+--     ELSE
+
+--         UPDATE compra SET estado = 1 WHERE id = compraId;
+--         COMMIT;
+--     END IF;
+-- END $$
+
+-- DELIMITER ;
+
+
+
+
+
+

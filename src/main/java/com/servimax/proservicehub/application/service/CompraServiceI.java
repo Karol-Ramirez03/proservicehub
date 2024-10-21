@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.TipoCompra;
 public interface CompraServiceI {
     List<Compra> findAll();
     Optional<Compra> findById(Long id);
@@ -13,4 +14,7 @@ public interface CompraServiceI {
     Optional<Compra> delete(Long id);
     List<Compra> findByPersonasId(Personas personasId);
     String obtenerNombreEstado(Long id);
+    void addComprayDetalle(Long idCliente,Long idservicio,int cantidad);
+    List<Compra> findByTipoCompraId(TipoCompra tipoCompraId);
+    // String ejecutar_compra(Long compraId);
 }

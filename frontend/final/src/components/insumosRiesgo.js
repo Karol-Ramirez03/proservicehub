@@ -1,16 +1,20 @@
 const rnderizarInicio = () => {
 
 }
+
 const renderizarTablas = () => {
     return /* html */`
+    <link rel="stylesheet" href="src/cliente.css"/>
     <table class="nombres-table">
         <thead>
             <tr>
-                <th>id</th>
-                <th>nombre</th>
-                <th>Codigo Interno</th>
-                <th>stock</th>
-                <th>Comprar</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Codigo interno</th>
+                <th>Stock</th>
+                <th>Stock minimo</th>
+                <th>Proveedor</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody class="tbody-info">
@@ -19,34 +23,42 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
-const cuerpoData = document.querySelector(".tbody-info")
+const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
+    const cuerpoData = document.querySelector(".tbody-info")
 
-console.log("funciona")
-cuerpoData.innerHTML = ""
-var fila=""
-var fila2=""
-datos.forEach(dato => {
-    fila = document.createElement("tr");
-    fila.innerHTML= `
-    <td>${dato.id}</td>
-    <td>${dato.nombre}</td>
-    <td>${dato.precio_unitario}</td>
-    <td>${dato.stock}</td>
-    <td><button class="comprar" id="${dato.id}">Comprar</button></td>
+    console.log("funciona")
+    cuerpoData.innerHTML = ""
+    console.log(datos)
+    datos.forEach(async dato => {
+        if (dato.stock<dato.stock_minimo){
+            console.log(dato)
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+            <td>${dato.id}</td>
+            <td>${dato.nombre}</td>
+            <td>${dato.codigo_interno}</td>
+            <td>${dato.stock}</td>
+            <td>${dato.stock_minimo}</td>
+            <td>Proveedor</td>
+            <td><button class="comprar" id="${dato.id}" >Generar pedido</button></td>
+            `;
+            cuerpoData.appendChild(fila);
+            const fila2 = document.createElement("table");
+            fila2.style.width = "260%"; 
+            fila2.classList.add(`comprar-${dato.id}`,"nombres-table")
+            cuerpoData.appendChild(fila2)
+            
+        }
+            
     
-    `;
-    cuerpoData.appendChild(fila)
-    fila2 = document.createElement("tr");
-    fila2.className=`comprar-${dato.id}`
-    cuerpoData.appendChild(fila2)
-});
-    // Después de que se hayan agregado todas las filas, agrega el EventListener
-    agregarTrCompra(shadowRoot,datos);
+    });
+
+    _addEventInsumo(shadowRoot,datos)
+
 }
 
-// Función para agregar EventListeners a los botones
-const agregarTrCompra = (shadowRoot,datos) => {
+
+const _addEventInsumo = (shadowRoot,datos) => {
     const botonesComprar = document.querySelectorAll(".comprar");
     
     botonesComprar.forEach(boton => {
@@ -66,6 +78,7 @@ const agregarTrCompra = (shadowRoot,datos) => {
             </td>
             <td><button class="cancelar" id="${idCompra}">Cancelar</button></td>
             <td><button class="orden" id="${idCompra}">Ordenar</button></td>
+            <td></td>
             
             `
             agregarEventListener(shadowRoot,datos)
@@ -94,7 +107,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
             const form=shadowRoot.querySelector(`.form-${idCompra}`)
             const datos = Object.fromEntries(new FormData(form).entries());
             const producto = JSON.parse(JSON.stringify(datos));
-
+            
             const {cantidad}=producto
             const idInsumo =datos2[idCompra-1]["id"]
 
@@ -102,7 +115,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
                 "idCliente":1005539417,
                 "idProducto":idInsumo,
                 "cantidad":cantidad,
-                "tipo_compra":2
+                "tipo_compra":1
             }
             try {
                 const response = await fetch("http://localhost:8080/api/compra/agregar", {
@@ -123,35 +136,29 @@ const agregarEventListener=(shadowRoot,datos2)=>{
         });
     });
 });
-
 }
 
-
-
-export const dataInsumos = async (contenedorPrincipal)  => {
-    contenedorPrincipal.innerHTML =``
+export const dataInsumoRiesgo = async (contenedorPrincipal,clienteId)  => {
+    contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/insumo", {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const insumos = await response.json();
-            renderizarDatos(insumos,shadowRoot);
+        const response = await fetch(`http://localhost:8080/api/insumo`, {
+            method: "GET"
+        });
+    
+        if (response.ok) {
+            const usuarios = await response.json();
+            renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+
+
+        } else {
+            console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
         }
-        
+    
     } catch (error) {
         console.error('Error:', error);
     }
-}
-
-
-
-const comprar = (dato)=>{
-    
     
 }
+

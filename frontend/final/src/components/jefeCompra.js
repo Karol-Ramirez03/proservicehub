@@ -1,20 +1,19 @@
 import { dataProveedorInsumo } from "./proveedoresInsumo.js";
 import { initProveedorPanel } from "./registrarProveedor.js";
+import { dataInsumoRiesgo } from "./insumosRiesgo.js";
 
 
-const botonInsumo = document.querySelector(".boton-proveedor-insumo")
+const botonProInsumo = document.querySelector(".boton-proveedor-insumo")
 const contenedor = document.querySelector(".table-container")
-const botonCompra = document.querySelector(".boton-proveedor")
-const divApp=document.querySelector("#app")
+const botonInsumoRiesgo= document.querySelector(".boton-insumo-riesgo")
 
 initProveedorPanel();
 
-botonInsumo.addEventListener("click", (e) => {
+botonProInsumo.addEventListener("click", (e) => {
     dataProveedorInsumo(contenedor)
 });
 
-// botonCompra.addEventListener("click", (e) => {
-//     divApp.innerHTML=""
-//     dataProveedor(contenedor,clienteId)
-// });
+botonInsumoRiesgo.addEventListener("click", (e) => {
+    dataInsumoRiesgo(contenedor)
+});
 
