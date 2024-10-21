@@ -74,4 +74,15 @@ public class RolController {
         return ResponseEntity.notFound().build();
     }
 
+
+    @GetMapping("/verificarPermiso")
+    public String verificarPermiso() {
+        boolean tienePermiso = rolServiceI.validarPermiso("Admin", "READ_ALL_PRODUCTS");
+        
+        if (tienePermiso) {
+            return "El rol tiene permiso para leer todos los productos.";
+        } else {
+            return "El rol no tiene permiso.";
+        }
+    }
 }

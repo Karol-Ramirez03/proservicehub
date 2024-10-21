@@ -52,4 +52,15 @@ public class RolImplementation implements RolServiceI{
         return ORol;
     }
 
+    public boolean validarPermiso(String nombreRol, String nombrePermiso) {
+        Optional<Rol> rolOptional = rolRepositoryI.findByNombre(nombreRol);
+
+        if (rolOptional.isPresent()) {
+            Rol rol = rolOptional.get();
+            // Verifica si el rol tiene el permiso especificado
+            return rol.getPermisos().stream().anyMatch(p -> p.getNombre().equals(nombrePermiso));
+        }
+        return false;
+    }
+
 }

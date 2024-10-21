@@ -6,9 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,6 +30,14 @@ public class Rol {
     @JsonIgnore
     @OneToMany(mappedBy = "rol")
     private List<Login> login;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "rol_permiso", 
+        joinColumns = @JoinColumn(name = "rol_id"),
+        inverseJoinColumns = @JoinColumn(name = "permiso_id")
+    )
+    private List<Permiso> permisos;
 
     public Rol() {
     }
@@ -64,6 +76,12 @@ public class Rol {
         this.login = login;
     }
 
-    
+    public List<Permiso> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
+    }
 
 }
