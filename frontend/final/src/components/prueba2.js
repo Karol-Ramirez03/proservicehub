@@ -14,7 +14,6 @@ import { initDynamicTable } from "./prueba";
 //         { label: 'Stock Mínimo', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
 //         { label: 'Stock Máximo', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
 //     ]
-////falta servicioinsumo-personainsumo-detallecompras
 // });
 
 // initDynamicPanel({
@@ -64,7 +63,6 @@ import { initDynamicTable } from "./prueba";
 //               ],
 //               required: true, validationMessage: 'Debe seleccionar un tipo de persona'
 //             }
-
 //     ]
 // });
 
@@ -99,14 +97,11 @@ import { initDynamicTable } from "./prueba";
 //         },
 //         { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
 //           options: [
-            
 //             { value: 'persona1', label: 'Persona 1' },
 //             { value: 'persona2', label: 'Persona 2' }
 //           ],
 //           required: true, validationMessage: 'Debe seleccionar un cliente'
 //         }
-        
-        
 //     ]
 // });
 
@@ -120,14 +115,12 @@ import { initDynamicTable } from "./prueba";
 //             { label: 'Precio Unitario', id: 'precio_unitario', type: 'number', apiKey: 'precio_unitario', required: true, validationMessage: 'El precio unitario no puede estar vacío' },
 //             { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', 
 //                 options: [ 
-//                   // Aquí se agregarían las opciones de insumos disponibbles o se pueden hacer dinamicas
 //                   { value: 'insumo1', label: 'Insumo 1' },
 //                   { value: 'insumo2', label: 'Insumo 2' }
 //                 ]
 //               },
 //               { label: 'Compra', id: 'compra', type: 'select', apiKey: 'compra', 
 //                 options: [
-//                   // Opciones de compra pero no se como mostrar la op
 //                   { value: 'compra1', label: 'Compra 1' },
 //                   { value: 'compra2', label: 'Compra 2' }
 //                 ]
@@ -159,7 +152,6 @@ import { initDynamicTable } from "./prueba";
 //             ],
 //             required: true, validationMessage: 'Debe seleccionar un servicio'
 //           }
-          
 //         ]
 // });
 
@@ -188,17 +180,15 @@ import { initDynamicTable } from "./prueba";
 //             ],
 //             required: true, validationMessage: 'Debe seleccionar un estado de orden'
 //           },
-//           { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
-//             options: [
-//               { value: 'reparacion electrica', label: 'Reparacion electrica' },
-//               { value: 'estudio de consumo', label: 'Estudio de consumo' },
-//               { value: 'pancarta', label: 'Pancarta' },
-//               { value: 'cambio transformador', label: 'Cambio transformador' }
-//             ],
-//             required: true, validationMessage: 'Debe seleccionar un servicio'
-//           }
-          
-
+        //   { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+        //     options: [
+        //       { value: 'reparacion electrica', label: 'Reparacion electrica' },
+        //       { value: 'estudio de consumo', label: 'Estudio de consumo' },
+        //       { value: 'pancarta', label: 'Pancarta' },
+        //       { value: 'cambio transformador', label: 'Cambio transformador' }
+        //     ],
+        //     required: true, validationMessage: 'Debe seleccionar un servicio'
+        //   }
 //         ]
 // });
 
@@ -213,7 +203,6 @@ import { initDynamicTable } from "./prueba";
 //             { label: 'Descripción', id: 'descripcion', type: 'text', apiKey: 'descripcion', validationMessage: 'Este campo es opcional' },
 //             { label: 'Barrio', id: 'barrio', type: 'text', apiKey: 'barrio', validationMessage: 'Este campo es opcional' },
 //             { label: 'Ciudad', id: 'ciudad', type: 'select', apiKey: 'ciudad', validationMessage: 'Este campo es opcional' }
-
 //         ]
 // });
 
@@ -233,7 +222,6 @@ import { initDynamicTable } from "./prueba";
 //               { value: 'educativo', label: 'Educativo' }
 //             ]
 //           }
-// ///el tema de q muestre los selects
 //         ]
 // });
 
@@ -254,16 +242,107 @@ import { initDynamicTable } from "./prueba";
 //             ],
 //             required: true, validationMessage: 'El tipo de empresa no puede estar vacío'
 //           }
-     
 //         ]
 // });
 
+// initDynamicPanel({
+//         buttonText: '+ Registrar Aprovacion Servicio  ',
+//         panelTitle: 'Agregar Nuevo Aprovacion Servicio ',
+//         submitButtonText: 'Registrar Aprovacion Servicio ',
+//         apiUrl: 'http://localhost:8080/api/aprovacion_servicio',
+//         fields: [          
+//             { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//             { label: 'Orden de Trabajo', id: 'orden_trabajo', type: 'select', apiKey: 'orden_trabajo' }, 
+//             { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//               options: [
+//                 { value: 'cliente1', label: 'Cliente 1' },
+//                 { value: 'cliente2', label: 'Cliente 2' }
+//               ],
+//               required: true, validationMessage: 'Debe seleccionar un cliente'
+//             },
+//             { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//                 options: [
+//                   { value: 'reparacion electrica', label: 'Reparacion electrica' },
+//                   { value: 'estudio de consumo', label: 'Estudio de consumo' },
+//                   { value: 'pancarta', label: 'Pancarta' },
+//                   { value: 'cambio transformador', label: 'Cambio transformador' }
+//                 ],
+//                 required: true, validationMessage: 'Debe seleccionar un servicio'
+//               },
+//             { label: 'Hallazgo', id: 'hallazgo', type: 'text', apiKey: 'hallazgo', required: false, placeholder: 'Ingrese el hallazgo encontrado' },
+//             { label: 'Solución', id: 'solucion', type: 'text', apiKey: 'solucion', required: false, placeholder: 'Ingrese la solución implementada' },
+//             { label: 'Motivo de Rechazo', id: 'motivoRechazo', type: 'text', apiKey: 'motivoRechazo', required: false, placeholder: 'Ingrese el motivo de rechazo (si aplica)' },
+//             { label: 'Estado de Aprobación', id: 'estado_aprobacion', type: 'select', apiKey: 'estado_aprobacion', 
+//               options: [
+//                 { value: 'ejecutado', label: 'Ejecutado' },
+//                 { value: 'no aprobado', label: 'No aprobado' },
+//                 { value: 'aprobado', label: 'Aprobado' },
+//                 { value: 'pendiente', label: 'Pendiente' }
+//               ],
+//               required: true, validationMessage: 'Debe seleccionar un estado de aprobación'
+//             }
+//         ]
+// });
 
+// initDynamicPanel({
+//         buttonText: '+ Registrar Empresa Servicio  ',
+//         panelTitle: 'Agregar Nueva Empresa Servicio ',
+//         submitButtonText: 'Registrar Aprovacion Servicio ',
+//         apiUrl: 'http://localhost:8080/api/empresa_servicio',
+//         fields: [          
+//           { label: 'ID Empresa-Servicio', id: 'id', type: 'text', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//           { label: 'Valor del Servicio', id: 'valorServicio', type: 'number', apiKey: 'valorServicio', required: true, validationMessage: 'El valor del servicio no puede estar vacío' },
+//           { label: 'Sucursal', id: 'sucursal', type: 'select', apiKey: 'sucursal', 
+//             options: [
+//               { value: '1', label: 'Sucursal 1' }, 
+//               { value: '2', label: 'Sucursal 2' } 
+//             ],
+//             required: true, validationMessage: 'Debe seleccionar una sucursal'
+//           },
+//           { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//             options: [
+//               { value: 'reparacion electrica', label: 'Reparacion electrica' },
+//               { value: 'estudio de consumo', label: 'Estudio de consumo' },
+//               { value: 'pancarta', label: 'Pancarta' },
+//               { value: 'cambio transformador', label: 'Cambio transformador' }
+//             ],
+//             required: true, validationMessage: 'Debe seleccionar un servicio'
+//           }
+//         ]
+// });
 
+// initDynamicPanel({
+//         buttonText: '+ Registrar Estado Aprobacion  ',
+//         panelTitle: 'Agregar Nuevo Estado Aprobacion ',
+//         submitButtonText: 'Registrar Estado Aprobacion ',
+//         apiUrl: 'http://localhost:8080/api/estado_aprobacion',
+//         fields: [          
+            // { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' },
+            // { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' }
+//         ]
+// });
 
+// initDynamicPanel({
+//   buttonText: '+ Registrar Estado Compra  ',
+//   panelTitle: 'Agregar Nuevo Estado Compra ',
+//   submitButtonText: 'Registrar Estado Compra ',
+//   apiUrl: 'http://localhost:8080/api/estado_compra',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
 
-
-
+initDynamicPanel({
+  buttonText: '+ Registrar Estado Orden  ',
+  panelTitle: 'Agregar Nuevo Estado Orden ',
+  submitButtonText: 'Registrar Estado Orden ',
+  apiUrl: 'http://localhost:8080/api/estado_orden',
+  fields: [          
+    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+  ]
+});
 
 
 
@@ -410,7 +489,6 @@ import { initDynamicTable } from "./prueba";
 //         ],
 //         required: true, validationMessage: 'Debe seleccionar un cliente'
 //       }
-      
 //     ]
 // });
 
@@ -421,14 +499,13 @@ import { initDynamicTable } from "./prueba";
 //         { label: 'Precio Unitario', id: 'precio_unitario', type: 'number', apiKey: 'precio_unitario', required: true, validationMessage: 'El precio unitario no puede estar vacío' },
 //         { label: 'Insumo', id: 'insumo', type: 'select', apiKey: 'insumo', 
 //             options: [ 
-//               // Aquí se agregarían las opciones de insumos disponibbles o se pueden hacer dinamicas
 //               { value: 'insumo1', label: 'Insumo 1' },
 //               { value: 'insumo2', label: 'Insumo 2' }
 //             ]
 //           },
 //           { label: 'Compra', id: 'compra', type: 'select', apiKey: 'compra', 
 //             options: [
-//               // Opciones de compra pero no se como mostrar la op
+
 //               { value: 'compra1', label: 'Compra 1' },
 //               { value: 'compra2', label: 'Compra 2' }
 //             ]
@@ -535,3 +612,87 @@ import { initDynamicTable } from "./prueba";
 //           }
 //     ]
 // });
+
+// initDynamicTable({
+//     apiUrl: 'http://localhost:8080/api/aprovacion_servicio',
+//     fields: [
+//         { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//         { label: 'Orden de Trabajo', id: 'orden_trabajo', type: 'select', apiKey: 'orden_trabajo' }, 
+//         { label: 'Cliente', id: 'personas', type: 'select', apiKey: 'personas', 
+//           options: [
+//             { value: 'cliente1', label: 'Cliente 1' },
+//             { value: 'cliente2', label: 'Cliente 2' }
+//           ],
+//           required: true, validationMessage: 'Debe seleccionar un cliente'
+//         },
+//         { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//             options: [
+//               { value: 'reparacion electrica', label: 'Reparacion electrica' },
+//               { value: 'estudio de consumo', label: 'Estudio de consumo' },
+//               { value: 'pancarta', label: 'Pancarta' },
+//               { value: 'cambio transformador', label: 'Cambio transformador' }
+//             ],
+//             required: true, validationMessage: 'Debe seleccionar un servicio'
+//           },
+//         { label: 'Hallazgo', id: 'hallazgo', type: 'text', apiKey: 'hallazgo', required: false, placeholder: 'Ingrese el hallazgo encontrado' },
+//         { label: 'Solución', id: 'solucion', type: 'text', apiKey: 'solucion', required: false, placeholder: 'Ingrese la solución implementada' },
+//         { label: 'Motivo de Rechazo', id: 'motivoRechazo', type: 'text', apiKey: 'motivoRechazo', required: false, placeholder: 'Ingrese el motivo de rechazo (si aplica)' },
+//         { label: 'Estado de Aprobación', id: 'estado_aprobacion', type: 'select', apiKey: 'estado_aprobacion', 
+//           options: [
+//             { value: 'ejecutado', label: 'Ejecutado' },
+//             { value: 'no aprobado', label: 'No aprobado' },
+//             { value: 'aprobado', label: 'Aprobado' },
+//             { value: 'pendiente', label: 'Pendiente' }
+//           ],
+//           required: true, validationMessage: 'Debe seleccionar un estado de aprobación'
+//         }
+//     ]
+// });
+
+// initDynamicTable({
+//     apiUrl: 'http://localhost:8080/api/empresa_servicio',
+//     fields: [
+//       { label: 'ID Empresa-Servicio', id: 'id', type: 'text', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Valor del Servicio', id: 'valorServicio', type: 'number', apiKey: 'valorServicio', required: true, validationMessage: 'El valor del servicio no puede estar vacío' },
+//     { label: 'Sucursal', id: 'sucursal', type: 'select', apiKey: 'sucursal', 
+//       options: [
+//         { value: '1', label: 'Sucursal 1' }, 
+//         { value: '2', label: 'Sucursal 2' } 
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar una sucursal'
+//     },
+//     { label: 'Servicio', id: 'servicio', type: 'select', apiKey: 'servicio', 
+//       options: [
+//         { value: 'reparacion electrica', label: 'Reparacion electrica' },
+//         { value: 'estudio de consumo', label: 'Estudio de consumo' },
+//         { value: 'pancarta', label: 'Pancarta' },
+//         { value: 'cambio transformador', label: 'Cambio transformador' }
+//       ],
+//       required: true, validationMessage: 'Debe seleccionar un servicio'
+//     }
+//     ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/estado_aprobacion',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/estado_compra',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+//     { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+//   ]
+// });
+
+initDynamicTable({
+  apiUrl: 'http://localhost:8080/api/estado_orden',
+  fields: [
+    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+  ]
+});
