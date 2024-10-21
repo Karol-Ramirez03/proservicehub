@@ -2,6 +2,7 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +24,8 @@ public class Personas {
     @Column
     private String nombre;
     private String apellido;
+
+    @Column(nullable = false,updatable = false)
     private Timestamp fechaRegistro;
 
     @JsonIgnore
@@ -66,6 +70,36 @@ public class Personas {
     @ManyToOne
     private TipoPersona tipoPersona;
 
+    @PrePersist
+    protected void onCreate() {
+        this.fechaRegistro = new Timestamp(new Date().getTime());
+    }
+
+    public Personas(Long nro_Doc, String nombre, String apellido, Timestamp fechaRegistro, List<TelPersona> telPersona,
+            List<EmailPersona> emailPersona, List<PersonaInsumo> personaInsumo,
+            List<OrdenServicio> ordenServicioCliente, List<OrdenServicio> ordenServicioEmpleado,
+            List<OrdenTrabajo> ordenTrabajoEmpleado, List<AprobacionServicio> aprovacionServicio, List<Compra> compra,
+            List<Login> login, Sucursal sucursal, TipoPersona tipoPersona) {
+        Nro_Doc = nro_Doc;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaRegistro = fechaRegistro;
+        this.telPersona = telPersona;
+        this.emailPersona = emailPersona;
+        this.personaInsumo = personaInsumo;
+        this.ordenServicioCliente = ordenServicioCliente;
+        this.ordenServicioEmpleado = ordenServicioEmpleado;
+        this.ordenTrabajoEmpleado = ordenTrabajoEmpleado;
+        this.aprovacionServicio = aprovacionServicio;
+        this.compra = compra;
+        this.login = login;
+        this.sucursal = sucursal;
+        this.tipoPersona = tipoPersona;
+    }
+
+
+    public Personas() {
+    }
     public Long getNro_Doc() {
         return Nro_Doc;
     }

@@ -49,7 +49,7 @@ const renderizarDatos = (datos,shadowRoot) => {
       <td>${dato.orden_trabajo.hora_asignacion}</td>
       <td>${dato.orden_trabajo.personas.nro_Doc}</td>
       <td>${dato.orden_trabajo.personas.nombre}</td>
-      <td>${dato.orden_trabajo.ordenServicio.numero_orden}</td>
+      <td>${dato.orden_trabajo.ordenServicio?.numero_orden??"NULL"}</td>
       <td>${dato.orden_trabajo.numero_orden_trabajo}</td>
       
       <td><button class="boton-fecha" id="${dato.id}">Asignar Fecha</button></td>

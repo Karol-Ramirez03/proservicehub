@@ -1,5 +1,3 @@
-INSERT INTO pais(nombre) VALUES ('Argentina');
-
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS actualizar_estado_servicio$$
@@ -15,11 +13,16 @@ BEGIN
     IF NEW.id_empleado IS NOT NULL THEN
             SET NEW.estado_orden_servicio_id = 3;
             SET id_empleado_asignado = NEW.id_empleado;
+
             
             SELECT numero_orden_trabajo + 1 INTO numeroSiguiente
-            FROM orden_Trabajo
+            FROM orden_trabajo
             ORDER BY numero_orden_trabajo DESC
             LIMIT 1;
+
+            IF numeroSiguiente IS NULL THEN
+                SET numeroSiguiente = 1;
+            END IF;
 
             SELECT id_servicio INTO id_servicio_Asignado
             FROM detalle_orden_servicio
@@ -33,10 +36,42 @@ BEGIN
 
 
             INSERT INTO detalle_orden_trabajo (fecha, id_orden_trabajo, id_estado, id_servicio)
-            VALUES(NULL, nueva_order_id, 1,id_servicio_Asignado);
+            VALUES(NULL, nueva_order_id, 3,id_servicio_Asignado);
             END IF;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS insertaprobacionservicio$$
+CREATE PROCEDURE insertaprobacionservicio(
+    IN id_trabajo INT,
+    IN hallazgoap VARCHAR(200),
+    IN solucionap VARCHAR(200)
+)
+BEGIN
+    DECLARE id_cliente_aprob INT;
+    DECLARE id_servicio_aprob INT;
+    DECLARE id_orden_servicio_aprob INT;
+
+    SELECT id_servicio INTO id_servicio_aprob
+    FROM detalle_orden_trabajo
+    WHERE id_orden_trabajo = id_trabajo
+    LIMIT 1;
+
+    SELECT numero_orden_servicio INTO id_orden_servicio_aprob
+    FROM orden_trabajo
+    WHERE id = id_trabajo;
+
+    SELECT id_cliente INTO id_cliente_aprob
+    FROM orden_servicio
+    WHERE numero_orden = id_orden_servicio_aprob;
+
+    INSERT INTO aprovacion_servicio(estado_aprobacion_id, id_cliente, id_orden_trabajo,id_servicio,hallazgo,solucion)
+    VALUES (4,id_cliente_aprob,id_trabajo,id_servicio_aprob,hallazgoap,solucionap);
+
+
+END$$
+DELIMITER;
 
 
 DROP PROCEDURE IF EXISTS addOrdenServicio;
@@ -54,56 +89,75 @@ BEGIN
 END $$
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS addOrdenServicio;
+DROP PROCEDURE IF EXISTS addComprayDetalle;
 DELIMITER $$
-CREATE PROCEDURE addOrdenServicio(IN idCliente INT,IN cantidad INT, IN idInsumo INT)
+CREATE PROCEDURE addComprayDetalle(IN idCliente INT,IN idProducto INT,IN cantidad INT,IN tipo_compra INT)
 BEGIN
-	DECLARE nueva_compra_id INT;
-    DECLARE total_compra DOUBLE;
-    DECLARE precio DOUBLE;
+	DECLARE id_compra INT;
+    DECLARE precio_total DOUBLE;
+    DECLARE precio_u DOUBLE;
 
-    SELECT precio_unitario INTO precio
-    FROM insumo 
-    WHERE id=idInsumo;
+    SELECT precio_unitario INTO precio_u
+    FROM insumo
+    WHERE id=idProducto;
 
-    SET total_compra= precio*cantidad;
+    SET precio_total= precio_u*cantidad;
+
+    INSERT INTO compra(fecha_compra,total,estado_compra_id,cliente,tipo_compra_id ) VALUES(NOW(),precio_total,2,idCliente,tipo_compra);
     
-    INSERT INTO compra(total,fecha_orden,id_empleado,id_cliente) VALUES(2,NOW(),null,idCliente);
+    SET id_compra = LAST_INSERT_ID();
     
-    SET nueva_orden_id = LAST_INSERT_ID();
-    
-    INSERT INTO detalle_orden_servicio(valor_servicio,id_orden_servicio,id_servicio) VALUES(0,nueva_orden_id,idServicio);
+    INSERT INTO detalle_compra(cantidad,precio_unitario,compra_id,insumo_id) VALUES(cantidad,precio_u,id_compra,idProducto);
     
 END $$
 DELIMITER ;
 
-DELIMITER$$
-CREATE PRCOCEDURE insert_aprobacion_servicio(
-    IN id_trabajo INT,
-    IN hallazgo VARCHAR,
-    IN solucion VARCHAR
-)
+DROP PROCEDURE IF EXISTS validar_stock;
+DELIMITER $$
+CREATE PROCEDURE validar_stock(IN insumoId INT, IN cantidad INT, OUT estado INT)
 BEGIN
-    DECLARE id_cliente_aprob INT;
-    DECLARE id_servicio_aprob INT;
-    DECLARE id_orden_servicio_aprob INT; 
+    DECLARE stock_disponible INT;
 
-    SELECT id_servicio INTO id_servicio_aprob
-    FROM detalle_orden_trabajo
-    WHERE id_orden_trabajo = id_trabajo
-    LIMIT 1;
+    SELECT stock INTO stock_disponible
+    FROM insumo
+    WHERE id = insumoId;
 
-    SELECT numero_orden_servicio INTO id_orden_servicio_aprob
-    FROM orden_trabajo
-    WHERE id = id_orden_trabajo;
+    IF stock_disponible IS NULL THEN
+        SET estado = -1; 
+    ELSEIF stock_disponible < cantidad THEN
+        SET estado = 0;
+    ELSE
+        SET estado = 1;
+    END IF;
+END $$
 
-    SELECT id_cliente INTO id_cliente_aprob
-    FROM orden_servicio
-    WHERE numero_orden = id_orden_servicio_aprob;
+DELIMITER ;
 
-    INSERT INTO aprovacion_servicio(estado_aprobacion_id, id_cliente, id_orden_trabajo,id_servicio,hallazgo,solucion)
-    VALUES (1,id_cliente_aprob,id_trabajo)
+DROP PROCEDURE IF EXISTS actualizarStock;
+DELIMITER $$
+CREATE PROCEDURE actualizarStock(IN insumoId INT, IN cantidad INT)
+BEGIN
+    DECLARE stock_nuevo INT;
 
+    SELECT stock INTO stock_nuevo
+    FROM insumo 
+    WHERE id=insumoId;
 
-END$$
-DELIMITER;
+    SET stock_nuevo = stock_nuevo - cantidad;
+
+    UPDATE insumo SET stock = stock_nuevo WHERE id=insumoId;
+
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS actualizarEstadoCompra;
+DELIMITER $$
+CREATE PROCEDURE actualizarEstadoCompra(IN compraId INT)
+BEGIN
+
+    UPDATE compra SET estado_compra_id = 1 WHERE id=compraId;
+
+END $$
+
+DELIMITER ;

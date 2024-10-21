@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servimax.proservicehub.application.service.LoginServiceI;
 import com.servimax.proservicehub.application.service.RolServiceI;
 import com.servimax.proservicehub.domain.entity.Login;
-import com.servimax.proservicehub.domain.entity.LoginRequest;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("api/login")
@@ -83,14 +83,14 @@ public class LoginController {
     }
 
 
-    @PostMapping("/register")
-    public ResponseEntity<Login> register(@RequestBody LoginRequest loginRequest) {
-        Login login = new Login();
-        login.setUsuario(loginRequest.getUsuario());
-        login.setContraseña(loginRequest.getContraseña());
-        Login savedLogin = loginServiceI.save(login);
-        return ResponseEntity.ok(savedLogin);
-    }
+    // @PostMapping("/register")
+    // public ResponseEntity<Login> register(@RequestBody LoginRequest loginRequest) {
+    //     Login login = new Login();
+    //     login.setUsuario(loginRequest.getUsuario());
+    //     login.setContraseña(loginRequest.getContraseña());
+    //     Login savedLogin = loginServiceI.save(login);
+    //     return ResponseEntity.ok(savedLogin);
+    // }
 
     // @GetMapping("/login")
     // public ResponseEntity<Login> login(@RequestParam String username, @RequestParam String password) {
@@ -102,14 +102,23 @@ public class LoginController {
     //     }
     // }
 
-
-    @GetMapping("/rol/{rolId}")
-    public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
-        List<Login> usuarios = loginServiceI.findByRolId(rolId);
-        if (usuarios.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Retorna 204 si no hay usuarios
+    @GetMapping("/usuario/{usuario}")
+    public ResponseEntity<Optional<Login>> findByUsuario(@PathVariable String usuario) {
+        Optional<Login> login = loginServiceI.findByUsuario(usuario);
+        if (login.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
         }
-        
-        return ResponseEntity.ok(usuarios); // Retorna 200 con los usuarios
+        return ResponseEntity.ok(login);
     }
+
+    @GetMapping("rol/{rolId}")
+    public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
+        List<Login> logins = loginServiceI.findByRolId(rolId);
+        if (logins.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(logins);
+    }
+
+    
 }

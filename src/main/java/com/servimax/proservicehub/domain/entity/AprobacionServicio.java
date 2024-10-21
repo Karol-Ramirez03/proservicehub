@@ -34,6 +34,9 @@ public class AprobacionServicio {
 
     @Column
     private String solucion;
+
+    @Column
+    private String motivoRechazo;
     
     @ManyToOne
     private EstadoAprobacion estado_aprobacion;
@@ -50,6 +53,34 @@ public class AprobacionServicio {
         this.hallazgo = hallazgo;
         this.solucion = solucion;
         this.estado_aprobacion = estado_aprovacion;
+    }
+
+    public AprobacionServicio(Long id, OrdenTrabajo orden_trabajo, Personas personas, Servicio servicio,
+            String hallazgo, String solucion, String motivoRechazo, EstadoAprobacion estado_aprobacion) {
+        this.id = id;
+        this.orden_trabajo = orden_trabajo;
+        this.personas = personas;
+        this.servicio = servicio;
+        this.hallazgo = hallazgo;
+        this.solucion = solucion;
+        this.motivoRechazo = motivoRechazo;
+        this.estado_aprobacion = estado_aprobacion;
+    }
+
+    public String getMotivoRechazo() {
+        return motivoRechazo;
+    }
+
+    public void setMotivoRechazo(String motivoRechazo) {
+        this.motivoRechazo = motivoRechazo;
+    }
+
+    public EstadoAprobacion getEstado_aprobacion() {
+        return estado_aprobacion;
+    }
+
+    public void setEstado_aprobacion(EstadoAprobacion estado_aprobacion) {
+        this.estado_aprobacion = estado_aprobacion;
     }
 
     public Long getId() {

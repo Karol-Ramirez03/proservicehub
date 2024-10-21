@@ -10,6 +10,7 @@ import com.servimax.proservicehub.domain.entity.Login;
 
 @Repository
 public interface LoginRepositoryI extends CrudRepository<Login,Long>{
-    Optional<Login> findByUsuario(String nombre);
-    List<Login> findByRolId(Long rolId); 
+    Optional<Login> findByUsuario(String usuario);
+    List<Login> findByRolId(Long rolId);
+
 }

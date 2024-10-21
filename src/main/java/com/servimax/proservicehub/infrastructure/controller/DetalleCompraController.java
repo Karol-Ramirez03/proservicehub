@@ -1,6 +1,7 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
 import java.util.Optional;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.DetalleCompraServiceI;
+import com.servimax.proservicehub.domain.dto.InsumoDTO;
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.DetalleCompra;
+import com.servimax.proservicehub.domain.entity.Insumo;
 import com.servimax.proservicehub.infrastructure.repository.compra.CompraRepositoryI;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -92,6 +95,34 @@ public class DetalleCompraController {
         }
         
         return ResponseEntity.ok(detaOrden); // Retorna 200 con las compras
+    }
+
+    @GetMapping("/top3")
+    public List<InsumoDTO> obtener3insumos() {
+        List<InsumoDTO> ListaTop3 = new ArrayList<>();
+        List<Object[]> resultados = detalleCompraServiceI.obtenerTop3InsumosVendidos();
+        for (Object[] resultado : resultados) {
+            Insumo insumo = (Insumo) resultado[0];
+            Long totalVendido = (Long) resultado[1];
+
+            InsumoDTO newInsumo = new InsumoDTO(totalVendido, insumo);
+            ListaTop3.add(newInsumo);
+        }
+        return ListaTop3;
+    }
+
+    @GetMapping("/top3menos")
+    public List<InsumoDTO> obtener3insumosmenos() {
+        List<InsumoDTO> ListaTop3menos = new ArrayList<>();
+        List<Object[]> resultados = detalleCompraServiceI.obtenerTop3InsumosMenosVendidos();
+        for (Object[] resultado : resultados) {
+            Insumo insumo = (Insumo) resultado[0];
+            Long totalVendido = (Long) resultado[1];
+
+            InsumoDTO newInsumo = new InsumoDTO(totalVendido, insumo);
+            ListaTop3menos.add(newInsumo);
+        }
+        return ListaTop3menos;
     }
 
 }

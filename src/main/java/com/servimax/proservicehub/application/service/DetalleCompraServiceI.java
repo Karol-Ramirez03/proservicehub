@@ -13,4 +13,6 @@ public interface DetalleCompraServiceI {
     Optional<DetalleCompra> update(Long id, DetalleCompra detalleCompra);
     Optional<DetalleCompra> delete(Long id);
     List<DetalleCompra> findByCompra(Compra conpra);
+    List<Object[]> obtenerTop3InsumosVendidos();
+    List<Object[]> obtenerTop3InsumosMenosVendidos();
 }

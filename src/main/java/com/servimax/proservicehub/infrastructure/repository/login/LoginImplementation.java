@@ -55,8 +55,12 @@ public class LoginImplementation implements LoginServiceI{
     }
 
     @Override
-    public List<Login> findByRolId(Long id) {
-        return  loginRepositoryI.findByRolId(id);
+    public Optional<Login> findByUsuario(String usuario) {
+        return loginRepositoryI.findByUsuario(usuario);
     }
 
+    @Override
+    public List<Login> findByRolId(Long rolId) {
+        return loginRepositoryI.findByRolId(rolId);
+    }
 }

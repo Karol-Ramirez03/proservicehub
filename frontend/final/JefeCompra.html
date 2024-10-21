@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>DashboardService</title>
         <link rel="stylesheet" href="src/cliente.css" />
-        <link rel="stylesheet" href="bodega.css">
-        <script type="module" src="src/components/jefeBodega.js" defer></script>
+        <link rel="stylesheet" href="/addProveedorButton.css">
+        <script type="module" src="src/components/jefeCompra.js" defer></script>
     </head>
     <body class="principal">
         <div class="container">
@@ -19,10 +19,9 @@
             </div>
                 </nav>  
             <section class="container-principal">
-            <div class="container-button">
-                <button class="boton-pro-insumo">Proveedor-Insumos</button>
-                <button class="boton-insumo-riesgo">Insumos en riesgo</button>
-                <button class="boton-proveedor agregar-proveedor">+ Agregar Proveedor</button>
+            <div class="container-button" style="display: flex; gap: 10px; align-items: center;">
+                <button class="boton-proveedor-insumo">Proveedor-Insumos</button>
+                <div id="app"></div>
             </div>
             <div id="app"></div>
             <div class="table-container">

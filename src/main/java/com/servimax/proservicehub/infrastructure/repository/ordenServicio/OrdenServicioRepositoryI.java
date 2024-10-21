@@ -24,3 +24,4 @@ public interface OrdenServicioRepositoryI extends CrudRepository<OrdenServicio,L
     @Procedure(name="addOrdenServicio")
     void addOrdenServicio(@Param("idCliente")Long idCliente,@Param("idServicio")Long idServicio);
 }
+//mcmvmv

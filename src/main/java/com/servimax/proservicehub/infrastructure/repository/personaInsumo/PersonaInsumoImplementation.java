@@ -51,4 +51,8 @@ public class PersonaInsumoImplementation implements PersonaInsumoServiceI{
         return null;
     }
 
+    public List<PersonaInsumo> getInsumosByPersonaId(Long idPersona) {
+        return personaInsumoRepositoryI.findByIdIdPersona(idPersona);
+    }
+
 }

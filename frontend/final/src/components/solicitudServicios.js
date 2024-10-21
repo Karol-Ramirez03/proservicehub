@@ -78,36 +78,93 @@ const addInfoEventListener = (shadowRoot, datos) => {
 
                 // Agregar botón "Cerrar" si el estado no es 4
                 if (dataUsar.estado_aprovacion.id == 4) {
-                    filas.innerHTML += `
+                    filas.innerHTML += /*html*/`
                     <td><button class="cancelar" id="${idCompra}">Denegar</button></td>
                     <td><button class="aprobar" id="${idCompra}">Aprobar</button></td>
                     `;
                 }
+                const newFila=document.createElement(`tr`)
+                newFila.className=(`div-${idCompra}`)
+                filas.insertAdjacentHTML("afterend",newFila.outerHTML)
 
 
                 // Asignar eventos a los nuevos botones
-                agregarEventosBotones(filas, dataUsar);
+                agregarEventosBotones(filas, dataUsar,idCompra);
             }
         });
     });
 };
 
-const agregarEventosBotones = (filas, dataUsar) => {
+const agregarEventosBotones = (filas, dataUsar,idCompra) => {
     const btnDenegar = filas.querySelector('.cancelar');
     const btnAprobar = filas.querySelector('.aprobar');
     const btnCerrar = filas.querySelector('.cerrar');
-
+    
     if (btnDenegar) {
-        btnDenegar.addEventListener('click', () => {
+        btnDenegar.addEventListener('click', async () => {
+            
+            // filas.insertAdjacentHTML("afterend", `
+            //                         <td></td>
+            //                         <td class="input" colspan="2">
+            //                             <form class="form-${idCompra}">
+            //                                 <div class="form-group">
+            //                                 <label for="descripcion" style="display: block;">Descripción:</label>
+            //                                 <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
+            //                                 </div>
+            //                             </form>
+            //                         </td>
+            //                         <td><button class="id" id="${idCompra}">Enviar</button></td>
+            //                     `);
             console.log(`Denegar id: ${dataUsar.id}`);
-            // Lógica para denegar
+            const solicitud={
+                "estado_aprobacion":{
+                    "id":2
+                }
+            }
+            try {
+                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(solicitud)
+                })
+                if(response2.ok){
+                    eliminarFila(filas)
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     }
 
     if (btnAprobar) {
-        btnAprobar.addEventListener('click', () => {
+        btnAprobar.addEventListener('click', async () => {
             console.log(`Aprobar id: ${dataUsar.id}`);
-            // Lógica para aprobar PROCEDURE ACTUALIZAR ESTADO
+            console.log(`Denegar id: ${dataUsar.id}`);
+            const solicitud={
+                "estado_aprobacion":{
+                    "id":3
+                }
+            }
+            try {
+                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                    method:"PUT",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(solicitud)
+                })
+                if(response2.ok){
+                    eliminarFila(filas)
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     }
 
@@ -130,7 +187,7 @@ export const dataAprobacion= async (contenedorPrincipal,clienteId)  => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/aprobacionservicio/persona/1005539417", {
+        const response = await fetch("http://localhost:8080/api/aprobacionservicio/persona/10255", {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

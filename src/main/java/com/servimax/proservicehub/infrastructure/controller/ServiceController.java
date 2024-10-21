@@ -53,16 +53,33 @@ public class ServiceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Servicio servicio, @PathVariable Long id, BindingResult result) {
-        Optional<Servicio> servicioOptional = servicioServiceI.update(id, servicio);
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Servicio servicio, BindingResult result) {
         if (result.hasFieldErrors()) {
             return ValidatedFields.validation(result);
         }
-        if (servicioOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(servicioOptional.orElseThrow());
+    
+        Optional<Servicio> servicioOptional = servicioServiceI.findById(id);
+        if (!servicioOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
+    
+        Servicio servicioExistente = servicioOptional.get();
+    
+        // Solo actualiza los campos que no son nulos en el objeto recibido
+        if (servicio.getNombre() != null) {
+            servicioExistente.setNombre(servicio.getNombre());
+        }
+        if (servicio.getRequiere_insumo() != null) {
+            servicioExistente.setRequiere_insumo(servicio.getRequiere_insumo());
+        }
+        if (servicio.getTiempo_ejecucion() != null) {
+            servicioExistente.setTiempo_ejecucion(servicio.getTiempo_ejecucion());
+        }
+        
+        Servicio servicioActualizado = servicioServiceI.save(servicioExistente);
+        return ResponseEntity.ok(servicioActualizado);
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.servimax.proservicehub.application.service.CompraServiceI;
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.TipoCompra;
 
 @Service
 public class CompraImplemetation implements CompraServiceI{
@@ -57,15 +58,29 @@ public class CompraImplemetation implements CompraServiceI{
 
     @Override
     public List<Compra> findByPersonasId(Personas personasId) {
-       return compraRepositoryI.findByPersonaId(personasId);
+        return compraRepositoryI.findByPersonaId(personasId);
     }
 
     public String obtenerNombreEstado(Long estadoId) {
         Compra compra = compraRepositoryI.findById(estadoId)
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        // Obtener el nombre del estado
         return compra.getEstado_compra().getNombre();
+    }
+
+    @Override
+    public void addComprayDetalle(Long idCliente,Long idservicio,int cantidad,int tipo) {
+        compraRepositoryI.addComprayDetalle(idCliente,idservicio,cantidad,tipo);
+    }
+
+    @Override
+    public List<Compra> findByTipoCompraId(TipoCompra tipoCompraId) {
+        return compraRepositoryI.findByTipoCompraId(tipoCompraId);
+    }
+
+    @Override
+    public void actualizarEstadocompra(int compraId){
+        compraRepositoryI.actualizarEstadocompra(compraId);
     }
 
 }

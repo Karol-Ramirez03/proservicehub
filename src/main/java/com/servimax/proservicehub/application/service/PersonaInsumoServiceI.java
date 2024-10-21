@@ -11,4 +11,5 @@ public interface PersonaInsumoServiceI {
     PersonaInsumo save(PersonaInsumo personaInsumo);
     Optional<PersonaInsumo> update(Long idPersona, Long idInsumo, PersonaInsumo personaInsumo);
     Optional<PersonaInsumo> delete(Long idPersona, Long idInsumo);
+    List<PersonaInsumo> getInsumosByPersonaId(Long idPersona);
 }

@@ -94,55 +94,23 @@ const agregarEventListener=(shadowRoot,datos2)=>{
             const form=shadowRoot.querySelector(`.form-${idCompra}`)
             const datos = Object.fromEntries(new FormData(form).entries());
             const producto = JSON.parse(JSON.stringify(datos));
+
             const {cantidad}=producto
-            
-            console.log(cantidad)
+            const idInsumo =datos2[idCompra-1]["id"]
+
             const datosEnviar={
-                "total": 0.0,
-                "estado_compra": {
-                    "id": 2
-                },
-                "personas": {
-                    "nro_Doc": 1005539417
-                }
+                "idCliente":10255,
+                "idProducto":idInsumo,
+                "cantidad":cantidad,
+                "tipo_compra":2
             }
             try {
-                const response = await fetch("http://localhost:8080/api/compra", {
+                const response = await fetch("http://localhost:8080/api/compra/agregar", {
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify(datosEnviar)
-                })
-                if(response.ok){
-                    console.log("Orden exitosa")
-                    fila.innerHTML=""
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            const precio= datos2[idCompra-1]["precio_unitario"]
-            console.log(precio)
-            const idInsumo =datos2[idCompra-1]["id"]
-            const datosEnviar2={
-                "cantidad": cantidad,
-                "precio_unitario": precio,
-                "insumo": {
-                    "id":idInsumo
-                },
-                "compra": {
-                    "id":1 //falta sacar el id de compra esta heavy
-                }
-            }
-            console.log(datosEnviar2)
-            try {
-                const response = await fetch("http://localhost:8080/api/detallecompra", {
-                    method:"POST",
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(datosEnviar2)
                 })
                 if(response.ok){
                     console.log("Orden exitosa")
