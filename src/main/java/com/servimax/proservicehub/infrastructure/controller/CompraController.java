@@ -110,7 +110,7 @@ public class CompraController {
 
     @PostMapping("/agregar")
     public ResponseEntity<Void> addOrdenSaddComprayDetalleervicio(@RequestBody CompraDTO compraDTO) {
-        compraServiceI.addComprayDetalle(compraDTO.getIdCliente(), compraDTO.getIdProducto(), compraDTO.getCantidad());
+        compraServiceI.addComprayDetalle(compraDTO.getIdCliente(), compraDTO.getIdProducto(), compraDTO.getCantidad(), compraDTO.getTipo_compra());
         return ResponseEntity.ok().build();
     }
 

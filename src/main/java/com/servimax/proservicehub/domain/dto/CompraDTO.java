@@ -5,6 +5,7 @@ public class CompraDTO {
     private Long idCliente;
     private Long idProducto;
     private int cantidad;
+    private int tipo_compra;
     
     public CompraDTO() {
     }
@@ -42,6 +43,14 @@ public class CompraDTO {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getTipo_compra() {
+        return tipo_compra;
+    }
+
+    public void setTipo_compra(int tipo_compra) {
+        this.tipo_compra = tipo_compra;
     }
 
     

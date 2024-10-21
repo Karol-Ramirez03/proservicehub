@@ -99,7 +99,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
             const idInsumo =datos2[idCompra-1]["id"]
 
             const datosEnviar={
-                "idCliente":1005539417,
+                "idCliente":10255,
                 "idProducto":idInsumo,
                 "cantidad":cantidad,
                 "tipo_compra":2

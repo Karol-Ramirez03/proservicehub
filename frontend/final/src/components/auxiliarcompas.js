@@ -126,6 +126,8 @@ const addInfoEventListener = (shadowRoot) => {
                     console.error('Error:', error);
                 }
             }else if(e.target.id === "vender"){
+
+                
                 console.log("Vendido al mejor")
                 
             }
