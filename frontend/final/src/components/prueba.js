@@ -190,7 +190,9 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
+                    
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -212,6 +214,7 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
                 } else {
                     console.error('Error al eliminar:', response.statusText);

@@ -1,20 +1,20 @@
 import { initDynamicPanel } from "./prueba";
 import { initDynamicTable } from "./prueba";
 
-// initDynamicPanel({
-//     buttonText: '+ Registrar Insumo',
-//     panelTitle: 'Agregar Nuevo Insumo',
-//     submitButtonText: 'Registrar Insumo',
-//     apiUrl: 'http://localhost:8080/api/insumo',
-//     fields: [
-//         { label: 'Código Interno', id: 'codigoInterno', type: 'text', apiKey: 'codigo_interno' },
-//         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
-//         { label: 'Precio', id: 'productPrice', type: 'number', apiKey: 'precio_unitario' },
-//         { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
-//         { label: 'Stock Mínimo', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
-//         { label: 'Stock Máximo', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
-//     ]
-// });
+initDynamicPanel({
+    buttonText: '+ Registrar Insumo',
+    panelTitle: 'Agregar Nuevo Insumo',
+    submitButtonText: 'Registrar Insumo',
+    apiUrl: 'http://localhost:8080/api/insumo',
+    fields: [
+        { label: 'Código Interno', id: 'codigoInterno', type: 'text', apiKey: 'codigo_interno' },
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
+        { label: 'Precio', id: 'productPrice', type: 'number', apiKey: 'precio_unitario' },
+        { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
+        { label: 'Stock Mínimo', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
+        { label: 'Stock Máximo', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
+    ]
+});
 
 // initDynamicPanel({
 //     buttonText: '+ Registrar Producto',
@@ -637,17 +637,17 @@ import { initDynamicTable } from "./prueba";
 //   ]
 // });
 
-initDynamicPanel({
-  buttonText: '+ Registrar Tipo Persona',
-  panelTitle: 'Agregar Nuevo Tipo Persona',
-  submitButtonText: 'Registrar Tipo Persona',
-  apiUrl: 'http://localhost:8080/api/tipo_telefono',
-  fields: [          
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
-    { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
-    }
-  ]
-});
+// initDynamicPanel({
+//   buttonText: '+ Registrar Tipo Telefono',
+//   panelTitle: 'Agregar Nuevo Tipo Telefono',
+//   submitButtonText: 'Registrar Tipo Telefono',
+//   apiUrl: 'http://localhost:8080/api/tipo_telefono',
+//   fields: [          
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+//     { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+//     }
+//   ]
+// });
 
 
 
@@ -696,18 +696,18 @@ initDynamicPanel({
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-// initDynamicTable({
-//     apiUrl: 'http://localhost:8080/api/insumo',
-//     fields: [
-//         { label: 'ID', id: 'id', type: 'text', apiKey: 'id' },
-//         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
-//         { label: 'Código Interno', id: 'codigo', type: 'text', apiKey: 'codigo_interno' },
-//         { label: 'Precio', id: 'precio', type: 'number', apiKey: 'precio_unitario' },
-//         { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
-//         { label: 'Min Stock', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
-//         { label: 'Max Stock', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
-//     ]
-// });
+initDynamicTable({
+    apiUrl: 'http://localhost:8080/api/insumo',
+    fields: [
+        { label: 'ID', id: 'id', type: 'text', apiKey: 'id' },
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
+        { label: 'Código Interno', id: 'codigo', type: 'text', apiKey: 'codigo_interno' },
+        { label: 'Precio', id: 'precio', type: 'number', apiKey: 'precio_unitario' },
+        { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
+        { label: 'Min Stock', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
+        { label: 'Max Stock', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
+    ]
+});
 
 // initDynamicTable({
 //     apiUrl: 'http://localhost:8080/api/producto',
@@ -1237,11 +1237,11 @@ initDynamicPanel({
 //   ]
 // });
 
-initDynamicTable({
-  apiUrl: 'http://localhost:8080/api/tipo_telefono',
-  fields: [
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
-    { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
-    }
-  ]
-});
+// initDynamicTable({
+//   apiUrl: 'http://localhost:8080/api/tipo_telefono',
+//   fields: [
+//     { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+//     { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+//     }
+//   ]
+// });

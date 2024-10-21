@@ -18,9 +18,19 @@ body {
         height: 50px;
     }
     
-    .nombres-table{
-        border: solid 3px  #1f9446;
+    .eliminar button{
+        background-color: red;
+    }
+    table th{
+        border-spacing: 10px 15px; /* 10px entre filas, 15px entre columnas */
+      }
+    #app2{
+        display: flex;
         width: 80%;
+        justify-content: space-between;
+    }
+    .nombres-table {
+        border: solid 3px  #1f9446;
     }
     
     .add-button {
