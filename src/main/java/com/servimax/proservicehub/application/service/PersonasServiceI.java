@@ -12,5 +12,7 @@ public interface PersonasServiceI {
     Personas save(Personas persona);
     Optional<Personas> update(Long nroDoc, Personas persona);
     Optional<Personas> delete(Long nroDoc);
+    List<Object[]> infoPersona(Long id);
+    List<Object[]> top3MasInversion();
 }
 

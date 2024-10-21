@@ -49,15 +49,15 @@ const renderizarDatos = (datos,shadowRoot) => {
   
 }
 
-export const dataAprobado = async (contenedorPrincipal)  => {
+export const dataAprobado = async (contenedorPrincipal,idEmpleado)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
-    
+
     try {
-        const response = await fetch("http://localhost:8080/api/aprobacionservicio/aprobacion/1", {
+        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/aprobacionPer/1/${idEmpleado}`, {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
