@@ -60,4 +60,13 @@ public class DetalleCompraImplementation implements DetalleCompraServiceI{
         return detalleCompraRepositoryI.findByCompra(compra);
     }
 
+    @Override
+    public List<Object[]> obtenerTop3InsumosVendidos() {
+        return detalleCompraRepositoryI.findTop3InsumosVendidos();
+    }
+
+    @Override
+    public List<Object[]> obtenerTop3InsumosMenosVendidos() {
+        return detalleCompraRepositoryI.findTop3InsumosMenosVendidos();
+    }
 }

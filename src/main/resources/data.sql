@@ -1,5 +1,3 @@
-INSERT INTO pais(nombre) VALUES ('Argentina');
-
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS actualizar_estado_servicio$$
@@ -15,11 +13,16 @@ BEGIN
     IF NEW.id_empleado IS NOT NULL THEN
             SET NEW.estado_orden_servicio_id = 3;
             SET id_empleado_asignado = NEW.id_empleado;
+
             
             SELECT numero_orden_trabajo + 1 INTO numeroSiguiente
-            FROM orden_Trabajo
+            FROM orden_trabajo
             ORDER BY numero_orden_trabajo DESC
             LIMIT 1;
+
+            IF numeroSiguiente IS NULL THEN
+                SET numeroSiguiente = 1;
+            END IF;
 
             SELECT id_servicio INTO id_servicio_Asignado
             FROM detalle_orden_servicio
@@ -33,21 +36,22 @@ BEGIN
 
 
             INSERT INTO detalle_orden_trabajo (fecha, id_orden_trabajo, id_estado, id_servicio)
-            VALUES(NULL, nueva_order_id, 1,id_servicio_Asignado);
+            VALUES(NULL, nueva_order_id, 3,id_servicio_Asignado);
             END IF;
 END$$
 DELIMITER ;
 
-DELIMITER$$
-CREATE PRCOCEDURE insert_aprobacion_servicio(
+DELIMITER $$
+DROP PROCEDURE IF EXISTS insertaprobacionservicio$$
+CREATE PROCEDURE insertaprobacionservicio(
     IN id_trabajo INT,
-    IN hallazgo VARCHAR,
-    IN solucion VARCHAR
+    IN hallazgoap VARCHAR(200),
+    IN solucionap VARCHAR(200)
 )
 BEGIN
     DECLARE id_cliente_aprob INT;
     DECLARE id_servicio_aprob INT;
-    DECLARE id_orden_servicio_aprob INT; 
+    DECLARE id_orden_servicio_aprob INT;
 
     SELECT id_servicio INTO id_servicio_aprob
     FROM detalle_orden_trabajo
@@ -56,14 +60,14 @@ BEGIN
 
     SELECT numero_orden_servicio INTO id_orden_servicio_aprob
     FROM orden_trabajo
-    WHERE id = id_orden_trabajo;
+    WHERE id = id_trabajo;
 
     SELECT id_cliente INTO id_cliente_aprob
     FROM orden_servicio
     WHERE numero_orden = id_orden_servicio_aprob;
 
     INSERT INTO aprovacion_servicio(estado_aprobacion_id, id_cliente, id_orden_trabajo,id_servicio,hallazgo,solucion)
-    VALUES (1,id_cliente_aprob,id_trabajo)
+    VALUES (4,id_cliente_aprob,id_trabajo,id_servicio_aprob,hallazgoap,solucionap);
 
 
 END$$

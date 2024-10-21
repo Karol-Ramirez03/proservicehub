@@ -19,7 +19,7 @@ public interface CompraRepositoryI extends CrudRepository<Compra,Long>{
     List<Compra> findByPersonaId(@Param("personaId") Personas personaId);
 
     @Procedure(name="addComprayDetalle")
-    void addComprayDetalle(@Param("idCliente")Long idCliente,@Param("idProducto")Long idProducto,@Param("cantidad")int cantidad);
+    void addComprayDetalle(@Param("idCliente")Long idCliente,@Param("idProducto")Long idProducto,@Param("cantidad")int cantidad,@Param("tipo_compra")int tipo);
 
     @Query("SELECT c FROM Compra c WHERE c.tipo_compra = ?1")
     List<Compra> findByTipoCompraId(@Param("tipoCompraId") TipoCompra tipoCompraId);

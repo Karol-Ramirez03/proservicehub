@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
+import com.servimax.proservicehub.domain.entity.EstadoAprobacion;
 import com.servimax.proservicehub.domain.entity.Personas;
 
 public interface AprobacionServicioServiceI {
@@ -14,5 +15,7 @@ public interface AprobacionServicioServiceI {
     Optional<AprobacionServicio> delete(Long id);
     List<AprobacionServicio> findByPersonasId(Personas personasId);
     List<AprobacionServicio> findByEstadoId(long estadoId);
-
+    void insertAprobacionServicio(Long idTrabajo,String hallazgoap,String solucionap);
+    List<AprobacionServicio> findByEstadoPersona(EstadoAprobacion estado_aprobacion,Long estadoId);
 }
+//mccm

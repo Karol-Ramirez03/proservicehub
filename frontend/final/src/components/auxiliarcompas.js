@@ -132,6 +132,8 @@ const addInfoEventListener = (shadowRoot) => {
                     console.error('Error:', error);
                 }
             }else if(e.target.id === "vender"){
+
+                
                 console.log("Vendido al mejor")
                 const idCompra = e.target.dataset.id; // Obtiene el id del botón que fue clickeado
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);

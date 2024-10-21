@@ -69,8 +69,8 @@ public class CompraImplemetation implements CompraServiceI{
     }
 
     @Override
-    public void addComprayDetalle(Long idCliente,Long idservicio,int cantidad) {
-        compraRepositoryI.addComprayDetalle(idCliente,idservicio,cantidad);
+    public void addComprayDetalle(Long idCliente,Long idservicio,int cantidad,int tipo) {
+        compraRepositoryI.addComprayDetalle(idCliente,idservicio,cantidad,tipo);
     }
 
     @Override
