@@ -54,6 +54,29 @@ BEGIN
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS addOrdenServicio;
+DELIMITER $$
+CREATE PROCEDURE addOrdenServicio(IN idCliente INT,IN cantidad INT, IN idInsumo INT)
+BEGIN
+	DECLARE nueva_compra_id INT;
+    DECLARE total_compra DOUBLE;
+    DECLARE precio DOUBLE;
+
+    SELECT precio_unitario INTO precio
+    FROM insumo 
+    WHERE id=idInsumo;
+
+    SET total_compra= precio*cantidad;
+    
+    INSERT INTO compra(total,fecha_orden,id_empleado,id_cliente) VALUES(2,NOW(),null,idCliente);
+    
+    SET nueva_orden_id = LAST_INSERT_ID();
+    
+    INSERT INTO detalle_orden_servicio(valor_servicio,id_orden_servicio,id_servicio) VALUES(0,nueva_orden_id,idServicio);
+    
+END $$
+DELIMITER ;
+
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS insertaprobacionservicio$$

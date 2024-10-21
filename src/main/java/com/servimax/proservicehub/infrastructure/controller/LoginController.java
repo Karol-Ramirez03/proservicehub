@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
+import com.servimax.proservicehub.application.service.RolServiceI;
 import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -30,6 +31,9 @@ public class LoginController {
 
     @Autowired
     private LoginServiceI loginServiceI;
+
+    @Autowired
+    private RolServiceI rolServiceI;
 
     @GetMapping
     public List<Login> list(){
@@ -98,6 +102,17 @@ public class LoginController {
     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     //     }
     // }
+
+
+    @GetMapping("/rol/{rolId}")
+    public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
+        List<Login> usuarios = loginServiceI.findByRolId(rolId);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay usuarios
+        }
+        
+        return ResponseEntity.ok(usuarios); // Retorna 200 con los usuarios
+    }
 
     @GetMapping("/usuario/{usuario}")
     public ResponseEntity<Optional<Login>> findByUsuario(@PathVariable String usuario) {
