@@ -129,56 +129,31 @@ END $$
 
 DELIMITER ;
 
--- DROP PROCEDURE IF EXISTS ejecutar_compra;
--- DELIMITER $$
+DROP PROCEDURE IF EXISTS actualizarStock;
+DELIMITER $$
+CREATE PROCEDURE actualizarStock(IN insumoId INT, IN cantidad INT)
+BEGIN
+    DECLARE stock_nuevo INT;
 
--- CREATE PROCEDURE ejecutar_compra(IN compraId INT)
--- BEGIN
---     DECLARE stock_insuficiente BOOLEAN DEFAULT FALSE;
---     DECLARE insumoId INT;
---     DECLARE cantidadA INT;
+    SELECT stock INTO stock_nuevo
+    FROM insumo 
+    WHERE id=insumoId;
 
---     DECLARE cur CURSOR FOR
---     SELECT insumo_id INTO insumoId, cantidad INTO cantidadA FROM detalle_compra WHERE compra_id = compraId;
+    SET stock_nuevo = stock_nuevo - cantidad;
 
---     DECLARE CONTINUE HANDLER FOR NOT FOUND SET stock_insuficiente = TRUE;
+    UPDATE insumo SET stock = stock_nuevo WHERE id=insumoId;
 
---     START TRANSACTION;
+END $$
 
---     OPEN cur;
+DELIMITER ;
 
---     read_loop: LOOP
---         FETCH cur INTO insumoId, cantidadA;
+DROP PROCEDURE IF EXISTS actualizarEstadoCompra;
+DELIMITER $$
+CREATE PROCEDURE actualizarEstadoCompra(IN compraId INT)
+BEGIN
 
---         IF stock_insuficiente THEN
---             LEAVE read_loop;
---         END IF;
+    UPDATE compra SET estado_compra_id = 1 WHERE id=compraId;
 
---         IF (SELECT stock FROM insumo WHERE id = insumoId) < cantidadA THEN 
---             SET stock_insuficiente = TRUE;
---             LEAVE read_loop; 
---         END IF;
+END $$
 
---         UPDATE insumo SET stock = stock - cantidadA WHERE id = insumoId;
---     END LOOP;
-
---     CLOSE cur;
-
---     IF stock_insuficiente THEN
-
---         ROLLBACK;
---         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Stock insuficiente para completar la compra.';
---     ELSE
-
---         UPDATE compra SET estado = 1 WHERE id = compraId;
---         COMMIT;
---     END IF;
--- END $$
-
--- DELIMITER ;
-
-
-
-
-
-
+DELIMITER ;

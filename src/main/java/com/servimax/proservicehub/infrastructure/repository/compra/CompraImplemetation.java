@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.CompraServiceI;
@@ -66,7 +65,6 @@ public class CompraImplemetation implements CompraServiceI{
         Compra compra = compraRepositoryI.findById(estadoId)
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        // Obtener el nombre del estado
         return compra.getEstado_compra().getNombre();
     }
 
@@ -80,15 +78,9 @@ public class CompraImplemetation implements CompraServiceI{
         return compraRepositoryI.findByTipoCompraId(tipoCompraId);
     }
 
-    // @Override
-    // public String ejecutar_compra(Long compraId){
-    //     try{
-    //         compraRepositoryI.ejecutar_compra(compraId);
-    //         return "Compra ejecutada con éxito.";
-
-    //     }catch (DataAccessException e){
-    //         return "Error al realizar la compra: " + e.getMessage();
-    //     }
-    // }
+    @Override
+    public void actualizarEstadocompra(int compraId){
+        compraRepositoryI.actualizarEstadocompra(compraId);
+    }
 
 }

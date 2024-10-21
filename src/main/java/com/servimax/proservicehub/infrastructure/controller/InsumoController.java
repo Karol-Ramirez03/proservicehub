@@ -94,4 +94,9 @@ public class InsumoController {
     public int validarStock(@RequestBody ValidarStockRequest request) {
         return InsumoServiceI.verificarStock(request.getInsumoId(), request.getCantidadSolicitada());
     }
+
+    @PostMapping("/actualizar-stock")
+    public void actualizarStock(@RequestBody ValidarStockRequest request) {
+        InsumoServiceI.actualizarStock(request.getInsumoId(), request.getCantidadSolicitada());
+    }
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,8 @@ public interface InsumoRepository extends CrudRepository<Insumo,Long>{
 
      @Query(value = "SELECT @estado", nativeQuery = true)
      Integer obtenerEstado();
+
+     @Procedure(name="actualizarStock")
+     void actualizarStock(@Param("insumoId")int insumoId,@Param("cantidad")int cantidad);
+
 }

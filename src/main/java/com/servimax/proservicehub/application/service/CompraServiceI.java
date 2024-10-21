@@ -3,6 +3,7 @@ package com.servimax.proservicehub.application.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.domain.entity.TipoCompra;
@@ -16,5 +17,5 @@ public interface CompraServiceI {
     String obtenerNombreEstado(Long id);
     void addComprayDetalle(Long idCliente,Long idservicio,int cantidad);
     List<Compra> findByTipoCompraId(TipoCompra tipoCompraId);
-    // String ejecutar_compra(Long compraId);
+    void actualizarEstadocompra(int compraId);
 }

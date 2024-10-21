@@ -24,7 +24,7 @@ public interface CompraRepositoryI extends CrudRepository<Compra,Long>{
     @Query("SELECT c FROM Compra c WHERE c.tipo_compra = ?1")
     List<Compra> findByTipoCompraId(@Param("tipoCompraId") TipoCompra tipoCompraId);
 
-    // @Procedure(name="ejecutar_compra")
-    // void ejecutar_compra(@Param("compraId")Long compraId);
+    @Procedure(name="actualizarEstadocompra")
+    void actualizarEstadocompra(@Param("compraId")int compraId);
 
 }

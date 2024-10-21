@@ -131,9 +131,9 @@ public class CompraController {
         return ResponseEntity.ok(compras); // Retorna 200 con las compras
     }
 
-    // @PostMapping("/ejecutar-compra/{id}")
-    // public String ejecutarCompraVerificarStock(@PathVariable Long id) {
-    //     return compraServiceI.ejecutar_compra(id);
-    // }
+    @PostMapping("/actualizarestadocompra/{compraid}")
+    public void actualizarEstadocompra(@PathVariable int compraid) {
+        compraServiceI.actualizarEstadocompra(compraid);
+    }
     
 }

@@ -65,4 +65,9 @@ public class InsumoImplementacion implements InsumoServiceI{
         return estado;
     }
 
+    @Override
+    public void actualizarStock(int insumoId,int cantidad){
+        InsumoRepository.actualizarStock(insumoId, cantidad);
+    }
+
 }
