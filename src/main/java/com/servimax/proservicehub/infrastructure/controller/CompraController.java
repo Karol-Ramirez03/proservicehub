@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.CompraServiceI;
 import com.servimax.proservicehub.application.service.PersonasServiceI;
+import com.servimax.proservicehub.application.service.TipoCompraServiceI;
+import com.servimax.proservicehub.domain.dto.CompraDTO;
 import com.servimax.proservicehub.domain.entity.Compra;
 import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.TipoCompra;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -34,6 +37,9 @@ public class CompraController {
 
     @Autowired
     private PersonasServiceI personasServiceI;
+
+    @Autowired
+    private TipoCompraServiceI tipoCompraServiceI;
 
     @GetMapping
     public List<Compra> list(){
@@ -102,6 +108,32 @@ public class CompraController {
         return ResponseEntity.ok(nombreEstado);
     }
 
+    @PostMapping("/agregar")
+    public ResponseEntity<Void> addOrdenSaddComprayDetalleervicio(@RequestBody CompraDTO compraDTO) {
+        compraServiceI.addComprayDetalle(compraDTO.getIdCliente(), compraDTO.getIdProducto(), compraDTO.getCantidad(), compraDTO.getTipo_compra());
+        return ResponseEntity.ok().build();
+    }
 
+    @GetMapping("/tipocompra/{tipoCompraId}")
+    public ResponseEntity<List<Compra>> findByTipoCompraId(@PathVariable Long tipoCompraId) {
+        // Primero, busca la persona por ID
+        Optional<TipoCompra> tipoCompra = tipoCompraServiceI.findById(tipoCompraId);
+        if (tipoCompra == null) {
+            return ResponseEntity.notFound().build(); // Retorna 404 si la persona no se encuentra
+        }
+        TipoCompra newTipo=tipoCompra.get();
+        // Busca las compras asociadas a la persona
+        List<Compra> compras = compraServiceI.findByTipoCompraId(newTipo);
+        if (compras.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no hay compras
+        }
+        
+        return ResponseEntity.ok(compras); // Retorna 200 con las compras
+    }
+
+    @PostMapping("/actualizarestadocompra/{compraid}")
+    public void actualizarEstadocompra(@PathVariable int compraid) {
+        compraServiceI.actualizarEstadocompra(compraid);
+    }
     
 }

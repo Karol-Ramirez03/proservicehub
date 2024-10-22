@@ -9,7 +9,7 @@ const botonCompra = document.querySelector(".boton-proveedor")
 const divApp=document.querySelector("#app")
 
 
-const clienteId=10255
+
 
 botonInsumo.addEventListener("click", (e) => {
     initInsumoPanel();
@@ -18,7 +18,7 @@ botonInsumo.addEventListener("click", (e) => {
 
 botonCompra.addEventListener("click", (e) => {
     divApp.innerHTML=""
-    dataProveedor(contenedor,clienteId)
+    dataProveedor(contenedor)
 });
 
 

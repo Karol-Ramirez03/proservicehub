@@ -68,7 +68,7 @@ button:active{
 
 
 .table-container {
-  width: 80%;
+  width: 85%;
   margin: 2% auto;
   background-color: white;
   border-radius: 8px;
@@ -86,7 +86,7 @@ button:active{
 }
 
 .nombres-table th, .nombres-table td {
-  padding: 1%;
+  padding: 1% 0.5%;
   text-align: left;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -98,6 +98,7 @@ button:active{
 
 .nombres-table td {
   color: #343a40;
+  text-wrap:wrap ;
 }
 
 .nombres-table tbody tr:hover {
@@ -157,13 +158,99 @@ width: 100%;
 padding: 3%;
 }
 
+#form-orden{
+  display: flex;
+  flex-wrap: wrap;  
+  width: 100%;
+}
+.formfila{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+}
+.formfila button{
+  padding: 5%;
+  width: auto;
+}
+.formfila .group{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.formfila input {
+  display: flex;
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1vw;
+  align-items: center;
+}
+.btn-cancelar{
+  background-color: #2563EB;
+  color: white;
+  width: 100%;
+  padding: 5%;
 
+}
+/* Estilos generales para la tarjeta */
+.tarjeta {
+  width: 25%;
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  text-align: center;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 2%;
+}
+
+.tituloinfo {
+  font-size: 1.4vw;
+  color: #333;
+  /* margin-bottom: 15px;  */
+}
+
+.imageninfo {
+  width: 15%; 
+  height: auto; 
+  object-fit: contain; /* Asegurar que la imagen se ajuste al contenedor */
+}
+
+.textoinfo {
+  font-size: 1vw;
+  color: #666;
+
+}
+
+.container-tarj{
+  padding: 5%;
+  display: flex;
+}
+.table-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap:2%;
+}
+.tarj{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+#newForm{
+  width: 40%;
+}
 @media (max-width:900px) {
   .table-container {
     width: 98%;
   }
   .nombres-table th, .nombres-table td {
-    font-size: 1.5vw;
+    font-size: 1.2vw;
+    word-wrap: break-word;
   }
   .container-button{
     width: 99%;
@@ -173,11 +260,24 @@ padding: 3%;
 
   
 #registroForm {
-/* border: 3px solid blue; */
-width: 60%;
+  /* border: 3px solid blue; */
+  width: 60%;
+}
 
+.tarjeta {
+  width: 40%;
 
 }
+
+.tituloinfo {
+  font-size: 2vw;
+}
+
+.textoinfo {
+  font-size: 1.8vw;
+
+}
+
 
 }
 @media (max-width:650px) {
@@ -185,7 +285,7 @@ width: 60%;
     width: 99%;
   }
   .nombres-table th, .nombres-table td {
-    font-size: 1.8vw;
+    font-size: 1.4vw;
   }
   button{
     background-color: white;
@@ -206,6 +306,11 @@ width: 60%;
   }
   .container-user h3{
     font-size: 3vw;
+  }
+
+  .tarjeta {
+    width: 60%;
+  
   }
 
 /* formulario Registro */

@@ -47,5 +47,13 @@ public class PersonasImplementacion implements PersonasServiceI{
         });
     }
 
-   
+    @Override
+    public List<Object[]> infoPersona(Long id) {
+        return personaRepository.findByEstadoEmpleado(id);
+    }
+
+    @Override
+    public List<Object[]> top3MasInversion() {
+        return personaRepository.findByTop3PersonasMasInversiones();
+    }
 }

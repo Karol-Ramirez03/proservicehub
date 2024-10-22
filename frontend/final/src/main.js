@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 
+
 class InicioForm extends LitElement {
 
   
@@ -126,8 +127,47 @@ class InicioForm extends LitElement {
       if(password!=data.contraseña){
         alert('Hubo un problema con tu contraseña intenta nuevamente.');
       }else{
-        console.log('Inicio de sesión exitoso:', data);
-        alert('Bienvenido.');
+        const idRol=data.rol.id;
+        localStorage.setItem("usuario",JSON.stringify(data))
+        switch(idRol){
+          case 1:
+            // window.open("http://localhost:5173/")
+            break;
+          case 2:
+            window.open("http://localhost:5173/cliente.html")
+            break;
+          case 3:
+            window.open("http://localhost:5173/recursosHumano.html")
+            break;
+          case 4:
+            window.open("http://localhost:5173/jefeBodega.html")
+            break;
+          case 5:
+            // window.open("http://localhost:5173/cliente.html")
+            break;
+          case 6:
+            window.open("http://localhost:5173/marketing.html")
+            break;
+          case 7:
+            // window.open("http://localhost:5173/cliente.html")
+            break;
+          case 8:
+            // window.open("http://localhost:5173/cliente.html")
+            break;
+          case 9:
+            window.open("http://localhost:5173/profesionalesServicios.html")
+            break;
+          case 10:
+            window.open("http://localhost:5173/proveedor.html")
+            break;
+          case 11:
+            window.open("http://localhost:5173/proveedores.html")
+            break;
+          case 12:
+            window.open("http://localhost:5173/jefeCompra.html")
+            break;
+        }
+        
       }
       
   

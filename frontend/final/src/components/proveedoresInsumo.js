@@ -25,7 +25,7 @@ const renderizarTablas = () => {
         <button id="closePanel">Cerrar</button>
         <form id="insumoForm">
             <label for="selectInsumo">Seleccionar Insumo:</label>
-            <select id="selectInsumo"></select>
+            <select id="selectInsumo" name="idInsumo"></select>
             <button type="submit">Agregar Insumo</button>
         </form>
     </div>
@@ -91,20 +91,21 @@ const _addEventInsumo = (shadowRoot) => {
                         fila.innerHTML = `
                             <th>Id Insumo</th>
                             <th>Nombre</th>
-                            <th>Cantidad</th>
-                            <th>Precio </th>
-                            <th><button style="position: relative; left: 20px;" class="cancelar" id="cerrar" data-id="${idPersona}">Cerrar</button></th>
+                            <th>Codigo interno</th>
+                            <th>Precio <button class="cancelar" id="cerrar" data-id="${idPersona}">Cerrar</button></th>
+                            <th></th>
                         `;
                         filas.appendChild(fila);
 
                         
                         detalles.forEach(detalle => {
+                            console.log(detalle)
                             const newFila = document.createElement("tr");
                             newFila.innerHTML = `
                                 <td>${detalle.insumo.id}</td>
                                 <td>${detalle.insumo.nombre}</td>
-                                <td>${detalle.cantidad}</td>
-                                <td>${detalle.precio_unitario}</td>
+                                <td>${detalle.insumo.codigo_interno}</td>
+                                <td>${detalle.insumo.precio_unitario}</td>
                                 <td></td>
                             `;
                             filas.appendChild(newFila);
@@ -152,14 +153,14 @@ const _addEventInsumo = (shadowRoot) => {
 
                 const insumoForm = document.getElementById("insumoForm");
                 insumoForm.onsubmit = async (event) => {
+                    const formData = new FormData(insumoForm);
+                    const idInsumo=formData.get("idInsumo")
                     event.preventDefault(); 
                     let num=Number(idPersona)
-                    let ser=Number(selectedInsumo)
-                    const selectedInsumo = selectInsumo.value;
                     const newPerIn={
                         "id":{
                             "idPersona": num,
-                            "idInsumo": ser,
+                            "idInsumo": idInsumo,
                         },
                         "servicio":{
                             "id":1 //cambiar esto
@@ -168,7 +169,7 @@ const _addEventInsumo = (shadowRoot) => {
                             "nro_Doc":idPersona
                         },
                         "insumo":{
-                            "id":ser
+                            "id":idInsumo
                         }
                     }
                     

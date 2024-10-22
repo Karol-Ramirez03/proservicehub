@@ -1,5 +1,8 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.DetalleOrdenServicioServiceI;
+import com.servimax.proservicehub.domain.dto.servicioDTO;
 import com.servimax.proservicehub.domain.entity.DetalleOrdenServicio;
+import com.servimax.proservicehub.domain.entity.Servicio;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
 import jakarta.validation.Valid;
@@ -89,5 +94,39 @@ public class DetalleOrdenServicioController {
             return ResponseEntity.noContent().build(); 
         }
         return ResponseEntity.ok(ordenServicios);
+    }
+
+    @GetMapping("/mas")
+    public List<servicioDTO> serviceMaspedido() {
+        List<servicioDTO> ListaTop3 = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date fechaInit =  cal.getTime();
+        List<Object[]> resultados = detalleOrdenServicioServiceI.servicioMasPedido(fechaInit);
+        for (Object[] resultado : resultados) {
+            Servicio result = (Servicio) resultado[0];
+            Long total = (Long) resultado[1];
+
+            servicioDTO newInsumo = new servicioDTO(result,total);
+            ListaTop3.add(newInsumo);
+        }
+        return ListaTop3;
+    }
+
+    @GetMapping("/menos")
+    public List<servicioDTO> serviceMenospedido() {
+        List<servicioDTO> ListaTop3 = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date fechaInit =  cal.getTime();
+        List<Object[]> resultados = detalleOrdenServicioServiceI.servicioMenosPedido(fechaInit);
+        for (Object[] resultado : resultados) {
+            Servicio result = (Servicio) resultado[0];
+            Long total = (Long) resultado[1];
+
+            servicioDTO newInsumo = new servicioDTO(result,total);
+            ListaTop3.add(newInsumo);
+        }
+        return ListaTop3;
     }
 }

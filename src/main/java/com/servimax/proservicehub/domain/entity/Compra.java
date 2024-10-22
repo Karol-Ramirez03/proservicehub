@@ -37,13 +37,15 @@ public class Compra {
     private EstadoCompra estado_compra;
 
     @ManyToOne
-    @JoinColumn(name = "cliente")
-    private Personas personas;
-    
+    private TipoCompra tipo_compra;
+
     @JsonIgnore
     @OneToMany(mappedBy = "compra")
     private List<DetalleCompra> detalleCompra;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente")
+    private Personas personas;
 
     @PrePersist
     protected void onCreate() {
@@ -51,6 +53,17 @@ public class Compra {
     }
 
     public Compra() {
+    }
+
+    public Compra(Long id, Timestamp fecha_compra, @NotNull(message = "No puede estar vacio") Double total,
+            EstadoCompra estado_compra, TipoCompra tipo_compra, List<DetalleCompra> detalleCompra, Personas personas) {
+        this.id = id;
+        this.fecha_compra = fecha_compra;
+        this.total = total;
+        this.estado_compra = estado_compra;
+        this.tipo_compra = tipo_compra;
+        this.detalleCompra = detalleCompra;
+        this.personas = personas;
     }
 
     public Compra(Long id, @NotNull(message = "No puede estar vacio") Timestamp fecha_compra, Double total,
@@ -82,6 +95,14 @@ public class Compra {
 
     public Timestamp getFecha_compra() {
         return fecha_compra;
+    }
+
+    public TipoCompra getTipo_compra() {
+        return tipo_compra;
+    }
+
+    public void setTipo_compra(TipoCompra tipo_compra) {
+        this.tipo_compra = tipo_compra;
     }
 
     public void setFecha_compra(Timestamp fecha_compra) {

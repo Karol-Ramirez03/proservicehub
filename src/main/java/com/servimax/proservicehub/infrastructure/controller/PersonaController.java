@@ -1,5 +1,6 @@
 package com.servimax.proservicehub.infrastructure.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.PersonasServiceI;
+import com.servimax.proservicehub.domain.dto.PersonaInversionDTO;
+import com.servimax.proservicehub.domain.dto.PersonasDTO;
+import com.servimax.proservicehub.domain.entity.Insumo;
 import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -71,4 +75,47 @@ public class PersonaController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/personas/{nroDoc}")
+    public ResponseEntity<?> viewDescrip(@PathVariable Long nroDoc) {
+        List<PersonasDTO> personasDTOList = new ArrayList<>();
+        List<Object[]> resultados = personaServiceI.infoPersona(nroDoc);
+        if (!resultados.isEmpty()) {
+            for (Object[] resultado : resultados) {
+                String nombre = (String) resultado[0];
+                String apellido = (String) resultado[1];
+                Insumo insumo = (Insumo) resultado[2];
+                Long cantidad = (Long) resultado[3];
+                Long telefono = (Long) resultado[4];
+                
+                PersonasDTO newInsumo = new PersonasDTO(nombre, apellido, insumo, cantidad,telefono);
+                personasDTOList.add(newInsumo);
+            }
+            
+            return ResponseEntity.ok(personasDTOList);
+        } 
+        return ResponseEntity.notFound().build();
+       
+    }
+    @GetMapping("/inversion")
+    public ResponseEntity<?> personaInversion() {
+        List<PersonaInversionDTO> personasDTOList = new ArrayList<>();
+        List<Object[]> resultados = personaServiceI.top3MasInversion();
+        if (!resultados.isEmpty()) {
+            for (Object[] resultado : resultados) {
+                String nombre = (String) resultado[0];
+                String apellido = (String) resultado[1];
+                Double cantidad = (Double) resultado[2];
+                Long tel = (Long) resultado[3];
+                
+                PersonaInversionDTO newInsumo = new PersonaInversionDTO(nombre, apellido,cantidad,tel);
+                personasDTOList.add(newInsumo);
+            }
+            
+            return ResponseEntity.ok(personasDTOList);
+        } 
+        return ResponseEntity.notFound().build();
+       
+    }
+    
 }

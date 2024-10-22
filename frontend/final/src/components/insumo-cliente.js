@@ -19,7 +19,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,idUsuario) => {
 const cuerpoData = document.querySelector(".tbody-info")
 
 console.log("funciona")
@@ -42,11 +42,11 @@ datos.forEach(dato => {
     cuerpoData.appendChild(fila2)
 });
     // Después de que se hayan agregado todas las filas, agrega el EventListener
-    agregarTrCompra(shadowRoot,datos);
+    agregarTrCompra(shadowRoot,datos,idUsuario);
 }
 
 // Función para agregar EventListeners a los botones
-const agregarTrCompra = (shadowRoot,datos) => {
+const agregarTrCompra = (shadowRoot,datos,idUsuario) => {
     const botonesComprar = document.querySelectorAll(".comprar");
     
     botonesComprar.forEach(boton => {
@@ -68,14 +68,14 @@ const agregarTrCompra = (shadowRoot,datos) => {
             <td><button class="orden" id="${idCompra}">Ordenar</button></td>
             
             `
-            agregarEventListener(shadowRoot,datos)
+            agregarEventListener(shadowRoot,datos,idUsuario)
 
             
         });
     });
 }
 
-const agregarEventListener=(shadowRoot,datos2)=>{
+const agregarEventListener=(shadowRoot,datos2,idUsuario)=>{
     const btnCancelar=shadowRoot.querySelectorAll(".cancelar")
     const btnOrden=shadowRoot.querySelectorAll(".orden")
 
@@ -94,55 +94,23 @@ const agregarEventListener=(shadowRoot,datos2)=>{
             const form=shadowRoot.querySelector(`.form-${idCompra}`)
             const datos = Object.fromEntries(new FormData(form).entries());
             const producto = JSON.parse(JSON.stringify(datos));
+
             const {cantidad}=producto
-            
-            console.log(cantidad)
+            const idInsumo =datos2[idCompra-1]["id"]
+
             const datosEnviar={
-                "total": 0.0,
-                "estado_compra": {
-                    "id": 2
-                },
-                "personas": {
-                    "nro_Doc": 1005539417
-                }
+                "idCliente":idUsuario,
+                "idProducto":idInsumo,
+                "cantidad":cantidad,
+                "tipo_compra":2
             }
             try {
-                const response = await fetch("http://localhost:8080/api/compra", {
+                const response = await fetch("http://localhost:8080/api/compra/agregar", {
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify(datosEnviar)
-                })
-                if(response.ok){
-                    console.log("Orden exitosa")
-                    fila.innerHTML=""
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            const precio= datos2[idCompra-1]["precio_unitario"]
-            console.log(precio)
-            const idInsumo =datos2[idCompra-1]["id"]
-            const datosEnviar2={
-                "cantidad": cantidad,
-                "precio_unitario": precio,
-                "insumo": {
-                    "id":idInsumo
-                },
-                "compra": {
-                    "id":1 //falta sacar el id de compra esta heavy
-                }
-            }
-            console.log(datosEnviar2)
-            try {
-                const response = await fetch("http://localhost:8080/api/detallecompra", {
-                    method:"POST",
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(datosEnviar2)
                 })
                 if(response.ok){
                     console.log("Orden exitosa")
@@ -160,7 +128,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
 
 
 
-export const dataInsumos = async (contenedorPrincipal)  => {
+export const dataInsumos = async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML =``
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
@@ -173,7 +141,7 @@ export const dataInsumos = async (contenedorPrincipal)  => {
         })
         if(response.ok){
             const insumos = await response.json();
-            renderizarDatos(insumos,shadowRoot);
+            renderizarDatos(insumos,shadowRoot,idUsuario);
         }
         
     } catch (error) {

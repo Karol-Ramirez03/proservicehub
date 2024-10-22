@@ -76,14 +76,11 @@ const _addEvent=(fila)=>{
     }
 }
 
-export const dataMisServicios= async (contenedorPrincipal,clienteId)  => {
+export const dataMisServicios= async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
-    const id=1005539417
-    var list=[]
-    var ordenList=[]
     try {
-        const response = await fetch(`http://localhost:8080/api/ordenservicio/persona/${id}`, {
+        const response = await fetch(`http://localhost:8080/api/ordenservicio/persona/${idUsuario}`, {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

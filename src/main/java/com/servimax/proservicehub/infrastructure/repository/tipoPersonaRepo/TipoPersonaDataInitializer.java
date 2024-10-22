@@ -18,8 +18,10 @@ public class TipoPersonaDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
     List<String> tipos = Arrays.asList(
-        "Natural",
-        "Juridico"
+        "Empleado",
+        "Cliente",
+        "Proveedor",
+        "Profesional"
     );
 
     for (String nombreTipo : tipos) {

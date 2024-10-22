@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.AprobacionServicioServiceI;
 import com.servimax.proservicehub.application.service.PersonasServiceI;
+import com.servimax.proservicehub.domain.dto.AprobacionDTO;
 import com.servimax.proservicehub.domain.entity.AprobacionServicio;
-import com.servimax.proservicehub.domain.entity.Compra;
+import com.servimax.proservicehub.domain.entity.EstadoAprobacion;
 import com.servimax.proservicehub.domain.entity.Personas;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -122,6 +123,26 @@ public class AprobacionServicioController {
             return ResponseEntity.noContent().build(); 
         }
         return ResponseEntity.ok(ordenServicios);
+    }
+
+    @GetMapping("/aprobacionPer/{estado_aprobacion}/{idempleado}")
+    public ResponseEntity<List<AprobacionServicio>> findByEstadoPersona(@PathVariable EstadoAprobacion estado_aprobacion,@PathVariable Long idempleado) {
+        List<AprobacionServicio> ordenServicios = aprobacionServicioServiceI.findByEstadoPersona(estado_aprobacion, idempleado);
+        if (ordenServicios.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(ordenServicios);
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<Void> insertAprobacionServicio(@RequestBody AprobacionDTO aprobacionDTO) {
+        try {
+            aprobacionServicioServiceI.insertAprobacionServicio(aprobacionDTO.getOrden_trabajo(), 
+                aprobacionDTO.getHallazgo(), aprobacionDTO.getSolucion());
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 }
