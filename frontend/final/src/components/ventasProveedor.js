@@ -129,12 +129,12 @@ const addInfoEventListener = (shadowRoot) => {
 };
 
 
-export const dataVentas = async (contenedorPrincipal,clienteId)  => {
+export const dataVentas = async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/compra/persona/1005539417", {
+        const response = await fetch(`http://localhost:8080/api/compra/persona/${idUsuario}`, {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'

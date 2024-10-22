@@ -46,12 +46,12 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
 
 }
 
-export const dataProveedorInsumos = async (contenedorPrincipal,clienteId)  => {
+export const dataProveedorInsumos = async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/123`, {
+        const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/${idUsuario}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'

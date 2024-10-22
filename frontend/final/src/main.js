@@ -161,7 +161,7 @@ class InicioForm extends LitElement {
             window.open("http://localhost:5173/proveedor.html")
             break;
           case 11:
-            window.open("http://localhost:5173/proveedor.html")
+            window.open("http://localhost:5173/proveedores.html")
             break;
           case 12:
             window.open("http://localhost:5173/jefeCompra.html")
