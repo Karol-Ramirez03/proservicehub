@@ -123,14 +123,14 @@ public class LoginController {
         return ResponseEntity.ok(login);
     }
 
-    @GetMapping("rol/{rolId}")
-    public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
-        List<Login> logins = loginServiceI.findByRolId(rolId);
-        if (logins.isEmpty()) {
-            return ResponseEntity.noContent().build(); 
-        }
-        return ResponseEntity.ok(logins);
-    }
+    // @GetMapping("rol/{rolId}")
+    // public ResponseEntity<List<Login>> findByRolId(@PathVariable Long rolId) {
+    //     List<Login> logins = loginServiceI.findByRolId(rolId);
+    //     if (logins.isEmpty()) {
+    //         return ResponseEntity.noContent().build(); 
+    //     }
+    //     return ResponseEntity.ok(logins);
+    // }
 
     
 }

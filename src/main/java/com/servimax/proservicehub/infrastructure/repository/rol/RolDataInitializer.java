@@ -235,10 +235,10 @@ public class RolDataInitializer implements CommandLineRunner{
             }
         }
 
-        for (String nombrePermiso : permisos) {
-            rolPermisoService.asignarPermisoARol("Admin", nombrePermiso);
-            rolPermisoService.asignarPermisoARol("Jefe_sistemas", nombrePermiso);
-        }
+
+        rolPermisoService.asignarPermisoARol("Admin", "READ_ALL_APROBACIONES");
+        rolPermisoService.asignarPermisoARol("Jefe_sistemas", "UPDATE_ONE_TIPO_TELEFONO");
+
         
         rolPermisoService.asignarPermisoARol("Cliente", "READ_ALL_APROBACIONES");
 }

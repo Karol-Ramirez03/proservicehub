@@ -4,16 +4,24 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
+import com.servimax.proservicehub.domain.dto.UserDTO;
 import com.servimax.proservicehub.domain.entity.Login;
+import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.infrastructure.utils.exceptiones.InvalidPasswordException;
 
 @Service
 public class LoginImplementation implements LoginServiceI{
 
     @Autowired 
     private LoginRepositoryI loginRepositoryI;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Login> findAll() {
@@ -63,4 +71,29 @@ public class LoginImplementation implements LoginServiceI{
     public List<Login> findByRolId(Long rolId) {
         return loginRepositoryI.findByRolId(rolId);
     }
+
+    @Override
+    public Login resgistroCliente(UserDTO newUser) {
+        // validatePassword(newUser);
+        Login usuario = new Login();
+        usuario.setContraseña(passwordEncoder.encode(newUser.getContraseña()));
+        usuario.setUsuario(newUser.getUsuario());
+        usuario.setRol(newUser.getRol());// areglar le debo pasar el rol a que hace referencia
+        usuario.setPersonas(newUser.getPersona_id());
+
+        return loginRepositoryI.save(usuario);
+    }
+
+    // private void validatePassword(UserDTO dto) {
+
+    //     if(!StringUtils.hasText(dto.getContraseña()) || !StringUtils.hasText(dto.getRepeatedPassword())){
+    //         throw new InvalidPasswordException("Passwords don't match");
+    //     }
+
+    //     if(!dto.getPassword().equals(dto.getRepeatedPassword())){
+    //         throw new InvalidPasswordException("Passwords don't match");
+    //     }
+
+    // }
+
 }

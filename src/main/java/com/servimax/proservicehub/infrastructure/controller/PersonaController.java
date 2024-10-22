@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class PersonaController {
     @Autowired
     private PersonasServiceI personaServiceI;
 
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping
     public List<Personas> list(){
         return personaServiceI.findAll();
@@ -55,6 +57,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(personaServiceI.save(persona));
     }
 
+    @PreAuthorize("hasAuthority('UPDATE_ONE_PERSONAS')")
     @PutMapping("/{nroDoc}")
     public ResponseEntity<?> update(@Valid @RequestBody Personas persona, @PathVariable Long nroDoc, BindingResult result) {
         Optional<Personas> personaOptional = personaServiceI.update(nroDoc, persona);
@@ -67,6 +70,7 @@ public class PersonaController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasAuthority('DISABLE_ONE_PERSONAS')")
     @DeleteMapping("/{nroDoc}")
     public ResponseEntity<?> delete(@PathVariable Long nroDoc) {
         Optional<Personas> personaOptional = personaServiceI.delete(nroDoc);
