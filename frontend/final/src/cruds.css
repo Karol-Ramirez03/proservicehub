@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     }
-    
+
     #app {
         min-height: auto;
         background-color: rgb(243, 243, 243);
@@ -40,6 +40,9 @@ body {
         padding: 1rem 1rem;
         border-radius: 0.75rem;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+     
     }
     
     .modal {

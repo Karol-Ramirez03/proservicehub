@@ -1,20 +1,41 @@
 import { initDynamicPanel } from "./prueba";
 import { initDynamicTable } from "./prueba";
 
-initDynamicPanel({
-    buttonText: '+ Registrar Insumo',
-    panelTitle: 'Agregar Nuevo Insumo',
-    submitButtonText: 'Registrar Insumo',
-    apiUrl: 'http://localhost:8080/api/insumo',
-    fields: [
-        { label: 'Código Interno', id: 'codigoInterno', type: 'text', apiKey: 'codigo_interno' },
-        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
-        { label: 'Precio', id: 'productPrice', type: 'number', apiKey: 'precio_unitario' },
-        { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
-        { label: 'Stock Mínimo', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
-        { label: 'Stock Máximo', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
+
+export const listaCruds=[
+    [{
+        buttonText: '+ Registrar Insumo',
+        panelTitle: 'Agregar Nuevo Insumo',
+        submitButtonText: 'Registrar Insumo',
+        apiUrl: 'http://localhost:8080/api/insumo',
+        fields: [
+            { label: 'Código Interno', id: 'codigoInterno', type: 'text', apiKey: 'codigo_interno' },
+            { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
+            { label: 'Precio', id: 'productPrice', type: 'number', apiKey: 'precio_unitario' },
+            { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
+            { label: 'Stock Mínimo', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
+            { label: 'Stock Máximo', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
+        ]
+    },{
+        apiUrl: 'http://localhost:8080/api/insumo',
+        fields: [
+            { label: 'ID', id: 'id', type: 'text', apiKey: 'id' },
+            { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
+            { label: 'Código Interno', id: 'codigo', type: 'text', apiKey: 'codigo_interno' },
+            { label: 'Precio', id: 'precio', type: 'number', apiKey: 'precio_unitario' },
+            { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
+            { label: 'Min Stock', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
+            { label: 'Max Stock', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
+        ]
+    }],
+    [
+
+    ],
+    [
+        
     ]
-});
+]
+
 
 // initDynamicPanel({
 //     buttonText: '+ Registrar Producto',
@@ -696,18 +717,7 @@ initDynamicPanel({
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-initDynamicTable({
-    apiUrl: 'http://localhost:8080/api/insumo',
-    fields: [
-        { label: 'ID', id: 'id', type: 'text', apiKey: 'id' },
-        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
-        { label: 'Código Interno', id: 'codigo', type: 'text', apiKey: 'codigo_interno' },
-        { label: 'Precio', id: 'precio', type: 'number', apiKey: 'precio_unitario' },
-        { label: 'Stock', id: 'stock', type: 'number', apiKey: 'stock' },
-        { label: 'Min Stock', id: 'stockMinimo', type: 'number', apiKey: 'stock_minimo' },
-        { label: 'Max Stock', id: 'stockMaximo', type: 'number', apiKey: 'stock_maximo' }
-    ]
-});
+
 
 // initDynamicTable({
 //     apiUrl: 'http://localhost:8080/api/producto',

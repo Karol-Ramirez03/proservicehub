@@ -29,7 +29,11 @@
     padding: 20px;
     display: none; /* Ocultar por defecto */
 }
- 
+  
+.small-image {
+  width: 50px;
+  height: 50px;
+} 
 .panel-content {
     display: flex;
     flex-direction: column;
