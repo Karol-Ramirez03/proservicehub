@@ -11,6 +11,7 @@ import com.servimax.proservicehub.domain.entity.Personas;
 
 @Repository
 public interface PersonasRepository extends CrudRepository<Personas,Long>{
+    
     @Query("SELECT p.nombre, p.apellido, d.insumo, SUM(d.cantidad) as totalCompras, tp.numero FROM Personas p LEFT JOIN p.telPersona tp JOIN p.compra c JOIN c.detalleCompra d WHERE p.Nro_Doc = ?1 GROUP BY p.nombre, p.apellido, d.insumo, tp.numero ORDER BY totalCompras DESC LIMIT 1")
     List<Object[]> findByEstadoEmpleado(@Param("idcliente")Long idcliente);
 

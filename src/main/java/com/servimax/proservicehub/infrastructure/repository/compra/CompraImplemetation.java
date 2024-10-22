@@ -61,6 +61,7 @@ public class CompraImplemetation implements CompraServiceI{
         return compraRepositoryI.findByPersonaId(personasId);
     }
 
+    @Override
     public String obtenerNombreEstado(Long estadoId) {
         Compra compra = compraRepositoryI.findById(estadoId)
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));

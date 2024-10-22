@@ -12,27 +12,27 @@ const botonCompra = document.querySelector(".boton-compra")
 const botonMisServicios = document.querySelector(".boton-mis-servicio")
 const botonAprobacion=document.querySelector(".aprobacion-servicios")
 
-
-const clienteId=10255
-
+const usuario=JSON.parse(localStorage.getItem("usuario"))
+const idUsuario=usuario.personas.nro_Doc
+console.log(idUsuario)
 botonInsumo.addEventListener("click", (e) => {
-    dataInsumos(contenedor)
+    dataInsumos(contenedor,idUsuario)
 });
 
 botonServicios.addEventListener("click", (e) => {
-    dataServicios(contenedor)
+    dataServicios(contenedor,idUsuario)
 });
 
 botonCompra.addEventListener("click", (e) => {
-    dataCompras(contenedor,clienteId)
+    dataCompras(contenedor,idUsuario)
 });
 
 botonMisServicios.addEventListener("click", (e) => {
-    dataMisServicios(contenedor)
+    dataMisServicios(contenedor,idUsuario)
 });
 
 botonAprobacion.addEventListener("click", (e) => {
-    dataAprobacion(contenedor)
+    dataAprobacion(contenedor,idUsuario)
 });
 
 
