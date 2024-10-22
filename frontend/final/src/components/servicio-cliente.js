@@ -20,7 +20,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,idUsuario) => {
     const cuerpoData = document.querySelector(".tbody-info");
 
     cuerpoData.innerHTML = "";
@@ -37,13 +37,13 @@ const renderizarDatos = (datos,shadowRoot) => {
         cuerpoData.appendChild(fila);
     });
 
-    addOrdenEvenListener(shadowRoot,datos)
+    addOrdenEvenListener(shadowRoot,datos,idUsuario)
 }
 
-const addOrdenEvenListener=(shadowRoot,datos)=>{
+const addOrdenEvenListener=(shadowRoot,datos,idUsuario)=>{
     const btnSolicitar=document.querySelectorAll(".solicitar");
 
-    const idCliente=1005539417
+    const idCliente=idUsuario
     btnSolicitar.forEach(boton=>{
         boton.addEventListener("click",async (e)=>{
             e.preventDefault()
@@ -70,7 +70,7 @@ const addOrdenEvenListener=(shadowRoot,datos)=>{
     })
 }
 
-export const dataServicios = async (contenedorPrincipal) => {
+export const dataServicios = async (contenedorPrincipal,idUsuario) => {
     contenedorPrincipal.innerHTML = "";
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas());
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
@@ -83,7 +83,7 @@ export const dataServicios = async (contenedorPrincipal) => {
         });
         if (response.ok) {
             const servicios = await response.json();
-            renderizarDatos(servicios,shadowRoot);
+            renderizarDatos(servicios,shadowRoot,idUsuario);
         }
     } catch (error) {
         console.error('Error:', error);

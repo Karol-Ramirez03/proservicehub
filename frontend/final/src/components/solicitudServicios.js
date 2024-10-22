@@ -182,12 +182,12 @@ const eliminarFila = (filas) => {
 
 
 
-export const dataAprobacion= async (contenedorPrincipal,clienteId)  => {
+export const dataAprobacion= async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
-        const response = await fetch("http://localhost:8080/api/aprobacionservicio/persona/10255", {
+        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/persona/${idUsuario}`, {
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
