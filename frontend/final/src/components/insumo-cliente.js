@@ -19,7 +19,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,idUsuario) => {
 const cuerpoData = document.querySelector(".tbody-info")
 
 console.log("funciona")
@@ -42,11 +42,11 @@ datos.forEach(dato => {
     cuerpoData.appendChild(fila2)
 });
     // Después de que se hayan agregado todas las filas, agrega el EventListener
-    agregarTrCompra(shadowRoot,datos);
+    agregarTrCompra(shadowRoot,datos,idUsuario);
 }
 
 // Función para agregar EventListeners a los botones
-const agregarTrCompra = (shadowRoot,datos) => {
+const agregarTrCompra = (shadowRoot,datos,idUsuario) => {
     const botonesComprar = document.querySelectorAll(".comprar");
     
     botonesComprar.forEach(boton => {
@@ -68,14 +68,14 @@ const agregarTrCompra = (shadowRoot,datos) => {
             <td><button class="orden" id="${idCompra}">Ordenar</button></td>
             
             `
-            agregarEventListener(shadowRoot,datos)
+            agregarEventListener(shadowRoot,datos,idUsuario)
 
             
         });
     });
 }
 
-const agregarEventListener=(shadowRoot,datos2)=>{
+const agregarEventListener=(shadowRoot,datos2,idUsuario)=>{
     const btnCancelar=shadowRoot.querySelectorAll(".cancelar")
     const btnOrden=shadowRoot.querySelectorAll(".orden")
 
@@ -99,7 +99,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
             const idInsumo =datos2[idCompra-1]["id"]
 
             const datosEnviar={
-                "idCliente":10255,
+                "idCliente":idUsuario,
                 "idProducto":idInsumo,
                 "cantidad":cantidad,
                 "tipo_compra":2
@@ -128,7 +128,7 @@ const agregarEventListener=(shadowRoot,datos2)=>{
 
 
 
-export const dataInsumos = async (contenedorPrincipal)  => {
+export const dataInsumos = async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML =``
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
@@ -141,7 +141,7 @@ export const dataInsumos = async (contenedorPrincipal)  => {
         })
         if(response.ok){
             const insumos = await response.json();
-            renderizarDatos(insumos,shadowRoot);
+            renderizarDatos(insumos,shadowRoot,idUsuario);
         }
         
     } catch (error) {

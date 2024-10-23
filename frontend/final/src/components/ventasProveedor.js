@@ -9,7 +9,7 @@ const renderizarTablas = () => {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Fecha de compra</th>
+                <th>Fecha de Venta</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -129,7 +129,7 @@ const addInfoEventListener = (shadowRoot) => {
 };
 
 
-export const dataCompras = async (contenedorPrincipal,idUsuario)  => {
+export const dataVentas = async (contenedorPrincipal,idUsuario)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;

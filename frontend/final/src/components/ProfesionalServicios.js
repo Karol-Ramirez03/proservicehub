@@ -42,23 +42,26 @@ class  PagInicioProfesionalServicios extends LitElement {
       const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
      
 
+      const usuario=JSON.parse(localStorage.getItem("usuario"))
+      const idUsuario=usuario.personas.nro_Doc
+      console.log(idUsuario)
+
       botonServicios.addEventListener("click", (e) => {
           e.preventDefault()
-          let idEmpleado = 10666;
-          dataserviciosAsignado(contenedorPrincipal,idEmpleado)
+          
+          dataserviciosAsignado(contenedorPrincipal,idUsuario)
 
         });
 
       botonTrabajos.addEventListener("click", (e) => {
         e.preventDefault()
-        let idEmpleado = 10666;
-        dataOrdenesTrabajo(contenedorPrincipal,idEmpleado)
+        
+        dataOrdenesTrabajo(contenedorPrincipal,idUsuario)
 
       });
       botonAprobado.addEventListener("click", (e) => {
           e.preventDefault()
-          let idEmpleado = 10666;
-          dataAprobado(contenedorPrincipal,idEmpleado)
+          dataAprobado(contenedorPrincipal,idUsuario)
         });
 
 

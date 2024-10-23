@@ -29,4 +29,8 @@ public interface InsumoRepository extends CrudRepository<Insumo,Long>{
      @Procedure(name="actualizarStock")
      void actualizarStock(@Param("insumoId")int insumoId,@Param("cantidad")int cantidad);
 
+     @Procedure(name="actualizarStockProveedor")
+     void actualizarStockProveedor(@Param("insumoId")int insumoId,@Param("cantidad")int cantidad);
+     
+
 }
