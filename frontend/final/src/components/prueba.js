@@ -35,31 +35,78 @@ export function initDynamicPanel(config) {
         const form = document.createElement('form');
         form.className = 'panel-body';
         form.addEventListener('submit', handleSubmit);
-
+        let fetchCount=0;
         config.fields.forEach(field => {
             const formGroup = document.createElement('div');
             formGroup.className = 'form-group';
-
             const label = document.createElement('label');
             label.textContent = field.label;
             label.setAttribute('for', field.id);
+            
+            if (field.label=="Persona" ||field.label=="Rol"  ||field.label=="Tipo Persona" ){
+                const select= document.createElement('select')
+                select.id=field.id;
+                select.innerHTML=`<option value="12" disabled selected>Seleccionar ${field.label}</option>`
+                fetch(`http://localhost:8080/api/${field.apiExtension}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('datos mios:', data);
+                    data.forEach(dato=>{
+                        let id=dato.id;
+                        let valor=dato.nombre;
+                        if(field.label=="Persona" ){
+                            id=dato.nro_Doc;
+                            valor=dato.nombre;
+                        }
+                        select.innerHTML+=`<option value="${id}">${valor}</option>`
+                    })
 
-            const input = document.createElement('input');
-            input.id = field.id;
-            input.placeholder = `Ingrese ${field.label.toLowerCase()}`;
-            input.type = field.type;
+                    console.log(select)
+                    formGroup.appendChild(label);
+                    formGroup.appendChild(select);
+                    form.appendChild(formGroup);
 
-            formGroup.appendChild(label);
-            formGroup.appendChild(input);
-            form.appendChild(formGroup);
+                    fetchCount+=1;
+                    if (fetchCount === config.totalFetches) {
+                        const submitButton = document.createElement('button');
+                        submitButton.textContent = config.submitButtonText || 'Registrar';
+                        submitButton.className = 'submit-button';
+                        submitButton.type = 'submit';
+                        form.appendChild(submitButton);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al almacenar el elemento:', error);
+                });
+
+            }else{
+                const input = document.createElement('input');
+                input.id = field.id;
+                input.placeholder = `Ingrese ${field.label.toLowerCase()}`;
+                input.type = field.type;
+
+                formGroup.appendChild(label);
+                formGroup.appendChild(input);
+                form.appendChild(formGroup);
+            }
+            
+            
         });
 
-        const submitButton = document.createElement('button');
-        submitButton.textContent = config.submitButtonText || 'Registrar';
-        submitButton.className = 'submit-button';
-        submitButton.type = 'submit';
+        
 
-        form.appendChild(submitButton);
+        if ( config.totalFetches=== 0) {
+            const submitButton = document.createElement('button');
+            submitButton.textContent = config.submitButtonText || 'Registrar';
+            submitButton.className = 'submit-button';
+            submitButton.type = 'submit';
+            form.appendChild(submitButton);
+        }
 
         panel.appendChild(header);
         panel.appendChild(form);
@@ -79,6 +126,7 @@ export function initDynamicPanel(config) {
         const nuevoElemento = {};
         config.fields.forEach(field => {
             const value = document.getElementById(field.id).value;
+            console.log(value)
             if (!value) {
                 alert(`Por favor, completa el campo: ${field.label}.`);
                 return;
