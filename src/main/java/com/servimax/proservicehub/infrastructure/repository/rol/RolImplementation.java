@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.RolServiceI;
@@ -50,6 +51,14 @@ public class RolImplementation implements RolServiceI{
             rolRepositoryI.delete(rols);
         });
         return ORol;
+    }
+
+    @Value("${security.default.role}")
+    private String defaultRole;
+
+    @Override
+    public Optional<Rol> findDefaultRole() {
+        return rolRepositoryI.findByNombre(defaultRole);
     }
 
 }
