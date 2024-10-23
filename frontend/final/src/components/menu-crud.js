@@ -26,7 +26,7 @@ class MenuCrud extends LitElement {
     color: rgb(10, 9, 9);
     padding: 4px;
     border: 1px solid #ccc;
-    width: 130px;
+    width: 125px;
     text-align: center;
     background-color: #f4f4f4;
     border-color: solid 3px;
@@ -56,38 +56,39 @@ class MenuCrud extends LitElement {
         super();
         this.menuItems = [
             { title: 'Insumos', imageUrl: 'public/edit.png', route: '/insumo',id:0 },
-            { title: 'Productos', imageUrl: 'public/edit.png', route: '/producto' },
-            { title: 'Rol', imageUrl: 'public/edit.png', route: '/rol' },
-            { title: 'Personas', imageUrl: 'public/edit.png', route: '/personas' },
-            { title: 'Ciudad', imageUrl: 'public/edit.png', route: '/ciudad' },
-            { title: 'Compra', imageUrl: 'public/edit.png', route: '/compra' },
-            { title: 'Detalle Compra', imageUrl: 'public/edit.png', route: '/detalle_compra' },
-            { title: 'Detalle Orden Servicio', imageUrl: 'public/edit.png', route: '/detalle_orden_servicio' },
-            { title: 'Detalle Orden Trabajo', imageUrl: 'public/edit.png', route: '/detalle_orden_trabajo' },
-            { title: 'Direccion', imageUrl: 'public/edit.png', route: '/direccion' },
-            { title: 'Email Persona', imageUrl: 'public/edit.png', route: '/email_persona' },
-            { title: 'Empresa', imageUrl: 'public/edit.png', route: '/empresa' },
-            { title: 'Aprovacion Servicio', imageUrl: 'public/edit.png', route: '/aprovacion_servicio' },
-            { title: 'Empresa Servicio', imageUrl: 'public/edit.png', route: '/empresa_servicio' },
-            { title: 'Estado Aprobacion', imageUrl: 'public/edit.png', route: '/estado_aprobacion' },
-            { title: 'Estado Compra', imageUrl: 'public/edit.png', route: '/estado_compra' },
-            { title: 'Estado Orden', imageUrl: 'public/edit.png', route: '/estado_orden' },
-            { title: 'Estado Orden Servicio', imageUrl: 'public/edit.png', route: '/estado_orden_servicio' },
-            { title: 'Login', imageUrl: 'public/edit.png', route: '/login' },
-            { title: 'Orden Servicio', imageUrl: 'public/edit.png', route: '/orden_servicio' },
-            { title: 'Orden Trabajo', imageUrl: 'public/edit.png', route: '/orden_trabajo' },
-            { title: 'Pais', imageUrl: 'public/edit.png', route: '/pais' },
-            { title: 'Persona Insumo', imageUrl: 'public/edit.png', route: '/persona_insumo' },
-            { title: 'Region', imageUrl: 'public/edit.png', route: '/region' },
-            { title: 'Servicio', imageUrl: 'public/edit.png', route: '/servicio' },
-            { title: 'Servicio Insumo', imageUrl: 'public/edit.png', route: '/servicio_insumo' },
-            { title: 'Sucursal', imageUrl: 'public/edit.png', route: '/sucursal' },
-            { title: 'Telefono Persona', imageUrl: 'public/edit.png', route: '/telefono_persona' },
-            { title: 'Telefono Sucursal', imageUrl: 'public/edit.png', route: '/telefono_sucursal' },
-            { title: 'Tipo Email', imageUrl: 'public/edit.png', route: '/tipo_email' },
-            { title: 'Tipo Empresa', imageUrl: 'public/edit.png', route: '/tipo_empresa' },
-            { title: 'Tipo Persona', imageUrl: 'public/edit.png', route: '/tipo_persona' },
-            { title: 'Tipo Telefono', imageUrl: 'public/edit.png', route: '/tipo_telefono' }
+            { title: 'Productos', imageUrl: 'public/edit.png', route: '/producto' ,id:1},
+            { title: 'Rol', imageUrl: 'public/edit.png', route: '/rol' ,id:2},
+            { title: 'Personas', imageUrl: 'public/edit.png', route: '/personas' ,id:3 },
+            { title: 'Ciudad', imageUrl: 'public/edit.png', route: '/ciudad' ,id:4},
+            { title: 'Compra', imageUrl: 'public/edit.png', route: '/compra' ,id:5},
+            { title: 'Detalle Compra', imageUrl: 'public/edit.png', route: '/detalle_compra' ,id:6},
+            { title: 'Detalle Orden Servicio', imageUrl: 'public/edit.png', route: '/detalle_orden_servicio' ,id:7},
+            { title: 'Detalle Orden Trabajo', imageUrl: 'public/edit.png', route: '/detalle_orden_trabajo' ,id:8},
+            { title: 'Direccion', imageUrl: 'public/edit.png', route: '/direccion' ,id:9},
+            { title: 'Email Persona', imageUrl: 'public/edit.png', route: '/email_persona' ,id:10},
+            { title: 'Empresa', imageUrl: 'public/edit.png', route: '/empresa' ,id:11},
+            { title: 'Aprovacion Servicio', imageUrl: 'public/edit.png', route: '/aprovacion_servicio' ,id:12},
+            { title: 'Empresa Servicio', imageUrl: 'public/edit.png', route: '/empresa_servicio' ,id:13},
+            { title: 'Estado Aprobacion', imageUrl: 'public/edit.png', route: '/estado_aprobacion' ,id:14},
+            { title: 'Estado Compra', imageUrl: 'public/edit.png', route: '/estado_compra' ,id:15},
+            { title: 'Estado Orden', imageUrl: 'public/edit.png', route: '/estado_orden' ,id:16},
+            { title: 'Estado Orden Servicio', imageUrl: 'public/edit.png', route: '/estado_orden_servicio' ,id:17 },
+            { title: 'Login', imageUrl: 'public/edit.png', route: '/login' ,id:18},
+            { title: 'Orden Servicio', imageUrl: 'public/edit.png', route: '/orden_servicio' ,id:19},
+            { title: 'Orden Trabajo', imageUrl: 'public/edit.png', route: '/orden_trabajo' ,id:20},
+            { title: 'Pais', imageUrl: 'public/edit.png', route: '/pais' ,id:21},
+            { title: 'Persona Insumo', imageUrl: 'public/edit.png', route: '/persona_insumo' ,id:22},
+            { title: 'Region', imageUrl: 'public/edit.png', route: '/region' ,id:23},
+            { title: 'Servicio', imageUrl: 'public/edit.png', route: '/servicio' ,id:24},
+            { title: 'Servicio Insumo', imageUrl: 'public/edit.png', route: '/servicio_insumo' ,id:25},
+            { title: 'Sucursal', imageUrl: 'public/edit.png', route: '/sucursal' ,id:26},
+            { title: 'Telefono Persona', imageUrl: 'public/edit.png', route: '/telefono_persona' ,id:27},
+            { title: 'Telefono Sucursal', imageUrl: 'public/edit.png', route: '/telefono_sucursal' ,id:28},
+            { title: 'Tipo Email', imageUrl: 'public/edit.png', route: '/tipo_email' ,id:29},
+            { title: 'Tipo Empresa', imageUrl: 'public/edit.png', route: '/tipo_empresa' ,id:30},
+            { title: 'Tipo Persona', imageUrl: 'public/edit.png', route: '/tipo_persona' ,id:31},
+            { title: 'Tipo Telefono', imageUrl: 'public/edit.png', route: '/tipo_telefono' ,id:32},
+            { title: 'Tipo Compra', imageUrl: 'public/edit.png', route: '/tipo_compra' ,id:33}
             
         ];
     }
@@ -122,3 +123,5 @@ class MenuCrud extends LitElement {
 }
 
 customElements.define('menu-crud', MenuCrud);
+
+
