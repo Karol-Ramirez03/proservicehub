@@ -21,7 +21,7 @@ public class EstadoOrden {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank(message = "No puedes ser vacio nombre")
+    @NotBlank(message = "No puedes ser vacio")
     @Column
     private String nombre;
 

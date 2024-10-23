@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "empresa_servicio")
@@ -16,6 +17,7 @@ public class EmpresaServicio {
     EmpresaServicioPk id;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private Double valorServicio;
 
     @ManyToOne
@@ -28,6 +30,15 @@ public class EmpresaServicio {
     @JoinColumn(name = "id_servicio", insertable = false, updatable = false)
     private Servicio servicio;
 
+    public EmpresaServicio() {
+    }
+
+    public EmpresaServicio(EmpresaServicioPk id, Double valorServicio, Sucursal sucursal, Servicio servicio) {
+        this.id = id;
+        this.valorServicio = valorServicio;
+        this.sucursal = sucursal;
+        this.servicio = servicio;
+    }
 
     public Double getValorServicio() {
         return valorServicio;

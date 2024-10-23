@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "aprovacion_servicio")
@@ -18,27 +19,34 @@ public class AprobacionServicio {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_orden_trabajo")
     private OrdenTrabajo orden_trabajo;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_cliente")
     private Personas personas;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_servicio")
     private Servicio servicio;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String hallazgo;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String solucion;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String motivoRechazo;
     
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private EstadoAprobacion estado_aprobacion;
 
     public AprobacionServicio() {

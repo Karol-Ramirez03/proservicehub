@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="login")
@@ -18,19 +19,21 @@ public class Login {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "no puede estar vacio")
     @Column(unique=true)
     private String usuario;
 
-    @NotBlank
+    @NotBlank(message = "no puede estar vacio")
     @Column(unique=true)
     private String contraseña;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_rol")
     private Rol rol;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_persona")
     private Personas personas;
 

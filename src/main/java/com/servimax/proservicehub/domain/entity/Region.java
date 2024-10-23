@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "region")
@@ -22,9 +24,11 @@ public class Region {
     private Long id;
 
     @Column
+    @NotBlank(message = "No puede estar vacio")
     private String nombre;
     
     @ManyToOne
+    @NotNull(message = "No puede estar vacio")
     private Pais pais;
 
     @JsonIgnore

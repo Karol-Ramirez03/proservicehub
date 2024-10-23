@@ -1,6 +1,7 @@
 package com.servimax.proservicehub.domain.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,12 +27,12 @@ public class Sucursal {
     private Long id;
 
     @Column
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotNull(message = "No puedes ser vacio")
     @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     private String nombre;
 
     @Column
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotNull(message = "No puedes ser vacio")
     @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     private String nit;
 
@@ -38,7 +40,7 @@ public class Sucursal {
     private Timestamp fecha_creacion;
 
     @ManyToOne
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotNull(message = "No puedes ser vacio")
     private Direccion direccion;
 
     @ManyToOne
@@ -56,6 +58,12 @@ public class Sucursal {
     @JsonIgnore
     @OneToMany(mappedBy = "sucursal")
     private List<TelSucursal> sucursales;
+
+     @PrePersist
+    protected void onCreate() {
+        this.fecha_creacion = new Timestamp(new Date().getTime());
+    }
+
 
     public Long getId() {
         return id;
