@@ -36,11 +36,11 @@ INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth');
 
 
 
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_APROBACIONES", '', 'GET', false, 1);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_APROBACION", '/[0-9]*', 'GET', false, 1);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_APROBACION", '', 'POST', false, 1);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_APROBACION", '/[0-9]*', 'PUT', false, 1);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_APROBACION", '/[0-9]*', 'DELETE', false, 1);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_APROBACIONES", '', 'GET', false, 1); 
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_APROBACION", '/[0-9]*', 'GET', false, 1); 
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_APROBACION", '', 'POST', false, 1); 
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_APROBACION", '/[0-9]*', 'PUT', false, 1); 
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_APROBACION", '/[0-9]*', 'DELETE', false, 1); 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_APROBACION_PERSONAS", '/persona/[0-9]*', 'GET', false, 1);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_APROBACION_ESTADO", '/aprobacion/[0-9]*', 'GET', false, 1);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_APROBACION_ESTADO_PERSONA", '/aprobacionPer/[0-9]*/[0-9]*', 'GET', false, 1);
@@ -111,7 +111,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_EMPRESA_SERVICIO", '/[0-9]*/[0-9]*', 'GET', false, 10);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_EMPRESA_SERVICIO", '', 'POST', false, 10);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_EMPRESA_SERVICIO", '/[0-9]*/[0-9]*', 'PUT', false, 10);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_EMPRESA_SERVICIO", '/[0-9]*/[0-9]*', 'DELETE', false, 10);+56
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_EMPRESA_SERVICIO", '/[0-9]*/[0-9]*', 'DELETE', false, 10);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_ESTADO_APROBACION", '', 'GET', false, 11);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_ESTADO_APROBACION", '/[0-9]*', 'GET', false, 11);
@@ -259,6 +259,8 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('VALIDATE-TOKEN','/validate-token', 'GET', true,33);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('READ_MY_PROFILE','/profile','GET', false, 33);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('LOGOUT','/logout', 'POST', true, 33);
+
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_INSUMO_PERSONA", 'insumos/[0-9]*', 'GET', false, 20);
 
 
  -- rol admin
@@ -453,6 +455,53 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 187);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 190);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 191);
+
+-- rol cliente
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 4);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 6);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 20);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 21);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 22);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 30);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 34);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 88);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 107);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 109);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 110);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 143);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 144);
+
+-- rol jefe recursos humanos
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 38);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 42);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 98);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 128);
+
+-- rol jefe bodega
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (4, 88);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (4, 90);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (4, 91);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (4, 102);
+
+-- rol jefe inventario
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (5, 88);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (5, 90);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (5, 91);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (5, 102);
+
+-- rol marketing
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 31);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 32);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 40);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 41);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 131);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 132)
 
 -- rol jefe sistemas 
 
@@ -839,3 +888,39 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 187);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 190);
+
+-- rol profesional
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (9, 8);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (9, 9);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (9, 39);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (9, 47);
+
+-- rol axiliar bodega
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 21);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 22);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 23);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 24);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 30);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 89);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 93);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 94);
+
+-- rol proveedor
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 20);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 21);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 24);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 30);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 95);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 192);
+
+-- rol jefe compra
+
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 88);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 98);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 102);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 123);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 128);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 192);
