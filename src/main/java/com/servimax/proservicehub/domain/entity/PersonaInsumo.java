@@ -31,6 +31,18 @@ public class PersonaInsumo {
     @JoinColumn(name = "id_Insumo", insertable = false, updatable = false)
     private Insumo insumo;
 
+    public PersonaInsumo() {
+    }
+
+    public PersonaInsumo(PersonaInsumoPk id, @NotNull(message = "No puede estar vacio") Servicio servicio,
+            @NotNull(message = "No puede estar vacio") Personas personas,
+            @NotNull(message = "No puede estar vacio") Insumo insumo) {
+        this.id = id;
+        this.servicio = servicio;
+        this.personas = personas;
+        this.insumo = insumo;
+    }
+
     public PersonaInsumoPk getId() {
         return id;
     }

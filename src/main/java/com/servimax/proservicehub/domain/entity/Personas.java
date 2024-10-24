@@ -33,6 +33,12 @@ public class Personas {
     @Column(nullable = false,updatable = false)
     private Timestamp fechaRegistro;
 
+    @ManyToOne
+    private Sucursal sucursal;
+
+    @ManyToOne
+    private TipoPersona tipoPersona;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "personas")
     private List<TelPersona> telPersona;
@@ -69,11 +75,10 @@ public class Personas {
     @OneToMany(mappedBy = "personas")
     private List<Login> login;
 
-    @ManyToOne
-    private Sucursal sucursal;
 
-    @ManyToOne
-    private TipoPersona tipoPersona;
+    public Personas(Long nro_Doc) {
+        Nro_Doc = nro_Doc;
+    }
 
     @PrePersist
     protected void onCreate() {

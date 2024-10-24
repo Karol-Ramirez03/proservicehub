@@ -43,7 +43,13 @@ export function initDynamicPanel(config) {
             label.textContent = field.label;
             label.setAttribute('for', field.id);
             
-            if (field.label=="Persona" ||field.label=="Rol"  ||field.label=="Tipo Persona" ){
+            if (field.label=="Persona" ||field.label=="Rol"  ||field.label=="Tipo de Persona" ||field.label=="Sucursal" 
+                ||field.label=="Estado Compra" ||field.label=="Cliente"  ||field.label=="Tipo Compra"  ||field.label=="Region" 
+                ||field.label=="Insumo" ||field.label=="Compra" ||field.label=="Orden de Servicio" ||field.label=="Servicio" 
+                ||field.label=="Orden de Trabajo" ||field.label=="Estado de Orden" ||field.label=="Ciudad" ||field.label=="Tipo de Email"
+                ||field.label=="Tipo de Empresa" ||field.label=="Estado de Aprobación" ||field.label=="Empleado" ||field.label=="Estado de la Orden" 
+                ||field.label=="Proveedor" 
+            ){
                 const select= document.createElement('select')
                 select.id=field.id;
                 select.innerHTML=`<option value="12" disabled selected>Seleccionar ${field.label}</option>`
@@ -59,7 +65,7 @@ export function initDynamicPanel(config) {
                     data.forEach(dato=>{
                         let id=dato.id;
                         let valor=dato.nombre;
-                        if(field.label=="Persona" ){
+                        if(field.label=="Persona" ||field.label=="Cliente" ||field.label=="Empleado" ||field.label=="Proveedor"  ){
                             id=dato.nro_Doc;
                             valor=dato.nombre;
                         }
@@ -238,7 +244,9 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
+                    
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -260,6 +268,7 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
                 } else {
                     console.error('Error al eliminar:', response.statusText);

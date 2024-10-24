@@ -11,15 +11,18 @@ const btnPendiente=document.querySelector(".boton-pendiente")
 
 
 // initProveedorPanel();
+const usuario=JSON.parse(localStorage.getItem("usuario"))
+const idUsuario=usuario.personas.nro_Doc
+console.log(idUsuario)
 
 botonProInsumo.addEventListener("click", (e) => {
-    dataProveedorInsumos(contenedor)
+    dataProveedorInsumos(contenedor,idUsuario)
 });
 
 btnVentas.addEventListener("click",(e)=>{
-    dataVentas(contenedor)
+    dataVentas(contenedor,idUsuario)
 })
 
 btnPendiente.addEventListener("click",(e)=>{
-    dataVentasPendiente(contenedor)
+    dataVentasPendiente(contenedor,idUsuario)
 })
