@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
+import com.servimax.proservicehub.application.service.auth.AuthenticationService;
+import com.servimax.proservicehub.domain.dto.RegisterUser;
+import com.servimax.proservicehub.domain.dto.UserDto;
 import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.validations.ValidatedFields;
 
@@ -116,5 +119,12 @@ public class LoginController {
         return ResponseEntity.ok(logins);
     }
 
-    
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @PostMapping("/post")
+    public ResponseEntity<RegisterUser> registerOne(@RequestBody @Valid UserDto newUser){
+        RegisterUser registeredUser = authenticationService.registerOneCustomer(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+    }
 }

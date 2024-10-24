@@ -2,18 +2,62 @@ package com.servimax.proservicehub.infrastructure.repository.login;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.util.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
+import com.servimax.proservicehub.application.service.RolServiceI;
+import com.servimax.proservicehub.domain.dto.UserDto;
 import com.servimax.proservicehub.domain.entity.Login;
+import com.servimax.proservicehub.domain.entity.Rol;
+import com.servimax.proservicehub.infrastructure.utils.exceptions.InvalidPasswordException;
+import com.servimax.proservicehub.infrastructure.utils.exceptions.ObjectNotFoundException;
 
 @Service
 public class LoginImplementation implements LoginServiceI{
 
     @Autowired 
     private LoginRepositoryI loginRepositoryI;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RolServiceI roleService;
+
+    @Override
+    public Login registrOneCustomer(UserDto newUser) {
+        validatePassword(newUser);
+
+        Login user = new Login();
+        user.setContraseña(passwordEncoder.encode(newUser.getPassword()));// Codifica la contraseña
+        user.setUsuario(newUser.getUsername()); // Establece el nombre de usuario
+        Rol defaultRole = roleService.findDefaultRole() // Busca un rol predeterminado
+                        .orElseThrow(() -> new ObjectNotFoundException("Role not found. Default Role"));
+        user.setRol(defaultRole); // Asigna el rol predeterminado al nuevo usuario
+
+        return loginRepositoryI.save(user); // Guarda el usuario en la base de datos
+    }
+
+    @Override
+    public Optional<Login> findOneByUsername(String username) {
+        return loginRepositoryI.findByUsuario(username);
+    }
+    
+    private void validatePassword(UserDto dto) {
+
+        if(!StringUtils.hasText(dto.getPassword()) || !StringUtils.hasText(dto.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
+
+        if(!dto.getPassword().equals(dto.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
+
+    }
 
     @Override
     public List<Login> findAll() {

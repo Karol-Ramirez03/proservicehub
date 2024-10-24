@@ -12,5 +12,8 @@ public interface  RolServiceI {
     Rol save(Rol rol);
     Optional<Rol> update(Long id, Rol rol);
     Optional<Rol> delete(Long id);
+
+    Optional<Rol> findDefaultRole();
+
 }
 
