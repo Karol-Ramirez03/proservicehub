@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="rol")
@@ -21,6 +22,7 @@ public class Rol {
     private Long id;
 
     @Column
+    @NotBlank(message = "No puede estar vacio")
     private String nombre;
 
     @JsonIgnore

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "estado_aprobacion")
@@ -21,6 +22,7 @@ public class EstadoAprobacion {
     private Long id;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String nombre;
 
     @JsonIgnore

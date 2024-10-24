@@ -18,16 +18,16 @@ public class DetalleOrdenServicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "no puede estar vacio")
     @Column
     private Double valor_servicio;
 
-    @NotNull
+    @NotNull(message = "no puede estar vacio")
     @ManyToOne
     @JoinColumn(name="id_orden_servicio")
     private OrdenServicio id_orden_servicio;
 
-    @NotNull
+    @NotNull(message = "no puede estar vacio")
     @ManyToOne
     @JoinColumn(name="id_servicio")
     private Servicio servicio;

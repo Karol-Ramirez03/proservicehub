@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tipo_email")
@@ -21,6 +22,7 @@ public class TipoEmail {
     private long id; 
 
     @Column
+    @NotBlank(message = "no puede ser null")
     private String nombre;
 
     @JsonIgnore
