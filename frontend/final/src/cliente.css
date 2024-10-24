@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
+  
 }
 
   /* body {
@@ -51,6 +52,7 @@
   }
   .principal{
     background-color: #F3F4F6;
+    
   }
   .container-user{
     display: flex;
@@ -67,6 +69,7 @@
   }
   
   .container-principal{
+    margin: 0;
     padding: 2%;
     display: flex;
     flex-direction:column;

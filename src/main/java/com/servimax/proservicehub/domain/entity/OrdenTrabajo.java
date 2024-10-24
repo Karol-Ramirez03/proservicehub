@@ -33,10 +33,6 @@ public class OrdenTrabajo {
     @Column
     private Time hora_asignacion;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "orden_trabajo")
-    private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
-
     @ManyToOne
     @JoinColumn(name="id_empleado")
     private Personas personas;
@@ -44,6 +40,10 @@ public class OrdenTrabajo {
     @ManyToOne
     @JoinColumn(name="numero_orden_servicio")
     private OrdenServicio ordenServicio;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "orden_trabajo")
+    private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "orden_trabajo")
