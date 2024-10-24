@@ -541,6 +541,7 @@ export const listaCruds=[
       ] 
     }],
     [{
+      totalFetches:1,
       buttonText: '+ Registrar Region ',
       panelTitle: 'Agregar Nueva Region ',
       submitButtonText: 'Registrar Region',
@@ -548,20 +549,24 @@ export const listaCruds=[
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
-          required: true, validationMessage: 'El nombre no puede estar vacío' 
-        },
-        { label: 'País', id: 'pais', type: 'number', apiKey: 'pais', 
-          options: [
-            { value: '1', label: 'País 1' }, 
-            { value: '2', label: 'País 2' }  
-          ],
+          required: true, validationMessage: 'El nombre no puede estar vacío' },
+        { label: 'País', id: 'pais', type: 'number', apiKey: 'pais', apiExtension:'pais',
           required: true, validationMessage: 'Debe seleccionar un país'
         }
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/region',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+          required: true, validationMessage: 'El nombre no puede estar vacío' },
+        { label: 'País', id: 'pais', type: 'number', apiKey: 'pais', apiExtension:'pais',
+          required: true, validationMessage: 'Debe seleccionar un país'
+        }
+      ]  
     }],
     [{
+      totalFetches:0,
       buttonText: '+ Registrar Servicio ',
       panelTitle: 'Agregar Nuevo Servicio ',
       submitButtonText: 'Registrar Servicio',
@@ -569,168 +574,222 @@ export const listaCruds=[
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
-          required: true, validationMessage: 'El nombre no puede estar vacío',
-          maxLength: 50 
-        },
+          required: true, validationMessage: 'El nombre no puede estar vacío', maxLength: 50 },
         { label: 'Requiere Insumo', id: 'requiere_insumo', type: 'checkbox', apiKey: 'requiere_insumo', 
-          required: true, validationMessage: 'Debe indicar si requiere insumo' 
-        },
+          required: true, validationMessage: 'Debe indicar si requiere insumo'   },
         { label: 'Tiempo de Ejecución', id: 'tiempo_ejecucion', type: 'text', apiKey: 'tiempo_ejecucion', 
-          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío'
-        }
+          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío' }
       ]
     },{
-        
-    }],
-    [{
-      buttonText: '+ Registrar Servicio ',
-      panelTitle: 'Agregar Nuevo Servicio ',
-      submitButtonText: 'Registrar Servicio',
-      apiUrl: 'http://localhost:8080/api/servicioinsumo',
+      apiUrl: 'http://localhost:8080/api/servicio',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
-          required: true, validationMessage: 'El nombre no puede estar vacío',
-          maxLength: 50 
-        },
+          required: true, validationMessage: 'El nombre no puede estar vacío', maxLength: 50 },
         { label: 'Requiere Insumo', id: 'requiere_insumo', type: 'checkbox', apiKey: 'requiere_insumo', 
-          required: true, validationMessage: 'Debe indicar si requiere insumo' 
-        },
+          required: true, validationMessage: 'Debe indicar si requiere insumo'   },
         { label: 'Tiempo de Ejecución', id: 'tiempo_ejecucion', type: 'text', apiKey: 'tiempo_ejecucion', 
-          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío'
-        }
+          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío' }
+      ]  
+    }],
+    [{
+      totalFetches:2,
+      buttonText: '+ Registrar Servicio Insumo ',
+      panelTitle: 'Agregar Nuevo Servicio Insumo',
+      submitButtonText: 'Registrar Servicio Insumo',
+      apiUrl: 'http://localhost:8080/api/servicioinsumo',
+      fields: [        
+        { label: 'Cantidad', id: 'cantidad', type: 'number', apiKey: 'cantidad', 
+          required: true, validationMessage: 'El nombre no puede estar vacío',  maxLength: 50 },
+        { label: 'Insumo', id: 'insumo', type: 'number', apiKey: 'insumo', apiExtension:'insumo',
+          required: true, validationMessage: 'Debe indicar si requiere insumo' },
+        { label: 'Servicio', id: 'id_servicio', type: 'number', apiKey: 'servicio', apiExtension:'servicio',
+          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío' }
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/servicioinsumo',
+      fields: [        
+        { label: 'Cantidad', id: 'cantidad', type: 'number', apiKey: 'cantidad', 
+          required: true, validationMessage: 'El nombre no puede estar vacío',  maxLength: 50 },
+        { label: 'Insumo', id: 'insumo', type: 'number', apiKey: 'insumo', apiExtension:'insumo',
+          required: true, validationMessage: 'Debe indicar si requiere insumo' },
+        { label: 'Servicio', id: 'id_servicio', type: 'number', apiKey: 'servicio', apiExtension:'servicio',
+          required: true, validationMessage: 'El tiempo de ejecución no puede estar vacío' }
+      ]  
     }],
     [{
+      totalFetches:2,
       buttonText: '+ Registrar Sucursal',
-  panelTitle: 'Agregar Nueva Sucursal',
-  submitButtonText: 'Registrar Sucursal',
-  apiUrl: 'http://localhost:8080/api/sucursal',
-  fields: [          
-    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
-      required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres', 
-      minLength: 1, maxLength: 100 
-    },
-    { label: 'NIT', id: 'nit', type: 'text', apiKey: 'nit', 
-      required: true, validationMessage: 'El NIT no puede estar vacío y debe tener entre 1 y 100 caracteres', 
-      minLength: 1, maxLength: 100 
-    },
-    { label: 'Fecha de Creación', id: 'fecha_creacion', type: 'datetime-local', apiKey: 'fecha_creacion', 
-      required: false 
-    },
-    { label: 'Dirección', id: 'direccion', type: 'number', apiKey: 'direccion', 
-      required: true, validationMessage: 'Debe seleccionar una dirección',
-      options: [] 
-    },
-    { label: 'Empresa', id: 'empresa', type: 'number', apiKey: 'empresa', 
-      required: true, validationMessage: 'Debe seleccionar una empresa',
-      options: [] 
-    }
-  ]
+      panelTitle: 'Agregar Nueva Sucursal',
+      submitButtonText: 'Registrar Sucursal',
+      apiUrl: 'http://localhost:8080/api/sucursal',
+      fields: [          
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+          required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+          minLength: 1, maxLength: 100    },
+        { label: 'NIT', id: 'nit', type: 'text', apiKey: 'nit', 
+          required: true, validationMessage: 'El NIT no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+          minLength: 1, maxLength: 100    },
+        { label: 'Fecha de Creación', id: 'fecha_creacion', type: 'datetime-local', apiKey: 'fecha_creacion', 
+          required: false   },
+        { label: 'Dirección', id: 'direccion', type: 'number', apiKey: 'direccion', apiExtension:'direccion',
+          required: true, validationMessage: 'Debe seleccionar una dirección', },
+        { label: 'Empresa', id: 'empresa', type: 'number', apiKey: 'empresa', apiExtension:'empresa',
+          required: true, validationMessage: 'Debe seleccionar una empresa',}
+      ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/sucursal',
+      fields: [          
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', 
+          required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+          minLength: 1, maxLength: 100    },
+        { label: 'NIT', id: 'nit', type: 'text', apiKey: 'nit', 
+          required: true, validationMessage: 'El NIT no puede estar vacío y debe tener entre 1 y 100 caracteres', 
+          minLength: 1, maxLength: 100    },
+        { label: 'Fecha de Creación', id: 'fecha_creacion', type: 'datetime-local', apiKey: 'fecha_creacion', 
+          required: false   },
+        { label: 'Dirección', id: 'direccion', type: 'number', apiKey: 'direccion', apiExtension:'direccion',
+          required: true, validationMessage: 'Debe seleccionar una dirección', },
+        { label: 'Empresa', id: 'empresa', type: 'number', apiKey: 'empresa', apiExtension:'empresa',
+          required: true, validationMessage: 'Debe seleccionar una empresa',}
+      ]  
     }],
     [{
+      totalFetches:2,
       buttonText: '+ Registrar Telefono Persona',
-  panelTitle: 'Agregar Nueva Telefono Persona',
-  submitButtonText: 'Registrar Telefono Persona',
-  apiUrl: 'http://localhost:8080/api/telefono_persona',
-  fields: [          
-    { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
-      required: true, validationMessage: 'El número de teléfono no puede ser nulo' 
-    },
-    { label: 'Tipo de Teléfono', id: 'tipoTelefono', type: 'number', apiKey: 'tipoTelefono', 
-      required: true, validationMessage: 'Debe seleccionar un tipo de teléfono', 
-      options: [] 
-    },
-    { label: 'Persona', id: 'personas', type: 'number', apiKey: 'personas', 
-      required: true, validationMessage: 'Debe seleccionar una persona', 
-      options: [] 
-    } 
-  ]
+      panelTitle: 'Agregar Nueva Telefono Persona',
+      submitButtonText: 'Registrar Telefono Persona',
+      apiUrl: 'http://localhost:8080/api/telefonopersona',
+      fields: [          
+        { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
+          required: true, validationMessage: 'El número de teléfono no puede ser nulo'   },
+        { label: 'Tipo de Teléfono', id: 'tipoTelefono', type: 'number', apiKey: 'tipoTelefono', apiExtension:'tipotelefono',
+          required: true, validationMessage: 'Debe seleccionar un tipo de teléfono',   },
+        { label: 'Persona', id: 'personas', type: 'number', apiKey: 'personas', apiExtension:'personas',
+          required: true, validationMessage: 'Debe seleccionar una persona', } 
+      ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/telefonopersona',
+      fields: [          
+        { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
+          required: true, validationMessage: 'El número de teléfono no puede ser nulo' 
+        },
+        { label: 'Tipo de Teléfono', id: 'tipoTelefono', type: 'number', apiKey: 'tipoTelefono', apiExtension:'tipotelefono',
+          required: true, validationMessage: 'Debe seleccionar un tipo de teléfono',   },
+        { label: 'Persona', id: 'personas', type: 'number', apiKey: 'personas', apiExtension:'personas',
+          required: true, validationMessage: 'Debe seleccionar una persona', } 
+      ]  
     }],
     [{
+      totalFetches:1,
       buttonText: '+ Registrar Telefono Sucursal',
       panelTitle: 'Agregar Nueva Telefono Sucursal',
       submitButtonText: 'Registrar Telefono Sucursal',
-      apiUrl: 'http://localhost:8080/api/telefono_sucursal',
+      apiUrl: 'http://localhost:8080/api/telefonosucursal',
       fields: [          
         { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
-          required: true, validationMessage: 'El número no puede estar vacío' 
-        },
+          required: true, validationMessage: 'El número no puede estar vacío' },
         { label: 'Sucursal', id: 'sucursal', type: 'number', apiKey: 'sucursal', 
-          required: true, validationMessage: 'Debe seleccionar una sucursal', 
-          options: []
-        }
+          required: true, validationMessage: 'Debe seleccionar una sucursal', apiExtension:'sucursal', }
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/telefonosucursal',
+      fields: [          
+        { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
+          required: true, validationMessage: 'El número no puede estar vacío' },
+        { label: 'Sucursal', id: 'sucursal', type: 'number', apiKey: 'sucursal', 
+          required: true, validationMessage: 'Debe seleccionar una sucursal', apiExtension:'sucursal', }
+      ]  
     }],
     [{
+      totalFetches:0,
       buttonText: '+ Registrar Tipo Email',
-  panelTitle: 'Agregar Nueva Tipo Email',
-  submitButtonText: 'Registrar Tipo Email',
-  apiUrl: 'http://localhost:8080/api/tipo_email',
-  fields: [          
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
-    { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
-  ]
+      panelTitle: 'Agregar Nueva Tipo Email',
+      submitButtonText: 'Registrar Tipo Email',
+      apiUrl: 'http://localhost:8080/api/tipoemail',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+      ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/tipoemail',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+        { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
+      ]  
     }],
     [{
+      totalFetches:0,
       buttonText: '+ Registrar Tipo Empresa',
       panelTitle: 'Agregar Nueva Tipo Empresa',
       submitButtonText: 'Registrar Tipo Empresa',
-      apiUrl: 'http://localhost:8080/api/tipo_empresa',
+      apiUrl: 'http://localhost:8080/api/tipoempresa',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
         { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/tipoempresa',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
+        { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
+      ]  
     }],
     [{
+      totalFetches:0,
       buttonText: '+ Registrar Tipo Persona',
-  panelTitle: 'Agregar Nuevo Tipo Persona',
-  submitButtonText: 'Registrar Tipo Persona',
-  apiUrl: 'http://localhost:8080/api/tipo_persona',
-  fields: [          
-    { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
-    { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
-    }
-  ]
-    },{
-        
-    }],
-    [{
-      buttonText: '+ Registrar Tipo Telefono',
-      panelTitle: 'Agregar Nuevo Tipo Telefono',
-      submitButtonText: 'Registrar Tipo Telefono',
-      apiUrl: 'http://localhost:8080/api/tipo_telefono',
+      panelTitle: 'Agregar Nuevo Tipo Persona',
+      submitButtonText: 'Registrar Tipo Persona',
+      apiUrl: 'http://localhost:8080/api/tipopersona',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
         { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
         }
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/tipopersona',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+        { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+        }
+      ]  
     }],
     [{
+      totalFetches:0,
       buttonText: '+ Registrar Tipo Telefono',
       panelTitle: 'Agregar Nuevo Tipo Telefono',
       submitButtonText: 'Registrar Tipo Telefono',
-      apiUrl: 'http://localhost:8080/api/tipo_compra',
+      apiUrl: 'http://localhost:8080/api/tipotelefono',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
         { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
         }
       ]
     },{
-        
+      apiUrl: 'http://localhost:8080/api/tipotelefono',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+        { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+        }
+      ]  
+    }],
+    [{
+      totalFetches:0,
+      buttonText: '+ Registrar Tipo Telefono',
+      panelTitle: 'Agregar Nuevo Tipo Telefono',
+      submitButtonText: 'Registrar Tipo Telefono',
+      apiUrl: 'http://localhost:8080/api/tipocompra',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+        { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+        }
+      ]
+    },{
+      apiUrl: 'http://localhost:8080/api/tipocompra',
+      fields: [          
+        { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío'  },
+        { label: 'Nombre',  id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío y debe tener entre 1 y 100 caracteres' 
+        }
+      ]  
     }],
 ]
