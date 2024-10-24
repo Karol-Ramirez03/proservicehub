@@ -35,9 +35,12 @@ public class LoginImplementation implements LoginServiceI{
         Login user = new Login();
         user.setContraseña(passwordEncoder.encode(newUser.getPassword()));// Codifica la contraseña
         user.setUsuario(newUser.getUsername()); // Establece el nombre de usuario
-        Rol defaultRole = roleService.findDefaultRole() // Busca un rol predeterminado
-                        .orElseThrow(() -> new ObjectNotFoundException("Role not found. Default Role"));
-        user.setRol(defaultRole); // Asigna el rol predeterminado al nuevo usuario
+        user.setPersonas(newUser.getIdPersonas());
+        user.setRol(newUser.getRole());
+
+        // Rol defaultRole = roleService.findDefaultRole() // Busca un rol predeterminado
+        //                 .orElseThrow(() -> new ObjectNotFoundException("Role not found. Default Role"));
+        // user.setRol(defaultRole); // Asigna el rol predeterminado al nuevo usuario
 
         return loginRepositoryI.save(user); // Guarda el usuario en la base de datos
     }

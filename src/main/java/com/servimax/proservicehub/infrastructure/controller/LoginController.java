@@ -124,6 +124,12 @@ public class LoginController {
 
     @PostMapping("/post")
     public ResponseEntity<RegisterUser> registerOne(@RequestBody @Valid UserDto newUser){
+        System.out.println(newUser.getName());
+        System.out.println(newUser.getPassword());
+        System.out.println(newUser.getUsername());
+        System.out.println(newUser.getIdPersonas());
+        System.out.println(newUser.getRole());
+        
         RegisterUser registeredUser = authenticationService.registerOneCustomer(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
     }
