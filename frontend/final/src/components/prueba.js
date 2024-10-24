@@ -195,13 +195,40 @@ export const initDynamicTable = (config) => {
 
         datos.forEach(dato => {
             const fila = document.createElement("tr");
-            fila.innerHTML = `
-                ${config.fields.map(field => `<td id="${field.id}-${dato.id}">${dato[field.apiKey]}</td>`).join('')}
-                <td>
-                    <button class="editar" id="${dato.id}">Editar</button>
-                    <button class="eliminar" id="${dato.id}">Eliminar</button>
-                </td>
-            `;
+                let cont=0
+                config.fields.map(field =>{
+                    if (field.label=="Numero Documento"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.nro_Doc}">${dato.nro_Doc}</td>`
+                        cont+=1
+                    }else if(field.label=="Sucursal" || field.label=="Tipo de Persona"|| field.label=="Region" || field.label=="Estado Compra" | field.label=="Tipo Compra"|| field.label=="Insumo" || field.label=="Ciudad"|| field.label=="Servicio" || field.label=="Estado de Aprobación"|| field.label=="Rol"|| field.label=="Estado de la Orden"){
+                        const api=field.apiKey
+                        fila.innerHTML+=`<td id="${field.id}-${dato[api].id}">${dato[api].nombre}</td>`
+                        cont+=1
+                    }else if(field.label=="Fecha Registro" || field.label=="Fecha Compra"   ){
+                        const fecha=dato[field.apiKey]
+                        const fechaSinHora = fecha.split("T")[0];
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${fechaSinHora}</td>`
+                        cont+=1
+                    }else if(field.label=="Id"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${dato.id}</td>`
+                        cont+=1
+                    }else if(field.label=="Cliente"|| field.label=="Persona"|| field.label=="Proveedor"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.personas.nro_Doc}">${dato.personas.nro_Doc}</td>`
+                        cont+=1
+                    }
+                    else{
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${dato[field.apiKey]}</td>`
+                        cont+=1
+                    }
+                    if(cont==config.fields.length){
+                        fila.innerHTML+=`<td>
+                        <button class="editar" id="${dato.nro_Doc}">Editar</button>
+                        <button class="eliminar" id="${dato.nro_Doc}">Eliminar</button>
+                    </td>`
+                    }
+                });
+                    
+            
             cuerpoData.appendChild(fila);
 
             const editarButton = fila.querySelector(".editar");
@@ -291,6 +318,7 @@ export const initDynamicTable = (config) => {
 
             if (response.ok) {
                 const datos = await response.json();
+                console.log(datos)
                 renderizarDatos(datos);
             }
         } catch (error) {

@@ -20,12 +20,16 @@ public class DetalleCompra {
     @NotNull(message = "No puede estar vacio")
     @Column
     private int cantidad;
+    
+    @NotNull(message = "no puede estar vacio")
     private Double precio_unitario;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private Insumo insumo;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private Compra compra;
 
     public DetalleCompra() {

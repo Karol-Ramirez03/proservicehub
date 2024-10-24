@@ -77,7 +77,7 @@ export const listaCruds=[
         submitButtonText: 'Registrar Personas',
         apiUrl: 'http://localhost:8080/api/personas',
         fields: [
-            { label: 'Numero Documento', id: 'numerodocumento', type: 'number', apiKey: ' Nro_Doc' },
+            { label: 'Numero Documento', id: 'numerodocumento', type: 'number', apiKey: ' nro_Doc' },
             { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
             { label: 'Apellido', id: 'apellido', type: 'text', apiKey: 'apellido' },
             { label: 'Fecha Registro', id: 'fechaRegistro', type: 'date', apiKey: 'fechaRegistro' },
@@ -89,7 +89,7 @@ export const listaCruds=[
     },{
         apiUrl: 'http://localhost:8080/api/personas',
         fields: [
-        { label: 'Numero Documento', id: 'numerodocumento', type: 'number', apiKey: ' Nro_Doc' },
+        { label: 'Numero Documento', id: 'numerodocumento', type: 'number', apiKey: ' nro_Doc' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre' },
         { label: 'Apellido', id: 'apellido', type: 'text', apiKey: 'apellido' },
         { label: 'Fecha Registro', id: 'fechaRegistro', type: 'date', apiKey: 'fechaRegistro' },
@@ -175,7 +175,7 @@ export const listaCruds=[
         buttonText: '+ Registrar Detalle Orden Servicio',
         panelTitle: 'Agregar Nuevo Detalle Orden Servicio',
         submitButtonText: 'Registrar Detalle Orden Servicio',
-        apiUrl: 'http://localhost:8080/api/detallordeservicio',
+        apiUrl: 'http://localhost:8080/api/detalleordenservicio',
         fields: [
           { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
           { label: 'Valor del Servicio', id: 'valor_servicio', type: 'number', apiKey: 'valor_servicio', required: true, validationMessage: 'El valor del servicio no puede estar vacío' },
@@ -185,7 +185,7 @@ export const listaCruds=[
             required: true, validationMessage: 'Debe seleccionar un servicio' }
         ]
     },{
-        apiUrl: 'http://localhost:8080/api/detallordeservicio',
+        apiUrl: 'http://localhost:8080/api/detalleordenservicio',
         fields: [
           { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
           { label: 'Valor del Servicio', id: 'valor_servicio', type: 'number', apiKey: 'valor_servicio', required: true, validationMessage: 'El valor del servicio no puede estar vacío' },
@@ -200,7 +200,7 @@ export const listaCruds=[
         buttonText: '+ Registrar Detalle Orden Trabajo',
         panelTitle: 'Agregar Nuevo Detalle Orden Trabajo',
         submitButtonText: 'Registrar Detalle Orden Trabajo',
-        apiUrl: 'http://localhost:8080/api/detalleordentrabajo',
+        apiUrl: 'http://localhost:8080/api/detalleorden',
         fields: [
           { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
           { label: 'Fecha', id: 'fecha', type: 'date', apiKey: 'fecha', required: true, validationMessage: 'La fecha no puede estar vacía' },
@@ -212,7 +212,7 @@ export const listaCruds=[
             required: true, validationMessage: 'Debe seleccionar un servicio' }
         ]
     },{
-        apiUrl: 'http://localhost:8080/api/detalleordentrabajo',
+        apiUrl: 'http://localhost:8080/api/detalleorden',
         fields: [
           { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
           { label: 'Fecha', id: 'fecha', type: 'date', apiKey: 'fecha', required: true, validationMessage: 'La fecha no puede estar vacía' },
@@ -296,7 +296,7 @@ export const listaCruds=[
         buttonText: '+ Registrar Aprovacion Servicio  ',
         panelTitle: 'Agregar Nuevo Aprovacion Servicio ',
         submitButtonText: 'Registrar Aprovacion Servicio ',
-        apiUrl: 'http://localhost:8080/api/aprovacionservicio',
+        apiUrl: 'http://localhost:8080/api/aprobacionservicio',
         fields: [          
             { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
             { label: 'Orden de Trabajo', id: 'orden_trabajo', type: 'number', apiKey: 'orden_trabajo',apiExtension:'ordentrabajo' }, 
@@ -311,7 +311,7 @@ export const listaCruds=[
               required: true, validationMessage: 'Debe seleccionar un estado de aprobación'}
         ]
     },{
-        apiUrl: 'http://localhost:8080/api/aprovacionservicio',
+        apiUrl: 'http://localhost:8080/api/aprobacionservicio',
         fields: [          
             { label: 'Id', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
             { label: 'Orden de Trabajo', id: 'orden_trabajo', type: 'number', apiKey: 'orden_trabajo',apiExtension:'ordentrabajo' }, 
@@ -362,7 +362,7 @@ export const listaCruds=[
           { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
         ]
     },{
-        apiUrl: 'http://localhost:8080/api/estadoprobacion',
+        apiUrl: 'http://localhost:8080/api/estadoaprobacion',
         fields: [     
           { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },     
           { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }

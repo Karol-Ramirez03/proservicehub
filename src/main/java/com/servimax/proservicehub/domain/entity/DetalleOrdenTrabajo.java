@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "detalle_orden_trabajo")
@@ -23,6 +24,7 @@ public class DetalleOrdenTrabajo {
     private Date fecha;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_orden_trabajo")
     private OrdenTrabajo orden_trabajo;
 
@@ -31,6 +33,7 @@ public class DetalleOrdenTrabajo {
     private EstadoOrden estado_orden;
    
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_servicio")
     private Servicio servicio;
 

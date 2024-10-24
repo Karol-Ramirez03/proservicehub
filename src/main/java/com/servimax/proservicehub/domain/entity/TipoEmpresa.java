@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,7 +24,7 @@ public class TipoEmpresa {
     private Long id;
 
     @Column
-    @NotNull(message = "no puede ser null")
+    @NotBlank(message = "no puede ser null")
     @Size(min = 1,max = 100, message = "no puede estar vacio")
     private String descripcion;
 

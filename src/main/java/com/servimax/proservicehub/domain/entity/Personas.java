@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "persona")
@@ -22,7 +23,11 @@ public class Personas {
     private Long Nro_Doc;
 
     @Column
+    @NotNull(message = "No puede estar vacio")
     private String nombre;
+
+    @Column
+    @NotNull(message = "No puede estar vacio")
     private String apellido;
 
     @Column(nullable = false,updatable = false)

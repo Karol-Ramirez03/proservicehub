@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 
@@ -23,7 +23,7 @@ public class TipoPersona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotBlank(message = "No puedes ser vacio este campo")
     @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     @Column
     private String nombre;

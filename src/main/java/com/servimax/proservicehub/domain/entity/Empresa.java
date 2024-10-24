@@ -21,12 +21,12 @@ public class Empresa {
     private Long id;
 
     @Column
-    @NotNull(message = "no puede ser null")
+    @NotNull(message = "no puede estar vacio")
     @Size(min = 1,max = 100, message = "no puede estar vacio")
     private String nombre;
     
     @ManyToOne
-    @NotNull(message = "no puede ser null")
+    @NotNull(message = "no puede estar vacio")
     private TipoEmpresa tipo_empresa;
 
     @JsonIgnore

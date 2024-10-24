@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "insumo")
@@ -21,13 +22,23 @@ public class Insumo {
     private long id;
 
     @Column(length=20,nullable=false)
+    @NotNull(message = "no puede estar vacio")
     private String codigo_interno;
 
     @Column(length=40,nullable=false)
+    @NotNull(message = "no puede estar vacio")
     private String nombre;
+
+    @NotNull(message = "no puede estar vacio")
     private Double precio_unitario;
+
+    @NotNull(message = "no puede estar vacio")
     private int stock;
+
+    @NotNull(message = "no puede estar vacio")
     private int stock_minimo;
+
+    @NotNull(message = "no puede estar vacio")
     private int stock_maximo;
 
     @JsonIgnore

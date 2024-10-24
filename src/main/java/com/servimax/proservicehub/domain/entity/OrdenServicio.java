@@ -1,5 +1,6 @@
 package com.servimax.proservicehub.domain.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,24 +27,31 @@ public class OrdenServicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numero_orden;
 
-    @NotNull(message = "No puedes ser vacio fecha")
     @Column
     private Date fecha_orden;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_cliente")
     private Personas personas;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_empleado")
     private Personas persona;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private EstadoOrdenServicio estado_orden_servicio;
 
     @JsonIgnore
     @OneToMany(mappedBy = "ordenServicio")
     private List<OrdenTrabajo> ordenTrabajo;
+
+    @PrePersist
+    protected void onCreate() {
+        this.fecha_orden = new Timestamp(new Date().getTime());
+    }
 
     public OrdenServicio() {
     }
