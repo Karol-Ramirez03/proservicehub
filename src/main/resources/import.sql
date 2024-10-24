@@ -1,36 +1,37 @@
-INSERT INTO module (name,base_path) VALUES ("AprobacionServicio","/api/aprobacionservicio");
-INSERT INTO module (name,base_path) VALUES ("Ciudad","/api/ciudad");
-INSERT INTO module (name,base_path) VALUES ("Compra","/api/compra");
-INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detalleCompra");
-INSERT INTO module (name,base_path) VALUES ("DetalleOrden","/api/detalleorden");
-INSERT INTO module (name,base_path) VALUES ("Direccion","/api/direccion");
-INSERT INTO module (name,base_path) VALUES ("Emailpersona","/api/emailpersona");
-INSERT INTO module (name,base_path) VALUES ("Empresa","/api/empresa");
-INSERT INTO module (name,base_path) VALUES ("EmpresaServicio","/api/empresaServicio");
-INSERT INTO module (name,base_path) VALUES ("Estadoaprobacion","/api/estadoaprobacion");
-INSERT INTO module (name,base_path) VALUES ("Estadocompra","/api/estadocompra");
-INSERT INTO module (name,base_path) VALUES ("EstadoOrden","/api/estadoorden");
-INSERT INTO module (name,base_path) VALUES ("EstadoOrdenServicio","/api/estadoordenservicio");
-INSERT INTO module (name,base_path) VALUES ("Insumo","/api/insumo");
-INSERT INTO module (name,base_path) VALUES ("Login","/api/login");
-INSERT INTO module (name,base_path) VALUES ("Ordenservicio","/api/ordenservicio");
-INSERT INTO module (name,base_path) VALUES ("Ordentrabajo","/api/ordentrabajo");
-INSERT INTO module (name,base_path) VALUES ("Pais","/api/pais");
-INSERT INTO module (name,base_path) VALUES ("PersonaInsumo","/api/personainsumo");
-INSERT INTO module (name,base_path) VALUES ("Personas","/api/personas");
-INSERT INTO module (name,base_path) VALUES ("Region","/api/region");
-INSERT INTO module (name,base_path) VALUES ("Rol","/api/rol");
-INSERT INTO module (name,base_path) VALUES ("Servicio","/api/servicio");
-INSERT INTO module (name,base_path) VALUES ("Servicioinsumo","/api/servicioinsumo");
-INSERT INTO module (name,base_path) VALUES ("Sucursal","/api/sucursal");
-INSERT INTO module (name,base_path) VALUES ("Telpersona","/api/telpersona");
-INSERT INTO module (name,base_path) VALUES ("Telsucursal","/api/telsucursal");
-INSERT INTO module (name,base_path) VALUES ("Tipocompra","/api/tipocompra");
-INSERT INTO module (name,base_path) VALUES ("TipoEmail","/api/tipoEmail");
-INSERT INTO module (name,base_path) VALUES ("TipoEmpresa","/api/tipoEmpresa");
-INSERT INTO module (name,base_path) VALUES ("Tipopersona","/api/tipopersona");
-INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono");
-INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth');
+INSERT INTO module (name,base_path) VALUES ("AprobacionServicio","/api/aprobacionservicio"); 
+INSERT INTO module (name,base_path) VALUES ("Ciudad","/api/ciudad"); 
+INSERT INTO module (name,base_path) VALUES ("Compra","/api/compra"); 
+INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detalleCompra"); 
+INSERT INTO module (name,base_path) VALUES ("Detalle0rdenServicio","/api/detalleordenservicio"); 
+INSERT INTO module (name,base_path) VALUES ("DetalleOrden","/api/detalleorden"); 
+INSERT INTO module (name,base_path) VALUES ("Direccion","/api/direccion"); 
+INSERT INTO module (name,base_path) VALUES ("Emailpersona","/api/emailpersona"); 
+INSERT INTO module (name,base_path) VALUES ("Empresa","/api/empresa"); 
+INSERT INTO module (name,base_path) VALUES ("EmpresaServicio","/api/empresaServicio"); 
+INSERT INTO module (name,base_path) VALUES ("Estadoaprobacion","/api/estadoaprobacion"); 
+INSERT INTO module (name,base_path) VALUES ("Estadocompra","/api/estadocompra"); 
+INSERT INTO module (name,base_path) VALUES ("EstadoOrden","/api/estadoorden"); 
+INSERT INTO module (name,base_path) VALUES ("EstadoOrdenServicio","/api/estadoordenservicio"); 
+INSERT INTO module (name,base_path) VALUES ("Insumo","/api/insumo"); 
+INSERT INTO module (name,base_path) VALUES ("Login","/api/login"); 
+INSERT INTO module (name,base_path) VALUES ("Ordenservicio","/api/ordenservicio"); 
+INSERT INTO module (name,base_path) VALUES ("Ordentrabajo","/api/ordentrabajo"); 
+INSERT INTO module (name,base_path) VALUES ("Pais","/api/pais"); 
+INSERT INTO module (name,base_path) VALUES ("PersonaInsumo","/api/personainsumo"); 
+INSERT INTO module (name,base_path) VALUES ("Personas","/api/personas"); 
+INSERT INTO module (name,base_path) VALUES ("Region","/api/region"); 
+INSERT INTO module (name,base_path) VALUES ("Rol","/api/rol"); 
+INSERT INTO module (name,base_path) VALUES ("Servicio","/api/servicio"); 
+INSERT INTO module (name,base_path) VALUES ("Servicioinsumo","/api/servicioinsumo"); 
+INSERT INTO module (name,base_path) VALUES ("Sucursal","/api/sucursal"); 
+INSERT INTO module (name,base_path) VALUES ("Telpersona","/api/telpersona"); 
+INSERT INTO module (name,base_path) VALUES ("Telsucursal","/api/telsucursal"); 
+INSERT INTO module (name,base_path) VALUES ("Tipocompra","/api/tipocompra"); 
+INSERT INTO module (name,base_path) VALUES ("TipoEmail","/api/tipoEmail"); 
+INSERT INTO module (name,base_path) VALUES ("TipoEmpresa","/api/tipoEmpresa"); 
+INSERT INTO module (name,base_path) VALUES ("Tipopersona","/api/tipopersona"); 
+INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth'); 
+INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono"); 
 
 
 
@@ -153,7 +154,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_LOGIN", '/[0-9]*', 'DELETE', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_USUARIO", '/usuario/[0-9]*', 'GET', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_ROL", '/rol/[0-9]*', 'GET', false, 16);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("REGISTER_ONE_LOGIN", '/post', 'POST', false, 16);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("REGISTER_ONE_LOGIN", '/post', 'POST', true, 16);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_ORDEN_SERVICIO", '', 'GET', false, 17);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_ORDEN_SERVICIO", '/[0-9]*', 'GET', false, 17);
@@ -183,7 +184,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_PERSONAS", '', 'GET', false, 21);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_PERSONAS", '/[0-9]*', 'GET', false, 21);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_PERSONAS", '', 'POST', false, 21);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_PERSONAS", '', 'POST', true, 21);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_PERSONAS", '/[0-9]*', 'PUT', false, 21);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_PERSONAS", '/[0-9]*', 'DELETE', false, 21);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_PERSONAS_TELEFONO", '/personas/[0-9]*', 'GET', false, 21);
@@ -243,17 +244,17 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_EMAIL", '/[0-9]*', 'PUT', false, 30);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_EMAIL", '/[0-9]*', 'DELETE', false, 30);
 
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_TIPO_ORDEN", '', 'GET', false, 31);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_TIPO_ORDEN", '/[0-9]*', 'GET', false, 31);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_TIPO_ORDEN", '', 'POST', false, 31);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_ORDEN", '/[0-9]*', 'PUT', false, 31);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_ORDEN", '/[0-9]*', 'DELETE', false, 31);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_TIPO_EMPRESA", '', 'GET', false, 31);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_TIPO_EMPRESA", '/[0-9]*', 'GET', false, 31);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_TIPO_EMPRESA", '', 'POST', false, 31);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_EMPRESA", '/[0-9]*', 'PUT', false, 31);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_EMPRESA", '/[0-9]*', 'DELETE', false, 31);
 
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_TIPO_SERVICIO", '', 'GET', false, 32);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_TIPO_SERVICIO", '/[0-9]*', 'GET', false, 32);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_TIPO_SERVICIO", '', 'POST', false, 32);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_SERVICIO", '/[0-9]*', 'PUT', false, 32);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_SERVICIO", '/[0-9]*', 'DELETE', false, 32);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_TIPO_PERSONA", '', 'GET', false, 32);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_TIPO_PERSONA", '/[0-9]*', 'GET', false, 32);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_TIPO_PERSONA", '', 'POST', false, 32);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_PERSONA", '/[0-9]*', 'PUT', false, 32);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_PERSONA", '/[0-9]*', 'DELETE', false, 32);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('AUTHENTICATE','/authenticate', 'POST', true, 33);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('VALIDATE-TOKEN','/validate-token', 'GET', true,33);
@@ -261,6 +262,12 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('LOGOUT','/logout', 'POST', true, 33);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_INSUMO_PERSONA", 'insumos/[0-9]*', 'GET', false, 20);
+
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_TIPO_TELEFONO", '', 'GET', false, 34);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_TIPO_TELEFONO", '/[0-9]*', 'GET', false, 34);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_TIPO_TELEFONO", '', 'POST', false, 34);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_TELEFONO", '/[0-9]*', 'PUT', false, 34);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_TELEFONO", '/[0-9]*', 'DELETE', false, 34);
 
 
  -- rol admin

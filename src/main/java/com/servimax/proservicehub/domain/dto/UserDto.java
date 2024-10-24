@@ -2,6 +2,9 @@ package com.servimax.proservicehub.domain.dto;
 
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+
+import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.Rol;
 //usada para el registro de buevos usuarios
 public class UserDto implements Serializable {
 
@@ -12,6 +15,11 @@ public class UserDto implements Serializable {
     private String password;
     @Size(min = 8)
     private String repeatedPassword;
+
+    private Personas idPersonas;
+    private Rol role;
+
+    
     public String getName() {
         return name;
     }
@@ -35,6 +43,18 @@ public class UserDto implements Serializable {
     }
     public void setRepeatedPassword(String repeatedPassword) {
         this.repeatedPassword = repeatedPassword;
+    }
+    public Personas getIdPersonas() {
+        return idPersonas;
+    }
+    public void setIdPersonas(Personas idPersonas) {
+        this.idPersonas = idPersonas;
+    }
+    public Rol getRole() {
+        return role;
+    }
+    public void setRole(Rol role) {
+        this.role = role;
     }
     
 }

@@ -2,11 +2,14 @@ package com.servimax.proservicehub.domain.dto;
 
 import java.io.Serializable;
 
+import com.servimax.proservicehub.domain.entity.Personas;
+import com.servimax.proservicehub.domain.entity.Rol;
+
 public class RegisterUser implements Serializable {
     private Long id;
     private String username;
-    private String name;
-    private String role;
+    private Personas idPersonas;
+    private Rol role;
     private String jwt;
     
     public Long getId() {
@@ -21,16 +24,11 @@ public class RegisterUser implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getRole() {
+    
+    public Rol getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(Rol role) {
         this.role = role;
     }
     public String getJwt() {
@@ -38,6 +36,12 @@ public class RegisterUser implements Serializable {
     }
     public void setJwt(String jwt) {
         this.jwt = jwt;
+    }
+    public Personas getIdPersonas() {
+        return idPersonas;
+    }
+    public void setIdPersonas(Personas idPersonas) {
+        this.idPersonas = idPersonas;
     }
     
 

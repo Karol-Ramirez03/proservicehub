@@ -49,8 +49,8 @@ public class AuthenticationService {
         RegisterUser userDto = new RegisterUser();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
-        userDto.setRole(user.getRol().getNombre());
-
+        userDto.setRole(user.getRol());
+        userDto.setIdPersonas(user.getPersonas());
         //Devuelve una instancia de RegisterUser que contiene el ID del usuario, 
         //su nombre de usuario, su rol, y el JWT generado.
         userDto.setJwt(jwt);
