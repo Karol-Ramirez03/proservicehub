@@ -21,7 +21,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,jwt) => {
     const cuerpoData = document.querySelector(".tbody-info")
 
     console.log("funciona")
@@ -46,11 +46,11 @@ const renderizarDatos = (datos,shadowRoot) => {
         cuerpoData.appendChild(fila2)
     
     })
-    addInfoEventListener(shadowRoot,datos);
+    addInfoEventListener(shadowRoot,datos,jwt);
 
 }
 
-const addInfoEventListener = (shadowRoot, datos) => {
+const addInfoEventListener = (shadowRoot, datos,jwt) => {
     console.log("aqui llego");
     const btnDetalles = shadowRoot.querySelectorAll(".tbody-info");
     console.log(btnDetalles);
@@ -89,13 +89,13 @@ const addInfoEventListener = (shadowRoot, datos) => {
 
 
                 // Asignar eventos a los nuevos botones
-                agregarEventosBotones(filas, dataUsar,idCompra);
+                agregarEventosBotones(filas, dataUsar,idCompra,jwt);
             }
         });
     });
 };
 
-const agregarEventosBotones = (filas, dataUsar,idCompra) => {
+const agregarEventosBotones = (filas, dataUsar,idCompra,jwt) => {
     const btnDenegar = filas.querySelector('.cancelar');
     const btnAprobar = filas.querySelector('.aprobar');
     const btnCerrar = filas.querySelector('.cerrar');
@@ -121,22 +121,57 @@ const agregarEventosBotones = (filas, dataUsar,idCompra) => {
                     "id":2
                 }
             }
+            let data = false;
+
             try {
-                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(solicitud)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
-                if(response2.ok){
-                    eliminarFila(filas)
-                    
+                if(response.ok){
+                    data = await response.json();
+                    console.log(data)
+
+
+                }else{
+                    alert("Usuario No Existente o no ha realizado Compras")
+
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
+
+            if (data) {
+
+                try {
+                    const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                        method:"PUT",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(solicitud)
+                    })
+                    if(response2.ok){
+                        eliminarFila(filas)
+                        
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+
+
+                //implementar
+                
+            }
+            
         });
     }
 
@@ -149,22 +184,55 @@ const agregarEventosBotones = (filas, dataUsar,idCompra) => {
                     "id":3
                 }
             }
+            let data = false;
+
             try {
-                const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(solicitud)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
-                if(response2.ok){
-                    eliminarFila(filas)
-                    
+                if(response.ok){
+                    data = await response.json();
+                    console.log(data)
+
+
+                }else{
+                    alert("Usuario No Existente o no ha realizado Compras")
+
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
+            if (data) {
+                try {
+                    const response2 = await fetch(`http://localhost:8080/api/aprobacionservicio/${idCompra}`, {
+                        method:"PUT",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(solicitud)
+                    })
+                    if(response2.ok){
+                        eliminarFila(filas)
+                        
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+
+
+                //implementar
+                
+            }
+            
         });
     }
 
@@ -182,26 +250,61 @@ const eliminarFila = (filas) => {
 
 
 
-export const dataAprobacion= async (contenedorPrincipal,idUsuario)  => {
+export const dataAprobacion= async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/persona/${idUsuario}`, {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const aprobaciones = await response.json();
-            renderizarDatos(aprobaciones,shadowRoot);
-            
+            data = await response.json();
+            console.log(data)
+
+
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+
+    if (data) {
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/aprobacionservicio/persona/${idUsuario}`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const aprobaciones = await response.json();
+                renderizarDatos(aprobaciones,shadowRoot,jwt);
+                
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
+    }
+
 
 }
 

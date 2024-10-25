@@ -41,27 +41,63 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
 
 }
 
-export const dataProveedor = async (contenedorPrincipal,clienteId)  => {
+export const dataProveedor = async (contenedorPrincipal,clienteId,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/login/rol/11`, {
-            method: "GET"
-        });
-    
-        if (response.ok) {
-            const usuarios = await response.json();
-            renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
 
 
-        } else {
-            console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
         }
-    
+        
     } catch (error) {
         console.error('Error:', error);
     }
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/login/rol/11`, {
+                method: "GET",
+                headers:{
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+        
+            if (response.ok) {
+                const usuarios = await response.json();
+                renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+    
+    
+            } else {
+                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+            }
+        
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+
+        //implementar
+        
+    }
+    
     
 }
 

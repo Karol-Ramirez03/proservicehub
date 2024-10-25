@@ -1,4 +1,4 @@
-export function initDynamicPanel(config) {
+export function initDynamicPanel(config,jwt) {
     const app = document.querySelector('#app');
     let isPanelOpen = false;
 
@@ -91,7 +91,8 @@ export function initDynamicPanel(config) {
         fetch(config.apiUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify(nuevoElemento)
         })
@@ -118,7 +119,7 @@ export function initDynamicPanel(config) {
     render();
 }
 
-export const initDynamicTable = (config) => {
+export const initDynamicTable = (config,jwt) => {
     const app = document.querySelector('#app2');
 
     const renderizarTablas = () => {
@@ -183,7 +184,8 @@ export const initDynamicTable = (config) => {
                 const response = await fetch(`${config.apiUrl}/${dato.id}`, {
                     method: "PUT",
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwt}`
                     },
                     body: JSON.stringify(updatedData)
                 });
@@ -208,6 +210,9 @@ export const initDynamicTable = (config) => {
             try {
                 const response = await fetch(`${config.apiUrl}/${id}`, {
                     method: "DELETE",
+                    headers: {
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 });
 
                 if (response.ok) {
@@ -228,7 +233,8 @@ export const initDynamicTable = (config) => {
             const response = await fetch(config.apiUrl, {
                 method: "GET",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`
                 }
             });
 

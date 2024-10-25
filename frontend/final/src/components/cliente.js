@@ -15,24 +15,25 @@ const botonAprobacion=document.querySelector(".aprobacion-servicios")
 const usuario=JSON.parse(localStorage.getItem("usuario"))
 const idUsuario=usuario.personas.nro_Doc
 console.log(idUsuario)
+let jwt = localStorage.getItem("jwt")
 botonInsumo.addEventListener("click", (e) => {
-    dataInsumos(contenedor,idUsuario)
+    dataInsumos(contenedor,idUsuario,jwt)
 });
 
 botonServicios.addEventListener("click", (e) => {
-    dataServicios(contenedor,idUsuario)
+    dataServicios(contenedor,idUsuario,jwt)
 });
 
 botonCompra.addEventListener("click", (e) => {
-    dataCompras(contenedor,idUsuario)
+    dataCompras(contenedor,idUsuario,jwt)
 });
 
 botonMisServicios.addEventListener("click", (e) => {
-    dataMisServicios(contenedor,idUsuario)
+    dataMisServicios(contenedor,idUsuario,jwt)
 });
 
 botonAprobacion.addEventListener("click", (e) => {
-    dataAprobacion(contenedor,idUsuario)
+    dataAprobacion(contenedor,idUsuario,jwt)
 });
 
 

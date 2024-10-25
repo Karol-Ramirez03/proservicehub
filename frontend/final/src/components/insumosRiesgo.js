@@ -23,7 +23,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
+const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     const cuerpoData = document.querySelector(".tbody-info")
 
     console.log("funciona")
@@ -53,12 +53,12 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
     
     });
 
-    _addEventInsumo(shadowRoot,datos)
+    _addEventInsumo(shadowRoot,datos,jwt)
 
 }
 
 
-const _addEventInsumo = (shadowRoot,datos) => {
+const _addEventInsumo = (shadowRoot,datos,jwt) => {
     const botonesComprar = document.querySelectorAll(".comprar");
     
     botonesComprar.forEach(boton => {
@@ -81,14 +81,14 @@ const _addEventInsumo = (shadowRoot,datos) => {
             <td></td>
             
             `
-            agregarEventListener(shadowRoot,datos)
+            agregarEventListener(shadowRoot,datos,jwt)
 
             
         });
     });
 }
 
-const agregarEventListener=(shadowRoot,datos2)=>{
+const agregarEventListener=(shadowRoot,datos2,jwt)=>{
     const btnCancelar=shadowRoot.querySelectorAll(".cancelar")
     const btnOrden=shadowRoot.querySelectorAll(".orden")
 
@@ -102,63 +102,136 @@ const agregarEventListener=(shadowRoot,datos2)=>{
 
     btnOrden.forEach(boton2 => {
         boton2.addEventListener("click", async (event) => {
-            const idCompra = event.target.id;
-            const fila=shadowRoot.querySelector(`.comprar-${idCompra}`)
-            const form=shadowRoot.querySelector(`.form-${idCompra}`)
-            const datos = Object.fromEntries(new FormData(form).entries());
-            const producto = JSON.parse(JSON.stringify(datos));
-            
-            const {cantidad}=producto
-            const idInsumo =datos2[idCompra-1]["id"]
 
-            const datosEnviar={
-                "idCliente":1005539417,
-                "idProducto":idInsumo,
-                "cantidad":cantidad,
-                "tipo_compra":1
+        let data = false;
+
+        try {
+            const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                data = await response.json();
+                console.log(data)
+
+
+            }else{
+                alert("Usuario No Existente o no ha realizado Compras")
+
             }
-            try {
-                const response = await fetch("http://localhost:8080/api/compra/agregar", {
-                    method:"POST",
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(datosEnviar)
-                })
-                if(response.ok){
-                    console.log("Orden exitosa")
-                    fila.innerHTML=""
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
+
+        if (data) {
+                const idCompra = event.target.id;
+                const fila=shadowRoot.querySelector(`.comprar-${idCompra}`)
+                const form=shadowRoot.querySelector(`.form-${idCompra}`)
+                const datos = Object.fromEntries(new FormData(form).entries());
+                const producto = JSON.parse(JSON.stringify(datos));
+                
+                const {cantidad}=producto
+                const idInsumo =datos2[idCompra-1]["id"]
+
+                const datosEnviar={
+                    "idCliente":1005539417,
+                    "idProducto":idInsumo,
+                    "cantidad":cantidad,
+                    "tipo_compra":1
+                }
+                try {
+                    const response = await fetch("http://localhost:8080/api/compra/agregar", {
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(datosEnviar)
+                    })
+                    if(response.ok){
+                        console.log("Orden exitosa")
+                        fila.innerHTML=""
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
                 }
                 
-            } catch (error) {
-                console.error('Error:', error);
+            } else {
+                
+
+                // implementar
+                
             }
+            
         });
     });
 });
 }
 
-export const dataInsumoRiesgo = async (contenedorPrincipal,clienteId)  => {
+export const dataInsumoRiesgo = async (contenedorPrincipal,clienteId,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/insumo`, {
-            method: "GET"
-        });
-    
-        if (response.ok) {
-            const usuarios = await response.json();
-            renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
 
 
-        } else {
-            console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
         }
-    
+        
     } catch (error) {
         console.error('Error:', error);
     }
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/insumo`, {
+                method: "GET",
+                headers:{
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+        
+            if (response.ok) {
+                const usuarios = await response.json();
+                renderizarDatos(usuarios,shadowRoot,contenedorPrincipal,jwt);
+    
+    
+            } else {
+                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+            }
+        
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+    
+
+        //implementar
+        
+    }
+
     
 }
 

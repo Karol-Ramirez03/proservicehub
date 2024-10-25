@@ -21,7 +21,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,orden,detalles) => {
+const renderizarDatos = (datos,orden,detalles,jwt) => {
     const cuerpoData = document.querySelector(".tbody-info");
 
         const fila = document.createElement("tr"); // Asegúrate de usar "tr" entre comillas
@@ -38,10 +38,10 @@ const renderizarDatos = (datos,orden,detalles) => {
         }
         cuerpoData.appendChild(fila);
     
-        _addEvent(fila);
+        _addEvent(fila,jwt);
 }
 
-const _addEvent=(fila)=>{
+const _addEvent=(fila,jwt)=>{
     const btnCancelar=fila.querySelector(".cancelar")
     if (btnCancelar) {
         btnCancelar.addEventListener('click', async (e) => {
@@ -51,75 +51,40 @@ const _addEvent=(fila)=>{
                     "id":3
                 }
             }
+            let data = false;
             try {
-                const response2 = await fetch(`http://localhost:8080/api/ordenservicio/${e.target.id}`, {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(orden)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
-                if(response2.ok){
-                    const servicio = await response2.json();
-                    renderizarDatos(servicio,orden,detalles);
+                if(response.ok){
+                    data = await response.json();
+                    console.log(data)
 
-                    
+                }else{
+                    alert("error")
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
-            }finally{
-                
-
             }
-        });
-    }
-}
-
-export const dataMisServicios= async (contenedorPrincipal,idUsuario)  => {
-    contenedorPrincipal.innerHTML = ""
-    contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
-    try {
-        const response = await fetch(`http://localhost:8080/api/ordenservicio/persona/${idUsuario}`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const ordenes = await response.json();
-            var cont=0
-            ordenes.forEach(async orden=>{
+            if (data) {
                 try {
-                    const response2 = await fetch(`http://localhost:8080/api/detalleordenservicio/${orden.numero_orden}`, {
-                        method:"GET",
+                    const response2 = await fetch(`http://localhost:8080/api/ordenservicio/${e.target.id}`, {
+                        method:"PUT",
                         headers:{
-                            'Content-Type':'application/json'
-                        }
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(orden)
                     })
                     if(response2.ok){
-                        const detalles = await response2.json();
-                        try {
-                            const response2 = await fetch(`http://localhost:8080/api/servicio/${detalles.servicio.id}`, {
-                                method:"GET",
-                                headers:{
-                                    'Content-Type':'application/json'
-                                }
-                            })
-                            if(response2.ok){
-                                const servicio = await response2.json();
-                                renderizarDatos(servicio,orden,detalles);
-
-                                
-                            }
-                            
-                        } catch (error) {
-                            console.error('Error:', error);
-                        }finally{
-                            
-
-                        }
-                        
+                        const servicio = await response2.json();
+                        renderizarDatos(servicio,orden,detalles,jwt);
+    
                         
                     }
                     
@@ -127,18 +92,143 @@ export const dataMisServicios= async (contenedorPrincipal,idUsuario)  => {
                     console.error('Error:', error);
                 }finally{
                     
+    
                 }
-            })
+                
+            } else {
+
+                //implementar
+                
+            }
             
-            
+        });
+    }
+}
+
+export const dataMisServicios= async (contenedorPrincipal,idUsuario,jwt)  => {
+    contenedorPrincipal.innerHTML = ""
+    contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
+    let data = false;
+    try {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
+
+        }else{
+            alert("error")
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/ordenservicio/persona/${idUsuario}`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+            if(response.ok){
+                const ordenes = await response.json();
+                var cont=0
+                ordenes.forEach(async orden=>{
+                    let data2 = false;
+                    try {
+                        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                            method:"GET",
+                            headers:{
+                                'Content-Type':'application/json',
+                                'Authorization': `Bearer ${jwt}`
+                            }
+                        })
+                        if(response.ok){
+                            data2 = await response.json();
+                            console.log(data)
+
+                        }else{
+                            alert("error")
+                        }
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                    if (data2) {
+                        try {
+                            const response2 = await fetch(`http://localhost:8080/api/detalleordenservicio/${orden.numero_orden}`, {
+                                method:"GET",
+                                headers:{
+                                    'Content-Type':'application/json',
+                                    'Authorization': `Bearer ${jwt}`
+                                }
+                            })
+                            if(response2.ok){
+                                const detalles = await response2.json();
+                                
+                                try {
+                                    const response2 = await fetch(`http://localhost:8080/api/servicio/${detalles.servicio.id}`, {
+                                        method:"GET",
+                                        headers:{
+                                            'Content-Type':'application/json',
+                                            'Authorization': `Bearer ${jwt}`
+                                        }
+                                    })
+                                    if(response2.ok){
+                                        const servicio = await response2.json();
+                                        renderizarDatos(servicio,orden,detalles,jwt);
     
+                                        
+                                    }
+                                    
+                                } catch (error) {
+                                    console.error('Error:', error);
+                                }finally{
+                                    
     
+                                }
+                                
+                                
+                            }
+                            
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }finally{
+                            
+                        }
+                        
+                    } else {
+
+
+
+
+                        //implementar
+                        
+                    }
+                    
+                })
+                
+                
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
+    }
     
+        
     
 }
 

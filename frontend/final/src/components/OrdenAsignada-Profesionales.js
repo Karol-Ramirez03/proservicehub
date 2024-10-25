@@ -46,30 +46,67 @@ const renderizarDatos = (datos,shadowRoot) => {
   });
 }
 
-export const dataserviciosAsignado = async (contenedorPrincipal,idEmpleadoAsignado)  => {
+export const dataserviciosAsignado = async (contenedorPrincipal,idEmpleadoAsignado,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
-    
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/detalleordenservicio/empleado/${idEmpleadoAsignado}`, {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,shadowRoot);
+            const data = await response.json();
+            console.log(data)
 
+
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
 
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/detalleordenservicio/empleado/${idEmpleadoAsignado}`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatos(Ordenes,shadowRoot);
+    
+    
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+        /*
+
+        implementar logica
+        
+        */
+        
+    }
+    
+   
   
 }

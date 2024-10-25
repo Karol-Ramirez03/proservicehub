@@ -1,4 +1,4 @@
-export function initInsumoPanel() {
+export function initInsumoPanel(jwt) {
     const app = document.querySelector('#app');
 
     let isPanelOpen = false;
@@ -108,7 +108,6 @@ export function initInsumoPanel() {
             "stock_maximo": parseInt(stockMaximo, 10)
         };
 
-        
     
         console.log('Insumo registrado:', nuevoInsumo);
     
@@ -116,7 +115,8 @@ export function initInsumoPanel() {
         fetch('http://localhost:8080/api/insumo', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify(nuevoInsumo)
         })

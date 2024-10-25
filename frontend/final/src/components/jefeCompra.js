@@ -4,12 +4,12 @@ import { initProveedorPanel } from "./registrarProveedor.js";
 
 const botonProInsumo = document.querySelector(".boton-proveedor-insumo")
 const contenedor = document.querySelector(".table-container")
+const jwt = localStorage.getItem("jwt")
 
-
-initProveedorPanel();
+initProveedorPanel(jwt);
 
 botonProInsumo.addEventListener("click", (e) => {
-    dataProveedorInsumo(contenedor)
+    dataProveedorInsumo(contenedor,jwt)
 });
 
 

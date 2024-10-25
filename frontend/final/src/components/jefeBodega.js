@@ -9,16 +9,16 @@ const botonCompra = document.querySelector(".boton-proveedor")
 const divApp=document.querySelector("#app")
 
 
-
+const jwt = localStorage.getItem("jwt")
 
 botonInsumo.addEventListener("click", (e) => {
     initInsumoPanel();
-    dataInsumos(contenedor)
+    dataInsumos(contenedor,jwt)
 });
 
 botonCompra.addEventListener("click", (e) => {
     divApp.innerHTML=""
-    dataProveedor(contenedor)
+    dataProveedor(contenedor,jwt)
 });
 
 

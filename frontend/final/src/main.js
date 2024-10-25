@@ -55,6 +55,9 @@ class InicioForm extends LitElement {
     const divLogin=this.shadowRoot.querySelector(".login-form")
     const shadowRoot=divLogin.shadowRoot || divLogin;
     
+    localStorage.clear();
+    console.log('LocalStorage ha sido limpiado.');
+    localStorage.setItem('jwt','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb25zdWx0YXMiLCJpYXQiOjE3Mjk4NjA2MDEsImV4cCI6MTcyOTg2MjQwMX0.R5-pnYEc5oQrcHB11Js8JR04yugkQQHeMqF2wZHyEqM')
   
     // Asegúrate de que los botones existen
     if (!btnguardar) {

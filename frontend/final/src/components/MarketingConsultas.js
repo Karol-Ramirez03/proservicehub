@@ -6,7 +6,7 @@ const renderizarDatos = (datos, contenedorPrincipal) => {
             <img class="imageninfo" src="ventas.png" alt="">
             <h3 class="tituloinfo">Top 3 Insumos Mas Vendidos</h3>
             <p class="textoinfo">
-            ${datos.map(dato => `Cantidad: ${dato.cantidad} - Insumo: ${dato.insumo.nombre}`)}
+            ${datos.map(dato => `Cantidad: ${dato.cantidad??""} - Insumo: ${dato.insumo?.nombre??""}`)}
             </p>
        </div>
     `
@@ -66,7 +66,7 @@ const renderizarDatosservicemenos = (datos, contenedorPrincipal) => {
     `)
     contenedorPrincipal.innerHTML += tarjetasHtml;
 };
-const renderizarusuariosCompras = (contenedorPrincipal,shadowRoot) => {
+const renderizarusuariosCompras = (contenedorPrincipal,shadowRoot,jwt) => {
 
     const tarjetasHtml = /*html*/ `
         <div class="tarjeta">
@@ -90,33 +90,64 @@ const renderizarusuariosCompras = (contenedorPrincipal,shadowRoot) => {
     form.addEventListener('click', async (e)  =>  {
         e.preventDefault(); 
         const clienteId = shadowRoot.querySelector('#clienteId').value;
-        if (clienteId && clienteId > 0 ) { 
-            console.log(clienteId);
-            try {
-                const response = await fetch(`http://localhost:8080/api/personas/personas/${clienteId}`, {
-                    method:"GET",
-                    headers:{
-                        'Content-Type':'application/json'
-                    }
-                })
-                if(response.ok){
-                    const Ordenes = await response.json();
-                    console.log(Ordenes)
-                    generarCarta(Ordenes, contenedorPrincipal);
-
+        let data = false;
         
-                }else{
-                    alert("Usuario No Existente o no ha realizado Compras")
-
+        try {
+            const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
                 }
-                
-            } catch (error) {
-                console.error('Error:', error);
+            })
+            if(response.ok){
+                data = await response.json();
+                console.log(data)
+
+    
+            }else{
+                alert("Usuario No Existente o no ha realizado Compras")
+
             }
             
-        } else {
-            alert('El ID del cliente no puede estar vacío ni ser negativo');
+        } catch (error) {
+            console.error('Error:', error);
         }
+
+
+        if (data) {
+            if (clienteId && clienteId > 0 ) { 
+                console.log(clienteId);
+                try {
+                    const response = await fetch(`http://localhost:8080/api/personas/personas/${clienteId}`, {
+                        method:"GET",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        }
+                    })
+                    if(response.ok){
+                        const Ordenes = await response.json();
+                        console.log(Ordenes)
+                        generarCarta(Ordenes, contenedorPrincipal);
+    
+            
+                    }else{
+                        alert("Usuario No Existente o no ha realizado Compras")
+    
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+                alert('El ID del cliente no puede estar vacío ni ser negativo');
+            }
+            
+        }
+
+
     });
 
 };
@@ -138,101 +169,160 @@ const generarCarta = (ordenes,contenedorPrincipal) => {
     contenedorPrincipal.appendChild(divcont)
     });
 };
-export const data3top = async (contenedorPrincipal)  => {
+export const data3top = async (contenedorPrincipal,jwt)  => {
     console.log(contenedorPrincipal)
+    console.log(jwt)
+
+    let data = false;
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    try {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
+
+
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
+        }
+        
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+    if (data) {
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/detallecompra/top3`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatos(Ordenes,contenedorPrincipal);
     
-    try {
-        const response = await fetch(`http://localhost:8080/api/detallecompra/top3`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
+    
             }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,contenedorPrincipal);
-
-
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:8080/api/detallecompra/top3menos`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            console.log(jwt)
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatosmenosInsumo(Ordenes,contenedorPrincipal);
+    
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        try {
+            console.log("JWT Token:", jwt)
+    
+            const response = await fetch(`http://localhost:8080/api/personas/inversion`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+    
+        console.log("Response status:", response.status);
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarTop3personasInversion(Ordenes,contenedorPrincipal);
+    
+            } else{
+                console.error("Failed to fetch:", response.statusText);
+            }
+    
+        } catch (error) {
+            console.error('Error:', error);
+    
+        }
+        try {
+            const response = await fetch(`http://localhost:8080/api/detalleordenservicio/mas`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatosservice(Ordenes,contenedorPrincipal);
+    
+    
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        try {
+            const response = await fetch(`http://localhost:8080/api/detalleordenservicio/menos`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatosservicemenos(Ordenes,contenedorPrincipal);
+                renderizarusuariosCompras(contenedorPrincipal,shadowRoot,jwt);
+    
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
         }
         
-    } catch (error) {
-        console.error('Error:', error);
-    }
-
-    try {
-        const response = await fetch(`http://localhost:8080/api/detallecompra/top3menos`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatosmenosInsumo(Ordenes,contenedorPrincipal);
-
-        }
         
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    try {
-        const response = await fetch(`http://localhost:8080/api/personas/inversion`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarTop3personasInversion(Ordenes,contenedorPrincipal);
+    } else {
 
-        }
+
+        /*
+        implementar la restauracion
+        */
+
+
+
+
+
+
+
+
+
+
         
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    try {
-        const response = await fetch(`http://localhost:8080/api/detalleordenservicio/mas`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatosservice(Ordenes,contenedorPrincipal);
-
-
-        }
-        
-    } catch (error) {
-        console.error('Error:', error);
-    }
-    try {
-        const response = await fetch(`http://localhost:8080/api/detalleordenservicio/menos`, {
-            method:"GET",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatosservicemenos(Ordenes,contenedorPrincipal);
-            renderizarusuariosCompras(contenedorPrincipal,shadowRoot);
-
-        }
-        
-    } catch (error) {
-        console.error('Error:', error);
     }
     
-
 
 }

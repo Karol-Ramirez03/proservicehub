@@ -18,7 +18,7 @@ public class JwtToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 2048)
+    @Column(length = 15048)
     private String token;
 
     private boolean isValid;

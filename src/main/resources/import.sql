@@ -1,7 +1,7 @@
 INSERT INTO module (name,base_path) VALUES ("AprobacionServicio","/api/aprobacionservicio"); 
 INSERT INTO module (name,base_path) VALUES ("Ciudad","/api/ciudad"); 
 INSERT INTO module (name,base_path) VALUES ("Compra","/api/compra"); 
-INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detalleCompra"); 
+INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detallecompra"); 
 INSERT INTO module (name,base_path) VALUES ("Detalle0rdenServicio","/api/detalleordenservicio"); 
 INSERT INTO module (name,base_path) VALUES ("DetalleOrden","/api/detalleorden"); 
 INSERT INTO module (name,base_path) VALUES ("Direccion","/api/direccion"); 
@@ -71,7 +71,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_DETALLE_COMPRA", '/[0-9]*', 'DELETE', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_PERSONA", 'compra/[0-9]*', 'GET', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_MAS_VENDIDO", '/top3', 'GET', false, 4);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_MENOS_VENDIDO", '/top3menos', 'GET.', false, 4);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_MENOS_VENDIDO", '/top3menos', 'GET', false, 4);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_DETALLE_ORDENES_SERVICIO", '', 'GET', false, 5);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_DETALLE_ORDEN_SERVICIO", '/[0-9]*', 'GET', false, 5);

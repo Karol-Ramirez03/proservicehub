@@ -46,42 +46,75 @@ const renderizarDatos = (datos,shadowRoot) => {
   });
 }
 
-export const dataserviciosNo = async (contenedorPrincipal)  => {
+export const dataserviciosNo = async (contenedorPrincipal,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
-    
+
+    let data = false;
+
     try {
-        const response = await fetch("http://localhost:8080/api/detalleordenservicio/estado/2", {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,shadowRoot);
+            data = await response.json();
+            console.log(data)
 
-            const botonEmpleado = shadowRoot.querySelectorAll(".boton-empleado")
-            botonEmpleado.forEach(boton => {
-                boton.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const idDetalle = e.target.id;
-                    console.log(idDetalle)
-                    console.log("Se ha hecho clic en el botón de asignar fecha");
-                    dataNewEmpleado(contenedorPrincipal,idDetalle)
 
-                });
-            });
-
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
 
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+    if (data) {
+        try {
+            const response = await fetch("http://localhost:8080/api/detalleordenservicio/estado/2", {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatos(Ordenes,shadowRoot);
+    
+                const botonEmpleado = shadowRoot.querySelectorAll(".boton-empleado")
+                botonEmpleado.forEach(boton => {
+                    boton.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const idDetalle = e.target.id;
+                        console.log(idDetalle)
+                        console.log("Se ha hecho clic en el botón de asignar fecha");
+                        dataNewEmpleado(contenedorPrincipal,idDetalle)
+    
+                    });
+                });
+    
+    
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
+    }
+    
   
 }
