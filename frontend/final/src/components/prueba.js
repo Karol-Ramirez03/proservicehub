@@ -129,16 +129,106 @@ export function initDynamicPanel(config) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        // const nuevoElemento = {};
+        // config.fields.forEach(field => {
+        //     const value = document.getElementById(field.id).value;
+        //     console.log(value)
+        //     if (!value) {
+        //         alert(`Por favor, completa el campo: ${field.label}.`);
+        //         return;
+        //     }
+        //     nuevoElemento[field.apiKey] = field.type === 'number' ? parseFloat(value) : value;
+        // });
+
         const nuevoElemento = {};
-        config.fields.forEach(field => {
-            const value = document.getElementById(field.id).value;
-            console.log(value)
-            if (!value) {
-                alert(`Por favor, completa el campo: ${field.label}.`);
-                return;
-            }
-            nuevoElemento[field.apiKey] = field.type === 'number' ? parseFloat(value) : value;
-        });
+config.fields.forEach(field => {
+    const value = document.getElementById(field.id).value;
+    console.log(value);
+    
+    if (!value) {
+        alert(`Por favor, completa el campo: ${field.label}.`);
+        return;
+    }
+    
+    
+    if (field.type === 'number') {
+        const numericValue = parseFloat(value);
+        if (numericValue < 0) {
+            alert(`El campo ${field.label} no puede ser un número negativo.`);
+            return ;
+        }
+        nuevoElemento[field.apiKey] = numericValue;
+    } else {
+        nuevoElemento[field.apiKey] = value;
+    }
+});
+
+
+
+
+
+
+
+
+
+// const nuevoElemento = {};
+// let isValid = true;
+// let negativo=false
+// config.fields.forEach(field => {
+//     const inputElement = document.getElementById(field.id);
+
+    
+//     if (field.type === 'number') {
+//         inputElement.addEventListener('input', () => {
+//             const value = parseFloat(inputElement.value);
+
+           
+//             if (value < 0) {
+//                 alert(`El campo ${field.label} no puede ser un número negativo.`);
+//                 inputElement.value = ''; 
+//                 negativo=true
+                
+//             }
+//         });
+//     }
+// });
+
+
+// function validarFormulario() {
+//     config.fields.forEach(field => {
+//         const inputElement = document.getElementById(field.id);
+//         const value = inputElement.value;
+        
+//         console.log(negativo)
+//         if (!value) {
+//             alert(`Por favor, completa el campo: ${field.label}.`);
+//             inputElement.focus();
+//             isValid = false;
+//             return;
+//         }else if(negativo){
+//             inputElement.focus();
+//             isValid=false
+//         }
+
+    
+//         nuevoElemento[field.apiKey] = field.type === 'number' ? parseFloat(value) : value;
+//     });
+
+//     if (isValid) {
+//         console.log('Datos validados:', nuevoElemento);
+//     }
+//     return isValid;
+// }
+
+
+
+
+
+
+
+
+
+
 
         console.log('Elemento registrado:', nuevoElemento);
 

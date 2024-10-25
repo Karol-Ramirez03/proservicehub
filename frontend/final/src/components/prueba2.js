@@ -29,31 +29,6 @@ export const listaCruds=[
         ]
     }],
     [{
-      totalFetches:3,
-      buttonText: '+ Registrar Producto',
-      panelTitle: 'Agregar Nuevo Producto',
-      submitButtonText: 'Registrar Producto',
-      apiUrl: 'http://localhost:8080/api/producto',
-      fields: [
-          { label: 'ID Producto', id: 'idProducto', type: 'text', apiKey: 'id_producto'},
-          { label: 'Descripción', id: 'descripcion', type: 'text', apiKey: 'descripcion' },
-          { label: 'Precio', id: 'precioProducto', type: 'number', apiKey: 'precio' },
-          { label: 'Persona', id: 'persona', type: 'number', apiKey: 'personas',apiExtension:'personas' },
-          { label: 'Rol', id: 'rol', type: 'number', apiKey: 'rol',apiExtension:'rol' },
-          { label: 'Tipo Persona', id: 'tipoPersona', type: 'number', apiKey: 'tipo_persona',apiExtension:'tipopersona' }
-      ]
-  },{
-      apiUrl: 'http://localhost:8080/api/producto',
-      fields: [
-          { label: 'ID Producto', id: 'idProducto', type: 'text', apiKey: 'id_producto'},
-          { label: 'Descripción', id: 'descripcion', type: 'text', apiKey: 'descripcion' },
-          { label: 'Precio', id: 'precioProducto', type: 'number', apiKey: 'precio' },
-          { label: 'Persona', id: 'persona', type: 'number', apiKey: 'personas',apiExtension:'personas' },
-          { label: 'Rol', id: 'rol', type: 'number', apiKey: 'rol',apiExtension:'rol' },
-          { label: 'Tipo Persona', id: 'tipoPersona', type: 'number', apiKey: 'tipo_persona',apiExtension:'tipopersona' }
-      ]
-    }],
-    [{
         totalFetches:0,
         buttonText: '+ Registrar Rol',
         panelTitle: 'Agregar Nuevo Rol',
