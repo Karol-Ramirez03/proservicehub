@@ -55,9 +55,6 @@ class InicioForm extends LitElement {
     const divLogin=this.shadowRoot.querySelector(".login-form")
     const shadowRoot=divLogin.shadowRoot || divLogin;
     
-    localStorage.clear();
-    console.log('LocalStorage ha sido limpiado.');
-    localStorage.setItem('jwt','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb25zdWx0YXMiLCJpYXQiOjE3Mjk4NjA2MDEsImV4cCI6MTcyOTg2MjQwMX0.R5-pnYEc5oQrcHB11Js8JR04yugkQQHeMqF2wZHyEqM')
   
     // Asegúrate de que los botones existen
     if (!btnguardar) {
@@ -107,78 +104,113 @@ class InicioForm extends LitElement {
     const username = formData.get('email');
     const password = formData.get('password');
     
+    ///////////////////////////////////////////////////////login
+    
+    localStorage.clear();
+    console.log('LocalStorage ha sido limpiado.');
+    
     const loginData = {
-      "usuario": username,
-      "contraseña": password
-    };
-    console.log(username)
-  
+      "username":username,
+      "password":password
+    }
+    console.log(username)    
+
+
+    
+
     try {
-      // Enviar los datos de autenticación al backend
-      const response = await fetch(`http://localhost:8080/api/login/usuario/${username}`, {
-        method: 'GET', // Cambiado a POST
-        headers: {
-          'Content-Type': 'application/json',
-        } // Enviar los datos en el cuerpo de la solicitud
-      });
-  
-      // if (!response.ok) {
-      //   throw new Error('Error en la autenticación');
-      // }
-  
-      const data = await response.json(); // Obtener la respuesta del servidor
-      if(password!=data.contraseña){
-        alert('Hubo un problema con tu contraseña intenta nuevamente.');
-      }else{
-        const idRol=data.rol.id;
-        localStorage.setItem("usuario",JSON.stringify(data))
-        switch(idRol){
-          case 1:
-            // window.open("http://localhost:5173/")
-            break;
-          case 2:
-            window.open("http://localhost:5173/cliente.html")
-            break;
-          case 3:
-            window.open("http://localhost:5173/recursosHumano.html")
-            break;
-          case 4:
-            window.open("http://localhost:5173/jefeBodega.html")
-            break;
-          case 5:
-            // window.open("http://localhost:5173/cliente.html")
-            break;
-          case 6:
-            window.open("http://localhost:5173/marketing.html")
-            break;
-          case 7:
-            // window.open("http://localhost:5173/cliente.html")
-            break;
-          case 8:
-            // window.open("http://localhost:5173/cliente.html")
-            break;
-          case 9:
-            window.open("http://localhost:5173/profesionalesServicios.html")
-            break;
-          case 10:
-            window.open("http://localhost:5173/proveedor.html")
-            break;
-          case 11:
-            window.open("http://localhost:5173/proveedores.html")
-            break;
-          case 12:
-            window.open("http://localhost:5173/jefeCompra.html")
-            break;
+        const response = await fetch(`http://localhost:8080/auth/authenticate`, {
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'      
+              },
+            body: JSON.stringify(loginData)
+        })
+        if(response.ok){
+            const jwt = await response.json();
+            console.log(jwt.jwt)
+            localStorage.setItem('jwt', jwt.jwt)//-----------------
+            try {
+              // Enviar los datos de autenticación al backend
+              const response = await fetch(`http://localhost:8080/api/login/usuario/${username}`, {
+                method: 'GET', // Cambiado a POST
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${jwt.jwt}`  
+                } // Enviar los datos en el cuerpo de la solicitud
+              });
+          
+              // if (!response.ok) {
+              //   throw new Error('Error en la autenticación');
+              // }
+          
+              const data = await response.json(); // Obtener la respuesta del servidor
+              console.log(data.contraseña +" ----- contraseña")
+              const idRol=data.rol.id;
+              localStorage.setItem("usuario",JSON.stringify(data))
+              switch(idRol){
+                case 1:
+                  // window.open("http://localhost:5173/")
+                  break;
+                case 2:
+                  window.open("http://localhost:5173/cliente.html")
+                  break;
+                case 3:
+                  window.open("http://localhost:5173/recursosHumano.html")
+                  break;
+                case 4:
+                  window.open("http://localhost:5173/jefeBodega.html")
+                  break;
+                case 5:
+                  // window.open("http://localhost:5173/cliente.html")
+                  break;
+                case 6:
+                  window.open("http://localhost:5173/marketing.html")
+                  break;
+                case 7:
+                  // window.open("http://localhost:5173/cliente.html")
+                  break;
+                case 8:
+                  // window.open("http://localhost:5173/cliente.html")
+                  break;
+                case 9:
+                  window.open("http://localhost:5173/profesionalesServicios.html")
+                  break;
+                case 10:
+                  window.open("http://localhost:5173/proveedor.html")
+                  break;
+                case 11:
+                  window.open("http://localhost:5173/proveedores.html")
+                  break;
+                case 12:
+                  window.open("http://localhost:5173/jefeCompra.html")
+                  break;
+              }
+                
+              
+              
+          
+              // Reseteo del formulario
+              form.reset();
+            } catch (error) {
+              console.error('Error en el inicio de sesión:', error);
+            }
+
+
+        }else{
+            alert("Problemas Para Autenticarse Volver a intentarlo mas tarde")
+            const errorMessage = await response.text();
+            console.error("Error en la autenticación: ", response.status, errorMessage);
+
         }
         
-      }
-      
-  
-      // Reseteo del formulario
-      form.reset();
     } catch (error) {
-      console.error('Error en el inicio de sesión:', error);
+        console.error('Error:', error);
     }
+
+
+
+
   }
   
     
@@ -272,14 +304,16 @@ class InicioForm extends LitElement {
       "apellido": lastname,
 	 		"fechaRegistro":"2024-10-18T16:51:50.139+00:00",
       "sucursal": {
-        "id":sucursal
+        "id": 1
       },
       "tipoPersona": {
         "id":tpersona
       },
       "nro_Doc": num
     }
+    
     console.log(registerData)
+    ///////////////////////////////////register
     try {
       // Enviar los datos de autenticación al backend
       const response = await fetch(`http://localhost:8080/api/personas`, {
@@ -296,18 +330,21 @@ class InicioForm extends LitElement {
       console.error('Error en el inicio de sesión:', error);
     }
     const newUser={
-      "usuario":email,
-      "contraseña":password,
-      "personas":{
+      "nombre":email,
+      "username":email,
+      "password":password,
+      "repeatedPassword":password,
+      "idPersonas":{
         "nro_Doc":number
       },
-      "rol":{
+      "role":{
         "id":tpersona
       }
     }
+    console.log(newUser)
     try {
       // Enviar los datos de autenticación al backend
-      const response = await fetch(`http://localhost:8080/api/login`, {
+      const response = await fetch(`http://localhost:8080/api/login/post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

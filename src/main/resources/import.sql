@@ -162,7 +162,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_LOGIN", '', 'POST', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_LOGIN", '/[0-9]*', 'PUT', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_LOGIN", '/[0-9]*', 'DELETE', false, 16);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_USUARIO", '/usuario/[0-9]*', 'GET', false, 16);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_USUARIO", '/usuario/[a-zA-Z0-9!@#$%^&*(),.?":{}|<>_-]+', 'GET', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_ROL", '/rol/[0-9]*', 'GET', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("REGISTER_ONE_LOGIN", '/post', 'POST', true, 16);
 
