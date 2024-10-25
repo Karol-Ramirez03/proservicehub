@@ -8,15 +8,15 @@ const divApp=document.querySelector("#app")
 const botonInsumoRiesgo= document.querySelector(".boton-insumo-riesgo")
 
 
-
+const jwt = localStorage.getItem("jwt")
 
 botonCompra.addEventListener("click", (e) => {
     // initInsumoPanel();
-    dataComprasAux(contenedor)
+    dataComprasAux(contenedor,jwt)
 });
 
 botonInsumoRiesgo.addEventListener("click", (e) => {
-    dataInsumoRiesgo(contenedor)
+    dataInsumoRiesgo(contenedor,jwt)
 });
 
 

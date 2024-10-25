@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servimax.proservicehub.application.service.auth.AuthenticationService;
@@ -29,6 +30,12 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    // @GetMapping("/validate-token")
+    // public ResponseEntity<Boolean> validate(@RequestParam String jwt){
+    //     boolean isTokenValid = authenticationService.validateToken(jwt);
+    //     return ResponseEntity.ok(isTokenValid);
+    // }
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -52,10 +59,17 @@ public class AuthenticationController {
     }
 
     @GetMapping("/validate-token")
-    public ResponseEntity<Boolean> validate(@RequestParam String jwt){
-        boolean isTokenValid = authenticationService.validateToken(jwt);
-        return ResponseEntity.ok(isTokenValid);
+    public ResponseEntity<Boolean> validate(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String jwt = authHeader.substring(7);
+            boolean isTokenValid = authenticationService.validateToken(jwt);
+            return ResponseEntity.ok(isTokenValid);
+        }
+        
+        //Si no hay un token válido en el header, retornamos 400 Bad Request
+        return ResponseEntity.badRequest().build();
     }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(

@@ -34,7 +34,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
+const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     const cuerpoData = document.querySelector(".tbody-info")
 
     console.log("funciona")
@@ -59,12 +59,12 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
     
     });
 
-    _addEventInsumo(shadowRoot,contenedorPrincipal)
+    _addEventInsumo(shadowRoot,contenedorPrincipal,jwt)
 
 }
 
 
-const _addEventInsumo = (shadowRoot) => {
+const _addEventInsumo = (shadowRoot,contenedorPrincipal,jwt) => {
     console.log("aqui llego");
     const btnDetalles = shadowRoot.querySelectorAll(".tbody-info");
     console.log(btnDetalles);
@@ -74,122 +74,192 @@ const _addEventInsumo = (shadowRoot) => {
             if (e.target.id === "insumos") {
                 const idPersona = e.target.dataset.id;
                 const filas = shadowRoot.querySelector(`.insumo-${idPersona}`);
+                let data = false;
 
                 try {
-                    const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/${idPersona}`, {
-                        method: "GET",
-                        headers: {
-                            'Content-Type': 'application/json'
+                    const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                        method:"GET",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
                         }
-                    });
+                    })
+                    if(response.ok){
+                        data = await response.json();
+                        console.log(data)
 
-                    if (response.ok) {
-                        const detalles = await response.json();
-                        filas.innerHTML = ""; 
 
-                        const fila = document.createElement("tr");
-                        fila.innerHTML = `
-                            <th>Id Insumo</th>
-                            <th>Nombre</th>
-                            <th>Codigo interno</th>
-                            <th>Precio <button class="cancelar" id="cerrar" data-id="${idPersona}">Cerrar</button></th>
-                            <th></th>
-                        `;
-                        filas.appendChild(fila);
+                    }else{
+                        alert("Usuario No Existente o no ha realizado Compras")
 
-                        
-                        detalles.forEach(detalle => {
-                            console.log(detalle)
-                            const newFila = document.createElement("tr");
-                            newFila.innerHTML = `
-                                <td>${detalle.insumo.id}</td>
-                                <td>${detalle.insumo.nombre}</td>
-                                <td>${detalle.insumo.codigo_interno}</td>
-                                <td>${detalle.insumo.precio_unitario}</td>
-                                <td></td>
-                            `;
-                            filas.appendChild(newFila);
-                        });
-
-                    
-                        const cerrarButton = fila.querySelector(".cancelar");
-                        cerrarButton.addEventListener("click", () => {
-                            filas.innerHTML = ""; 
-                        });
                     }
-
+                    
                 } catch (error) {
                     console.error('Error:', error);
                 }
+
+                if (data) {
+                    try {
+                        const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/${idPersona}`, {
+                            method: "GET",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+    
+                        if (response.ok) {
+                            const detalles = await response.json();
+                            filas.innerHTML = ""; 
+    
+                            const fila = document.createElement("tr");
+                            fila.innerHTML = `
+                                <th>Id Insumo</th>
+                                <th>Nombre</th>
+                                <th>Codigo interno</th>
+                                <th>Precio <button class="cancelar" id="cerrar" data-id="${idPersona}">Cerrar</button></th>
+                                <th></th>
+                            `;
+                            filas.appendChild(fila);
+    
+                            
+                            detalles.forEach(detalle => {
+                                console.log(detalle)
+                                const newFila = document.createElement("tr");
+                                newFila.innerHTML = `
+                                    <td>${detalle.insumo.id}</td>
+                                    <td>${detalle.insumo.nombre}</td>
+                                    <td>${detalle.insumo.codigo_interno}</td>
+                                    <td>${detalle.insumo.precio_unitario}</td>
+                                    <td></td>
+                                `;
+                                filas.appendChild(newFila);
+                            });
+    
+                        
+                            const cerrarButton = fila.querySelector(".cancelar");
+                            cerrarButton.addEventListener("click", () => {
+                                filas.innerHTML = ""; 
+                            });
+                        }
+    
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                    
+                } else {
+
+
+                    //implementar
+                    
+                }
+
+                
             }
             if (e.target.classList.contains("Addinsumos")) {
+                
                 const idPersona = e.target.dataset.id; 
                 const floatingPanel = document.getElementById("floatingPanel");
                 const selectInsumo = document.getElementById("selectInsumo");
                 selectInsumo.innerHTML = "";
 
-                
-                try {
-                    const response = await fetch(`http://localhost:8080/api/insumo`, {
-                        method: "GET",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
+                let data = false;
 
-                    if (response.ok) {
-                        const detalles = await response.json();
-                        detalles.forEach(detalle => {
-                            selectInsumo.innerHTML += `
-                            <option value="${detalle.id}">${detalle.nombre}</option>
-                            `;
-                        });
+                try {
+                    const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                        method:"GET",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        }
+                    })
+                    if(response.ok){
+                        data = await response.json();
+                        console.log(data)
+
+
+                    }else{
+                        alert("Usuario No Existente o no ha realizado Compras")
+
                     }
+                    
                 } catch (error) {
                     console.error('Error:', error);
                 }
-
-                floatingPanel.style.display = "block"; 
-
-                const insumoForm = document.getElementById("insumoForm");
-                insumoForm.onsubmit = async (event) => {
-                    const formData = new FormData(insumoForm);
-                    const idInsumo=formData.get("idInsumo")
-                    event.preventDefault(); 
-                    let num=Number(idPersona)
-                    const newPerIn={
-                        "id":{
-                            "idPersona": num,
-                            "idInsumo": idInsumo,
-                        },
-                        "servicio":{
-                            "id":1 //cambiar esto
-                        },
-                        "personas":{
-                            "nro_Doc":idPersona
-                        },
-                        "insumo":{
-                            "id":idInsumo
-                        }
-                    }
-                    
+                if (data) {
                     try {
-                        const response = await fetch(`http://localhost:8080/api/personainsumo`, {
-                            method: "POST",
+                        const response = await fetch(`http://localhost:8080/api/insumo`, {
+                            method: "GET",
                             headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(newPerIn)
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${jwt}`
+                            }
                         });
-
+    
                         if (response.ok) {
-                            
-                            console.log('Insumo agregado exitosamente');
+                            const detalles = await response.json();
+                            detalles.forEach(detalle => {
+                                selectInsumo.innerHTML += `
+                                <option value="${detalle.id}">${detalle.nombre}</option>
+                                `;
+                            });
                         }
                     } catch (error) {
-                        console.error('Error al agregar insumo:', error);
+                        console.error('Error:', error);
                     }
-                };
+    
+                    floatingPanel.style.display = "block"; 
+    
+                    const insumoForm = document.getElementById("insumoForm");
+                    insumoForm.onsubmit = async (event) => {
+                        const formData = new FormData(insumoForm);
+                        const idInsumo=formData.get("idInsumo")
+                        event.preventDefault(); 
+                        let num=Number(idPersona)
+                        const newPerIn={
+                            "id":{
+                                "idPersona": num,
+                                "idInsumo": idInsumo,
+                            },
+                            "servicio":{
+                                "id":1 //cambiar esto
+                            },
+                            "personas":{
+                                "nro_Doc":idPersona
+                            },
+                            "insumo":{
+                                "id":idInsumo
+                            }
+                        }
+                        
+                        try {
+                            const response = await fetch(`http://localhost:8080/api/personainsumo`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${jwt}`
+                                },
+                                body: JSON.stringify(newPerIn)
+                            });
+    
+                            if (response.ok) {
+                                
+                                console.log('Insumo agregado exitosamente');
+                            }
+                        } catch (error) {
+                            console.error('Error al agregar insumo:', error);
+                        }
+                    };
+                    
+                } else {
+
+
+
+
+                    //implementar
+                    
+                }
+                
+                
             }
         });
     });
@@ -200,26 +270,61 @@ const _addEventInsumo = (shadowRoot) => {
         });
 };
 
-export const dataProveedorInsumo = async (contenedorPrincipal,clienteId)  => {
+export const dataProveedorInsumo = async (contenedorPrincipal,clienteId,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/login/rol/11`, {
-            method: "GET"
-        });
-    
-        if (response.ok) {
-            const usuarios = await response.json();
-            renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
 
 
-        } else {
-            console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
         }
-    
+        
     } catch (error) {
         console.error('Error:', error);
+    }
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/login/rol/11`, {
+                method: "GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+        
+            if (response.ok) {
+                const usuarios = await response.json();
+                renderizarDatos(usuarios,shadowRoot,contenedorPrincipal,jwt);
+    
+    
+            } else {
+                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+            }
+        
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
     }
     
 }

@@ -65,7 +65,7 @@ const renderizarDatos = (datos,shadowRoot) => {
   });
   
 }
-const renderizarSolicitar = (shadowRoot,filaid) => {
+const renderizarSolicitar = (shadowRoot,filaid,jwt) => {
     const fila = shadowRoot.querySelector(`.cont${filaid}`)
     fila.innerHTML = ""
     fila.innerHTML =`
@@ -110,30 +110,72 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
             "solucion":solucion
 
         }
+
         if (hallazgo && solucion) {
             console.log("Datos registrados:", { idtra, hallazgo, solucion });
             console.log(formFila);
             alert("Registro completado!");
+            let data = false;
+
             try {
-                const response = await fetch(`http://localhost:8080/api/aprobacionservicio/agregar`, {
-                    method:"POST",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify(enviarData)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
                 if(response.ok){
-                    
-                    formFila.reset()
-                    fila.innerHTML = "";
-                    console.log("prueba")
-                    
+                    data = await response.json();
+                    console.log(data)
+       
+                }else{
+                    alert("Usuario No Existente o no ha realizado Compras")
                 }
+                
             } catch (error) {
                 console.error('Error:', error);
-
-
             }
+
+            if (data) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/aprobacionservicio/agregar`, {
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body: JSON.stringify(enviarData)
+                    })
+                    if(response.ok){
+                        
+                        formFila.reset()
+                        fila.innerHTML = "";
+                        console.log("prueba")
+                        
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+
+                }
+                
+            } else {
+
+
+
+
+                /*
+                implementar
+                */
+
+
+
+
+
+                
+            }
+
+            
 
         } else {
             alert("Por favor, complete todos los campos.");
@@ -147,39 +189,77 @@ const renderizarSolicitar = (shadowRoot,filaid) => {
 
 }
 
-export const dataOrdenesTrabajo = async (contenedorPrincipal,idEmpleado)  => {
+export const dataOrdenesTrabajo = async (contenedorPrincipal,idEmpleado,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
-    
+
+    let data = false;
+
+
     try {
-        const response = await fetch(`http://localhost:8080/api/detalleorden/empleadoId/${idEmpleado}`, {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,shadowRoot);
+            data = await response.json();
+            console.log(data)
 
-            const botonsolicitar = shadowRoot.querySelectorAll(".boton")
-            botonsolicitar.forEach(boton => {
-                boton.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const botonid = e.target.id;
-                    renderizarSolicitar(shadowRoot,botonid)
-                });
-            });
-            
+
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
+
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/detalleorden/empleadoId/${idEmpleado}`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatos(Ordenes,shadowRoot);
+    
+                const botonsolicitar = shadowRoot.querySelectorAll(".boton")
+                botonsolicitar.forEach(boton => {
+                    boton.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const botonid = e.target.id;
+                        renderizarSolicitar(shadowRoot,botonid,jwt)
+                    });
+                });
+                
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        /*
+        implementar
+        
+        */
+        
+    }
+    
     
 
   

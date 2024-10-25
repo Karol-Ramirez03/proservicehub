@@ -49,30 +49,66 @@ const renderizarDatos = (datos,shadowRoot) => {
   
 }
 
-export const dataAprobado = async (contenedorPrincipal,idEmpleado)  => {
+export const dataAprobado = async (contenedorPrincipal,idEmpleado,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
 
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
 
+    let data = false;
+
     try {
-        const response = await fetch(`http://localhost:8080/api/aprobacionservicio/aprobacionPer/3/${idEmpleado}`, {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const Ordenes = await response.json();
-            console.log(Ordenes)
-            renderizarDatos(Ordenes,shadowRoot);
+            data = await response.json();
+            console.log(data)
 
-            
+        }else{
+            alert("Usuario No Existente o no ha realizado Compras")
         }
         
     } catch (error) {
         console.error('Error:', error);
+    }
+
+    if (data) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/aprobacionservicio/aprobacionPer/3/${idEmpleado}`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const Ordenes = await response.json();
+                console.log(Ordenes)
+                renderizarDatos(Ordenes,shadowRoot);
+    
+                
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+
+        /*
+        
+        implementar
+        
+        */
+        
     }
     
     

@@ -53,7 +53,7 @@ const renderizarTablas = () => {
     `;
 }
 
-export const dataRegistro = async (contenedorPrincipal)  => {
+export const dataRegistro = async (contenedorPrincipal,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
@@ -89,43 +89,98 @@ export const dataRegistro = async (contenedorPrincipal)  => {
             "personas":{"nro_Doc":nroDoc}
           }
         console.log(datosEnviar)
+
+        let data = false;
         try {
-            const response = await fetch("http://localhost:8080/api/personas", {
-                method:"POST",
+            const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                method:"GET",
                 headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify(datosEnviar)
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
             })
             if(response.ok){
-                const Ordenes = await response.json();
-                console.log(Ordenes)
-                registroForm.reset()
+                data = await response.json();
+                console.log(data)
     
+            }else{
+                alert("Usuario No Existente o no ha realizado Compras")
             }
             
         } catch (error) {
             console.error('Error:', error);
         }
-        try {
-            const response = await fetch("http://localhost:8080/api/login", {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify(DatosLogin)
-            })
-            if (response.ok) {
-                const Ordenes = await response.json();
-                console.log(Ordenes)
+
+        if (data) {
+            try {
+                const response = await fetch("http://localhost:8080/api/personas", {
+                    method:"POST",
+                    headers:{
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    },
+                    body:JSON.stringify(datosEnviar)
+                })
+                if(response.ok){
+                    const Ordenes = await response.json();
+                    console.log(Ordenes)
+                    registroForm.reset()
+        
+                }
                 
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            try {
+                const response = await fetch("http://localhost:8080/api/login/post", {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json",
+                        'Authorization': `Bearer ${jwt}`
+                    },
+                    body:JSON.stringify(DatosLogin)
+                })
+                if (response.ok) {
+                    const Ordenes = await response.json();
+                    console.log(Ordenes)
+                    
+                    
+                }
+                
+            } catch (error) {
+                console.error('Error:',error)
                 
             }
             
-        } catch (error) {
-            console.error('Error:',error)
+        } else {
+
+            /*
+            
+            
+            
+            implementar
+            
+            
+            
+            */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
         }
+        
+        
     })
   
 }

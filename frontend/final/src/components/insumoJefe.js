@@ -22,7 +22,7 @@ const renderizarTablas = () => {
     `;
 }
 {/* <button class="agregar-insumo"">+ Registrar Insumo</button> */}
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,jwt) => {
 const cuerpoData = document.querySelector(".tbody-info")
 
 console.log("funciona")
@@ -83,22 +83,52 @@ datos.forEach(dato => {
             };
             const id= dato.id
             console.log(uptInsumo)
+            let data = false;
             try {
-                const response = await fetch(`http://localhost:8080/api/insumo/${id}`, {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(uptInsumo)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
                 if(response.ok){
-                    const insumos = await response.json();
-                    renderizarDatos(insumos,shadowRoot);
+                    data = await response.json();
+                    console.log(data)
+        
+                }else{
+                    alert("error")
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
+            if (data) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/insumo/${id}`, {
+                        method:"PUT",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(uptInsumo)
+                    })
+                    if(response.ok){
+                        const insumos = await response.json();
+                        renderizarDatos(insumos,shadowRoot,jwt);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+
+
+                //implementar
+                
+            }
+            
 
 
             fila.innerHTML = `
@@ -126,24 +156,55 @@ datos.forEach(dato => {
 
 
 
-export const dataInsumos = async (contenedorPrincipal)  => {
+export const dataInsumos = async (contenedorPrincipal,jwt)  => {
     contenedorPrincipal.innerHTML =``
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
-    const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal
+    let data = false;
     try {
-        const response = await fetch("http://localhost:8080/api/insumo", {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const insumos = await response.json();
-            renderizarDatos(insumos,shadowRoot);
+            data = await response.json();
+            console.log(data)
+
+        }else{
+            alert("error")
         }
         
     } catch (error) {
         console.error('Error:', error);
+    }
+    if (data) {
+        try {
+            const response = await fetch("http://localhost:8080/api/insumo", {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const insumos = await response.json();
+                renderizarDatos(insumos,shadowRoot,jwt);
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+    } else {
+
+
+
+
+        //implementar
+        
     }
 }
 

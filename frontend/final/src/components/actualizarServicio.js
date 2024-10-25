@@ -18,7 +18,7 @@ const renderizarFecha = () => {
     `;
 }
 
-export const dataNewFecha = async (contenedorPrincipal, idDetalleOrden)  => {
+export const dataNewFecha = async (contenedorPrincipal, idDetalleOrden,jwt)  => {
 
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarFecha())
@@ -41,25 +41,62 @@ export const dataNewFecha = async (contenedorPrincipal, idDetalleOrden)  => {
             const datosEnviar =	{
                 "fecha": fecha,
             }
-            
+            let data = false;
             try {
-                const response = await fetch(`http://localhost:8080/api/detalleorden/${detalleid}`, {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(datosEnviar)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
                 if(response.ok){
-                    const Ordenes = await response.json();
-                    console.log(Ordenes)
-                    formulario.reset()
+                    data = await response.json();
+                    console.log(data)
+        
+                }else{
+                    alert("error")
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
 
+            if (data) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/detalleorden/${detalleid}`, {
+                        method:"PUT",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(datosEnviar)
+                    })
+                    if(response.ok){
+                        const Ordenes = await response.json();
+                        console.log(Ordenes)
+                        formulario.reset()
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+                
+
+
+                //implementar
+
+
+
+
+
+
+
+
+            }
+            
             
         }
 
@@ -111,25 +148,54 @@ export const dataNewEmpleado = async (contenedorPrincipal, idOrdenServicio)  => 
                     "nro_Doc": Dato
                 }
             }
-            
+            let data = false;
             try {
-                const response = await fetch(`http://localhost:8080/api/ordenservicio/${detalleid}`,  {
-                    method:"PUT",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify(datosEnviar)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
                 if(response.ok){
-                    const Ordenes = await response.json();
-                    console.log(Ordenes)
-                    formulario.reset()
+                    data = await response.json();
+                    console.log(data)
+        
+                }else{
+                    alert("error")
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
 
+            if (data) {
+
+                try {
+                    const response = await fetch(`http://localhost:8080/api/ordenservicio/${detalleid}`,  {
+                        method:"PUT",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body: JSON.stringify(datosEnviar)
+                    })
+                    if(response.ok){
+                        const Ordenes = await response.json();
+                        console.log(Ordenes)
+                        formulario.reset()
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+
+
+                //implementar
+                
+            }
             
         }
 

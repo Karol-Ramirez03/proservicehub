@@ -44,18 +44,18 @@ class  PagInicioRecursosHumanos extends LitElement {
         const serviciosAsignacion = this.shadowRoot.querySelector(".servicio-no-asignado")
         const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
       
-
+        const jwt = localStorage.getItem("jwt")
         botonOrdenes.addEventListener('click', (e) => {
             e.preventDefault()
-            dataOrdenes(contenedorPrincipal);
+            dataOrdenes(contenedorPrincipal,jwt);
           });
         botonRegistro.addEventListener("click", (e) => {
             e.preventDefault()
-            dataRegistro(contenedorPrincipal);
+            dataRegistro(contenedorPrincipal,jwt);
           });
         serviciosAsignacion.addEventListener("click", (e) => {
             e.preventDefault()
-            dataserviciosNo(contenedorPrincipal);
+            dataserviciosNo(contenedorPrincipal,jwt);
           });
 
         

@@ -1,5 +1,5 @@
 import {LitElement, html } from 'lit'
-import { data3top } from './MarketingConsultas';
+import { data3top } from './MarketingConsultas.js';
 class  PagInicioMarketing extends LitElement {
     constructor(){
         super()
@@ -31,7 +31,10 @@ class  PagInicioMarketing extends LitElement {
         // const encrpit=JSON.parse(localStorage.getItem("jwt"))
         // console.log(encrpit)
         const contenedor = this.shadowRoot.querySelector(".tarj")
-        data3top(contenedor)
+        // let jwt ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb25zdWx0YXMiLCJpYXQiOjE3Mjk4NjA2MDEsImV4cCI6MTcyOTg2MjQwMX0.R5-pnYEc5oQrcHB11Js8JR04yugkQQHeMqF2wZHyEqM"
+        let jwt = localStorage.getItem('jwt')
+        console.log(jwt)
+        data3top(contenedor,jwt)
 
     }
 

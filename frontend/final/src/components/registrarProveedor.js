@@ -1,4 +1,4 @@
-export function initProveedorPanel() {
+export function initProveedorPanel(jwt) {
     const app = document.querySelector('#app');
 
     let isPanelOpen = false;
@@ -117,7 +117,9 @@ export function initProveedorPanel() {
         fetch('http://localhost:8080/api/personas', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+
             },
             body: JSON.stringify(nuevoProveedor)
         })
@@ -143,7 +145,8 @@ export function initProveedorPanel() {
         fetch('http://localhost:8080/api/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
             },
             body: JSON.stringify(newUser)
         })

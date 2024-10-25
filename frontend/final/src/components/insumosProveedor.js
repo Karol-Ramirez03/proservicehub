@@ -46,29 +46,60 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal) => {
 
 }
 
-export const dataProveedorInsumos = async (contenedorPrincipal,idUsuario)  => {
+export const dataProveedorInsumos = async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+    let data = false;
     try {
-        const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/${idUsuario}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
-        });
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
 
-        if (response.ok) {
-            const usuarios = await response.json();
-            renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
-
-
-        } else {
-            console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+        }else{
+            alert("error")
         }
-    
+        
     } catch (error) {
         console.error('Error:', error);
+    }
+
+    if (data) {
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/personainsumo/insumos/${idUsuario}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+                }
+            });
+    
+            if (response.ok) {
+                const usuarios = await response.json();
+                renderizarDatos(usuarios,shadowRoot,contenedorPrincipal);
+    
+    
+            } else {
+                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+            }
+        
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
     }
     
 }

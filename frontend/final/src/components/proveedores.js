@@ -15,14 +15,16 @@ const usuario=JSON.parse(localStorage.getItem("usuario"))
 const idUsuario=usuario.personas.nro_Doc
 console.log(idUsuario)
 
+const jwt = localStorage.getItem("jwt")
+
 botonProInsumo.addEventListener("click", (e) => {
-    dataProveedorInsumos(contenedor,idUsuario)
+    dataProveedorInsumos(contenedor,idUsuario,jwt)
 });
 
 btnVentas.addEventListener("click",(e)=>{
-    dataVentas(contenedor,idUsuario)
+    dataVentas(contenedor,idUsuario,jwt)
 })
 
 btnPendiente.addEventListener("click",(e)=>{
-    dataVentasPendiente(contenedor,idUsuario)
+    dataVentasPendiente(contenedor,idUsuario,jwt)
 })

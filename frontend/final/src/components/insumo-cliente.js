@@ -19,7 +19,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot,idUsuario) => {
+const renderizarDatos = (datos,shadowRoot,idUsuario,jwt) => {
 const cuerpoData = document.querySelector(".tbody-info")
 
 console.log("funciona")
@@ -42,11 +42,11 @@ datos.forEach(dato => {
     cuerpoData.appendChild(fila2)
 });
     // Después de que se hayan agregado todas las filas, agrega el EventListener
-    agregarTrCompra(shadowRoot,datos,idUsuario);
+    agregarTrCompra(shadowRoot,datos,idUsuario,jwt);
 }
 
 // Función para agregar EventListeners a los botones
-const agregarTrCompra = (shadowRoot,datos,idUsuario) => {
+const agregarTrCompra = (shadowRoot,datos,idUsuario,jwt) => {
     const botonesComprar = document.querySelectorAll(".comprar");
     
     botonesComprar.forEach(boton => {
@@ -68,14 +68,14 @@ const agregarTrCompra = (shadowRoot,datos,idUsuario) => {
             <td><button class="orden" id="${idCompra}">Ordenar</button></td>
             
             `
-            agregarEventListener(shadowRoot,datos,idUsuario)
+            agregarEventListener(shadowRoot,datos,idUsuario,jwt)
 
             
         });
     });
 }
 
-const agregarEventListener=(shadowRoot,datos2,idUsuario)=>{
+const agregarEventListener=(shadowRoot,datos2,idUsuario,jwt)=>{
     const btnCancelar=shadowRoot.querySelectorAll(".cancelar")
     const btnOrden=shadowRoot.querySelectorAll(".orden")
 
@@ -104,22 +104,51 @@ const agregarEventListener=(shadowRoot,datos2,idUsuario)=>{
                 "cantidad":cantidad,
                 "tipo_compra":2
             }
+            let data = false;
             try {
-                const response = await fetch("http://localhost:8080/api/compra/agregar", {
-                    method:"POST",
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
                     headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(datosEnviar)
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${jwt}`
+                    }
                 })
                 if(response.ok){
-                    console.log("Orden exitosa")
-                    fila.innerHTML=""
+                    data = await response.json();
+                    console.log(data)
+
+                }else{
+                    alert("error")
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
             }
+            if (data) {
+                try {
+                    const response = await fetch("http://localhost:8080/api/compra/agregar", {
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body:JSON.stringify(datosEnviar)
+                    })
+                    if(response.ok){
+                        console.log("Orden exitosa")
+                        fila.innerHTML=""
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            } else {
+
+                //implemenetar
+                
+            }
+            
         });
     });
 });
@@ -128,25 +157,57 @@ const agregarEventListener=(shadowRoot,datos2,idUsuario)=>{
 
 
 
-export const dataInsumos = async (contenedorPrincipal,idUsuario)  => {
+export const dataInsumos = async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.innerHTML =``
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
+
+    let data = false;
     try {
-        const response = await fetch("http://localhost:8080/api/insumo", {
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
             }
         })
         if(response.ok){
-            const insumos = await response.json();
-            renderizarDatos(insumos,shadowRoot,idUsuario);
+            data = await response.json();
+            console.log(data)
+
+        }else{
+            alert("error")
         }
         
     } catch (error) {
         console.error('Error:', error);
     }
+
+    if (data) {
+        try {
+            const response = await fetch("http://localhost:8080/api/insumo", {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                const insumos = await response.json();
+                renderizarDatos(insumos,shadowRoot,idUsuario,jwt);
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    } else {
+
+
+        //implementar
+        
+    }
+
 }
 
 
