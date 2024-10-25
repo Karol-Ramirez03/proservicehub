@@ -1,7 +1,7 @@
 INSERT INTO module (name,base_path) VALUES ("AprobacionServicio","/api/aprobacionservicio"); 
 INSERT INTO module (name,base_path) VALUES ("Ciudad","/api/ciudad"); 
 INSERT INTO module (name,base_path) VALUES ("Compra","/api/compra"); 
-INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detalleCompra"); 
+INSERT INTO module (name,base_path) VALUES ("DetalleCompra","/api/detallecompra"); 
 INSERT INTO module (name,base_path) VALUES ("Detalle0rdenServicio","/api/detalleordenservicio"); 
 INSERT INTO module (name,base_path) VALUES ("DetalleOrden","/api/detalleorden"); 
 INSERT INTO module (name,base_path) VALUES ("Direccion","/api/direccion"); 
@@ -33,8 +33,18 @@ INSERT INTO module (name,base_path) VALUES ("Tipopersona","/api/tipopersona");
 INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth'); 
 INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono"); 
 
-
-
+INSERT INTO rol (nombre) VALUES ("Admin")
+INSERT INTO rol (nombre) VALUES ("Cliente")
+INSERT INTO rol (nombre) VALUES ("Jefe_recursos_humanos")
+INSERT INTO rol (nombre) VALUES ("Jefe_bodega")
+INSERT INTO rol (nombre) VALUES ("Jefe_inventario")
+INSERT INTO rol (nombre) VALUES ("Jefe_marketing")
+INSERT INTO rol (nombre) VALUES ("Jefe_sistemas")
+INSERT INTO rol (nombre) VALUES ("Gerente")
+INSERT INTO rol (nombre) VALUES ("Profesional")
+INSERT INTO rol (nombre) VALUES ("Auxiliar_bodega")
+INSERT INTO rol (nombre) VALUES ("Proveedor")
+INSERT INTO rol (nombre) VALUES ("Jefe_compra")
 
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_APROBACIONES", '', 'GET', false, 1); 
@@ -931,3 +941,23 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 102);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 123);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 128);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 192);
+
+
+
+INSERT INTO pais (nombre) VALUES ("Colombia");
+
+INSERT INTO  region (nombre,pais_id) VALUES ("Santander",1);
+
+INSERT INTO ciudad (nombre,region_id) VALUES ("Bucaramanga",1);
+
+INSERT INTO tipo_empresa (descripcion) VALUES ("Natural");
+
+INSERT INTO empresa (id,nombre,tipo_empresa_id) VALUES (1223,"Globant",1);
+
+INSERT INTO direccion (barrio,calle,carrera,descripcion,ciudad_id) VALUES ("Las mercedes","34","56b","Apt 203",1);
+
+INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12423,"Amadeus",1,1223);
+
+INSERT INTO tipo_persona (nombre) VALUES ("Natural");
+
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1005539417,"Mauricio","2024-10-9","Diaz",1,1);
