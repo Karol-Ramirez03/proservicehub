@@ -48,7 +48,7 @@ export function initDynamicPanel(config) {
                 ||field.label=="Insumo" ||field.label=="Compra" ||field.label=="Orden de Servicio" ||field.label=="Servicio" 
                 ||field.label=="Orden de Trabajo" ||field.label=="Estado de Orden" ||field.label=="Ciudad" ||field.label=="Tipo de Email"
                 ||field.label=="Tipo de Empresa" ||field.label=="Estado de Aprobación" ||field.label=="Empleado" ||field.label=="Estado de la Orden" 
-                ||field.label=="Proveedor" 
+                ||field.label=="Proveedor" ||field.label=="País" ||field.label=="Dirección" ||field.label=="Empresa" ||field.label=="Tipo de Teléfono"
             ){
                 const select= document.createElement('select')
                 select.id=field.id;
