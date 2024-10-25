@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,6 +51,20 @@ public class JwtService {
 
         return jwt;
     }
+
+    @SuppressWarnings("deprecation")
+    public String generateRefreshToken(UserDetails user) {
+        Date issuedAt = new Date(System.currentTimeMillis());
+        Date expiration = new Date((EXPIRATION_IN_MINUTES * 60 * 1000 * 24) + issuedAt.getTime()); // 1 día
+
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .setIssuedAt(issuedAt)
+                .setExpiration(expiration)
+                .signWith(generateKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+    
     private SecretKey generateKey() {
         byte[] passwordDecoded = Decoders.BASE64.decode(SECRET_KEY);
         //La clave secreta está codificada en Base64. Aquí se decodifica.
@@ -94,5 +109,16 @@ public class JwtService {
         return extractAllClaims(jwt).getExpiration();
         //Extrae la fecha de expiración de las claims del JWT utilizando el método extractAllClaims.
     }
+
+    public Boolean validateToken(String jwt, UserDetails user) {
+        final String username = extractUsername(jwt);
+        return (username.equals(user.getUsername()) && !isTokenExpired(jwt));
+    }
+
+    private Boolean isTokenExpired(String jwt) {
+        return extractExpiration(jwt).before(new Date());
+    }
+
+  
 
 }
