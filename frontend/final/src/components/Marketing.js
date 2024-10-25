@@ -28,6 +28,8 @@ class  PagInicioMarketing extends LitElement {
     }
     //
     updated() {
+        // const encrpit=JSON.parse(localStorage.getItem("jwt"))
+        // console.log(encrpit)
         const contenedor = this.shadowRoot.querySelector(".tarj")
         data3top(contenedor)
 

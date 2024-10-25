@@ -56,6 +56,10 @@ public class Insumo {
     public Insumo() {
     }
 
+    public Insumo(long id) {
+        this.id = id;
+    }
+
     public Insumo( String codigo_interno, String nombre) {
         
         this.codigo_interno = codigo_interno;

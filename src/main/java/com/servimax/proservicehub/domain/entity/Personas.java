@@ -75,7 +75,10 @@ public class Personas {
     @OneToMany(mappedBy = "personas")
     private List<Login> login;
 
- 
+
+    public Personas(Long nro_Doc) {
+        Nro_Doc = nro_Doc;
+    }
 
     @PrePersist
     protected void onCreate() {

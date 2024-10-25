@@ -33,7 +33,6 @@ public class Ciudad {
     private Region region;
 
     @JsonIgnore
-    @NotNull(message = "no puede estar vacio")
     @OneToMany(mappedBy = "ciudad")
     private List<Direccion> direccion;
 

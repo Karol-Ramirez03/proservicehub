@@ -98,8 +98,8 @@ class MenuCrud extends LitElement {
             <div class="menu"> 
                 ${this.menuItems.map(item => html`
                     <div class="menu-item" id="${item.id}">
-                        <span>${item.title}</span>
-                        <img src="${item.imageUrl}" alt="${item.title}" class="small-image">
+                        <span id="${item.id}">${item.title}</span>
+                        <img id="${item.id}" src="${item.imageUrl}" alt="${item.title}" class="small-image">
                     </div>
                 `)}
             </div>
@@ -117,6 +117,7 @@ class MenuCrud extends LitElement {
                 console.log(listaCruds[id])
                 initDynamicPanel(listaCruds[id][0])
                 initDynamicTable(listaCruds[id][1])
+                console.log("Aqui llegoo")
             })
         });
     }
