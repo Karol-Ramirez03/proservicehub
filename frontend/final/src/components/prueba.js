@@ -200,11 +200,11 @@ export const initDynamicTable = (config) => {
                     if (field.label=="Numero Documento"){
                         fila.innerHTML+=`<td id="${field.id}-${dato.nro_Doc}">${dato.nro_Doc}</td>`
                         cont+=1
-                    }else if(field.label=="Sucursal" || field.label=="Tipo de Persona"|| field.label=="Region" || field.label=="Estado Compra" | field.label=="Tipo Compra"|| field.label=="Insumo" || field.label=="Ciudad"|| field.label=="Servicio" || field.label=="Estado de Aprobación"|| field.label=="Rol"|| field.label=="Estado de la Orden"){
+                    }else if(field.label=="Sucursal" || field.label=="Tipo de Persona"|| field.label=="Region" || field.label=="Estado Compra" | field.label=="Tipo Compra"|| field.label=="Insumo" || field.label=="Ciudad"|| field.label=="Servicio" || field.label=="Estado de Aprobación"|| field.label=="Rol"|| field.label=="Estado de la Orden"|| field.label=="Estado de Orden"|| field.label=="País"|| field.label=="Empresa"){
                         const api=field.apiKey
                         fila.innerHTML+=`<td id="${field.id}-${dato[api].id}">${dato[api].nombre}</td>`
                         cont+=1
-                    }else if(field.label=="Fecha Registro" || field.label=="Fecha Compra"   ){
+                    }else if(field.label=="Fecha Registro" || field.label=="Fecha Compra" || field.label=="Fecha de Creación"  || field.label=="Fecha de Orden" ){
                         const fecha=dato[field.apiKey]
                         const fechaSinHora = fecha.split("T")[0];
                         fila.innerHTML+=`<td id="${field.id}-${dato.id}">${fechaSinHora}</td>`
@@ -215,8 +215,19 @@ export const initDynamicTable = (config) => {
                     }else if(field.label=="Cliente"|| field.label=="Persona"|| field.label=="Proveedor"){
                         fila.innerHTML+=`<td id="${field.id}-${dato.personas.nro_Doc}">${dato.personas.nro_Doc}</td>`
                         cont+=1
-                    }
-                    else{
+                    }else if(field.label=="Compra"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.compra.id}">${dato.compra.id}</td>`
+                        cont+=1
+                    }else if(field.label=="Orden de Trabajo"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.orden_trabajo.numero_orden_trabajo}">${dato.orden_trabajo.numero_orden_trabajo}</td>`
+                        cont+=1
+                    }else if(field.label=="Tipo de Empresa"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.tipo_empresa.id}">${dato.tipo_empresa.descripcion}</td>`
+                        cont+=1
+                    }else if(field.label=="Dirección"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.direccion.id}">Cll: ${dato.direccion.calle} Cr: ${dato.direccion.carrera} ${dato.direccion.barrio}, ${dato.direccion.descripcion}</td>`
+                        cont+=1
+                    }else{
                         fila.innerHTML+=`<td id="${field.id}-${dato.id}">${dato[field.apiKey]}</td>`
                         cont+=1
                     }

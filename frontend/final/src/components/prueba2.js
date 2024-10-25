@@ -659,7 +659,7 @@ export const listaCruds=[
       buttonText: '+ Registrar Telefono Persona',
       panelTitle: 'Agregar Nueva Telefono Persona',
       submitButtonText: 'Registrar Telefono Persona',
-      apiUrl: 'http://localhost:8080/api/telefonopersona',
+      apiUrl: 'http://localhost:8080/api/telpersona',
       fields: [          
         { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
           required: true, validationMessage: 'El número de teléfono no puede ser nulo'   },
@@ -669,7 +669,7 @@ export const listaCruds=[
           required: true, validationMessage: 'Debe seleccionar una persona', } 
       ]
     },{
-      apiUrl: 'http://localhost:8080/api/telefonopersona',
+      apiUrl: 'http://localhost:8080/api/telpersona',
       fields: [          
         { label: 'Número de Teléfono', id: 'numero', type: 'number', apiKey: 'numero', 
           required: true, validationMessage: 'El número de teléfono no puede ser nulo' 
@@ -685,7 +685,7 @@ export const listaCruds=[
       buttonText: '+ Registrar Telefono Sucursal',
       panelTitle: 'Agregar Nueva Telefono Sucursal',
       submitButtonText: 'Registrar Telefono Sucursal',
-      apiUrl: 'http://localhost:8080/api/telefonosucursal',
+      apiUrl: 'http://localhost:8080/api/telsucursal',
       fields: [          
         { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
           required: true, validationMessage: 'El número no puede estar vacío' },
@@ -693,7 +693,7 @@ export const listaCruds=[
           required: true, validationMessage: 'Debe seleccionar una sucursal', apiExtension:'sucursal', }
       ]
     },{
-      apiUrl: 'http://localhost:8080/api/telefonosucursal',
+      apiUrl: 'http://localhost:8080/api/telsucursal',
       fields: [          
         { label: 'Número de Sucursal', id: 'numero', type: 'number', apiKey: 'numero', 
           required: true, validationMessage: 'El número no puede estar vacío' },
@@ -706,13 +706,13 @@ export const listaCruds=[
       buttonText: '+ Registrar Tipo Email',
       panelTitle: 'Agregar Nueva Tipo Email',
       submitButtonText: 'Registrar Tipo Email',
-      apiUrl: 'http://localhost:8080/api/tipoemail',
+      apiUrl: 'http://localhost:8080/api/tipoEmail',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
       ]
     },{
-      apiUrl: 'http://localhost:8080/api/tipoemail',
+      apiUrl: 'http://localhost:8080/api/tipoEmail',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
         { label: 'Nombre', id: 'nombre', type: 'text', apiKey: 'nombre', required: true, validationMessage: 'El nombre no puede estar vacío' }
@@ -723,13 +723,13 @@ export const listaCruds=[
       buttonText: '+ Registrar Tipo Empresa',
       panelTitle: 'Agregar Nueva Tipo Empresa',
       submitButtonText: 'Registrar Tipo Empresa',
-      apiUrl: 'http://localhost:8080/api/tipoempresa',
+      apiUrl: 'http://localhost:8080/api/tipoEmpresa',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
         { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
       ]
     },{
-      apiUrl: 'http://localhost:8080/api/tipoempresa',
+      apiUrl: 'http://localhost:8080/api/tipoEmpresa',
       fields: [          
         { label: 'ID', id: 'id', type: 'number', apiKey: 'id', required: true, validationMessage: 'El ID no puede estar vacío' },
         { label: 'Descripción',  id: 'descripcion', type: 'text', apiKey: 'descripcion', required: true, validationMessage: 'La descripción no puede estar vacía y debe tener entre 1 y 100 caracteres'}
