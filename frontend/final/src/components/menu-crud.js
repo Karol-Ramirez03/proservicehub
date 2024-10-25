@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { listaCruds } from './prueba2';
 import { initDynamicPanel } from './prueba';
 import { initDynamicTable } from './prueba';
+import { refreshToken } from './refreshToken';
 
 class MenuCrud extends LitElement {
     static styles = css`
@@ -108,6 +109,17 @@ class MenuCrud extends LitElement {
     }
 
     updated(){
+        const user={
+            "username":"mauro@gmail.com",
+            "personas":{
+                "nro_Doc":1005539417
+            }
+        }
+        // localStorage.setItem("refreshToken",)
+        // localStorage.setItem("jwt",)
+        localStorage.setItem("usuario",JSON.stringify(user))
+        let jwt = localStorage.getItem("jwt")
+
         const botones=this.shadowRoot.querySelectorAll(".menu-item")
         botones.forEach(boton => {
             boton.addEventListener("click",(e)=>{
@@ -115,8 +127,8 @@ class MenuCrud extends LitElement {
                 const id=e.target.id
                 console.log(id)
                 console.log(listaCruds[id])
-                initDynamicPanel(listaCruds[id][0])
-                initDynamicTable(listaCruds[id][1])
+                initDynamicPanel(listaCruds[id][0],jwt)
+                initDynamicTable(listaCruds[id][1],jwt)
                 console.log("Aqui llegoo")
             })
         });

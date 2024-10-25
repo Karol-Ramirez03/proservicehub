@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 export function initInsumoPanel(jwt) {
     const app = document.querySelector('#app');
 
@@ -83,7 +85,7 @@ export function initInsumoPanel(jwt) {
         render();
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const codigoInterno = document.getElementById('codigoInterno').value;
@@ -110,24 +112,52 @@ export function initInsumoPanel(jwt) {
 
     
         console.log('Insumo registrado:', nuevoInsumo);
+        let data = false;
+        try {
+            const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                data = await response.json();
+                console.log(data)
     
-        
-        fetch('http://localhost:8080/api/insumo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify(nuevoInsumo)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Insumo almacenado:', data);
+    
+            }else{
+                alert("Usuario No Existente o no ha realizado Compras")
+    
+            }
             
-        })
-        .catch(error => {
-            console.error('Error al almacenar el insumo:', error);
-        });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        if (data) {
+        
+            fetch('http://localhost:8080/api/insumo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                },
+                body: JSON.stringify(nuevoInsumo)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Insumo almacenado:', data);
+                
+            })
+            .catch(error => {
+                console.error('Error al almacenar el insumo:', error);
+            });
+        } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
+            }
+    
         isPanelOpen = false;
         render();
     }

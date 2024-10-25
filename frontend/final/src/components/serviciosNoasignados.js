@@ -1,4 +1,5 @@
 import { dataNewEmpleado } from "./actualizarServicio";
+import { refreshToken } from "./refreshToken";
 
 const renderizarTablas = () => {
     return /* html */`
@@ -109,11 +110,10 @@ export const dataserviciosNo = async (contenedorPrincipal,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
   

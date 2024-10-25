@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -143,10 +145,10 @@ const agregarEventListener=(shadowRoot,datos2,idUsuario,jwt)=>{
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-                //implemenetar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         });
@@ -201,11 +203,10 @@ export const dataInsumos = async (contenedorPrincipal,idUsuario,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
 }

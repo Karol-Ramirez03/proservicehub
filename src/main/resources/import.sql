@@ -31,7 +31,7 @@ INSERT INTO module (name,base_path) VALUES ("TipoEmail","/api/tipoEmail");
 INSERT INTO module (name,base_path) VALUES ("TipoEmpresa","/api/tipoEmpresa"); 
 INSERT INTO module (name,base_path) VALUES ("Tipopersona","/api/tipopersona"); 
 INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth'); 
-INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono"); 
+INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono");
 
 INSERT INTO rol (nombre) VALUES ("Admin")
 INSERT INTO rol (nombre) VALUES ("Cliente")
@@ -279,6 +279,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_TIPO_TELEFONO", '/[0-9]*', 'PUT', false, 34);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_TELEFONO", '/[0-9]*', 'DELETE', false, 34);
 
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('REFRESCAR_TOKEN','/refresh-token', 'POST', true, 33);
 
  -- rol admin
 
@@ -945,19 +946,47 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (12, 192);
 
 
 INSERT INTO pais (nombre) VALUES ("Colombia");
+INSERT INTO pais (nombre) VALUES ("Estados Unidos");
+INSERT INTO pais (nombre) VALUES ("Mexico");
 
 INSERT INTO  region (nombre,pais_id) VALUES ("Santander",1);
+INSERT INTO  region (nombre,pais_id) VALUES ("Cundinamarca",1);
+INSERT INTO  region (nombre,pais_id) VALUES ("Cesar",1);
+INSERT INTO  region (nombre,pais_id) VALUES ("Norte de santander",1);
 
 INSERT INTO ciudad (nombre,region_id) VALUES ("Bucaramanga",1);
+INSERT INTO ciudad (nombre,region_id) VALUES ("Piedecuesta",1);
+INSERT INTO ciudad (nombre,region_id) VALUES ("Cucuta",1);
+INSERT INTO ciudad (nombre,region_id) VALUES ("Giron",1);
 
-INSERT INTO tipo_empresa (descripcion) VALUES ("Natural");
+INSERT INTO tipo_empresa (descripcion) VALUES ("Publica");
+INSERT INTO tipo_empresa (descripcion) VALUES ("Privada");
 
-INSERT INTO empresa (id,nombre,tipo_empresa_id) VALUES (1223,"Globant",1);
+INSERT INTO empresa (id,nombre,tipo_empresa_id) VALUES (1289,"Electricos SA",2);
+INSERT INTO empresa (id,nombre,tipo_empresa_id) VALUES (1267,"Plomeria a tu servicio",1);
+INSERT INTO empresa (id,nombre,tipo_empresa_id) VALUES (1223,"Bellas artes",1);
 
 INSERT INTO direccion (barrio,calle,carrera,descripcion,ciudad_id) VALUES ("Las mercedes","34","56b","Apt 203",1);
+INSERT INTO direccion (barrio,calle,carrera,descripcion,ciudad_id) VALUES ("Altamira","52","3","local 19",2);
+INSERT INTO direccion (barrio,calle,carrera,descripcion,ciudad_id) VALUES ("La Napolitana","16","6w","Edificio miraflores",3);
 
-INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12423,"Amadeus",1,1223);
+INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12423,"Tu servicio express",1,1289);
+INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (124235,"Destapa-Todo",2,1267);
+INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12456,"Artina",3,1223);
 
-INSERT INTO tipo_persona (nombre) VALUES ("Natural");
+INSERT INTO tipo_persona  (id,nombre) VALUES (1,"Admin")
+INSERT INTO tipo_persona  (id,nombre) VALUES (2,"Cliente")
+INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
+INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
+INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
+INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
+INSERT INTO tipo_persona  (id,nombre) VALUES (7,"Jefe_sistemas")
+INSERT INTO tipo_persona  (id,nombre) VALUES (8,"Gerente")
+INSERT INTO tipo_persona  (id,nombre) VALUES (9,"Profesional")
+INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
+INSERT INTO tipo_persona  (id,nombre) VALUES (11,"Proveedor")
+INSERT INTO tipo_persona  (id,nombre) VALUES (12,"Empleado")
 
 INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1005539417,"Mauricio","2024-10-9","Diaz",1,1);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10255,"Karol","2024-10-9","Ramirez",2,8);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10266,"Laura","2024-10-9","Torres",3,7);

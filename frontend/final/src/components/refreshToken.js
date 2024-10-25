@@ -1,26 +1,25 @@
-const refreshToken=async ()=> {
-    const refreshToken = localStorage.getItem('refreshToken'); // Obtener el refresh token
-    const username = localStorage.getItem('username'); // Obtener el nombre de usuario
+export const refreshToken = async () => {
+    const currentToken = localStorage.getItem('refreshToken'); // O donde estés almacenando tu token
 
-    if (!refreshToken || !username) {
-        console.error('Refresh token o username no disponible');
-        return;
+    try {
+        const response = await fetch('http://localhost:8080/auth/refresh-token', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${currentToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al refrescar el token');
+        }
+
+        const data = await response.json();
+        // Guarda el nuevo token en el almacenamiento local o en donde lo necesites
+        const newData=data.jwt
+        localStorage.setItem('jwt', newData);
+        
+    } catch (error) {
+        console.error('Error al refrescar el token:', error);
     }
-
-    
-    const response = await fetch('/api/auth/refresh-token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ refreshToken, username }), // Enviar refreshToken y username en el body
-    });
-
-    if (response.ok) {
-        const newAccessToken = await response.text();
-        localStorage.setItem('jwt', newAccessToken); // Almacenar el nuevo access token
-        console.log('Access token refrescado:', newAccessToken);
-    } else {
-        console.error('Error al refrescar el token');
-    }
-}
+};

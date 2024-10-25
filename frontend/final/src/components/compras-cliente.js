@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -28,35 +30,61 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
 
     datos.forEach(async dato => {
     var fila2=""
-
+    let data = false;
     try {
-        const response2 = await fetch(`http://localhost:8080/api/compra/${dato.id}/estado/nombre`, {
-            method: "GET"
-        });
-    
-        if (response2.ok) {
-            const estado = await response2.text();
-            const fechaCompra = new Date(dato.fecha_compra).toLocaleDateString('en-CA');
-            const fila = document.createElement("tr");
-            fila.innerHTML = `
-            <td>${dato.id}</td>
-            <td >${fechaCompra}</td>
-            <td>${estado}</td>
-            <td><button class="detalles" id="detalles"  data-id="${dato.id}">Ver detalles</button></td>
-            `;
-            cuerpoData.appendChild(fila);
-            fila2 = document.createElement("table");
-            fila2.style.width = "200%"; 
-            fila2.classList.add(`detalle-${dato.id}`,"nombres-table")
-            cuerpoData.appendChild(fila2)
+        const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+            method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        if(response.ok){
+            data = await response.json();
+            console.log(data)
 
-        } else {
-            console.error(`Error en la solicitud: ${response2.status} - ${response2.statusText}`);
+        }else{
+            alert("error")
         }
-    
+        
     } catch (error) {
         console.error('Error:', error);
     }
+    if(data){
+        try {
+            const response2 = await fetch(`http://localhost:8080/api/compra/${dato.id}/estado/nombre`, {
+                method: "GET"
+            });
+        
+            if (response2.ok) {
+                const estado = await response2.text();
+                const fechaCompra = new Date(dato.fecha_compra).toLocaleDateString('en-CA');
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+                <td>${dato.id}</td>
+                <td >${fechaCompra}</td>
+                <td>${estado}</td>
+                <td><button class="detalles" id="detalles"  data-id="${dato.id}">Ver detalles</button></td>
+                `;
+                cuerpoData.appendChild(fila);
+                fila2 = document.createElement("table");
+                fila2.style.width = "200%"; 
+                fila2.classList.add(`detalle-${dato.id}`,"nombres-table")
+                cuerpoData.appendChild(fila2)
+    
+            } else {
+                console.error(`Error en la solicitud: ${response2.status} - ${response2.statusText}`);
+            }
+        
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
+    }
+    
     
     
     });
@@ -147,12 +175,10 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                         console.error('Error:', error);
                     }
                     
-                } else {
-
-
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
                 
             }

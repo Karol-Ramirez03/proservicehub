@@ -86,31 +86,78 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse login(AuthenticationRequest autRequest) {
-
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 autRequest.getUsername(), autRequest.getPassword()
         );
-        /*
-         * Se crea un objeto UsernamePasswordAuthenticationToken 
-         * utilizando las credenciales proporcionadas en AuthenticationRequest 
-         * y se autentica con authenticationManager.
-        */
-
+    
+        // Autenticar al usuario
         authenticationManager.authenticate(authentication);
-
-        /*
-         * Si la autenticación es correcta, se genera un nuevo JWT y se guarda.
-         * Devuelve una instancia de AuthenticationResponse que contiene el JWT generado.
-        */
-
+    
+        // Cargar los detalles del usuario
         UserDetails user = userService.findOneByUsername(autRequest.getUsername()).get();
-        String jwt = jwtService.generateToken(user, generateExtraClaims((Login) user));
-        saveUserToken((Login) user, jwt);
-        AuthenticationResponse authRsp = new AuthenticationResponse();
-        authRsp.setJwt(jwt);
-
-        return authRsp;
+    
+        // Generar el token de acceso
+        String accessToken = jwtService.generateToken(user, generateExtraClaims((Login) user));
+        // Generar el token de refresco
+        String refreshToken = jwtService.generateRefreshToken(user); // Asegúrate de tener este método en JwtService
+    
+        // Guardar el token del usuario (opcional)
+        saveUserToken((Login) user, accessToken);
+    
+        // Crear la respuesta con ambos tokens
+        return new AuthenticationResponse(accessToken, refreshToken);
     }
+
+    public AuthenticationResponse refresh(AuthenticationRequest autRequest) {
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                autRequest.getUsername(), autRequest.getPassword()
+        );
+    
+        // Autenticar al usuario
+        authenticationManager.authenticate(authentication);
+    
+        // Cargar los detalles del usuario
+        UserDetails user = userService.findOneByUsername(autRequest.getUsername()).get();
+    
+        // Generar el token de acceso
+        String accessToken = jwtService.generateToken(user, generateExtraClaims((Login) user));
+        // Generar el token de refresco
+    
+        // Guardar el token del usuario (opcional)
+        saveUserToken((Login) user, accessToken);
+    
+        // Crear la respuesta con ambos tokens
+        return new AuthenticationResponse(accessToken);
+    }
+    
+    
+
+    // public AuthenticationResponse login(AuthenticationRequest autRequest) {
+
+    //     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+    //             autRequest.getUsername(), autRequest.getPassword()
+    //     );
+    //     /*
+    //      * Se crea un objeto UsernamePasswordAuthenticationToken 
+    //      * utilizando las credenciales proporcionadas en AuthenticationRequest 
+    //      * y se autentica con authenticationManager.
+    //     */
+
+    //     authenticationManager.authenticate(authentication);
+
+    //     /*
+    //      * Si la autenticación es correcta, se genera un nuevo JWT y se guarda.
+    //      * Devuelve una instancia de AuthenticationResponse que contiene el JWT generado.
+    //     */
+
+    //     UserDetails user = userService.findOneByUsername(autRequest.getUsername()).get();
+    //     String jwt = jwtService.generateToken(user, generateExtraClaims((Login) user));
+    //     saveUserToken((Login) user, jwt);
+    //     AuthenticationResponse authRsp = new AuthenticationResponse();
+    //     authRsp.setJwt(jwt);
+
+    //     return authRsp;
+    // }
 
     public boolean validateToken(String jwt) {
 

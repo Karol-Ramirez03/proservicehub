@@ -1,5 +1,5 @@
 // ver solicitudes aprobadas por los clientes
-
+import { refreshToken } from "./refreshToken";
 
 //ver todas las ordenes de trabajo y su seguimiento
 const renderizarTablas = () => {
@@ -99,16 +99,10 @@ export const dataAprobado = async (contenedorPrincipal,idEmpleado,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-
-        /*
-        
-        implementar
-        
-        */
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
     

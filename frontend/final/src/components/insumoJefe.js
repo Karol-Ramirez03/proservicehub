@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -122,11 +124,10 @@ datos.forEach(dato => {
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
 
@@ -198,19 +199,9 @@ export const dataInsumos = async (contenedorPrincipal,jwt)  => {
             console.error('Error:', error);
         }
 
-    } else {
-
-
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
-}
-
-
-
-const comprar = (dato)=>{
-    
-    
 }

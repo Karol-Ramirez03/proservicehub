@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -163,11 +165,10 @@ const agregarEventListener=(shadowRoot,datos2,jwt)=>{
                     console.error('Error:', error);
                 }
                 
-            } else {
-                
-
-                // implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         });
@@ -224,12 +225,10 @@ export const dataInsumoRiesgo = async (contenedorPrincipal,clienteId,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-    
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
     

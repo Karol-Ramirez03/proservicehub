@@ -1,3 +1,4 @@
+import { refreshToken } from "./refreshToken";
 
 const renderizarTablas = () => {
     return /* html */`
@@ -152,32 +153,10 @@ export const dataRegistro = async (contenedorPrincipal,jwt)  => {
                 
             }
             
-        } else {
-
-            /*
-            
-            
-            
-            implementar
-            
-            
-            
-            */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+        } else{
+            console.log("Vamos a refrescarnos ATT: jwt")
+            refreshToken()
+            jwt=localStorage.getItem("jwt")
         }
         
         

@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const renderizarInicio = () => {
     // Puedes agregar aquí cualquier contenido inicial que necesites.
 }
@@ -92,10 +94,10 @@ const addOrdenEvenListener=(shadowRoot,datos,idUsuario,jwt)=>{
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
           
         })
@@ -146,10 +148,10 @@ export const dataServicios = async (contenedorPrincipal,idUsuario,jwt) => {
             console.error('Error:', error);
         }
         
-    } else {
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
 }

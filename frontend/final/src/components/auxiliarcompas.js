@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -91,12 +93,10 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
         }
         
         
-    } else {
-
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
 
@@ -189,17 +189,10 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                         console.error('Error:', error);
                     }
                     
-                } else {
-
-
-
-
-
-
-
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
 
                 
@@ -289,10 +282,10 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                     actualizarStock(suficiente,insumos,idCompra,jwt);
                 });
                     
-                } else {
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
                 
                 
@@ -377,14 +370,10 @@ const actualizarStock=async (suficiente,insumos,idCompra,jwt)=>{
         }
 
             
-        } else {
-
-
-
-
-
-            //implementar
-            
+        } else{
+            console.log("Vamos a refrescarnos ATT: jwt")
+            refreshToken()
+            jwt=localStorage.getItem("jwt")
         }
         
     }else{
@@ -436,11 +425,10 @@ export const dataComprasAux = async (contenedorPrincipal,clienteId)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-        //implementar
-        
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
 }

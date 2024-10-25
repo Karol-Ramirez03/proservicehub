@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const renderizarFecha = () => {
     return /* html */`
     <div class="contenedor-formularioper">
@@ -82,19 +84,10 @@ export const dataNewFecha = async (contenedorPrincipal, idDetalleOrden,jwt)  => 
                     console.error('Error:', error);
                 }
                 
-            } else {
-                
-
-
-                //implementar
-
-
-
-
-
-
-
-
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
             
@@ -190,11 +183,10 @@ export const dataNewEmpleado = async (contenedorPrincipal, idOrdenServicio)  => 
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         }
