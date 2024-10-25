@@ -21,7 +21,7 @@ public class TipoTelefono {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
 
-    @NotBlank
+    @NotBlank(message = "no puede ser null")
     @Column
     private String nombre;
 

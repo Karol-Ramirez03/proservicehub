@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "email_persona")
@@ -17,14 +18,27 @@ public class EmailPersona {
     private long id; 
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String email;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private Personas personas;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private TipoEmail tipoEmail;
     
+
+    public EmailPersona() {
+    }
+
+    public EmailPersona(long id, String email, Personas personas, TipoEmail tipoEmail) {
+        this.id = id;
+        this.email = email;
+        this.personas = personas;
+        this.tipoEmail = tipoEmail;
+    }
 
     public long getId() {
         return id;

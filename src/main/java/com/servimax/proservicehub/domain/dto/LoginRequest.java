@@ -1,4 +1,4 @@
-package com.servimax.proservicehub.domain.entity;
+package com.servimax.proservicehub.domain.dto;
 
 public class LoginRequest {
     private String usuario;

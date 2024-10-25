@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

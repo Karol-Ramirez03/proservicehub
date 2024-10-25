@@ -35,31 +35,84 @@ export function initDynamicPanel(config) {
         const form = document.createElement('form');
         form.className = 'panel-body';
         form.addEventListener('submit', handleSubmit);
-
+        let fetchCount=0;
         config.fields.forEach(field => {
             const formGroup = document.createElement('div');
             formGroup.className = 'form-group';
-
             const label = document.createElement('label');
             label.textContent = field.label;
             label.setAttribute('for', field.id);
+            
+            if (field.label=="Persona" ||field.label=="Rol"  ||field.label=="Tipo de Persona" ||field.label=="Sucursal" 
+                ||field.label=="Estado Compra" ||field.label=="Cliente"  ||field.label=="Tipo Compra"  ||field.label=="Region" 
+                ||field.label=="Insumo" ||field.label=="Compra" ||field.label=="Orden de Servicio" ||field.label=="Servicio" 
+                ||field.label=="Orden de Trabajo" ||field.label=="Estado de Orden" ||field.label=="Ciudad" ||field.label=="Tipo de Email"
+                ||field.label=="Tipo de Empresa" ||field.label=="Estado de Aprobación" ||field.label=="Empleado" ||field.label=="Estado de la Orden" 
+                ||field.label=="Proveedor" ||field.label=="País" ||field.label=="Dirección" ||field.label=="Empresa" ||field.label=="Tipo de Teléfono"
+            ){
+                const select= document.createElement('select')
+                select.id=field.id;
+                select.innerHTML=`<option value="12" disabled selected>Seleccionar ${field.label}</option>`
+                fetch(`http://localhost:8080/api/${field.apiExtension}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('datos mios:', data);
+                    data.forEach(dato=>{
+                        let id=dato.id;
+                        let valor=dato.nombre;
+                        if(field.label=="Persona" ||field.label=="Cliente" ||field.label=="Empleado" ||field.label=="Proveedor"  ){
+                            id=dato.nro_Doc;
+                            valor=dato.nombre;
+                        }
+                        select.innerHTML+=`<option value="${id}">${valor}</option>`
+                    })
 
-            const input = document.createElement('input');
-            input.id = field.id;
-            input.placeholder = `Ingrese ${field.label.toLowerCase()}`;
-            input.type = field.type;
+                    console.log(select)
+                    formGroup.appendChild(label);
+                    formGroup.appendChild(select);
+                    form.appendChild(formGroup);
 
-            formGroup.appendChild(label);
-            formGroup.appendChild(input);
-            form.appendChild(formGroup);
+                    fetchCount+=1;
+                    if (fetchCount === config.totalFetches) {
+                        const submitButton = document.createElement('button');
+                        submitButton.textContent = config.submitButtonText || 'Registrar';
+                        submitButton.className = 'submit-button';
+                        submitButton.type = 'submit';
+                        form.appendChild(submitButton);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al almacenar el elemento:', error);
+                });
+
+            }else{
+                const input = document.createElement('input');
+                input.id = field.id;
+                input.placeholder = `Ingrese ${field.label.toLowerCase()}`;
+                input.type = field.type;
+
+                formGroup.appendChild(label);
+                formGroup.appendChild(input);
+                form.appendChild(formGroup);
+            }
+            
+            
         });
 
-        const submitButton = document.createElement('button');
-        submitButton.textContent = config.submitButtonText || 'Registrar';
-        submitButton.className = 'submit-button';
-        submitButton.type = 'submit';
+        
 
-        form.appendChild(submitButton);
+        if ( config.totalFetches=== 0) {
+            const submitButton = document.createElement('button');
+            submitButton.textContent = config.submitButtonText || 'Registrar';
+            submitButton.className = 'submit-button';
+            submitButton.type = 'submit';
+            form.appendChild(submitButton);
+        }
 
         panel.appendChild(header);
         panel.appendChild(form);
@@ -79,6 +132,7 @@ export function initDynamicPanel(config) {
         const nuevoElemento = {};
         config.fields.forEach(field => {
             const value = document.getElementById(field.id).value;
+            console.log(value)
             if (!value) {
                 alert(`Por favor, completa el campo: ${field.label}.`);
                 return;
@@ -141,13 +195,51 @@ export const initDynamicTable = (config) => {
 
         datos.forEach(dato => {
             const fila = document.createElement("tr");
-            fila.innerHTML = `
-                ${config.fields.map(field => `<td id="${field.id}-${dato.id}">${dato[field.apiKey]}</td>`).join('')}
-                <td>
-                    <button class="editar" id="${dato.id}">Editar</button>
-                    <button class="eliminar" id="${dato.id}">Eliminar</button>
-                </td>
-            `;
+                let cont=0
+                config.fields.map(field =>{
+                    if (field.label=="Numero Documento"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.nro_Doc}">${dato.nro_Doc}</td>`
+                        cont+=1
+                    }else if(field.label=="Sucursal" || field.label=="Tipo de Persona"|| field.label=="Region" || field.label=="Estado Compra" | field.label=="Tipo Compra"|| field.label=="Insumo" || field.label=="Ciudad"|| field.label=="Servicio" || field.label=="Estado de Aprobación"|| field.label=="Rol"|| field.label=="Estado de la Orden"|| field.label=="Estado de Orden"|| field.label=="País"|| field.label=="Empresa"){
+                        const api=field.apiKey
+                        fila.innerHTML+=`<td id="${field.id}-${dato[api].id}">${dato[api].nombre}</td>`
+                        cont+=1
+                    }else if(field.label=="Fecha Registro" || field.label=="Fecha Compra" || field.label=="Fecha de Creación"  || field.label=="Fecha de Orden" ){
+                        const fecha=dato[field.apiKey]
+                        const fechaSinHora = fecha.split("T")[0];
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${fechaSinHora}</td>`
+                        cont+=1
+                    }else if(field.label=="Id"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${dato.id}</td>`
+                        cont+=1
+                    }else if(field.label=="Cliente"|| field.label=="Persona"|| field.label=="Proveedor"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.personas.nro_Doc}">${dato.personas.nro_Doc}</td>`
+                        cont+=1
+                    }else if(field.label=="Compra"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.compra.id}">${dato.compra.id}</td>`
+                        cont+=1
+                    }else if(field.label=="Orden de Trabajo"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.orden_trabajo.numero_orden_trabajo}">${dato.orden_trabajo.numero_orden_trabajo}</td>`
+                        cont+=1
+                    }else if(field.label=="Tipo de Empresa"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.tipo_empresa.id}">${dato.tipo_empresa.descripcion}</td>`
+                        cont+=1
+                    }else if(field.label=="Dirección"){
+                        fila.innerHTML+=`<td id="${field.id}-${dato.direccion.id}">Cll: ${dato.direccion.calle} Cr: ${dato.direccion.carrera} ${dato.direccion.barrio}, ${dato.direccion.descripcion}</td>`
+                        cont+=1
+                    }else{
+                        fila.innerHTML+=`<td id="${field.id}-${dato.id}">${dato[field.apiKey]}</td>`
+                        cont+=1
+                    }
+                    if(cont==config.fields.length){
+                        fila.innerHTML+=`<td>
+                        <button class="editar" id="${dato.nro_Doc}">Editar</button>
+                        <button class="eliminar" id="${dato.nro_Doc}">Eliminar</button>
+                    </td>`
+                    }
+                });
+                    
+            
             cuerpoData.appendChild(fila);
 
             const editarButton = fila.querySelector(".editar");
@@ -190,7 +282,9 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
+                    
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -212,6 +306,7 @@ export const initDynamicTable = (config) => {
 
                 if (response.ok) {
                     const updatedDatos = await response.json();
+                    location.reload();
                     renderizarDatos(updatedDatos);
                 } else {
                     console.error('Error al eliminar:', response.statusText);
@@ -234,6 +329,7 @@ export const initDynamicTable = (config) => {
 
             if (response.ok) {
                 const datos = await response.json();
+                console.log(datos)
                 renderizarDatos(datos);
             }
         } catch (error) {

@@ -23,13 +23,13 @@ public class Ciudad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotNull(message = "No puedes ser vacio ")
     @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres")
     @Column
     private String nombre;
 
     @ManyToOne
-    @NotNull(message = "No puedes ser vacio este campo")
+    @NotNull(message = "No puedes ser vacio")
     private Region region;
 
     @JsonIgnore

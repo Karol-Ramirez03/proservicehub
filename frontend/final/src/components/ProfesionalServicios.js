@@ -15,7 +15,7 @@ class  PagInicioProfesionalServicios extends LitElement {
       <nav>
         <h1>Portal de Profesionales De Servicios</h1>
         <div class="container-user">
-          <img src="User (2).png" alt="">
+          <img src="public/user 2.png" alt="user-icon" class="small-image">
           <h3>user</h3>
         </div>
       </nav>  

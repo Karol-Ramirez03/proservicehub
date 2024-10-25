@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "orden_trabajo")
@@ -25,6 +26,7 @@ public class OrdenTrabajo {
     private Long id;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private int numero_orden_trabajo;
 
     @Column
@@ -33,17 +35,18 @@ public class OrdenTrabajo {
     @Column
     private Time hora_asignacion;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "orden_trabajo")
-    private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
-
     @ManyToOne
     @JoinColumn(name="id_empleado")
     private Personas personas;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="numero_orden_servicio")
     private OrdenServicio ordenServicio;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "orden_trabajo")
+    private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "orden_trabajo")

@@ -29,20 +29,44 @@ public class Direccion {
     private String calle;
     
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String carrera;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String descripcion;
 
     @Column
+    @NotNull(message = "no puede estar vacio")
     private String barrio;
 
     @ManyToOne
+    @NotNull(message = "no puede estar vacio")
     private Ciudad ciudad;
 
     @JsonIgnore
     @OneToMany(mappedBy = "direccion")
     private List<Sucursal> sucursal; 
+
+    
+
+    public Direccion() {
+    }
+    
+    public Direccion(long id,
+            @NotNull(message = "No puedes ser vacio este campo") @Size(min = 1, max = 100, message = "debe tener entre 1 y 100 caracteres") String calle,
+            @NotNull(message = "no puede estar vacio") String carrera,
+            @NotNull(message = "no puede estar vacio") String descripcion,
+            @NotNull(message = "no puede estar vacio") String barrio,
+            @NotNull(message = "no puede estar vacio") Ciudad ciudad, List<Sucursal> sucursal) {
+        this.id = id;
+        this.calle = calle;
+        this.carrera = carrera;
+        this.descripcion = descripcion;
+        this.barrio = barrio;
+        this.ciudad = ciudad;
+        this.sucursal = sucursal;
+    }
 
     public long getId() {
         return id;

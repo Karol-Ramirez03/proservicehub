@@ -22,14 +22,14 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull(message = "No puedes ser vacio nombre")
+    @NotNull(message = "No puedes ser vacio")
     @Column(length = 50,nullable = false)
     private String nombre;
 
-    @NotNull(message = "No puedes ser vacio requiere insumo")
+    @NotNull(message = "No puedes ser vacio")
     private Boolean requiere_insumo;
 
-    @NotNull(message = "No puedes ser vacio tiempo ejecucion")
+    @NotNull(message = "No puedes ser vacio")
     private String  tiempo_ejecucion;
 
     @JsonIgnore
@@ -55,6 +55,10 @@ public class Servicio {
     public Servicio() {
     }
     
+    public Servicio(Long id) {
+        this.id = id;
+    }
+
     public Servicio(@NotNull(message = "No puedes ser vacio nombre") String nombre,
             @NotNull(message = "No puedes ser vacio requiere insumo") Boolean requiere_insumo,
             @NotNull(message = "No puedes ser vacio tiempo ejecucion") String tiempo_ejecucion) {
