@@ -84,10 +84,11 @@ export const dataRegistro = async (contenedorPrincipal,jwt)  => {
             "nro_Doc": nroDoc
         }
         const DatosLogin = {
-            "usuario": usuario,
-            "contraseña": password,
-            "rol": {"id": idRol},
-            "personas":{"nro_Doc":nroDoc}
+            "username": usuario,
+            "password": password,
+            "repeatedPassword":password,
+            "role": {"id": idRol},
+            "idPersonas":{"nro_Doc":nroDoc}
           }
         console.log(datosEnviar)
 
@@ -146,6 +147,8 @@ export const dataRegistro = async (contenedorPrincipal,jwt)  => {
                     console.log(Ordenes)
                     
                     
+                }else{
+                    alert("verifica los datos contraseña mayor de 8 caracteres")
                 }
                 
             } catch (error) {

@@ -244,17 +244,10 @@ class InicioForm extends LitElement {
                 <select id="idtipo" name="tipopersona">
                   <option value="" disabled selected>Seleccionar tipo</option>
                   <option value="2">Cliente</option>
-                  <option value="3">Proveedor</option>
-                  <option value="4">Profesional</option>
-                </select>  
-
-                </select>
-                <select id="idrol" name="idrol">
-                  <option value="" disabled selected>Seleccionar rol</option>
-                  <option value="2">Cliente</option>
                   <option value="11">Proveedor</option>
                   <option value="9">Profesional</option>
-                </select> 
+                </select>  
+
               </div>
 
               <button class="guardar register-btn">Registrarse</button>
@@ -306,7 +299,7 @@ class InicioForm extends LitElement {
     const number = formData.get('documentNumber');
     const sucursal = Number(formData.get('idSucursal'));
     const tpersona = Number(formData.get('tipopersona'));
-    const trol = Number(formData.get('idrol'));
+    // const trol = Number(formData.get('idrol'));
     let num=Number(number)
     const registerData = {
       "nombre": username,
@@ -346,7 +339,7 @@ class InicioForm extends LitElement {
         "nro_Doc":number
       },
       "role":{
-        "id":trol
+        "id":tpersona
       }
     }
     console.log(newUser)
