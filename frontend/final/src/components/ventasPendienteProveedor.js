@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -135,12 +137,10 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                         console.error('Error:', error);
                     }
                     
-                } else {
-
-
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
                 
             }else if(e.target.id === "vender"){
@@ -254,13 +254,10 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                     //     actualizarStock(suficiente,insumos,idCompra);
                     // });
                     
-                } else {
-
-
-
-                    //implementar
-
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
                 
                 
@@ -317,11 +314,10 @@ export const dataVentasPendiente = async (contenedorPrincipal,idUsuario,jwt)  =>
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
 }

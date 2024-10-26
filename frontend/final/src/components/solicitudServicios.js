@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -165,11 +167,10 @@ const agregarEventosBotones = (filas, dataUsar,idCompra,jwt) => {
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         });
@@ -226,11 +227,10 @@ const agregarEventosBotones = (filas, dataUsar,idCompra,jwt) => {
                     console.error('Error:', error);
                 }
                 
-            } else {
-
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         });
@@ -298,11 +298,10 @@ export const dataAprobacion= async (contenedorPrincipal,idUsuario,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
 

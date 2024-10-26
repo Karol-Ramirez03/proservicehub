@@ -25,6 +25,8 @@ public class JwtService {
     @Value("${security.jwt.secret-key}")
     private String SECRET_KEY;
 
+    private static final long REFRESH_TOKEN_EXPIRATION_TIME= 1000 * 60 * 60; 
+
     public String generateToken(UserDetails user, Map<String, Object> extraClaims) {
             
             Date issuedAt = new Date(System.currentTimeMillis());
@@ -50,19 +52,6 @@ public class JwtService {
             
 
         return jwt;
-    }
-
-    @SuppressWarnings("deprecation")
-    public String generateRefreshToken(UserDetails user) {
-        Date issuedAt = new Date(System.currentTimeMillis());
-        Date expiration = new Date((EXPIRATION_IN_MINUTES * 60 * 1000 * 24) + issuedAt.getTime()); // 1 día
-
-        return Jwts.builder()
-                .setSubject(user.getUsername())
-                .setIssuedAt(issuedAt)
-                .setExpiration(expiration)
-                .signWith(generateKey(), SignatureAlgorithm.HS256)
-                .compact();
     }
     
     private SecretKey generateKey() {
@@ -119,6 +108,15 @@ public class JwtService {
         return extractExpiration(jwt).before(new Date());
     }
 
-  
+    @SuppressWarnings("deprecation")
+    public String generateRefreshToken(UserDetails userDetails) {
+        return Jwts.builder()
+                    .setSubject(userDetails.getUsername())
+                    .setIssuedAt(new Date(System.currentTimeMillis()))
+                    .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION_TIME)) // Define el tiempo de expiración
+                    .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                    .compact();
+    }
+    
 
 }

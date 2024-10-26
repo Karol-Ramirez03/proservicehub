@@ -1,4 +1,6 @@
 //ver todas las ordenes de trabajo y su seguimiento
+import { refreshToken } from "./refreshToken";
+
 import { dataNewFecha } from "./actualizarServicio";
 const renderizarTablas = () => {
     return /* html */`
@@ -121,22 +123,10 @@ export const dataOrdenes = async (contenedorPrincipal,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        /*
-        
-        
-        
-        
-        implementar
-        
-        
-        
-        
-        
-        */
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
 
     

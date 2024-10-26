@@ -1,4 +1,4 @@
-
+import { refreshToken } from "./refreshToken";
 const renderizarDatos = (datos, contenedorPrincipal) => {
 
     const tarjetasHtml = `
@@ -145,6 +145,10 @@ const renderizarusuariosCompras = (contenedorPrincipal,shadowRoot,jwt) => {
                 alert('El ID del cliente no puede estar vacío ni ser negativo');
             }
             
+        }else{
+            console.log("Vamos a refrescarnos ATT: jwt")
+            refreshToken()
+            jwt=localStorage.getItem("jwt")
         }
 
 
@@ -305,23 +309,10 @@ export const data3top = async (contenedorPrincipal,jwt)  => {
         }
         
         
-    } else {
-
-
-        /*
-        implementar la restauracion
-        */
-
-
-
-
-
-
-
-
-
-
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
 

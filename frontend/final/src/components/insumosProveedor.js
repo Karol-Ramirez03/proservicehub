@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -95,11 +97,10 @@ export const dataProveedorInsumos = async (contenedorPrincipal,idUsuario,jwt)  =
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
 }

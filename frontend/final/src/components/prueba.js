@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 export function initDynamicPanel(config,jwt) {
     const app = document.querySelector('#app');
     let isPanelOpen = false;
@@ -36,7 +38,7 @@ export function initDynamicPanel(config,jwt) {
         form.className = 'panel-body';
         form.addEventListener('submit', handleSubmit);
         let fetchCount=0;
-        config.fields.forEach(field => {
+        config.fields.forEach(async field => {
             const formGroup = document.createElement('div');
             formGroup.className = 'form-group';
             const label = document.createElement('label');
@@ -53,10 +55,33 @@ export function initDynamicPanel(config,jwt) {
                 const select= document.createElement('select')
                 select.id=field.id;
                 select.innerHTML=`<option value="12" disabled selected>Seleccionar ${field.label}</option>`
-                fetch(`http://localhost:8080/api/${field.apiExtension}`, {
+                let data = false;
+                console.log(data)
+                try {
+                    const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                        method:"GET",
+                        headers:{
+                            'Content-Type':'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        }
+                    })
+                    if(response.ok){
+                        data = await response.json();
+                        console.log(data)
+
+                    }else{
+                        alert("error")
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                if (data){
+                    fetch(`http://localhost:8080/api/${field.apiExtension}`, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization':`Bearer ${jwt}`
                     }
                 })
                 .then(response => response.json())
@@ -89,6 +114,13 @@ export function initDynamicPanel(config,jwt) {
                 .catch(error => {
                     console.error('Error al almacenar el elemento:', error);
                 });
+                }else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
+                }
+                
+                
 
             }else{
                 const input = document.createElement('input');
@@ -271,26 +303,59 @@ export const initDynamicTable = (config,jwt) => {
                 const input = fila.querySelector(`#${field.id}-${dato.id} input`);
                 updatedData[field.apiKey] = field.type === 'number' ? parseFloat(input.value) : input.value;
             });
-
+            let data = false;
             try {
-                const response = await fetch(`${config.apiUrl}/${dato.id}`, {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json',
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
+                    headers:{
+                        'Content-Type':'application/json',
                         'Authorization': `Bearer ${jwt}`
-                    },
-                    body: JSON.stringify(updatedData)
-                });
+                    }
+                })
+                if(response.ok){
+                    data = await response.json();
+                    console.log(data)
 
-                if (response.ok) {
-                    const updatedDatos = await response.json();
-                    location.reload();
-                    renderizarDatos(updatedDatos);
-                    
+                }else{
+                    alert("error")
                 }
+                
             } catch (error) {
                 console.error('Error:', error);
             }
+
+            if (data){
+                
+            }else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
+            }
+            if (data){
+                try {
+                    const response = await fetch(`${config.apiUrl}/${dato.id}`, {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${jwt}`
+                        },
+                        body: JSON.stringify(updatedData)
+                    });
+
+                    if (response.ok) {
+                        const updatedDatos = await response.json();
+                        location.reload();
+                        renderizarDatos(updatedDatos);
+                        
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+        } else{
+            console.log("Vamos a refrescarnos ATT: jwt")
+            refreshToken()
+            jwt=localStorage.getItem("jwt")
+        }
         });
 
         const cancelarButton = fila.querySelector(".cancelar");
@@ -301,29 +366,94 @@ export const initDynamicTable = (config,jwt) => {
 
     const eliminarFila = async (id) => {
         if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
+
+            let data = false;
             try {
-                const response = await fetch(`${config.apiUrl}/${id}`, {
-                    method: "DELETE",
-                    headers: {
+                const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                    method:"GET",
+                    headers:{
+                        'Content-Type':'application/json',
                         'Authorization': `Bearer ${jwt}`
                     }
-                });
+                })
+                if(response.ok){
+                    data = await response.json();
+                    console.log(data)
 
-                if (response.ok) {
-                    const updatedDatos = await response.json();
-                    location.reload();
-                    renderizarDatos(updatedDatos);
-                } else {
-                    console.error('Error al eliminar:', response.statusText);
+                }else{
+                    alert("error")
                 }
+                
             } catch (error) {
                 console.error('Error:', error);
             }
+
+            if (data){
+                
+            }else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
+            }
+            if (data){
+                try {
+                    const response = await fetch(`${config.apiUrl}/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            'Authorization': `Bearer ${jwt}`
+                        }
+                    });
+    
+                    if (response.ok) {
+                        const updatedDatos = await response.json();
+                        location.reload();
+                        renderizarDatos(updatedDatos);
+                    } else {
+                        console.error('Error al eliminar:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
+            }
+            
         }
     };
 
     const dataFetch = async () => {
         app.innerHTML = renderizarTablas();
+        let data = false;
+        try {
+            const response = await fetch(`http://localhost:8080/auth/validate-token`, {
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+            if(response.ok){
+                data = await response.json();
+                console.log(data)
+
+            }else{
+                alert("error")
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+        if (data){
+            
+        }else{
+            console.log("Vamos a refrescarnos ATT: jwt")
+            refreshToken()
+            jwt=localStorage.getItem("jwt")
+        }
+
         try {
             const response = await fetch(config.apiUrl, {
                 method: "GET",

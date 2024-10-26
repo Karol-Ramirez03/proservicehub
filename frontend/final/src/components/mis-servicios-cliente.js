@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -95,10 +97,10 @@ const _addEvent=(fila,jwt)=>{
     
                 }
                 
-            } else {
-
-                //implementar
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
             
         });
@@ -221,11 +223,10 @@ export const dataMisServicios= async (contenedorPrincipal,idUsuario,jwt)  => {
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
         

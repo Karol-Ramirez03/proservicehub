@@ -1,5 +1,6 @@
 // visualizar las órdenes
 // //solicitar al cliente la aprobación de una reparación a partir de hallazgos encontrados
+import { refreshToken } from "./refreshToken";
 
 const renderizarTablas = () => {
     return /* html */`
@@ -159,20 +160,10 @@ const renderizarSolicitar = (shadowRoot,filaid,jwt) => {
 
                 }
                 
-            } else {
-
-
-
-
-                /*
-                implementar
-                */
-
-
-
-
-
-                
+            } else{
+                console.log("Vamos a refrescarnos ATT: jwt")
+                refreshToken()
+                jwt=localStorage.getItem("jwt")
             }
 
             
@@ -250,14 +241,10 @@ export const dataOrdenesTrabajo = async (contenedorPrincipal,idEmpleado,jwt)  =>
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        /*
-        implementar
-        
-        */
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
     

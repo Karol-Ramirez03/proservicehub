@@ -1,3 +1,5 @@
+import { refreshToken } from "./refreshToken";
+
 const rnderizarInicio = () => {
 
 }
@@ -146,11 +148,10 @@ const _addEventInsumo = (shadowRoot,contenedorPrincipal,jwt) => {
                         console.error('Error:', error);
                     }
                     
-                } else {
-
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
 
                 
@@ -250,13 +251,10 @@ const _addEventInsumo = (shadowRoot,contenedorPrincipal,jwt) => {
                         }
                     };
                     
-                } else {
-
-
-
-
-                    //implementar
-                    
+                } else{
+                    console.log("Vamos a refrescarnos ATT: jwt")
+                    refreshToken()
+                    jwt=localStorage.getItem("jwt")
                 }
                 
                 
@@ -320,11 +318,10 @@ export const dataProveedorInsumo = async (contenedorPrincipal,clienteId,jwt)  =>
             console.error('Error:', error);
         }
         
-    } else {
-
-
-        //implementar
-        
+    } else{
+        console.log("Vamos a refrescarnos ATT: jwt")
+        refreshToken()
+        jwt=localStorage.getItem("jwt")
     }
     
 }
