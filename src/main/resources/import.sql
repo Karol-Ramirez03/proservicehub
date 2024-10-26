@@ -162,7 +162,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_LOGIN", '', 'POST', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_LOGIN", '/[0-9]*', 'PUT', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_LOGIN", '/[0-9]*', 'DELETE', false, 16);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_USUARIO", '/usuario/[a-zA-Z0-9!@#$%^&*(),.?":{}|<>_-]+', 'GET', false, 16);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_USUARIO", '/usuario/[a-zA-Z0-9!@#$%^&*(),.?":{}|<>_-]+', 'GET', true, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_LOGIN_ROL", '/rol/[0-9]*', 'GET', false, 16);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("REGISTER_ONE_LOGIN", '/post', 'POST', true, 16);
 
@@ -224,7 +224,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_SERVICIO_INSUMO", '/[0-9]*/[0-9]*', 'PUT', false, 25);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_SERVICIO_INSUMO", '/[0-9]*/[0-9]*', 'DELETE', false, 25);
 
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_SUCURSAL", '', 'GET', false, 26);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_SUCURSAL", '', 'GET', true, 26);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_SUCURSAL", '/[0-9]*', 'GET', false, 26);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_SUCURSAL", '', 'POST', false, 26);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_SUCURSAL", '/[0-9]*', 'PUT', false, 26);

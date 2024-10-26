@@ -132,7 +132,7 @@ class InicioForm extends LitElement {
             localStorage.setItem('jwt', jwt.jwt)//-----------------
             try {
               // Enviar los datos de autenticación al backend
-              const response = await fetch(`http://localhost:8080/api/login/usuario/${username}`, {
+              const response2 = await fetch(`http://localhost:8080/api/login/usuario/${username}`, {
                 method: 'GET', // Cambiado a POST
                 headers: {
                   'Content-Type': 'application/json',
@@ -144,8 +144,9 @@ class InicioForm extends LitElement {
               //   throw new Error('Error en la autenticación');
               // }
           
-              const data = await response.json(); // Obtener la respuesta del servidor
+              const data = await response2.json(); // Obtener la respuesta del servidor
               console.log(data.contraseña +" ----- contraseña")
+              console.log(data)
               const idRol=data.rol.id;
               localStorage.setItem("usuario",JSON.stringify(data))
               switch(idRol){
@@ -242,11 +243,18 @@ class InicioForm extends LitElement {
                 </select>
                 <select id="idtipo" name="tipopersona">
                   <option value="" disabled selected>Seleccionar tipo</option>
-                  <option value="13">Empleado</option>
                   <option value="2">Cliente</option>
-                  <option value="9">Proveedor</option>
-                  <option value="11">Profesional</option>
+                  <option value="3">Proveedor</option>
+                  <option value="4">Profesional</option>
                 </select>  
+
+                </select>
+                <select id="idrol" name="idrol">
+                  <option value="" disabled selected>Seleccionar rol</option>
+                  <option value="2">Cliente</option>
+                  <option value="11">Proveedor</option>
+                  <option value="9">Profesional</option>
+                </select> 
               </div>
 
               <button class="guardar register-btn">Registrarse</button>
@@ -296,15 +304,15 @@ class InicioForm extends LitElement {
     const email = formData.get('email');
     const password = formData.get('password');
     const number = formData.get('documentNumber');
-    const sucursal = formData.get('idSucursal');
-    const tpersona = formData.get('tipopersona');
+    const sucursal = Number(formData.get('idSucursal'));
+    const tpersona = Number(formData.get('tipopersona'));
+    const trol = Number(formData.get('idrol'));
     let num=Number(number)
     const registerData = {
       "nombre": username,
       "apellido": lastname,
-	 		"fechaRegistro":"2024-10-18T16:51:50.139+00:00",
       "sucursal": {
-        "id": 1
+        "id": sucursal
       },
       "tipoPersona": {
         "id":tpersona
@@ -338,7 +346,7 @@ class InicioForm extends LitElement {
         "nro_Doc":number
       },
       "role":{
-        "id":tpersona
+        "id":trol
       }
     }
     console.log(newUser)
