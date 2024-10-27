@@ -14,8 +14,14 @@ class  PagInicioMarketing extends LitElement {
       <nav>
         <h1>Portal de Marketing</h1>
         <div class="container-user">
+          <input type="checkbox" name="" id="check">
+          <label for="check" class="checkbutton">
           <img src="User (2).png" alt="">
-          <h3>user</h3>
+          </label>
+          <div class="dropdown-content">
+            <li class="logout">logout</li>
+            <li>perfil</li>
+          </div>
         </div>
       </nav>  
       <section class="container-principal container-tarj">
