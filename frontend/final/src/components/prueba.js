@@ -57,6 +57,7 @@ export function initDynamicPanel(config,jwt) {
                 select.innerHTML=`<option value="12" disabled selected>Seleccionar ${field.label}</option>`
                 let data = false;
                 console.log(data)
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -304,6 +305,7 @@ export const initDynamicTable = (config,jwt) => {
                 updatedData[field.apiKey] = field.type === 'number' ? parseFloat(input.value) : input.value;
             });
             let data = false;
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -368,6 +370,7 @@ export const initDynamicTable = (config,jwt) => {
         if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
 
             let data = false;
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -426,6 +429,7 @@ export const initDynamicTable = (config,jwt) => {
     const dataFetch = async () => {
         app.innerHTML = renderizarTablas();
         let data = false;
+        jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",

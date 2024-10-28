@@ -31,6 +31,7 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     datos.forEach(async dato => {
     var fila2=""
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
@@ -51,19 +52,12 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
         console.error('Error:', error);
     }
     if(data){
-        try {
-            const response2 = await fetch(`http://localhost:8080/api/compra/${dato.id}/estado/nombre`, {
-                method: "GET"
-            });
-        
-            if (response2.ok) {
-                const estado = await response2.text();
                 const fechaCompra = new Date(dato.fecha_compra).toLocaleDateString('en-CA');
                 const fila = document.createElement("tr");
                 fila.innerHTML = `
                 <td>${dato.id}</td>
                 <td >${fechaCompra}</td>
-                <td>${estado}</td>
+                <td>${dato.estado_compra.nombre}</td>
                 <td><button class="detalles" id="detalles"  data-id="${dato.id}">Ver detalles</button></td>
                 `;
                 cuerpoData.appendChild(fila);
@@ -72,13 +66,8 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
                 fila2.classList.add(`detalle-${dato.id}`,"nombres-table")
                 cuerpoData.appendChild(fila2)
     
-            } else {
-                console.error(`Error en la solicitud: ${response2.status} - ${response2.statusText}`);
-            }
         
-        } catch (error) {
-            console.error('Error:', error);
-        }
+
     }else{
         console.log("Vamos a refrescarnos ATT: jwt")
         refreshToken()
@@ -106,6 +95,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);
 
                 let data = false;
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -192,6 +182,7 @@ export const dataCompras = async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

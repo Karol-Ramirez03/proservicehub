@@ -107,6 +107,7 @@ const agregarEventListener=(shadowRoot,datos2,idUsuario,jwt)=>{
                 "tipo_compra":2
             }
             let data = false;
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -165,6 +166,7 @@ export const dataInsumos = async (contenedorPrincipal,idUsuario,jwt)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
 
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

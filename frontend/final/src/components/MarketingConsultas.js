@@ -91,6 +91,7 @@ const renderizarusuariosCompras = (contenedorPrincipal,shadowRoot,jwt) => {
         e.preventDefault(); 
         const clienteId = shadowRoot.querySelector('#clienteId').value;
         let data = false;
+        jwt = localStorage.getItem("jwt")
         
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
@@ -178,7 +179,7 @@ export const data3top = async (contenedorPrincipal,jwt)  => {
     console.log(jwt)
 
     let data = false;
-
+    jwt = localStorage.getItem("jwt")
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {

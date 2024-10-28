@@ -54,6 +54,7 @@ const _addEvent=(fila,jwt)=>{
                 }
             }
             let data = false;
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -111,6 +112,7 @@ export const dataMisServicios= async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

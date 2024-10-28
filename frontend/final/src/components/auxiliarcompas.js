@@ -32,6 +32,7 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     datos.forEach(async dato => {
     var fila2=""
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
@@ -120,6 +121,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);
 
                 let data = false;
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -199,6 +201,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
             }else if(e.target.id === "vender"){
 
                 let data = false;
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -255,6 +258,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 let suficiente = true;
                 const fetchPromises = insumos.map(async insumo => {
                     console.log(insumo);
+                    
                     try {
                         const response = await fetch("http://localhost:8080/api/insumo/validar-stock", {
                             method: "POST",
@@ -299,6 +303,7 @@ const actualizarStock=async (suficiente,insumos,idCompra,jwt)=>{
     if(suficiente){
 
         let data = false;
+        jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",
@@ -384,6 +389,7 @@ const actualizarStock=async (suficiente,insumos,idCompra,jwt)=>{
 
 export const dataComprasAux = async (contenedorPrincipal,clienteId)  => {
     let data = false;
+    jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",

@@ -86,6 +86,7 @@ datos.forEach(dato => {
             const id= dato.id
             console.log(uptInsumo)
             let data = false;
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -162,6 +163,7 @@ export const dataInsumos = async (contenedorPrincipal,jwt)  => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal
     let data = false;
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

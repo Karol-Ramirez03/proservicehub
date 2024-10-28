@@ -2,6 +2,9 @@ package com.servimax.proservicehub.domain.entity;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,10 +17,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "orden_servicio")
@@ -36,7 +35,6 @@ public class OrdenServicio {
     private Personas personas;
 
     @ManyToOne
-    @NotNull(message = "no puede estar vacio")
     @JoinColumn(name="id_empleado")
     private Personas persona;
 

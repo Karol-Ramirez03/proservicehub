@@ -113,6 +113,7 @@ export function initInsumoPanel(jwt) {
     
         console.log('Insumo registrado:', nuevoInsumo);
         let data = false;
+        jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",

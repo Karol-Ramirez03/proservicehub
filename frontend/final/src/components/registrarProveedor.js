@@ -115,6 +115,7 @@ export function initProveedorPanel(jwt) {
     
         console.log('Insumo registrado:', nuevoProveedor);
         let data = false;
+        jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",

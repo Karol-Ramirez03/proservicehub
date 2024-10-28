@@ -93,6 +93,7 @@ export const dataRegistro = async (contenedorPrincipal,jwt)  => {
         console.log(datosEnviar)
 
         let data = false;
+        jwt = localStorage.getItem("jwt")
         try {
             const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                 method:"GET",

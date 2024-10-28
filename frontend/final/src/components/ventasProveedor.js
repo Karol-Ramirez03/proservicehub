@@ -31,7 +31,7 @@ const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     datos.forEach(async dato => {
     var fila2=""
     let data = false;
-
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
@@ -113,6 +113,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 const idCompra = e.target.dataset.id; // Obtiene el id del botón que fue clickeado
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);
                 let data = false;
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -200,7 +201,7 @@ export const dataVentas = async (contenedorPrincipal,idUsuario,jwt)  => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     let data = false;
-
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

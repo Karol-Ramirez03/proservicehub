@@ -117,6 +117,7 @@ const renderizarSolicitar = (shadowRoot,filaid,jwt) => {
             console.log(formFila);
             alert("Registro completado!");
             let data = false;
+            jwt = localStorage.getItem("jwt")
 
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
@@ -189,7 +190,7 @@ export const dataOrdenesTrabajo = async (contenedorPrincipal,idEmpleado,jwt)  =>
 
     let data = false;
 
-
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

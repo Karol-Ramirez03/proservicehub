@@ -65,7 +65,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 const idCompra = e.target.dataset.id; // Obtiene el id del botón que fue clickeado
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);
                 let data = false;
-
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -149,7 +149,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
                 const filas = shadowRoot.querySelector(`.detalle-${idCompra}`);
                 let insumos=[]
                 let data = false;
-
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -273,7 +273,7 @@ export const dataVentasPendiente = async (contenedorPrincipal,idUsuario,jwt)  =>
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     let data = false;
-
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

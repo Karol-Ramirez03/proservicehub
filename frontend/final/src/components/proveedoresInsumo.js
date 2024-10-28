@@ -77,7 +77,7 @@ const _addEventInsumo = (shadowRoot,contenedorPrincipal,jwt) => {
                 const idPersona = e.target.dataset.id;
                 const filas = shadowRoot.querySelector(`.insumo-${idPersona}`);
                 let data = false;
-
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -164,7 +164,7 @@ const _addEventInsumo = (shadowRoot,contenedorPrincipal,jwt) => {
                 selectInsumo.innerHTML = "";
 
                 let data = false;
-
+                jwt = localStorage.getItem("jwt")
                 try {
                     const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                         method:"GET",
@@ -273,7 +273,8 @@ export const dataProveedorInsumo = async (contenedorPrincipal,clienteId,jwt)  =>
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas())
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     let data = false;
-
+    
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",

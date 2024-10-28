@@ -57,6 +57,7 @@ export const dataAprobado = async (contenedorPrincipal,idEmpleado,jwt)  => {
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
 
     let data = false;
+    jwt = localStorage.getItem("jwt")
 
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {

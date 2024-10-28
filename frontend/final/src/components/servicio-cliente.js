@@ -55,7 +55,7 @@ const addOrdenEvenListener=(shadowRoot,datos,idUsuario,jwt)=>{
                 "idServicio":idServicio
             }
             let data = false;
-
+            jwt = localStorage.getItem("jwt")
             try {
                 const response = await fetch(`http://localhost:8080/auth/validate-token`, {
                     method:"GET",
@@ -109,7 +109,7 @@ export const dataServicios = async (contenedorPrincipal,idUsuario,jwt) => {
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarTablas());
     const shadowRoot = contenedorPrincipal.shadowRoot || contenedorPrincipal;
     let data = false;
-
+    jwt = localStorage.getItem("jwt")
     try {
         const response = await fetch(`http://localhost:8080/auth/validate-token`, {
             method:"GET",
