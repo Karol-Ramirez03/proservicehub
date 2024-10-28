@@ -2,7 +2,7 @@ import {LitElement, html } from 'lit'
 import { dataAprobado } from './OrdenesAprobadas-Profesionales.js';
 import { dataserviciosAsignado } from './OrdenAsignada-Profesionales.js';
 import { dataOrdenesTrabajo } from './OrdenTrabajo-Profesionales.js';
-import { refreshToken } from './refreshToken.js';
+import { logout } from './logout.js';
 
 class  PagInicioProfesionalServicios extends LitElement {
     constructor(){
@@ -74,7 +74,10 @@ class  PagInicioProfesionalServicios extends LitElement {
           dataAprobado(contenedorPrincipal,idUsuario,jwt)
         });
 
-
+      const logoutBtn=this.shadowRoot.querySelector(".logout")
+        logoutBtn.addEventListener("click",(e)=>{
+          logout();
+        })
 
         
     }

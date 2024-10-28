@@ -49,6 +49,12 @@ class  PagInicioRecursosHumanos extends LitElement {
         const botonRegistro = this.shadowRoot.querySelector(".registro")
         const serviciosAsignacion = this.shadowRoot.querySelector(".servicio-no-asignado")
         const contenedorPrincipal = this.shadowRoot.querySelector('.table-container');
+        const logoutBtn=this.shadowRoot.querySelector(".logout")
+
+        
+        logoutBtn.addEventListener("click",(e)=>{
+            logout();
+        })
       
         const jwt = localStorage.getItem("jwt")
         botonOrdenes.addEventListener('click', (e) => {

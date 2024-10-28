@@ -1,5 +1,6 @@
 import {LitElement, html } from 'lit'
 import { data3top } from './MarketingConsultas.js';
+import { logout } from './logout.js';
 
 import { refreshToken } from './refreshToken.js';
 class  PagInicioMarketing extends LitElement {
@@ -43,6 +44,12 @@ class  PagInicioMarketing extends LitElement {
         let jwt = localStorage.getItem('jwt')
         console.log(jwt)
         data3top(contenedor,jwt)
+
+        const logoutBtn=this.shadowRoot.querySelector(".logout")
+        logoutBtn.addEventListener("click",(e)=>{
+          logout();
+        })
+
 
     }
 

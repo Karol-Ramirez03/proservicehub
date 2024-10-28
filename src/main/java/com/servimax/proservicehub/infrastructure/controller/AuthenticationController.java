@@ -44,9 +44,6 @@ public class AuthenticationController {
     // }
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private JwtService jwtUtil;
 
     @Autowired

@@ -109,6 +109,12 @@ class MenuCrud extends LitElement {
     }
 
     updated(){
+
+        const logoutBtn=this.shadowRoot.querySelector(".logout")
+        logoutBtn.addEventListener("click",(e)=>{
+            logout();
+        })
+
         const user={
             "username":"mauro@gmail.com",
             "personas":{
