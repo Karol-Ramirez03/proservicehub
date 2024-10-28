@@ -16,8 +16,14 @@ class  PagInicioProfesionalServicios extends LitElement {
       <nav>
         <h1>Portal de Profesionales De Servicios</h1>
         <div class="container-user">
-          <img src="public/user 2.png" alt="user-icon" class="small-image">
-          <h3>user</h3>
+          <input type="checkbox" name="" id="check">
+          <label for="check" class="checkbutton">
+          <img src="User (2).png" alt="">
+          </label>
+          <div class="dropdown-content">
+            <li class="logout">logout</li>
+            <li>perfil</li>
+          </div>
         </div>
       </nav>  
       <section class="container-principal">
