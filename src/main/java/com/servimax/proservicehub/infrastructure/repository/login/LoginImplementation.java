@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.servimax.proservicehub.application.service.LoginServiceI;
-import com.servimax.proservicehub.application.service.RolServiceI;
 import com.servimax.proservicehub.domain.dto.UserDto;
 import com.servimax.proservicehub.domain.entity.Login;
 import com.servimax.proservicehub.infrastructure.utils.exceptions.InvalidPasswordException;
@@ -22,9 +21,6 @@ public class LoginImplementation implements LoginServiceI{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private RolServiceI roleService;
 
     @Override
     public Login registrOneCustomer(UserDto newUser) {

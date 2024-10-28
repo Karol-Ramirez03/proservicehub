@@ -107,6 +107,8 @@ public class HttpSecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
         }
+        
+        @SuppressWarnings("removal")
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http.cors() // Habilitar CORS

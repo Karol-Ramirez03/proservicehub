@@ -474,6 +474,14 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 190);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 191);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 192);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 193);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 194);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 195);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 196);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 197);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 198);
+
 
 -- rol cliente
 
@@ -713,6 +721,15 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 187);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 190);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 191);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 192);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 193);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 194);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 195);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 196);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 197);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 198);
+
 
 -- rol gerente
 
@@ -906,6 +923,15 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 187);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 190);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 191);;
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 192);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 193);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 194);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 195);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 196);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 197);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 198);
+
 
 -- rol profesional
 
