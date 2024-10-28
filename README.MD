@@ -1,4 +1,5 @@
-![](/home/camper/Documentos/mauricio/proservicehub/src/main/resources/img/image.webp)
+![alt text](src/main/resources/img/image.webp)
+
 
 
 
