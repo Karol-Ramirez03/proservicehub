@@ -16,7 +16,7 @@ export const logout = async () => {
         const data = await response.json();
         localStorage.clear();
         alert("¡Gracias por usar la aplicación! Hasta luego.")
-        window.open("http://localhost:5173")
+        window.location.assign("http://localhost:5173");
         
     } catch (error) {
         console.error('Error:', error);

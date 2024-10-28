@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { listaCruds } from './prueba2';
 import { initDynamicPanel } from './prueba';
 import { initDynamicTable } from './prueba';
-import { refreshToken } from './refreshToken';
+import { logout } from "./logout";
 
 class MenuCrud extends LitElement {
     static styles = css`
@@ -110,8 +110,9 @@ class MenuCrud extends LitElement {
 
     updated(){
 
-        const logoutBtn=this.shadowRoot.querySelector(".logout")
+        const logoutBtn=document.querySelector(".logout")
         logoutBtn.addEventListener("click",(e)=>{
+            console.log("Se salee")
             logout();
         })
 

@@ -32,7 +32,6 @@ public class Login implements UserDetails{
     private String usuario;
 
     @NotBlank(message = "no puede estar vacio")
-    @Column(unique=true)
     private String contraseña;
 
     @ManyToOne

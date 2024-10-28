@@ -33,18 +33,18 @@ INSERT INTO module (name,base_path) VALUES ("Tipopersona","/api/tipopersona");
 INSERT INTO module (name,base_path) VALUES ('AUTH', '/auth'); 
 INSERT INTO module (name,base_path) VALUES ("Tipotelefono","/api/tipotelefono");
 
-INSERT INTO rol (nombre) VALUES ("Admin")
-INSERT INTO rol (nombre) VALUES ("Cliente")
-INSERT INTO rol (nombre) VALUES ("Jefe_recursos_humanos")
-INSERT INTO rol (nombre) VALUES ("Jefe_bodega")
-INSERT INTO rol (nombre) VALUES ("Jefe_inventario")
-INSERT INTO rol (nombre) VALUES ("Jefe_marketing")
-INSERT INTO rol (nombre) VALUES ("Jefe_sistemas")
-INSERT INTO rol (nombre) VALUES ("Gerente")
-INSERT INTO rol (nombre) VALUES ("Profesional")
-INSERT INTO rol (nombre) VALUES ("Auxiliar_bodega")
-INSERT INTO rol (nombre) VALUES ("Proveedor")
-INSERT INTO rol (nombre) VALUES ("Jefe_compra")
+INSERT INTO rol (nombre) VALUES ("Admin");
+INSERT INTO rol (nombre) VALUES ("Cliente");
+INSERT INTO rol (nombre) VALUES ("Jefe_recursos_humanos");
+INSERT INTO rol (nombre) VALUES ("Jefe_bodega");
+INSERT INTO rol (nombre) VALUES ("Jefe_inventario");
+INSERT INTO rol (nombre) VALUES ("Jefe_marketing");
+INSERT INTO rol (nombre) VALUES ("Jefe_sistemas");
+INSERT INTO rol (nombre) VALUES ("Gerente");
+INSERT INTO rol (nombre) VALUES ("Profesional");
+INSERT INTO rol (nombre) VALUES ("Auxiliar_bodega");
+INSERT INTO rol (nombre) VALUES ("Proveedor");
+INSERT INTO rol (nombre) VALUES ("Jefe_compra");
 
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_APROBACIONES", '', 'GET', false, 1); 
@@ -527,7 +527,7 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 32);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 40);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 41);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 131);
-INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 132)
+INSERT INTO granted_permission (role_id, operation_id) VALUES (6, 132);
 
 -- rol jefe sistemas 
 
@@ -923,7 +923,7 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 187);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 188);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 189);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (8, 190);
-INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 191);;
+INSERT INTO granted_permission (role_id, operation_id) VALUES (7, 191);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 192);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 193);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (1, 194);
@@ -1000,14 +1000,39 @@ INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12423,"Tu serv
 INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (124235,"Destapa-Todo",2,1267);
 INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12456,"Artina",3,1223);
 
-INSERT INTO tipo_persona  (id,nombre) VALUES (1,"Admin")
-INSERT INTO tipo_persona  (id,nombre) VALUES (2,"Cliente")
-INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
-INSERT INTO tipo_persona  (id,nombre) VALUES (7,"Jefe_sistemas")
-INSERT INTO tipo_persona  (id,nombre) VALUES (8,"Gerente")
-INSERT INTO tipo_persona  (id,nombre) VALUES (9,"Profesional")
-INSERT INTO tipo_persona  (id,nombre) VALUES (11,"Proveedor")
+INSERT INTO tipo_persona  (id,nombre) VALUES (1,"Admin");
+INSERT INTO tipo_persona  (id,nombre) VALUES (2,"Cliente");
+INSERT INTO tipo_persona  (id,nombre) VALUES (4,"Empleado");
+INSERT INTO tipo_persona  (id,nombre) VALUES (7,"Jefe_sistemas");
+INSERT INTO tipo_persona  (id,nombre) VALUES (8,"Gerente");
+INSERT INTO tipo_persona  (id,nombre) VALUES (9,"Profesional");
+INSERT INTO tipo_persona  (id,nombre) VALUES (11,"Proveedor");
 
 INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1005539417,"Mauricio","2024-10-9","Diaz",1,1);
-INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10255,"Karol","2024-10-9","Ramirez",2,8);
-INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10266,"Laura","2024-10-9","Torres",3,7);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1096,"Henry","2024-10-9","Camelo",3,2);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1097,"Carolina","2024-10-9","Mandarina",3,4);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1098,"Camilo","2024-10-9","Zipaquira",3,4);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10982,"Camilo2","2024-10-9","Zipaquira",3,4);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1099,"Susana","2024-10-9","Horia",3,4);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1097782065,"Laura","2024-10-9","Torres",3,7);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1099739192,"Karol","2024-10-9","Ramirez",2,8);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1100,"Aquiles","2024-10-9","Vaesa",2,9);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1101,"Carlos","2024-10-9","Infante",2,4);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1102,"Armando","2024-10-9","Bronca",2,11);
+INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1103,"Armando2","2024-10-9","Casas",2,4);
+
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("mauricio@gmail.com","$2a$10$KGbEh1NfpoUA2cle8qpsz.hleoMk1mPRnQztx555sC07AnYh.Oy2u",1,1005539417);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Henry@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",2,1096);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Carolina@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",3,1097);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Camilo@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",4,1098);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Camilo2@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",5,10982);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Susana@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",6,1099);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Laura@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",7,1097782065);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Karol@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",8,1099739192);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Aquiles@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",9,1100);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Carlos@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",10,1101);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Armando@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",11,1102);
+INSERT INTO login (usuario,contraseña,id_rol,id_persona) VALUES ("Armando2@gmail.com","$2a$10$3IUaGESxc5m9bFsjXOVWGeuU0Tnj9xoyOAvtbrsmPXIxy2sSd7nAq",12,1103);
+
+INSERT INTO tipo_compra(nombre) VALUES ("Compra Proveedor");
+INSERT INTO tipo_compra(nombre) VALUES ("Venta Cliente");

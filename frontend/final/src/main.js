@@ -151,40 +151,40 @@ class InicioForm extends LitElement {
               localStorage.setItem("usuario",JSON.stringify(data))
               switch(idRol){
                 case 1:
-                  // window.open("http://localhost:5173/")
+                  window.location.assign("http://localhost:5173/menucruds.html")
                   break;
                 case 2:
-                  window.open("http://localhost:5173/cliente.html")
+                  window.location.assign("http://localhost:5173/cliente.html")
                   break;
                 case 3:
-                  window.open("http://localhost:5173/recursosHumano.html")
+                  window.location.assign("http://localhost:5173/recursosHumano.html")
                   break;
                 case 4:
-                  window.open("http://localhost:5173/jefeBodega.html")
+                  window.location.assign("http://localhost:5173/jefeBodega.html")
                   break;
                 case 5:
-                  // window.open("http://localhost:5173/cliente.html")
+                  window.location.assign("http://localhost:5173/jefeBodega.html")
                   break;
                 case 6:
-                  window.open("http://localhost:5173/marketing.html")
+                  window.location.assign("http://localhost:5173/marketing.html")
                   break;
                 case 7:
-                  // window.open("http://localhost:5173/cliente.html")
+                  window.location.assign("http://localhost:5173/menucruds.html")
                   break;
                 case 8:
-                  // window.open("http://localhost:5173/cliente.html")
+                  window.location.assign("http://localhost:5173/menucruds.html")
                   break;
                 case 9:
-                  window.open("http://localhost:5173/profesionalesServicios.html")
+                  window.location.assign("http://localhost:5173/profesionalesServicios.html")
                   break;
                 case 10:
-                  window.open("http://localhost:5173/proveedor.html")
+                  window.location.assign("http://localhost:5173/proveedor.html")
                   break;
                 case 11:
-                  window.open("http://localhost:5173/proveedores.html")
+                  window.location.assign("http://localhost:5173/proveedores.html")
                   break;
                 case 12:
-                  window.open("http://localhost:5173/jefeCompra.html")
+                  window.location.assign("http://localhost:5173/jefeCompra.html")
                   break;
               }
                 
