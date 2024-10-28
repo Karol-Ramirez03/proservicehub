@@ -20,6 +20,12 @@ nav{
   width: 50px;
   height: 50px;
 }
+/* .container{
+  background-image: url("../public/fondo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: ;
+} */
 
 .principal{
   background-color: #F3F4F6;

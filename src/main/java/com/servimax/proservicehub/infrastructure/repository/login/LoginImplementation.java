@@ -12,9 +12,7 @@ import com.servimax.proservicehub.application.service.LoginServiceI;
 import com.servimax.proservicehub.application.service.RolServiceI;
 import com.servimax.proservicehub.domain.dto.UserDto;
 import com.servimax.proservicehub.domain.entity.Login;
-import com.servimax.proservicehub.domain.entity.Rol;
 import com.servimax.proservicehub.infrastructure.utils.exceptions.InvalidPasswordException;
-import com.servimax.proservicehub.infrastructure.utils.exceptions.ObjectNotFoundException;
 
 @Service
 public class LoginImplementation implements LoginServiceI{

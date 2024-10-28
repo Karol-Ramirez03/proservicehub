@@ -977,15 +977,10 @@ INSERT INTO sucursal (nit,nombre,direccion_id,empresa_id) VALUES (12456,"Artina"
 INSERT INTO tipo_persona  (id,nombre) VALUES (1,"Admin")
 INSERT INTO tipo_persona  (id,nombre) VALUES (2,"Cliente")
 INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
-INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
-INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
-INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
 INSERT INTO tipo_persona  (id,nombre) VALUES (7,"Jefe_sistemas")
 INSERT INTO tipo_persona  (id,nombre) VALUES (8,"Gerente")
 INSERT INTO tipo_persona  (id,nombre) VALUES (9,"Profesional")
-INSERT INTO tipo_persona  (nombre) VALUES ("Empleado")
 INSERT INTO tipo_persona  (id,nombre) VALUES (11,"Proveedor")
-INSERT INTO tipo_persona  (id,nombre) VALUES (12,"Empleado")
 
 INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (1005539417,"Mauricio","2024-10-9","Diaz",1,1);
 INSERT INTO persona (nro_Doc,nombre, fecha_registro ,apellido,sucursal_id,tipo_persona_id) VALUES (10255,"Karol","2024-10-9","Ramirez",2,8);
