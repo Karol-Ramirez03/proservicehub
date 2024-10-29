@@ -91,6 +91,7 @@ export const dataRegistro = async (contenedorPrincipal,jwt)  => {
             "idPersonas":{"nro_Doc":nroDoc}
           }
         console.log(datosEnviar)
+        console.log(DatosLogin)
 
         let data = false;
         jwt = localStorage.getItem("jwt")

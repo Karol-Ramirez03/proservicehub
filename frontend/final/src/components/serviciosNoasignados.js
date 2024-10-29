@@ -98,7 +98,7 @@ export const dataserviciosNo = async (contenedorPrincipal,jwt)  => {
                         const idDetalle = e.target.id;
                         console.log(idDetalle)
                         console.log("Se ha hecho clic en el botón de asignar fecha");
-                        dataNewEmpleado(contenedorPrincipal,idDetalle)
+                        dataNewEmpleado(contenedorPrincipal,idDetalle,jwt)
     
                     });
                 });

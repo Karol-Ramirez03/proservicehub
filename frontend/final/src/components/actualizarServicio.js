@@ -117,7 +117,7 @@ const renderizarEmpleado = () => {
     `;
 }
 
-export const dataNewEmpleado = async (contenedorPrincipal, idOrdenServicio)  => {
+export const dataNewEmpleado = async (contenedorPrincipal, idOrdenServicio,jwt)  => {
     console.log(contenedorPrincipal)
     contenedorPrincipal.innerHTML = ""
     contenedorPrincipal.insertAdjacentHTML("beforeend", renderizarEmpleado())

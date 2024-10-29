@@ -504,7 +504,9 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (2, 144);
 
 INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 38);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 42);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 45);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 98);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 107);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (3, 128);
 
 -- rol jefe bodega
