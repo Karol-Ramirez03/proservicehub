@@ -79,7 +79,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("CREATE_ONE_DETALLE_COMPRA", '', 'POST', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ONE_DETALLE_COMPRA", '/[0-9]*', 'PUT', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_DETALLE_COMPRA", '/[0-9]*', 'DELETE', false, 4);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_PERSONA", 'compra/[0-9]*', 'GET', false, 4);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_PERSONA", '/compra/[0-9]*', 'GET', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_MAS_VENDIDO", '/top3', 'GET', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_DETALLE_COMPRA_MENOS_VENDIDO", '/top3menos', 'GET', false, 4);
 

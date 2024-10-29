@@ -118,7 +118,8 @@ const addInfoEventListener = (shadowRoot,jwt) => {
 
                 if (data) {
                     try {
-                        const response = await fetch(`http://localhost:8080/api/detallecompra/compra/${idCompra}`, {
+                        jwt = localStorage.getItem("jwt")
+                     const response = await fetch(`http://localhost:8080/api/detallecompra/compra/${idCompra}`, {
                             method: "GET",
                             headers: {
                                 'Content-Type': 'application/json',

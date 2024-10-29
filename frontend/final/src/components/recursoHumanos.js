@@ -2,6 +2,8 @@ import {LitElement, html } from 'lit'
 import {dataOrdenes } from './OrdenesRH.js';
 import { dataRegistro } from './RegistroEmpleados.js';
 import { dataserviciosNo } from './serviciosNoasignados.js';
+import { logout } from "./logout";
+
 // registrar empleados
 // servicios no asignados - generar ordenes de trabajo
 // seguimiento de ordenes de trabajo
@@ -53,6 +55,7 @@ class  PagInicioRecursosHumanos extends LitElement {
 
         
         logoutBtn.addEventListener("click",(e)=>{
+            e.preventDefault()
             logout();
         })
       

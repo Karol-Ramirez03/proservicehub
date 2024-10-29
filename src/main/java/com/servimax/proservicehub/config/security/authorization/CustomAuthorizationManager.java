@@ -59,7 +59,7 @@ public class CustomAuthorizationManager implements AuthorizationManager<RequestA
         List<Operation> operations = obtainOperations(authentication);
 
         boolean isGranted = operations.stream().anyMatch(getOperationPredicate(url, httpMethod));
-
+        System.out.println(operations) ;
         System.out.println("IS GRANTED: " + isGranted);
         return isGranted;
     }

@@ -72,5 +72,15 @@ public class Operation {
     public void setModule(Module module) {
         this.module = module;
     }
-
+    @Override
+        public String toString() {
+            return "Operation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", httpMethod='" + httpMethod + '\'' +
+                ", permitAll=" + permitAll +
+                ", module=" + (module != null ? module.getId() : "null") +
+                '}';
+        }
 }

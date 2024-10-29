@@ -76,6 +76,7 @@ const _addEvent=(fila,jwt)=>{
             }
             if (data) {
                 try {
+                    jwt = localStorage.getItem("jwt")
                     const response2 = await fetch(`http://localhost:8080/api/ordenservicio/${e.target.id}`, {
                         method:"PUT",
                         headers:{
@@ -134,10 +135,12 @@ export const dataMisServicios= async (contenedorPrincipal,idUsuario,jwt)  => {
     }
     if (data) {
         try {
+            console.log(idUsuario)
             const response = await fetch(`http://localhost:8080/api/ordenservicio/persona/${idUsuario}`, {
                 method:"GET",
                 headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                'Authorization': `Bearer ${jwt}`
                 }
             })
             if(response.ok){
