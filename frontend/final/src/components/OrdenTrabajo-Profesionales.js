@@ -31,7 +31,7 @@ const renderizarTablas = () => {
     `;
 }
 
-const renderizarDatos = (datos,shadowRoot) => {
+const renderizarDatos = (datos,shadowRoot,jwt) => {
   const cuerpoData = shadowRoot.querySelector(".tbody-info")
 
   console.log(cuerpoData)
@@ -113,7 +113,7 @@ const renderizarSolicitar = (shadowRoot,filaid,jwt) => {
         }
 
         if (hallazgo && solucion) {
-            console.log("Datos registrados:", { idtra, hallazgo, solucion });
+            console.log("Datos registrados:", { idtra, hallazgo, solucion ,jwt});
             console.log(formFila);
             alert("Registro completado!");
             let data = false;

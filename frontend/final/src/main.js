@@ -130,6 +130,7 @@ class InicioForm extends LitElement {
             const jwt = await response.json();
             console.log(jwt.jwt)
             localStorage.setItem('jwt', jwt.jwt)//-----------------
+            localStorage.setItem('refreshToken', jwt.refreshToken)
             try {
               // Enviar los datos de autenticación al backend
               const response2 = await fetch(`http://localhost:8080/api/login/usuario/${username}`, {
