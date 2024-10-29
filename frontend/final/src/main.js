@@ -178,7 +178,7 @@ class InicioForm extends LitElement {
                   window.location.assign("http://localhost:5173/profesionalesServicios.html")
                   break;
                 case 10:
-                  window.location.assign("http://localhost:5173/proveedor.html")
+                  window.location.assign("http://localhost:5173/auxiliarBodega.html")
                   break;
                 case 11:
                   window.location.assign("http://localhost:5173/proveedores.html")

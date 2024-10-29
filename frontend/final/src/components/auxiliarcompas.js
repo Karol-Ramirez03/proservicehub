@@ -25,6 +25,7 @@ const renderizarTablas = () => {
 
 const renderizarDatos = (datos,shadowRoot,contenedorPrincipal,jwt) => {
     const cuerpoData = document.querySelector(".tbody-info")
+    jwt = localStorage.getItem("jwt")
 
     console.log("funciona")
     cuerpoData.innerHTML = ""
@@ -113,7 +114,7 @@ const addInfoEventListener = (shadowRoot,jwt) => {
     console.log("aqui llego");
     const btnDetalles = shadowRoot.querySelectorAll(".tbody-info");
     console.log(btnDetalles);
-
+    jwt = localStorage.getItem("jwt")
     btnDetalles.forEach(detalle => {
         detalle.addEventListener("click", async (e) => {
             if (e.target.id === "detalles") {
@@ -387,7 +388,7 @@ const actualizarStock=async (suficiente,insumos,idCompra,jwt)=>{
 }
 
 
-export const dataComprasAux = async (contenedorPrincipal,clienteId)  => {
+export const dataComprasAux = async (contenedorPrincipal,clienteId,jwt)  => {
     let data = false;
     jwt = localStorage.getItem("jwt")
         try {

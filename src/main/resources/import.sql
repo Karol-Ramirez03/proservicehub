@@ -71,8 +71,8 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_COMPRA_PERSONAS", '/persona/[0-9]*', 'GET', false, 3);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_NOMBRE_ESTADO_COMPRA", '/[0-9]*/estado/nombre', 'GET', false, 3);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("ADD_NEW_COMPRA", '/agregar', 'POST', false, 3);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_COMPRA_TIPO", 'tipocompra/[0-9]*', 'GET', false, 3);
-INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ESTADO_COMPRA", 'actualizarestadocompra/[0-9]*', 'POST', false, 3);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_COMPRA_TIPO", '/tipocompra/[0-9]*', 'GET', false, 3);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("UPDATE_ESTADO_COMPRA", '/actualizarestadocompra/[0-9]*', 'POST', false, 3);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ALL_DETALLE_COMPRAS", '', 'GET', false, 4);
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_DETALLE_COMPRA", '/[0-9]*', 'GET', false, 4);
@@ -280,6 +280,7 @@ INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("DELETE_ONE_TIPO_TELEFONO", '/[0-9]*', 'DELETE', false, 34);
 
 INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ('REFRESCAR_TOKEN','/refresh-token', 'POST', true, 33);
+INSERT INTO operation (name, path, http_method, permit_all, module_id) VALUES ("READ_ONE_PERSONA_INSUMO", '/insumos/[0-9]*', 'GET', false, 20);
 
  -- rol admin
 
@@ -947,6 +948,7 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 22);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 23);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 24);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 30);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 88);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 89);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 93);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (10, 94);
@@ -959,6 +961,7 @@ INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 24);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 30);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 95);
 INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 192);
+INSERT INTO granted_permission (role_id, operation_id) VALUES (11, 199);
 
 -- rol jefe compra
 
